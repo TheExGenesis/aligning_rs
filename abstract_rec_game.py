@@ -360,21 +360,24 @@ class Agent:
 
 #agent with vector attributes and axelrod lib strategy
 class VectorAgent(Agent):
-    def __init__(self, id, env, attr_dim = 3, strat = axl.Cooperator()):
+    def __init__(self, id, env = None, attr_dim = 3, strat = axl.Cooperator()):
         Agent.__init__(self, id)
         self.vector = self.__getRandomUnitVector(attr_dim)
         self.strat = strat
         self.score = 0
         self.env = env
         
-
-    def getAttributes(self):
-        return self.vector
-
     def __getRandomUnitVector(self, dim):
         v = np.random.rand(dim)
         v_hat = v / np.linalg.norm(v)
         return v_hat
+
+    def setEnv(self, env):
+        self.env = env
+
+    def getAttributes(self):
+        return self.vector
+
         
     """
     estimate of expected reward from playing against a2
@@ -470,9 +473,11 @@ class Env:
         elif agents != None and network == None:
             self.network = nx.barabasi_albert_graph(len(self.agents),new_edges).to_undirected()
             self.agents = agents
+            self.agents.setEnv(self)
         else:
             self.network = network
             self.agents = agents
+            self.agents.setEnv(self)
         
         if mediator == None:
             self.mediator = SelfishMediator(self.agents)
