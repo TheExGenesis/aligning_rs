@@ -1,0 +1,103 @@
+
+from graph_tool.all import *
+import math
+from random import choice
+#from graph_tool import *
+import graph_tool as gt
+import graph_tool.generation as gen
+import numpy as np  
+from numpy.random import rand 
+from network import *
+from agent import *
+from mediator import *
+from dilemma import *
+import axelrod as axl
+
+#"""parameters for the model"""
+data experimentConfig(networkParams, agentParams, gameParams, mediatorParams)
+data mediatorPoolParams(mediator_params_pool is [ mediatorParams ])
+
+
+#mvpMediatorPolicyPool = ['Best', 'Worst', 'PseudoGreedy']
+
+
+
+# runSim :: config -> History -> store
+
+#Utils
+# medMakeRec :: mediator -> agent -> agent
+# agentPickNeighbor :: agent -> agent
+# agentDecideRec :: agent -> (agent, agent) -> {pair: (agent, agent), is_rec: Boolean}
+# gameFromPair :: (agent,agent) -> game
+# playGame :: game -> {actions: (action,action), payoffs: (Number, Number)} # action from {C,D} # returns actions and payoffs
+
+
+
+#Rec phase
+# medMakeRecs :: mediator -> [agent] -> [agent] # Mediator makes 1 recommendation for each agent
+# agentsPickNeighbor :: [agent] -> [agent] # Agents pick 1 agent from their neighborhood
+# agentsDecideRec :: [agent] -> [(agent, agent)] -> [{pair: (agent, agent), is_rec: Boolean}] # Agent and mediator picks are compared and player pairs generated
+# payMediator :: {pair: (agent, agent), is_rec: Boolean} -> [Number] -> store
+# saveRecHistory :: IMPURE [{agent: agent, pair: (agent.id local, agent.id rec), is_rec: Boolean}] -> store
+
+#Dilemma phase
+# makeGames :: [(agent,agent)] -> game
+# playGames :: [game] -> [((action,action), (Number, Number))]
+# saveDilemmaHistory 
+
+# episode :: (Rec phase, Dilemma phase)
+# runEpisode :: history -> mediator -> network -> episodeData
+# addToHistory :: history -> episodeData -> history
+# storeData :: IMPURE path -> dict -> store
+# storeEpisode :: IMPURE dict -> store
+# storeEpisode = episodeHistory -> storeData(f'path/{run_n}/{ep_n}.json', episodeHistory)
+
+
+# initRun
+
+def describeExperiment(config):
+  print(f'Running experiment with the following config: {config}')
+
+  
+
+
+# runExperiment :: config -> history
+def runExperiment(config):
+  (networkParams, agentParams, gameParams, mediatorParams) = config
+  (N, m, c, gamma, directed) = networkParams
+  (U, pair_eval_fn, attribute_type, rec_policy_pool, dilemma_policy_pool) = agentParams
+  (alpha) = gameParams
+  (med_pair_eval_fn) = mediatorParams
+  
+  #Init
+  # config -> graph
+  g = genNetwork(networkParams)
+  # graph -> config -> graph w/ agents
+  net = populateSocialNetwork(g, agentParams)
+  # graph -> agents
+  agents = net.vp.agents
+  # fn -> mediator
+  med = genMediator(mediatorParams)
+  
+  describeExperiment(config)
+
+  
+
+def main():
+  # Config
+  mvpDilemmaPolicyPool = [axl.Cooperator, axl.Defector, axl.Random]
+  mediatorParamPool = [mediatorParams(evalPairPayoff)]
+
+  for mediatorParam in mediatorParamPool:  
+    config = experimentConfig(networkParams = mvpNetwork, agentParams = mvpAgent, gameParams = mvpGame, mediatorParams = mediatorParam) where:
+      mvpNetwork = baNetworkParams(N = 1000, m = 1)
+      mvpAgent = simplestAgentParams(dilemma_policy_pool = mvpDilemmaPolicyPool)
+      mvpGame = pdGameParams(alpha = 2)
+
+    runExperiment(config)
+
+
+
+
+if __name__ == "__main__":
+    main()

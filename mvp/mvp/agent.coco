@@ -1,0 +1,99 @@
+import numpy as np  
+from numpy.random import rand 
+from random import choice
+from dilemma import *
+
+# The distribution of the random sanmpling of the attributes is another set of degrees of freedom. We sample from the uniform distribution.
+data vectorAttr(n):
+  def __new__(cls, n):
+    """Create a new vector from the given pts."""
+    vec = []
+    case n:
+      match _ is vectorAttr:
+        vec =  n  # vector(v) where v is a vector should return v
+      match _ is np.ndarray:
+        vec = n |> makedata$(cls)  # vector(v) where v is a vector should return v
+      match _ is int:
+        vec = rand(n) |> makedata$(cls)
+    else:
+        raise TypeError()
+    return vec
+  
+# Constructor for null attribute
+noAttr = vectorAttr$(0)
+
+# agentParams :: (U, attribute_type, [rec_policy], [dilemma_policy])
+# """parameters for an agent, need to work out how U (utility function) and attribute_type are handled"""
+data agentParams(U, pair_eval_fn, attribute_type, rec_policy_pool is list, dilemma_policy_pool is list) # match data
+
+
+
+# agent :: (dilemma_policy, rec_policy, attributes) 
+data agent(pair_eval_fn, dilemma_policy, rec_policy, attributes):
+  def evalPartner(self,partner) = self.pair_eval_fn(self, partner)
+
+# makeRandomAgent :: params -> agent
+# TODO: might be optimal to init the policy later
+def makeRandomAgent(params) =  agent(
+  pair_eval_fn=params.pair_eval_fn, 
+  dilemma_policy=choice(params.dilemma_policy_pool)(), 
+  rec_policy=choice(params.rec_policy_pool), 
+  attributes=params.attribute_type()) 
+
+def vToAgent(agents, v) = agents[v]
+
+# makeEvalPartnerById :: agents -> vertex -> fn evalPartner
+# fn evalPartner :: int -> float
+def makeAgentIdEval(agents, v) = agents$[] ..> agents[v].evalPartner
+
+# getEvalPartner :: graph -> vertex -> fn evalPartner
+# def getGraphEvalPartner(g, v) = g.vp.agents$[] ..> agents[v].evalPartner
+
+# optimizeIterator :: func -> np.type -> iterator -> v
+# finds fn's argmax from iterator of a type from np
+# makes a numpy array from a generator, then argmaxes
+def optimizeIterator(fn, iter_type, iter) = iter |> np.fromiter$(?,iter_type) |> np.vectorize(fn) |> np.argmax
+
+# optimizePartnerPick :: func -> iterator -> v
+def optimizePartnerPick(evalPartner, adversaries) =
+  optimizeIterator(evalPartner, np.int, adversaries |> map$(int))
+
+# evalPartnerPayoff :: agents -> v -> func
+def evalPairPayoff(a1,a2) = (a1, a2) |> map$(.dilemma_policy) |*> estimateDilemmaPayoffs |> .[0]
+
+
+# agentPickPartner :: agents, v -> agent
+# agents :: agents property map
+# picks the neighbor/accessible partner that if a dilemma is played with them, maximizes the agent's U 
+def agentPickPartnerFromAgents(agents, v) = v.out_neighbors() |> optimizePartnerPick$(makeAgentIdEval(agents, v))
+  #getBestPayoffPartner$(agents, v)
+ 
+# agents = soc_net.vp.agents
+# a1 = soc_net.vertex(1)
+# a2 = soc_net.vertex(2)
+# agentPickPartner(agents, a1)
+
+#def agentPickByPayoff(agents,v) = evalPartnerPayoff(agents,v) |> agentPickPartner$(?,v)
+
+
+# simplestAgentParams :: agentParams
+# parameters for the simplest agent
+simplestAgentParams = agentParams$(
+  U='identity', 
+  pair_eval_fn=evalPairPayoff, 
+  attribute_type=noAttr, 
+  rec_policy_pool=['Greedy'])
+
+
+  
+# getBestPartner :: vp -> vertex -> iter -> int
+# vp: vector property
+# def getBestPayoffPartner(agents, v, adversaries):
+#   # v2A :: v -> agent
+#   v2A = vToAgent$(agents)
+#   # v2Strat :: v -> dilemma_policy
+#   v2Strat = v2A ..> .dilemma_policy
+#   # pickUtil :: (v -> agent) -> float           # Expected utility from picking agent
+#   pickPayoff = (v |> v2Strat |> estimateDilemmaPayoffs$) ..> .[0]
+#   return optimizePartnerPick(v2Strat ..> pickPayoff, adversaries)
+#   return optimizePartnerPick(evalPartnerPayoff, adversaries)

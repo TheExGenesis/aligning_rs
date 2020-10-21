@@ -1,0 +1,53 @@
+from dilemma import *
+
+#policyEnum = {'Best':selflessMediatorPickPartner, 'Worst':evilMediatorPickPartner, 'PseudoGreedy':None}
+# Recommendation policies. Take the social network, an agent, and return another agent as a recommendation
+
+# bestPolicy :: socNet -> agent -> agent
+# returns best possible match for agent in the entire network
+def bestPolicy(soc_net, agent) = 1
+  
+
+#"""parameters for the mediator"""
+data mediatorParams(pair_eval_fn)
+
+data mediator(pair_eval_fn)
+
+def genMediator(p):
+  match mediatorParams(pair_eval_fn) in p:
+    return mediator(pair_eval_fn)
+  else:
+    raise TypeError()
+
+# mediatorPickPartner :: mediator -> graph -> vertex -> agent
+# agents :: agents property map
+# picks the neighbor/accessible partner that if a dilemma is played with them, maximizes the agent's U 
+def mediatorPickPartner(m, g, v) = 
+  agents = g.vp.agents
+  g.vertices() |> optimizePartnerPick$()
+
+def selflessMediatorPickPartner(g, v) = 
+  agents = g.vp.agents
+  g.vertices() |> optimizePartnerPick$(makeAgentIdEval(agents, v))
+  
+def evilMediatorPickPartner(g, v) = 
+  agents = g.vp.agents
+  makeNegIdEval = makeAgentIdEval(agents, v) ..> (*)$(-1)
+  g.vertices() |> optimizePartnerPick$()
+
+# makeRecGame :: graph -> vertex
+def makeRecGame(graph, agentVertex):
+  agents = graph.vp.agents
+  agentPickPartner = agentPickPartnerFromAgents$(agents)
+  alt_pick = agentPickPartner(agentVertex)
+  selfish_pick = mediatorPickPartner()
+  selfless_pick = mediatorPickPartner()
+  refusal = 0
+  
+  A = [[max_a, ok_a], [alt_a, alt_a]]
+  B = [[ok_r, max_r], [refusal_r, refusal_r]]
+  rec_game = makeAsymmetricGame(A,B)
+  return rec_game
+
+def makeRecGames(graph):
+  return (makeRecGame(graph, v) for v in graph.vertices())
