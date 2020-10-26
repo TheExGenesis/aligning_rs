@@ -1,0 +1,48 @@
+import pandas as pd
+from graph_tool.all import graph_draw
+
+# def calcPayoff(happenings, agent):
+    # get payoff of agent row
+    # get sum of payoffs of rows where agent is the partner
+
+# Rec and dilemma logs in a single line
+def makeEpisodeLog(_agents, picks, neighbors, recs, games, dilemmaMoves) = {agent:{'pick': picks[agent], 'neighbor': neighbors[agent], 'rec': recs[agent], 'game':games[agent].game, 'moves':dilemmaMoves[agent]} for agent in _agents}
+
+# IMPURE
+def storeEpisode(ep, epPath):
+    print(f'storing episode {epPath}')
+    net = ep['net']
+    happenings = pd.DataFrame.from_dict(ep['happenings']).T
+    print(happenings)
+    net.save(epPath + "_net.gt")
+    print(net)
+    happenings.to_csv(epPath + "_hap.csv")
+#   pd.DataFrame.from_dict(ep['rec']['agents']).to_csv(epPath + "_rec.csv")
+#   dilemmaHist = pd.DataFrame.from_dict(ep['dilemma']).transpose()
+#   dilemmaHist.to_csv(epPath + "_dilemma.csv")
+    drawNet(epPath + "_pic.png", net) # has this name bc it's the only kind but eventually I'll specify
+
+def loadEpisode(epPath):
+    pd.read_csv()
+# IMPURE
+def storeHistory(history, runName):
+    for i, ep in enumerate(history):
+        storeEpisode(ep, f'{runName}{i}')
+
+
+def getPolicies(shapes, net) = 
+    policies = net.new_vertex_property('string')
+    for v in net.get_vertices(): policies[v] = net.vp.agents[v].dilemma_policy
+    for v in net.get_vertices(): policies[v] = shapes[policies[v]]
+    policies
+
+def getPayoffs(dilemmaHist, net) = 
+    payoffs = []
+    for v in net.get_vertices(): payoffs[v] = shapes[payoffs[v]]
+    payoffs
+# different colors for each dilemma policy. Maybe eventually change to shapes and color according to reward
+def drawNet(path, net):
+    #m = {'Defector':'black', 'Cooperator':'white', 'Random: 0.5':'pink'}   
+    shapes = {'Defector':'triangle', 'Cooperator':'circle', 'Random':'square'}   
+    policies = getPolicies(shapes,net)
+    graph_draw(net, output=path, vertex_shape=policies, bg_color="white")  #, vertex_fill_color=policies

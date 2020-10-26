@@ -1,0 +1,102 @@
+import numpy as np  
+from numpy.random import rand 
+from random import choice
+from dilemma import *
+
+'''Utils'''
+# randArgmax :: [x] -> int
+def randArgmax(b) = np.random.choice(np.where(np.isclose(b, b.max()))[0])
+def vToAgent(agents, v) = agents[v]
+# makeEvalPartnerById :: agents -> vertex -> fn evalPartner
+# fn evalPartner :: int -> float
+def makeAgentIdEval(agents, v) = agents$[] ..> agents[v].evalPartner
+
+
+'''Utility Functions'''
+# evalPartnerPayoff :: agent -> agent -> func
+def evalPairPayoff(a1,a2) = (a1, a2) |> map$(.dilemma_policy) |*> estimateDilemmaPayoffs |> .[0]
+
+
+'''Agent construction'''
+# The distribution of the random sanmpling of the attributes is another set of degrees of freedom. We sample from the uniform distribution.
+data vectorAttr(n):
+  def __new__(cls, n):
+    """Create a new vector from the given pts."""
+    vec = []
+    case n:
+      match _ is vectorAttr:
+        vec =  n  # vector(v) where v is a vector should return v
+      match _ is np.ndarray:
+        vec = n |> makedata$(cls)  # vector(v) where v is a vector should return v
+      match _ is int:
+        vec = rand(n) |> makedata$(cls)
+    else:
+        raise TypeError()
+    return vec
+  
+# Constructor for null attribute
+noAttr = vectorAttr$(0)
+
+# agentParams :: (U, attribute_type, [rec_policy], [dilemma_policy])
+# """parameters for an agent, need to work out how U (utility function) and attribute_type are handled"""
+data agentParams(U, pair_eval_fn, attribute_type, rec_policy_pool is list, dilemma_policy_pool is list) # match data
+
+# agent :: (dilemma_policy, rec_policy, attributes) 
+data agent(pair_eval_fn, dilemma_policy, rec_policy, attributes):
+  def evalPartner(self,partner) = self.pair_eval_fn(self, partner)
+
+# makeRandomAgent :: params -> agent
+# TODO: might be optimal to init the policy later
+def makeRandomAgent(params) =  agent(
+  pair_eval_fn=params.pair_eval_fn, 
+  dilemma_policy=choice(params.dilemma_policy_pool), 
+  rec_policy=choice(params.rec_policy_pool), 
+  attributes=params.attribute_type()) 
+
+simplestAgentParams = agentParams$(
+  U='identity', 
+  pair_eval_fn=evalPairPayoff, 
+  attribute_type=noAttr, 
+  rec_policy_pool=['Greedy'])
+
+'''Partner Picking'''
+# getEvalPartner :: graph -> vertex -> fn evalPartner
+# def getGraphEvalPartner(g, v) = g.vp.agents$[] ..> agents[v].evalPartner
+
+# optimizeIterator :: func -> np.type -> iterator -> v
+# finds fn's argmax from iterator of a type from np
+# makes a numpy array from a generator, then argmaxes
+#def optimizeIterator(fn, iter_type, iter) = iter |> np.fromiter$(?,iter_type) |> np.vectorize(fn) |> np.argmax
+def optimizeIterator(fn, iter_type, iter) = iter |> np.fromiter$(?,iter_type) |> np.vectorize(fn) |> randArgmax |> iter[]
+
+# optimizePartnerPick :: func -> iterator -> v
+def optimizeAgents(evalPartner, adversaryPool) =
+  optimizeIterator(evalPartner, np.int, adversaryPool |> map$(int))
+
+# optimizeAgentPick :: [agent] -> v -> v -> (iterator -> float)
+def optimizeAgentPick(agents, v) = optimizeAgents$(makeAgentIdEval(agents, v))
+
+# agentPickPartner :: net -> v -> v
+# agents :: agents property map
+# picks the neighbor/accessible partner that if a dilemma is played with them, maximizes the agent's U 
+def agentPickNeighbor(net, v) = net.vertex(v).out_neighbors() |> list |> optimizeAgentPick(net.vp.agents, v)
+  #getBestPayoffPartner$(agents, v)
+#def agentPickByPayoff(agents,v) = evalPartnerPayoff(agents,v) |> agentPickPartner$(?,v)
+
+# agentDecideRec :: agents -> v -> v -> v
+def agentDecideRec(agents, v, bestNeighbor, rec) = optimizeAgentPick(agents, v)([bestNeighbor, rec])
+
+
+
+  
+# getBestPartner :: vp -> vertex -> iter -> int
+# vp: vector property
+# def getBestPayoffPartner(agents, v, adversaries):
+#   # v2A :: v -> agent
+#   v2A = vToAgent$(agents)
+#   # v2Strat :: v -> dilemma_policy
+#   v2Strat = v2A ..> .dilemma_policy
+#   # pickUtil :: (v -> agent) -> float           # Expected utility from picking agent
+#   pickPayoff = (v |> v2Strat |> estimateDilemmaPayoffs$) ..> .[0]
+#   return optimizeAgents(v2Strat ..> pickPayoff, adversaries)
+#   return optimizeAgents(evalPartnerPayoff, adversaries)
