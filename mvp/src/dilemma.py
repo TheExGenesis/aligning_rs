@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x35a1fdff
+# __coconut_hash__ = 0x59450d28
 
 # Compiled with Coconut version 1.4.3 [Ernest Scribbler]
 
@@ -650,6 +650,7 @@ _coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_makedata, _coc
 
 import axelrod as axl
 import nashpy as nash
+import random
 
 policyDict = {'Cooperator': axl.Cooperator(), 'Defector': axl.Defector(), 'Random': axl.Random()}
 # vPol :: vertex -> policy
@@ -682,7 +683,7 @@ def gameFromPair(agents, v1, v2):
 @_coconut_tco
 def makeEncounterFromPair(agents, v1, v2):
     vPol = _coconut_base_compose(_coconut.functools.partial(_coconut.operator.getitem, agents), (_coconut.operator.attrgetter("dilemma_policy"), 0), (_coconut.functools.partial(_coconut.operator.getitem, policyDict), 0))
-    return _coconut_tail_call(makeSymmetricEncounter, gameFromPair(agents, v1, v2), vPol(v1), vPol(v2))
+    return _coconut_tail_call(makeSymmetricMatch, 1, gameFromPair(agents, v1, v2), vPol(v1), vPol(v2))
 @_coconut_tco
 def makePDEncounter(strat1, strat2):
     return _coconut_tail_call(makeSymmetricEncounter, game=makePD(), strat1=strat1, strat2=strat2)
@@ -709,19 +710,33 @@ def getNashEqs(game):
 @_coconut_tco
 def playEncounter(enc):
     return _coconut_tail_call((lambda match: {'moves': getMatchMoves(match), 'payoff': getMatchAvgRewards(match)}), playSymmetricMatch(enc))
+playGames = _coconut.functools.partial(map, playEncounter)
 calcEncounterPayoffs = _coconut_base_compose(playSymmetricMatch, (getMatchAvgRewards, 0))
+# def calcDilemmaPayoffs(game, strat1, strat2) = makeSymmetricEncounter(game=game, strat1=strat1, strat2=strat2) |> calcEncounterPayoffs
 @_coconut_tco
-def calcDilemmaPayoffs(game, strat1, strat2):
-    return _coconut_tail_call((calcEncounterPayoffs), makeSymmetricEncounter(game=game, strat1=strat1, strat2=strat2))
+def calcDilemmaPayoffs(n_turns, game, strat1, strat2):
+    return _coconut_tail_call((calcEncounterPayoffs), makeSymmetricMatch(n_turns=n_turns, game=game, strat1=strat1, strat2=strat2))
 
 # Takes policies
 @_coconut_tco
-def _estimateDilemmaPayoffs(strat1, strat2):
-    return _coconut_tail_call(calcDilemmaPayoffs, makePD(), strat1, strat2)
+def estimateDilemmaPayoffsAxl(n_turns, strat1, strat2):
+    return _coconut_tail_call(calcDilemmaPayoffs, n_turns, makePD(), strat1, strat2)
+
+def translatePol(_strat):
+    return random.choice(['Cooperator', 'Defector']) if _strat == 'Random' else _strat
+def translatePol(_strat):
+    return random.choice(['Cooperator', 'Defector']) if _strat == 'Random' else _strat
+
+# Takes string descriptions of policies
 @memoize()
 @_coconut_tco
-def estimateDilemmaPayoffs(strat1, strat2):
-    return _coconut_tail_call(_estimateDilemmaPayoffs, policyDict[strat1], policyDict[strat2])
+def _estimateDilemmaPayoffs(n_turns, strat1, strat2):
+    return _coconut_tail_call(estimateDilemmaPayoffsAxl, n_turns, policyDict[strat1], policyDict[strat2])
+
+@_coconut_tco
+def estimateDilemmaPayoffs(n_turns, strat1, strat2):
+    return _coconut_tail_call(_estimateDilemmaPayoffs, n_turns, translatePol(strat1), translatePol(strat2))
+
 
 def moveScore(game, moves):
     return game.game.scores[moves]

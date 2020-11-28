@@ -1,4 +1,4 @@
-import graph_tool.generation as gen
+gen = x->x # import graph_tool.generation as 
 from agent import makeRandomAgent 
 """
 N, m=1, c=None, gamma=1, directed=True
@@ -26,6 +26,9 @@ baNetworkParams = priceNetworkParams$(c = 0.0, gamma = 1.0, directed = False ) #
 # genNetwork :: priceNetworkParams -> Graph
 # gen price network from graph_tools
 def genNetwork(p):
+  global gen
+  import graph_tool.generation as g
+  gen = g
   match priceNetworkParams(N,m,c,gamma,directed) in p:
     return gen.price_network(N=N, m=m, c=c, gamma=gamma, directed=directed)
   else:

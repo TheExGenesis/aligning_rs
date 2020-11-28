@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xf52fcb71
+# __coconut_hash__ = 0x7ce88518
 
 # Compiled with Coconut version 1.4.3 [Ernest Scribbler]
 
@@ -648,7 +648,7 @@ _coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_makedata, _coc
 
 # Compiled Coconut: -----------------------------------------------------------
 
-import graph_tool.generation as gen
+gen = lambda x: x  # import graph_tool.generation as 
 from agent import makeRandomAgent
 """
 N, m=1, c=None, gamma=1, directed=True
@@ -709,6 +709,9 @@ baNetworkParams = _coconut.functools.partial(priceNetworkParams, c=0.0, gamma=1.
 # gen price network from graph_tools
 @_coconut_tco
 def genNetwork(p):
+    global gen
+    import graph_tool.generation as g
+    gen = g
     _coconut_match_to = p
     _coconut_match_check = False
     if (_coconut.isinstance(_coconut_match_to, priceNetworkParams)) and (_coconut.len(_coconut_match_to) == 5):

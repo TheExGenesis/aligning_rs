@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xcd6cadc
+# __coconut_hash__ = 0xa4122ccd
 
 # Compiled with Coconut version 1.4.3 [Ernest Scribbler]
 
@@ -668,9 +668,10 @@ def makeAgentIdEval(agents, v):
 
 
 '''Utility Functions'''
-# evalPartnerPayoff :: agent -> agent -> func
+# evalPartnerPayoff :: agent -> agent -> float
+# def evalPairPayoff(a1,a2) = (a1.dilemma_policy, a2.dilemma_policy) |*> estimateDilemmaPayoffs(10) |> .[0]
 def evalPairPayoff(a1, a2):
-    return ((estimateDilemmaPayoffs)(*map(_coconut.operator.attrgetter("dilemma_policy"), (a1, a2))))[0]
+    return (estimateDilemmaPayoffs(10, *(a1.dilemma_policy, a2.dilemma_policy)))[0]
 
 
 '''Agent construction'''
@@ -710,7 +711,7 @@ noAttr = _coconut.functools.partial(vectorAttr, 0)
 
 # agentParams :: (U, attribute_type, [rec_policy], [dilemma_policy])
 # """parameters for an agent, need to work out how U (utility function) and attribute_type are handled"""
-class agentParams(_coconut.collections.namedtuple("agentParams", "U, pair_eval_fn, attribute_type, rec_policy_pool, dilemma_policy_pool")):  # match data
+class agentParams(_coconut.collections.namedtuple("agentParams", "U, pair_eval_fn, attribute_type, rec_policy_pool, dilemma_policy_pool, imitationCoef")):  # match data
     __slots__ = ()  # match data
     __ne__ = _coconut.object.__ne__  # match data
     def __eq__(self, other):  # match data
@@ -720,28 +721,30 @@ class agentParams(_coconut.collections.namedtuple("agentParams", "U, pair_eval_f
     def __new__(_cls, *_coconut_match_to_args, **_coconut_match_to_kwargs):  # match data
         _coconut_match_check = False  # match data
         _coconut_FunctionMatchError = _coconut_get_function_match_error()  # match data
-        if (_coconut.len(_coconut_match_to_args) <= 5) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "U" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "pair_eval_fn" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 2, "attribute_type" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 3, "rec_policy_pool" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 4, "dilemma_policy_pool" in _coconut_match_to_kwargs)) == 1):  # match data
+        if (_coconut.len(_coconut_match_to_args) <= 6) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "U" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "pair_eval_fn" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 2, "attribute_type" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 3, "rec_policy_pool" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 4, "dilemma_policy_pool" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 5, "imitationCoef" in _coconut_match_to_kwargs)) == 1):  # match data
             _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("U")  # match data
             _coconut_match_temp_1 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("pair_eval_fn")  # match data
             _coconut_match_temp_2 = _coconut_match_to_args[2] if _coconut.len(_coconut_match_to_args) > 2 else _coconut_match_to_kwargs.pop("attribute_type")  # match data
             _coconut_match_temp_3 = _coconut_match_to_args[3] if _coconut.len(_coconut_match_to_args) > 3 else _coconut_match_to_kwargs.pop("rec_policy_pool")  # match data
             _coconut_match_temp_4 = _coconut_match_to_args[4] if _coconut.len(_coconut_match_to_args) > 4 else _coconut_match_to_kwargs.pop("dilemma_policy_pool")  # match data
-            if (_coconut.isinstance(_coconut_match_temp_3, list)) and (_coconut.isinstance(_coconut_match_temp_4, list)) and (not _coconut_match_to_kwargs):  # match data
+            _coconut_match_temp_5 = _coconut_match_to_args[5] if _coconut.len(_coconut_match_to_args) > 5 else _coconut_match_to_kwargs.pop("imitationCoef")  # match data
+            if (_coconut.isinstance(_coconut_match_temp_3, list)) and (_coconut.isinstance(_coconut_match_temp_4, list)) and (_coconut.isinstance(_coconut_match_temp_5, float)) and (not _coconut_match_to_kwargs):  # match data
                 U = _coconut_match_temp_0  # match data
                 pair_eval_fn = _coconut_match_temp_1  # match data
                 attribute_type = _coconut_match_temp_2  # match data
                 rec_policy_pool = _coconut_match_temp_3  # match data
                 dilemma_policy_pool = _coconut_match_temp_4  # match data
+                imitationCoef = _coconut_match_temp_5  # match data
                 _coconut_match_check = True  # match data
 # match data
         if not _coconut_match_check:  # match data
             _coconut_match_val_repr = _coconut.repr(_coconut_match_to_args)  # match data
-            _coconut_match_err = _coconut_FunctionMatchError("pattern-matching failed for " "'data agentParams(U, pair_eval_fn, attribute_type, rec_policy_pool is list, dilemma_policy_pool is list)  # match data'" " in " + (_coconut_match_val_repr if _coconut.len(_coconut_match_val_repr) <= 500 else _coconut_match_val_repr[:500] + "..."))  # match data
-            _coconut_match_err.pattern = 'data agentParams(U, pair_eval_fn, attribute_type, rec_policy_pool is list, dilemma_policy_pool is list)  # match data'  # match data
+            _coconut_match_err = _coconut_FunctionMatchError("pattern-matching failed for " "'data agentParams(U, pair_eval_fn, attribute_type, rec_policy_pool is list, dilemma_policy_pool is list, imitationCoef is float)  # match data'" " in " + (_coconut_match_val_repr if _coconut.len(_coconut_match_val_repr) <= 500 else _coconut_match_val_repr[:500] + "..."))  # match data
+            _coconut_match_err.pattern = 'data agentParams(U, pair_eval_fn, attribute_type, rec_policy_pool is list, dilemma_policy_pool is list, imitationCoef is float)  # match data'  # match data
             _coconut_match_err.value = _coconut_match_to_args  # match data
             raise _coconut_match_err  # match data
 # match data
-        return _coconut.tuple.__new__(_cls, (U, pair_eval_fn, attribute_type, rec_policy_pool, dilemma_policy_pool))  # match data
+        return _coconut.tuple.__new__(_cls, (U, pair_eval_fn, attribute_type, rec_policy_pool, dilemma_policy_pool, imitationCoef))  # match data
 # match data
 
 # agent :: (dilemma_policy, rec_policy, attributes) 
@@ -753,8 +756,14 @@ class agent(_coconut.collections.namedtuple("agent", "pair_eval_fn dilemma_polic
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
     @_coconut_tco
-    def evalPartner(self, partner):
-        return _coconut_tail_call(self.pair_eval_fn, self, partner)
+    def evalPartner(a1, partner):
+        return _coconut_tail_call(a1.pair_eval_fn, a1, partner)
+
+# changeDilemmaPolicy :: agent -> agent
+@_coconut_tco
+def changeDilemmaPolicy(oldAgent, newPolicy):
+    return _coconut_tail_call(agent, oldAgent.pair_eval_fn, newPolicy, oldAgent.rec_policy, oldAgent.attributes)
+
 
 # makeRandomAgent :: params -> agent
 # TODO: might be optimal to init the policy later
@@ -762,7 +771,7 @@ class agent(_coconut.collections.namedtuple("agent", "pair_eval_fn dilemma_polic
 def makeRandomAgent(params):
     return _coconut_tail_call(agent, pair_eval_fn=params.pair_eval_fn, dilemma_policy=choice(params.dilemma_policy_pool), rec_policy=choice(params.rec_policy_pool), attributes=params.attribute_type())
 
-simplestAgentParams = _coconut.functools.partial(agentParams, U='identity', pair_eval_fn=evalPairPayoff, attribute_type=noAttr, rec_policy_pool=['Greedy'])
+simplestAgentParams = _coconut.functools.partial(agentParams, U='identity', pair_eval_fn=evalPairPayoff, attribute_type=noAttr, rec_policy_pool=['Greedy'], imitationCoef=0.5)
 
 '''Partner Picking'''
 # getEvalPartner :: graph -> vertex -> fn evalPartner
@@ -796,11 +805,18 @@ def agentPickNeighbor(net, v):
 #def agentPickByPayoff(agents,v) = evalPartnerPayoff(agents,v) |> agentPickPartner$(?,v)
 
 # agentDecideRec :: agents -> v -> v -> v
+# def agentDecideRec(agents, v, bestNeighbor, rec) = optimizeAgentPick(agents, v)([bestNeighbor, rec])
+# def agentDecideRec(agents, v, bestNeighbor, rec) = makeAgentIdEval(agents, v)
 @_coconut_tco
-def agentDecideRec(agents, v, bestNeighbor, rec):
-    return _coconut_tail_call(optimizeAgentPick(agents, v), [bestNeighbor, rec])
+def agentDecideRec(agents, v, advs):
+    return _coconut_tail_call((lambda x: (_coconut.functools.partial(_coconut.operator.getitem, advs))((randArgmax)(np.array(x)))), (list)(map(makeAgentIdEval(agents, v), advs)))
+# optimizeAgentPick(agents, v)([bestNeighbor, rec])
 
-
+# def agentsDecideRec(agents, vs, neighs, recs):
+#   # evalId = makeAgentIdEval(agents, v)
+#   agentDecideRec = (v, x, y) -> [makeAgentIdEval(agents, v)(x), makeAgentIdEval(agents, v)(y)]  |> x->np.array(x) |> randArgmax |> advs[]
+#   return map(x->agentDecideRec(*x), zip(vs, neighs, recs))
+#advs |> map$(eval) |> x->np.array(x) |> randArgmax |> advs[]
 
 
 # getBestPartner :: vp -> vertex -> iter -> int

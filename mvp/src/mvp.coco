@@ -1,23 +1,33 @@
+from time import time
 from analytics import *
 from network import *
 from agent import *
 from mediator import *
 from dilemma import *
-from graph_tool.all import *
+from utils import *
+from data import *
+start = time()
 import math
-from random import choice
+from random import choice, sample
+# from graph_tool.all import *
 #from graph_tool import *
 # import graph_tool as gt
 # import graph_tool.generation as gen
-import numpy as np  
-from numpy.random import rand 
+from timeit import timeit
 import axelrod as axl
-from pprint import pprint
-import toolz as tz
 import pandas as pd
+import toolz as tz
+import numpy as np  
+from numpy.random import choice
+from numpy.random import rand 
+from pprint import pprint
+from copy import deepcopy
+end = time()
+print(f'[DEBUG] external imports took {end-start}s')
 
-storagePath = "../data/dev/"
-data experimentConfig(networkParams, agentParams, gameParams, mediatorParams)
+
+data experimentParams(episode_n is int)
+data experimentConfig(expParams, networkParams, agentParams, gameParams, mediatorParams)
 data mediatorPoolParams(mediator_params_pool is [ mediatorParams ])
 
 
@@ -33,167 +43,199 @@ def agentsTookRec(picks,recs) = [picks[i]==recs[i] for i in range(len(picks))]
 # medEvalPayoff :: vertex -> int # Evaluates how much v picking a rec pays off
 def medEvalPayoff(v) = 1
 
-''' START NOTEBOOK LAND '''
+# useless, memory aid
+def unpackConfig(config):
+  (networkParams, agentParams, gameParams, mediatorParams) = config
+  (N, m, c, gamma, directed) = networkParams
+  (U, pair_eval_fn, attribute_type, rec_policy_pool, dilemma_policy_pool, imitationCoef) = agentParams
+  (alpha) = gameParams
+  (med_pair_eval_fn) = mediatorParams
+  return config
 
-# Config
-mvpDilemmaPolicyPool = ['Cooperator', 'Defector', 'Random']
-mediatorParam = mediatorParams(evalPairPayoff)
+def initNet(networkParams, agentParams):
+  g = genNetwork(networkParams) # config -> graph
+  net = populateSocialNetwork(g, agentParams)  # graph -> config -> graph w/ agents
+  return net
 
-config = experimentConfig(networkParams = mvpNetwork, agentParams = mvpAgent, gameParams = mvpGame, mediatorParams = mediatorParam) where:
-  mvpNetwork = baNetworkParams(N = 100, m = 1)
-  mvpAgent = simplestAgentParams(dilemma_policy_pool = mvpDilemmaPolicyPool)
-  mvpGame = pdGameParams(alpha = 2)
 
-describeExperiment(config)
-
-(networkParams, agentParams, gameParams, mediatorParams) = config
-(N, m, c, gamma, directed) = networkParams
-(U, pair_eval_fn, attribute_type, rec_policy_pool, dilemma_policy_pool) = agentParams
-(alpha) = gameParams
-(med_pair_eval_fn) = mediatorParams
-
-#Init
-historyRec = []
-# config -> graph
-g = genNetwork(networkParams)
-pprint(f'genNetwork: {g}')
-# graph -> config -> graph w/ agents
-net = populateSocialNetwork(g, agentParams)
-pprint(f'populateSocialNetwork: {net}')
-# graph -> agents
-agents = net.vp.agents
-pprint(f'net.vp.agents: {agents}')
-# fn -> mediator
-med = genMediator(mediatorParams)
-pprint(f'genMediator: {med}')
 
 #Rec phase functions
 # medMakeRecs :: mediator -> graph -> [vertex] -> [vertex] # Mediator makes 1 recommendation for each agent
-medMakeRecs = map$(medMakeRec$(med, net))
+# medMakeRecs = (med,net) -> map$(medMakeRec$(med, net))
+# medMakeRecs = _medMakeRecs
 # agentsPickNeighbor :: [vertex] -> [vertex] # Agents pick 1 agent from their neighborhood
-agentsPickNeighbor = map$(agentPickNeighbor$(net))
+agentsPickNeighbor = net -> map$(agentPickNeighbor$(net))
 # (this return was made for history-keeping) agentsDecideRec :: [(vertex, (vertex, vertex))] -> [{pair: (vertex, vertex), is_rec: Boolean}] # Agent and mediator picks are compared and player pairs generated
 # agentsDecideRec :: [(vertex, vertex, vertex)] -> [vertex] # Agent and mediator picks are compared and player pairs generated
-agentsDecideRec = map$(x->x |*> agentDecideRec$(agents))
+agentsDecideRec = agents -> map$(x->x |*> agentDecideRec$(agents))
 # medEvalPayoffs :: [vertex] -> int
 medEvalPayoffs = filter$(x->x) ..> map$(medEvalPayoff)
 #Dilemma phase functions
 # makeGames :: [(vertex,vertex)] -> game
-makeGames = map$(x->x |*> makeEncounterFromPair$(agents))
-# playGames :: [(vertex,vertex)] -> game
-playGames = map$(playEncounter)
-
-_agents = net.get_vertices() |> list
-neighbors = _agents |> agentsPickNeighbor |> list
-recs = _agents |> medMakeRecs |> list
-picks = [_agents, neighbors, recs] |*> zip |> agentsDecideRec |> list
-takenRecs = agentsTookRec(picks, recs)
-mediatorPayoff = medEvalPayoffs(takenRecs)
-
-# _historyRec = {
-#   'agents':{agent: {'neighbor': neighbors[agent], 'rec': recs[agent], 'pick': picks[agent]} for agent in _agents},
-#   #'mediator': {'payoff': mediatorPayoff},
-# }
-
-pairs = [_agents, picks] |*> zip |> list
-games = makeGames(pairs) 
-dilemmaResults = playGames(games)
-dilemmaMoves = dilemmaResults |> map$(.['moves']) 
-#dilemmaPayoffs = dilemmaResults |> map$(.['payoff'])
-
-# _historyDi = {pairs[i]:{'game':games[i].game, 'moves':dilemmaMoves[i]} for i in range(len(pairs))}
-# history.append({'net':net, 'rec':_historyRec, 'dilemma':_historyDi})
-expName = 'notebook'
-i=0
-{'net':net , 'happenings':makeEpisodeLog(_agents, picks, neighbors, recs, games, dilemmaMoves)} |> storeEpisode$(?, f'{storagePath}{expName}{i}')
-
-#TODO: Something's wrong, dilemmaResults[0] returning different values each time, payoffs not corresponding to moves
-''' END NOTEBOOK LAND '''
-
-# runExperiment :: config -> history
-def runExperiment(expName, config, episode_n):
-  describeExperiment(config)
-
-  (networkParams, agentParams, gameParams, mediatorParams) = config
-  (N, m, c, gamma, directed) = networkParams
-  (U, pair_eval_fn, attribute_type, rec_policy_pool, dilemma_policy_pool) = agentParams
-  (alpha) = gameParams
-  (med_pair_eval_fn) = mediatorParams
-
-  #Init
-  # config -> graph
-  g = genNetwork(networkParams)
-  pprint(f'genNetwork: {g}')
-  # graph -> config -> graph w/ agents
-  net = populateSocialNetwork(g, agentParams)
-  pprint(f'populateSocialNetwork: {net}')
-  # graph -> agents
-  agents = net.vp.agents
-  pprint(f'net.vp.agents: {agents}')
-  # fn -> mediator
-  med = genMediator(mediatorParams)
-  pprint(f'genMediator: {med}')
-
-  #Rec phase functions
-  # medMakeRecs :: mediator -> graph -> [vertex] -> [vertex] # Mediator makes 1 recommendation for each agent
-  medMakeRecs = map$(medMakeRec$(med, net))
-  # agentsPickNeighbor :: [vertex] -> [vertex] # Agents pick 1 agent from their neighborhood
-  agentsPickNeighbor = map$(agentPickNeighbor$(net))
-  # (this return was made for history-keeping) agentsDecideRec :: [(vertex, (vertex, vertex))] -> [{pair: (vertex, vertex), is_rec: Boolean}] # Agent and mediator picks are compared and player pairs generated
-  # agentsDecideRec :: [(vertex, vertex, vertex)] -> [vertex] # Agent and mediator picks are compared and player pairs generated
-  agentsDecideRec = map$(x->x |*> agentDecideRec$(agents))
-  # medEvalPayoffs :: [vertex] -> int
-  medEvalPayoffs = filter$(x->x) ..> map$(medEvalPayoff)
-  #Dilemma phase functions
-  # makeGames :: [(vertex,vertex)] -> game
-  makeGames = map$(x->x |*> makeEncounterFromPair$(agents))
+makeGames = agents -> map$(x->x |*> makeEncounterFromPair$(agents))
   # playGames :: [(vertex,vertex)] -> game
-  playGames = map$(playEncounter)
+  
+def runRecPhase(net, med):
+  agents = net.vp.agents
+  agentIds = net.get_vertices() |> list
+  neighbors = timeF('agentsPickNeighbor', ->(agentIds |> agentsPickNeighbor(net) |> list))
+  if med.pair_eval_fn != 'noMed':
+    recs = timeF('medMakeRecs', ->(medMakeRecs(med, net, neighbors) |> list))
+    picks = timeF('agentsDecideRec', ->[agentIds, zip(neighbors, recs)] |*> zip |> agentsDecideRec(agents) |> list)
+  else:
+    recs = [None for i in agentIds]
+    picks = neighbors
+  mediatorPayoff = timeF('medEvalPayoffs', ->(agentsTookRec(picks, recs) |> medEvalPayoffs))
+  return neighbors, recs, picks, mediatorPayoff
 
-  for i in range(episode_n):
-    _agents = net.get_vertices() |> list
-    neighbors = _agents |> agentsPickNeighbor |> list
-    recs = _agents |> medMakeRecs |> list
-    picks = [_agents, neighbors, recs] |*> zip |> agentsDecideRec |> list
-    takenRecs = agentsTookRec(picks, recs)
-    mediatorPayoff = medEvalPayoffs(takenRecs)
+def runDilemmaPhase(agents, agentIds, picks):
+  pairs = [agentIds, picks] |*> zip |> list
+  games = pairs |> makeGames(agents) |> list
+  dilemmaResults = playGames(games)
+  dilemmaMoves = dilemmaResults |> map$(.['moves']) |> list
+  return games, dilemmaMoves
 
-    # _historyRec = {
-    #   'agents':{agent: {'neighbor': neighbors[agent], 'rec': recs[agent], 'pick': picks[agent]} for agent in _agents},
-    #   #'mediator': {'payoff': mediatorPayoff},
-    # }
+def pickRandomNeighbor(net, v) = sample(net.vertex(v).out_neighbors()|>list,1)[0]
 
-    pairs = [_agents, picks] |*> zip |> list
-    games = makeGames(pairs) 
-    dilemmaResults = playGames(games)
-    dilemmaMoves = dilemmaResults |> map$(.['moves']) 
-    #dilemmaPayoffs = dilemmaResults |> map$(.['payoff'])
+def fermi(beta, fitness_diff):
+    """
+    The fermi function determines the probability that the first type imitates the second.
+    :param beta: intensity of selection
+    :param fitness_diff: f_a - f_b
+    :return: the imitation probability
+    :rtype: float
+    """
+    return np.clip(1. / (1. + np.exp(beta * fitness_diff, dtype=np.float64)), 0., 1.)
 
-    # _historyDi = {pairs[i]:{'game':games[i].game, 'moves':dilemmaMoves[i]} for i in range(len(pairs))}
-    # episode = {'net':net, 'rec':_historyRec, 'dilemma':_historyDi}
 
-    ep = {'net':net , 'happenings':makeEpisodeLog(_agents, picks, neighbors, recs, games, dilemmaMoves)} 
-    ep |> storeEpisode$(?, f'{expName}{i}')
 
-def main():
+
+# decideImitate :: agents -> float -> v -> v -> dilemma_policy # who will v imitate?
+def decideImitate(imitationCoef, totalScore, neighbors, v):
+  def imitateProb(A,B) = fermi(imitationCoef, B-A) # beta [0,1]:: influence of diff in imitation
+  # evoNeighbors :: neighbors + pick (which might be a rec)
+  vScore = totalScore[v]
+  neigh = sample(neighbors|>list,1)[0]
+  neighScore = totalScore[neigh|>int]
+  # imitate strategy with probability given by Fermi equation
+  p = imitateProb(vScore, neighScore)
+  return choice([v, neigh], p=[1-p,p])
+
+# runEvolution :: (net, happenings, imitationCoef) -> net
+def runEvolution(net, hap, imitationCoef):
+  def evoNeighbors(v) = net.vertex(v).out_neighbors() :: (net.vertex(hap.iloc[v].pick),) |> set |> list
+  agents = net.vp.agents
+  newAgents = agents
+  agentIds = net.get_vertices() |> list
+  _decideImitate = decideImitate$(imitationCoef, hap.totalScore)
+  def getNewPolicy(v) = _decideImitate(evoNeighbors(v), v) |> agents[] |> .dilemma_policy
+  for v in agentIds:
+  #   imitated = _decideImitate(evoNeighbors(v), v)
+    newAgents[v] = getNewPolicy(v) |> changeDilemmaPolicy$(agents[v], ?)
+  return newAgents
+
+# decideImitate :: agents -> float -> v -> v -> dilemma_policy # sample score of random neighbor
+# def decideImitate(imitationCoef, net, totalScore, v, adv):
+#   def imitateProb(A,B) = fermi(imitationCoef, B-A) # beta [0,1]:: influence of diff in imitation
+#   # evoNeighbors :: neighbors + pick (which might be a rec)
+#   def evoNeighbors(v) = net.vertex(v).out_neighbors() :: (g.vertex(adv),) |> set |> list
+#   agents = net.vp.agents
+#   vScore = totalScore[v]
+#   # neigh = pickRandomNeighbor(net,v)
+#   neigh = sample(evoNeighbors(v).out_neighbors()|>list,1)[0]
+#   neighScore = totalScore[neigh|>int]
+#   # imitate strategy with probability given by Fermi equation
+#   p = imitateProb(vScore, neighScore)
+#   return choice([agents[v].dilemma_policy, agents[neigh].dilemma_policy], p=[1-p,p])
+
+# # runEvolution :: (net, happenings, imitationCoef) -> net
+# def runEvolution(net, haps, imitationCoef):
+#   newNet = net
+#   agents = net.vp.agents
+#   agentIds = net.get_vertices() |> list
+#   _decideImitate = decideImitate$(imitationCoef, net, haps.totalScore, imitationCoef)
+#   for v in agentIds:
+    
+#     newNet.vp.agents[v] = changeDilemmaPolicy(agents[v], _decideImitate(haps.iloc[v].pick, v))
+#   return newNet
+
+def updateNetVP(name, net, vp):
+  net.vp[name] = vp
+  return net
+
+# runEpisode :: net, med -> ep  #ep :: {net, happenings} # happenings :: {agents, picks, neighbors, recs, games, dilemmaMoves}
+def runEpisode(net, med, imitationCoef):
+  # Rec
+  agents = net.vp.agents
+  neighbors, recs, picks, mediatorPayoff = timeF('runRecPhase', ->runRecPhase(net, med))
+  # Dilemma
+  agentIds = net.get_vertices() |> list
+  games, dilemmaMoves = timeF('runDilemmaPhase', ->runDilemmaPhase(agents, agentIds, picks))
+  happenings = timeF('makeEpisodeLog', ->makeEpisodeLog(agentIds, agents, picks, neighbors, recs, games, dilemmaMoves) |>  x -> pd.DataFrame.from_dict(x).T)
+  happeningsWPayoff = timeF('calcAllPayoffs', ->calcAllPayoffs(happenings))
+  # Evo
+  newAgents = timeF('runEvolution', ->runEvolution(net, happeningsWPayoff, imitationCoef))
+  newNet = updateNetVP('agents', net, newAgents)
+  ep = {'net':newNet , 'happenings':happeningsWPayoff} 
+  # ep['happenings'] = pd.DataFrame.from_dict(ep['happenings']).T
+  ep['happenings'] = pd.DataFrame.from_dict(ep['happenings'])
+  return ep
+
+def runAllEpisodes(net, med, imitationCoef, remaining_eps):
+  print(f'in runAllEpisodes, {remaining_eps} remaining')
+  ep = timeF(f'RUNEPISODE {remaining_eps} EPS REMAINING', ->runEpisode(net, med, imitationCoef))
+  print(dilemmaPolShares(ep['net'].vp.agents))
+  yield ep
+  if remaining_eps <= 1: 
+    print(f'returning runAllEpisodes {remaining_eps}')
+    return
+  else:
+    print(f"recalling runAllEpisodes {remaining_eps}")
+    yield from runAllEpisodes(ep['net'], med, imitationCoef, remaining_eps-1)
+
+def runMedExperiment(imitationCoef, episode_n, net, med):  
+  print(f'dilemma policy distribution: {dilemmaPolShares(net.vp.agents)}')
+  return runAllEpisodes(net, med, imitationCoef, episode_n)
+  # for i in range(episode_n):
+  #   ep =  runEpisode(net,med)
+  #   yield ep
+
+def makeMvpConfig():
+  expParams = experimentParams(episode_n = 5)
+  mvpNetwork = baNetworkParams(N = 1000, m = 1)
+  mvpAgent = simplestAgentParams(dilemma_policy_pool = ['Cooperator', 'Defector', 'Random'])
+  mvpGame = pdGameParams(alpha = 2)
+  mvpMeds = mediatorParams(pol_pool = ['noMed', 'selflessRecEval', 'naiveSelfishRecEval'])
+  return experimentConfig(expParams = expParams, networkParams = mvpNetwork, agentParams = mvpAgent, gameParams = mvpGame, mediatorParams = mvpMeds)
+
+def runExperiment(config, expName):
+  describeExperiment(config)
+  (expParams, networkParams, agentParams, gameParams, mediatorParams) = config
+  imitationCoef = agentParams.imitationCoef
+  episode_n = expParams.episode_n
+  medPolPool = mediatorParams.pol_pool
+  net = initNet(networkParams, agentParams) # need to store it to get a fresh copy each time(?)
   # Config
-  mvpDilemmaPolicyPool = ['Cooperator', 'Defector', 'Random']
-  mediatorParamPool = [mediatorParams(evalPairPayoff)]
+  for medPol in medPolPool:  
+    episodes = runMedExperiment(imitationCoef, episode_n, deepcopy(net), mediator(medPol))
+    for i,ep in enumerate(episodes):
+      print(f'will store ep {i}')
+      timeF(f'storeEpisode{i}', ->storeEpisode(storagePath, expName, medPol, i, ep))
+      
+storagePath = "../data/dev"
+def main(makeConfig):
+  expName = 'd'
+  runExperiment(makeConfig(), expName)
+  timeF(f'runAnalysis', ->runAnalysis(storagePath, expName))
 
-  for mediatorParam in mediatorParamPool:  
-    config = experimentConfig(networkParams = mvpNetwork, agentParams = mvpAgent, gameParams = mvpGame, mediatorParams = mediatorParam) where:
-      mvpNetwork = baNetworkParams(N = 1000, m = 1)
-      mvpAgent = simplestAgentParams(dilemma_policy_pool = mvpDilemmaPolicyPool)
-      mvpGame = pdGameParams(alpha = 2)
+timeF('main', ->main(makeMvpConfig))
 
-    runExperiment('test', config, 2)
-
-
+# config, net, med, happenings  = consoleSetup()
 
 DEBUG = True
 #"""parameters for the model"""
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 

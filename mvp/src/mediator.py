@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x25e0b6d0
+# __coconut_hash__ = 0xa8ad933e
 
 # Compiled with Coconut version 1.4.3 [Ernest Scribbler]
 
@@ -650,6 +650,10 @@ _coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_makedata, _coc
 
 from dilemma import *
 from agent import *
+import numpy as np
+from itertools import chain
+from utils import *
+from math import inf
 
 #policyEnum = {'Best':selflessMediatorPickPartner, 'Worst':evilMediatorPickPartner, 'PseudoGreedy':None}
 # Recommendation policies. Take the social network, an agent, and return another agent as a recommendation
@@ -659,9 +663,21 @@ from agent import *
 def bestPolicy(soc_net, agent):
     return 1
 
+# selflessRecEval :: agent -> agent -> float
+@_coconut_tco
+def selflessRecEval(neighbor, a1, a2):
+    return _coconut_tail_call(evalPairPayoff, a1, a2)
+# naiveSelfishRecEval :: agent -> agent -> float # recs the lowest value rec that's still better than the alternative for the player
+def naiveSelfishRecEval(neighbor, a1, a2):
+    neighPayoff = evalPairPayoff(a1, neighbor)
+    a2Payoff = evalPairPayoff(a1, a2)
+    diff = a2Payoff - neighPayoff
+    return -diff if diff < 0 else -inf
 
-#"""parameters for the mediator"""
-class mediatorParams(_coconut.collections.namedtuple("mediatorParams", "pair_eval_fn")):
+medPolicyDict = {'selflessRecEval': selflessRecEval, 'naiveSelfishRecEval': naiveSelfishRecEval}
+
+#"""parameters for the mediator""" 
+class mediatorParams(_coconut.collections.namedtuple("mediatorParams", "pol_pool")):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __eq__(self, other):
@@ -669,6 +685,7 @@ class mediatorParams(_coconut.collections.namedtuple("mediatorParams", "pair_eva
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
 
+# data mediatorParams(pair_eval_fn)
 
 class mediator(_coconut.collections.namedtuple("mediator", "pair_eval_fn")):
     __slots__ = ()
@@ -679,17 +696,11 @@ class mediator(_coconut.collections.namedtuple("mediator", "pair_eval_fn")):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
 
 
-@_coconut_tco
-def genMediator(p):
-    _coconut_match_to = p
-    _coconut_match_check = False
-    if (_coconut.isinstance(_coconut_match_to, mediatorParams)) and (_coconut.len(_coconut_match_to) == 1):
-        pair_eval_fn = _coconut_match_to[0]
-        _coconut_match_check = True
-    if _coconut_match_check:
-        return _coconut_tail_call(mediator, pair_eval_fn)
-    else:
-        raise TypeError()
+# def genMediator(p):
+#   match mediatorParams(pair_eval_fn) in p:
+#     return mediator(pair_eval_fn)
+#   else:
+#     raise TypeError()
 
 # mediatorPickPartner :: mediator -> graph -> vertex -> vertex
 # agents :: agents property map
@@ -697,10 +708,55 @@ def genMediator(p):
 @_coconut_tco
 def medMakeRec(med, net, v):
     agents = net.vp.agents
-    @_coconut_tco
-    def pairEvalById(a1, a2):
-        return _coconut_tail_call(med.pair_eval_fn, agents[a1], agents[a2])
+    pairEval = medPolicyDict[med.pair_eval_fn]
+    pairEvalById = lambda x: pairEval(agents[x[0]], agents[x[1]])
     return _coconut_tail_call(optimizeAgents, _coconut.functools.partial(pairEvalById, v), net.get_vertices())
+
+# TODO: unfinished
+# fromiter2d :: type -> [int] -> fn -> fn -> iter<2d> -> ndarray 
+# def fromiter2d(_type, shape, iter1, iter2):
+#   a = np.fromiter(chain.from_iterable((tuple(j for j in iter2) for i in iter1)), dtype=_type) #type: int
+#   a.shape = shape
+#   return a
+# iterMatrix :: [int] -> iter -> ndarray
+@_coconut_tco
+def iterMatrix(shape, iter):
+    return _coconut_tail_call((_coconut_partial(np.reshape, {1: [1000, 1000]}, 2)), (_coconut_partial(np.fromiter, {}, 1, dtype=int))(iter))
+# crossIter :: iter -> iter<tuple>
+def crossIter(iter):
+    return (tuple(((i, j) for j in iter)) for i in iter)
+# combIter :: iter -> iter<tuple>
+def combIter(iter):
+    return (tuple(((i, j) for j in iter[i + 1:])) for i in iter)
+
+def iterTri(n, a):
+# n = len(a)*2
+# create an empty matrix
+    m = np.zeros(shape=(n, n), dtype=np.float16)
+# ids of the upper triangle
+    u_ids = np.triu_indices(n, 1)
+# set upper values
+    m[u_ids] = a
+# switch coordinates to set lower values
+    m[u_ids[1], u_ids[0]] = a
+# fill diag with zeros
+    np.fill_diagonal(m, np.zeros(n).astype(float))
+    return m
+
+# combIter(range(1000)) |> chain.from_iterable |> map$(x->[agents[x[0]], agents[x[1]]] |*> evalPairPayoff)
+
+# _medMakeRecs :: med -> net -> [v]
+def medMakeRecs(med, net, neighbors):
+    n = net.num_vertices()
+    agents = net.vp.agents
+# def pairEvalById(a1,a2) = med.pair_eval_fn(agents[a1], agents[a2])
+# @memoize()
+    pairEval = medPolicyDict[med.pair_eval_fn]
+    pairEvalById = lambda x: pairEval(agents[neighbors[x[0]]], agents[x[0]], agents[x[1]])
+    pairEvalMatrix = iterTri(n, (list)(map(pairEvalById, (chain.from_iterable)(combIter(net.get_vertices())))))
+    recs = timeF('randArgmax', lambda _=None: np.apply_along_axis(randArgmax, 1, pairEvalMatrix))
+    return recs
+
 
 @_coconut_tco
 def selflessMediatorMakeRec(g, v):
@@ -713,19 +769,19 @@ def evilMediatorMakeRec(g, v):
     makeNegIdEval = _coconut_base_compose(makeAgentIdEval(agents, v), (_coconut.functools.partial(_coconut.operator.mul, -1), 0))
     return _coconut_tail_call(optimizeAgents, makeNegIdEval(agents, v), g.vertices())
 
-# makeRecGame :: graph -> vertex
-def makeRecGame(graph, agentVertex):
-    agents = graph.vp.agents
-    agentPickPartner = _coconut.functools.partial(agentPickPartnerFromAgents, agents)
-    alt_pick = agentPickPartner(agentVertex)
-    selfish_pick = mediatorPickPartner()
-    selfless_pick = mediatorPickPartner()
-    refusal = 0
+# # makeRecGame :: graph -> vertex
+# def makeRecGame(graph, agentVertex):
+#   agents = graph.vp.agents
+#   agentPickPartner = agentPickPartnerFromAgents$(agents)
+#   alt_pick = agentPickPartner(agentVertex)
+#   selfish_pick = mediatorPickPartner()
+#   selfless_pick = mediatorPickPartner()
+#   refusal = 0
 
-    A = [[max_a, ok_a], [alt_a, alt_a]]
-    B = [[ok_r, max_r], [refusal_r, refusal_r]]
-    rec_game = makeAsymmetricGame(A, B)
-    return rec_game
+#   A = [[max_a, ok_a], [alt_a, alt_a]]
+#   B = [[ok_r, max_r], [refusal_r, refusal_r]]
+#   rec_game = makeAsymmetricGame(A,B)
+#   return rec_game
 
-def makeRecGames(graph):
-    return (makeRecGame(graph, v) for v in graph.vertices())
+# def makeRecGames(graph):
+#   return (makeRecGame(graph, v) for v in graph.vertices())

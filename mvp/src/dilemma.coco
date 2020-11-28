@@ -1,5 +1,6 @@
 import axelrod as axl
 import nashpy as nash
+import random
 
 policyDict = {
   'Cooperator': axl.Cooperator(),
@@ -16,11 +17,12 @@ data pdGameParams(alpha)
 def makeSymmetricGame(r, s, t, p) = axl.game.Game(r=r, s=s, t=t, p=p)
 def makeSymmetricMatch(n_turns, game, strat1,strat2) = axl.Match((strat1,strat2), turns = n_turns, game=game)
 makeSymmetricEncounter = makeSymmetricMatch$(1)
-def makePD() = makeSymmetricGame(r=3, p=1, s=0, t=5)
+# def makePD() = makeSymmetricGame(r=3, p=1, s=0, t=5)
+def makePD() = makeSymmetricGame(r=1, p=0, s=-0.5, t=1.5)
 def gameFromPair(agents, v1, v2) = makePD()
 def makeEncounterFromPair(agents, v1, v2) = 
   vPol = agents[] ..> .dilemma_policy ..> policyDict[]
-  makeSymmetricEncounter(gameFromPair(agents, v1, v2), vPol(v1),vPol(v2))
+  makeSymmetricMatch(1, gameFromPair(agents, v1, v2), vPol(v1),vPol(v2))
 def makePDEncounter(strat1,strat2) = makeSymmetricEncounter(game=makePD(), strat1=strat1, strat2=strat2)
 
 
@@ -37,13 +39,22 @@ def getNashEqs(game) = [eq for eq in game.support_enumeration()]
 
 # calcEncounterPayoffs :: encounter -> (float, float)
 def playEncounter(enc) = playSymmetricMatch(enc) |> match->{'moves': getMatchMoves(match),'payoff': getMatchAvgRewards(match)}
+playGames = map$(playEncounter)
 calcEncounterPayoffs = playSymmetricMatch ..> getMatchAvgRewards
-def calcDilemmaPayoffs(game, strat1, strat2) = makeSymmetricEncounter(game=game, strat1=strat1, strat2=strat2) |> calcEncounterPayoffs
+# def calcDilemmaPayoffs(game, strat1, strat2) = makeSymmetricEncounter(game=game, strat1=strat1, strat2=strat2) |> calcEncounterPayoffs
+def calcDilemmaPayoffs(n_turns, game, strat1, strat2) = makeSymmetricMatch(n_turns=n_turns, game=game, strat1=strat1, strat2=strat2) |> calcEncounterPayoffs
 
 # Takes policies
-def _estimateDilemmaPayoffs(strat1, strat2) = calcDilemmaPayoffs(makePD(), strat1, strat2)
-@memoize()
+def estimateDilemmaPayoffsAxl(n_turns, strat1, strat2) = calcDilemmaPayoffs(n_turns, makePD(), strat1, strat2)
+
+def translatePol(_strat) = random.choice(['Cooperator', 'Defector']) if _strat == 'Random' else _strat
+def translatePol(_strat) = random.choice(['Cooperator', 'Defector']) if _strat == 'Random' else _strat
+
 # Takes string descriptions of policies
-def estimateDilemmaPayoffs(strat1, strat2) = _estimateDilemmaPayoffs(policyDict[strat1], policyDict[strat2])
+@memoize()
+def _estimateDilemmaPayoffs(n_turns, strat1, strat2) = estimateDilemmaPayoffsAxl(n_turns, policyDict[strat1], policyDict[strat2])
+
+def estimateDilemmaPayoffs(n_turns, strat1, strat2) = _estimateDilemmaPayoffs(n_turns, translatePol(strat1), translatePol(strat2))
+
 
 def moveScore(game, moves) = game.game.scores[moves]

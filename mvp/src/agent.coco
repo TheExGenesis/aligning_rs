@@ -13,8 +13,9 @@ def makeAgentIdEval(agents, v) = agents$[] ..> agents[v].evalPartner
 
 
 '''Utility Functions'''
-# evalPartnerPayoff :: agent -> agent -> func
-def evalPairPayoff(a1,a2) = (a1, a2) |> map$(.dilemma_policy) |*> estimateDilemmaPayoffs |> .[0]
+# evalPartnerPayoff :: agent -> agent -> float
+# def evalPairPayoff(a1,a2) = (a1.dilemma_policy, a2.dilemma_policy) |*> estimateDilemmaPayoffs(10) |> .[0]
+def evalPairPayoff(a1,a2) = (a1.dilemma_policy, a2.dilemma_policy) |*> estimateDilemmaPayoffs$(10) |> .[0]
 
 
 '''Agent construction'''
@@ -39,11 +40,15 @@ noAttr = vectorAttr$(0)
 
 # agentParams :: (U, attribute_type, [rec_policy], [dilemma_policy])
 # """parameters for an agent, need to work out how U (utility function) and attribute_type are handled"""
-data agentParams(U, pair_eval_fn, attribute_type, rec_policy_pool is list, dilemma_policy_pool is list) # match data
+data agentParams(U, pair_eval_fn, attribute_type, rec_policy_pool is list, dilemma_policy_pool is list, imitationCoef is float) # match data
 
 # agent :: (dilemma_policy, rec_policy, attributes) 
 data agent(pair_eval_fn, dilemma_policy, rec_policy, attributes):
-  def evalPartner(self,partner) = self.pair_eval_fn(self, partner)
+  def evalPartner(a1,partner) = a1.pair_eval_fn(a1, partner)
+
+# changeDilemmaPolicy :: agent -> agent
+def changeDilemmaPolicy(oldAgent, newPolicy) = agent(oldAgent.pair_eval_fn, newPolicy, oldAgent.rec_policy, oldAgent.attributes)
+
 
 # makeRandomAgent :: params -> agent
 # TODO: might be optimal to init the policy later
@@ -57,7 +62,8 @@ simplestAgentParams = agentParams$(
   U='identity', 
   pair_eval_fn=evalPairPayoff, 
   attribute_type=noAttr, 
-  rec_policy_pool=['Greedy'])
+  rec_policy_pool=['Greedy'],
+  imitationCoef=0.5)
 
 '''Partner Picking'''
 # getEvalPartner :: graph -> vertex -> fn evalPartner
@@ -84,9 +90,16 @@ def agentPickNeighbor(net, v) = net.vertex(v).out_neighbors() |> list |> optimiz
 #def agentPickByPayoff(agents,v) = evalPartnerPayoff(agents,v) |> agentPickPartner$(?,v)
 
 # agentDecideRec :: agents -> v -> v -> v
-def agentDecideRec(agents, v, bestNeighbor, rec) = optimizeAgentPick(agents, v)([bestNeighbor, rec])
+# def agentDecideRec(agents, v, bestNeighbor, rec) = optimizeAgentPick(agents, v)([bestNeighbor, rec])
+# def agentDecideRec(agents, v, bestNeighbor, rec) = makeAgentIdEval(agents, v)
+def agentDecideRec(agents, v, advs) = advs |> map$(makeAgentIdEval(agents, v)) |> list |> x->np.array(x) |> randArgmax |> advs[]
+# optimizeAgentPick(agents, v)([bestNeighbor, rec])
 
-
+# def agentsDecideRec(agents, vs, neighs, recs):
+#   # evalId = makeAgentIdEval(agents, v)
+#   agentDecideRec = (v, x, y) -> [makeAgentIdEval(agents, v)(x), makeAgentIdEval(agents, v)(y)]  |> x->np.array(x) |> randArgmax |> advs[]
+#   return map(x->agentDecideRec(*x), zip(vs, neighs, recs))
+#advs |> map$(eval) |> x->np.array(x) |> randArgmax |> advs[]
 
   
 # getBestPartner :: vp -> vertex -> iter -> int

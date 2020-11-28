@@ -30,7 +30,8 @@ class DevMediator:
     def makeAttributeMatrix(self, agents):
         attr_list = [a.getAttributes() for a in agents]
         attr_matrix = np.vstack(attr_list) # adds dimension on the left, stacks vectors like pancakes
-        return attr_matrix
+        return attr_matri\
+             
 
     def makeSimilarityMatrix(self, attr_matrix):
         sim_matrix = cosine_similarity(attr_matrix)

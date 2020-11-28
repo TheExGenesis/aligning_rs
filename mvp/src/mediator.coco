@@ -1,5 +1,9 @@
 from dilemma import *
 from agent import *
+import numpy as np
+from itertools import chain
+from utils import *
+from math import inf 
 
 #policyEnum = {'Best':selflessMediatorPickPartner, 'Worst':evilMediatorPickPartner, 'PseudoGreedy':None}
 # Recommendation policies. Take the social network, an agent, and return another agent as a recommendation
@@ -7,26 +11,83 @@ from agent import *
 # bestPolicy :: socNet -> agent -> agent
 # returns best possible match for agent in the entire network
 def bestPolicy(soc_net, agent) = 1
-  
 
-#"""parameters for the mediator"""
-data mediatorParams(pair_eval_fn)
+# selflessRecEval :: agent -> agent -> float
+def selflessRecEval(neighbor, a1, a2) = evalPairPayoff(a1, a2)
+# naiveSelfishRecEval :: agent -> agent -> float # recs the lowest value rec that's still better than the alternative for the player
+def naiveSelfishRecEval(neighbor, a1, a2):
+  neighPayoff = evalPairPayoff(a1, neighbor)
+  a2Payoff = evalPairPayoff(a1, a2)
+  diff = a2Payoff - neighPayoff
+  return -diff if diff < 0 else -inf
+
+medPolicyDict = {
+  'selflessRecEval': selflessRecEval,
+  'naiveSelfishRecEval': naiveSelfishRecEval,
+}
+
+#"""parameters for the mediator""" 
+data mediatorParams(pol_pool)
+# data mediatorParams(pair_eval_fn)
 
 data mediator(pair_eval_fn)
 
-def genMediator(p):
-  match mediatorParams(pair_eval_fn) in p:
-    return mediator(pair_eval_fn)
-  else:
-    raise TypeError()
+# def genMediator(p):
+#   match mediatorParams(pair_eval_fn) in p:
+#     return mediator(pair_eval_fn)
+#   else:
+#     raise TypeError()
 
 # mediatorPickPartner :: mediator -> graph -> vertex -> vertex
 # agents :: agents property map
 # picks the neighbor/accessible partner that if a dilemma is played with them, maximizes the agent's U 
 def medMakeRec(med, net, v):
   agents = net.vp.agents
-  def pairEvalById(a1,a2) = med.pair_eval_fn(agents[a1], agents[a2])
+  pairEval = medPolicyDict[med.pair_eval_fn]
+  pairEvalById = x->pairEval(agents[x[0]], agents[x[1]])
   return net.get_vertices() |> optimizeAgents$(pairEvalById$(v))
+
+# TODO: unfinished
+# fromiter2d :: type -> [int] -> fn -> fn -> iter<2d> -> ndarray 
+# def fromiter2d(_type, shape, iter1, iter2):
+#   a = np.fromiter(chain.from_iterable((tuple(j for j in iter2) for i in iter1)), dtype=_type) #type: int
+#   a.shape = shape
+#   return a
+# iterMatrix :: [int] -> iter -> ndarray
+def iterMatrix(shape, iter) = iter |> np.fromiter$(?, dtype=int) |> np.reshape$(?, [1000,1000])
+# crossIter :: iter -> iter<tuple>
+def crossIter(iter) = (tuple((i,j) for j in iter) for i in iter) 
+# combIter :: iter -> iter<tuple>
+def combIter(iter) = (tuple((i,j) for j in iter[i+1:]) for i in iter) 
+
+def iterTri(n, a):
+  # n = len(a)*2
+  # create an empty matrix
+  m = np.zeros(shape=(n,n), dtype=np.float16)
+  # ids of the upper triangle
+  u_ids = np.triu_indices(n,1)
+  # set upper values
+  m[u_ids] = a
+  # switch coordinates to set lower values
+  m[u_ids[1],u_ids[0]] = a
+  # fill diag with zeros
+  np.fill_diagonal(m, np.zeros(n).astype(float))
+  return m
+
+# combIter(range(1000)) |> chain.from_iterable |> map$(x->[agents[x[0]], agents[x[1]]] |*> evalPairPayoff)
+
+# _medMakeRecs :: med -> net -> [v]
+def medMakeRecs(med, net, neighbors):
+  n = net.num_vertices()
+  agents = net.vp.agents
+  # def pairEvalById(a1,a2) = med.pair_eval_fn(agents[a1], agents[a2])
+  # @memoize()
+  pairEval = medPolicyDict[med.pair_eval_fn]
+  pairEvalById = x->pairEval(agents[neighbors[x[0]]], agents[x[0]], agents[x[1]])
+  pairEvalMatrix = combIter(net.get_vertices()) |> chain.from_iterable |> map$(pairEvalById) |> list |> iterTri$(n)
+  recs = timeF('randArgmax', ->np.apply_along_axis(randArgmax, 1, pairEvalMatrix))
+  return recs
+  
 
 def selflessMediatorMakeRec(g, v) = 
   agents = g.vp.agents
@@ -37,19 +98,19 @@ def evilMediatorMakeRec(g, v) =
   makeNegIdEval = makeAgentIdEval(agents, v) ..> (*)$(-1)
   g.vertices() |> optimizeAgents$(makeNegIdEval(agents, v))
 
-# makeRecGame :: graph -> vertex
-def makeRecGame(graph, agentVertex):
-  agents = graph.vp.agents
-  agentPickPartner = agentPickPartnerFromAgents$(agents)
-  alt_pick = agentPickPartner(agentVertex)
-  selfish_pick = mediatorPickPartner()
-  selfless_pick = mediatorPickPartner()
-  refusal = 0
+# # makeRecGame :: graph -> vertex
+# def makeRecGame(graph, agentVertex):
+#   agents = graph.vp.agents
+#   agentPickPartner = agentPickPartnerFromAgents$(agents)
+#   alt_pick = agentPickPartner(agentVertex)
+#   selfish_pick = mediatorPickPartner()
+#   selfless_pick = mediatorPickPartner()
+#   refusal = 0
   
-  A = [[max_a, ok_a], [alt_a, alt_a]]
-  B = [[ok_r, max_r], [refusal_r, refusal_r]]
-  rec_game = makeAsymmetricGame(A,B)
-  return rec_game
+#   A = [[max_a, ok_a], [alt_a, alt_a]]
+#   B = [[ok_r, max_r], [refusal_r, refusal_r]]
+#   rec_game = makeAsymmetricGame(A,B)
+#   return rec_game
 
-def makeRecGames(graph):
-  return (makeRecGame(graph, v) for v in graph.vertices())
+# def makeRecGames(graph):
+#   return (makeRecGame(graph, v) for v in graph.vertices())

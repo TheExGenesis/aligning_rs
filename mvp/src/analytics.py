@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xece0cd4b
+# __coconut_hash__ = 0xd04c51c1
 
 # Compiled with Coconut version 1.4.3 [Ernest Scribbler]
 
@@ -648,55 +648,125 @@ _coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_makedata, _coc
 
 # Compiled Coconut: -----------------------------------------------------------
 
+from collections import Counter
+from utils import *
+from data import *
 import pandas as pd
-from graph_tool.all import graph_draw
 
-# def calcPayoff(happenings, agent):
-# get payoff of agent row
+import math
+from toolz.functoolz import apply
+
+
+
+def calcGamePayoff(row):
+    score = row.game.score
+    moves = row.moves
+    scores = map(score, moves)
+    total = (list)(map(sum, (zip)(*scores)))
+    return total
+
+# def calcAgentPayoff(hap, agent):
+
+@_coconut_tco
+def calcExternalPayoff(hap, row):
+    return _coconut_tail_call(hap.loc[hap.pick == hap.index[row['index']]].gamePayoff.map(_coconut.operator.itemgetter(1)).sum)
+
+def calcAllPayoffs(hap):
+    hap_ind = hap.reset_index()
+    hap_ind['gamePayoff'] = hap_ind.apply(calcGamePayoff, axis=1)
+# hap.loc[hap.pick == hap.index[3]]
+    hap['totalScore'] = hap_ind.apply(lambda x: calcExternalPayoff(hap_ind, x) + x.gamePayoff[0], axis=1)
+    return hap
+
+
+# stratShares :: agents -> [float] 
+def dilemmaPolShares(agents):
+    strats = [a.dilemma_policy for a in agents]
+    n = len(strats)
+    shares = {pol: c / n for (pol, c) in Counter(strats).items()}
+    return shares
+
+@_coconut_tco
+def polShares(hap):
+    return _coconut_tail_call(hap.groupby('policy').size)
+
+@_coconut_tco
+def scoreDist(hap):
+    return _coconut_tail_call(hap.totalScore.hist, bins=100)
+def saveScoreDist(path, hap):
+    saveFigure(path, (scoreDist)(hap))
+
+@_coconut_tco
+def medianScore(hap):
+    return _coconut_tail_call(hap.totalScore.median)
+
+def coopRate(hap):
+    c = hap.moves.str.count('C').sum()
+    d = hap.moves.str.count('D').sum()
+    return c / (c + d)
+
+@_coconut_tco
+def totalScore(hap):
+    return _coconut_tail_call(hap.totalScore.sum)
+
+# tookRec :: agentRecord -> Bool
+def tookRec(a):
+    return a.pick == a.rec
+@_coconut_tco
+def totalMedScore(hap):
+    return _coconut_tail_call(len, hap[hap['pick'] == hap['rec']].index)
+
+# overTime :: fn -> [hap] -> fig
+def overTime(fn, haps):
+    points = pd.DataFrame([fn(hap) for hap in haps])
+    return points
+
+@_coconut_tco
+def linePlotSeries(series):
+    return _coconut_tail_call(series.plot.line)
+
+@_coconut_tco
+def multiLinePlot(df):
+    return _coconut_tail_call(df.groupby)
+
+# a[0].to_frame().T.append(a[0], ignore_index=True)
+
+
+@_coconut_tco
+def saveLinePlot(path, fn, haps):
+    return _coconut_tail_call(saveFigure, path, (linePlotSeries)(overTime(fn, haps)))
+
+@_coconut_tco
+def saveCoopRatePlot(path, haps):
+    return _coconut_tail_call(saveLinePlot, f'{path}/coopRate.png', coopRate, haps)
+@_coconut_tco
+def saveAgentScorePlot(path, haps):
+    return _coconut_tail_call(saveLinePlot, f'{path}/agentScore.png', totalScore, haps)
+@_coconut_tco
+def saveMediatorScorePlot(path, haps):
+    return _coconut_tail_call(saveLinePlot, f'{path}/medScore.png', totalMedScore, haps)
+@_coconut_tco
+def savePolSharesPlot(path, haps):
+    return _coconut_tail_call(saveLinePlot, f'{path}/polShares.png', polShares, haps)
+
+def runAnalysis(storagePath, expName):
+    exps = loadExperimentData(storagePath, expName, 'hap.csv')
+    funcs = [saveCoopRatePlot, saveAgentScorePlot, saveMediatorScorePlot, savePolSharesPlot]
+    for medName, haps in exps.items():
+        haps = (list)(haps)
+        (print)((list)(map(lambda fn: fn(f'{storagePath}/{expName}/{medName}', haps), funcs)))
+
+# def calcPayoff(hap, agent):
+#     # get payoff of agent row
+#     score = hap.iloc[agent].game.score
+#     moves = hap.iloc[agent].moves
+#     scores = map(score,moves)
+#     total = scores |*> zip |> map$(sum)
+#     return total
 # get sum of payoffs of rows where agent is the partner
 
-# Rec and dilemma logs in a single line
-def makeEpisodeLog(_agents, picks, neighbors, recs, games, dilemmaMoves):
-    return {agent: {'pick': picks[agent], 'neighbor': neighbors[agent], 'rec': recs[agent], 'game': games[agent].game, 'moves': dilemmaMoves[agent]} for agent in _agents}
 
-# IMPURE
-def storeEpisode(ep, epPath):
-    print(f'storing episode {epPath}')
-    net = ep['net']
-    happenings = pd.DataFrame.from_dict(ep['happenings']).T
-    print(happenings)
-    net.save(epPath + "_net.gt")
-    print(net)
-    happenings.to_csv(epPath + "_hap.csv")
-#   pd.DataFrame.from_dict(ep['rec']['agents']).to_csv(epPath + "_rec.csv")
-#   dilemmaHist = pd.DataFrame.from_dict(ep['dilemma']).transpose()
-#   dilemmaHist.to_csv(epPath + "_dilemma.csv")
-    drawNet(epPath + "_pic.png", net)  # has this name bc it's the only kind but eventually I'll specify
-
-def loadEpisode(epPath):
-    pd.read_csv()
-# IMPURE
-def storeHistory(history, runName):
-    for i, ep in enumerate(history):
-        storeEpisode(ep, f'{runName}{i}')
-
-
-def getPolicies(shapes, net):
-    policies = net.new_vertex_property('string')
-    for v in net.get_vertices():
-        policies[v] = net.vp.agents[v].dilemma_policy
-    for v in net.get_vertices():
-        policies[v] = shapes[policies[v]]
-    return policies
-
-def getPayoffs(dilemmaHist, net):
-    payoffs = []
-    for v in net.get_vertices():
-        payoffs[v] = shapes[payoffs[v]]
-    return payoffs
-# different colors for each dilemma policy. Maybe eventually change to shapes and color according to reward
-def drawNet(path, net):
-#m = {'Defector':'black', 'Cooperator':'white', 'Random: 0.5':'pink'}   
-    shapes = {'Defector': 'triangle', 'Cooperator': 'circle', 'Random': 'square'}
-    policies = getPolicies(shapes, net)
-    graph_draw(net, output=path, vertex_shape=policies, bg_color="white")  #, vertex_fill_color=policies
+# def vpAgentProp(net, vpType, prop, fn):
+#     vp = net.new_vertex_property(vpType)
+#     for v in net.get_vertices(): vp[v] = fn(prop |> net.vp.agents[v].)
+#     return vp
