@@ -1,0 +1,9 @@
+Collecting coconut-develop
+  Using cached coconut_develop-1.4.3.post0.dev66-py2.py3-none-any.whl
+Collecting cPyparsing<2.4.6,>=2.4.5.0.1.2
+  Using cached cPyparsing-2.4.5.0.1.2-cp38-cp38-linux_x86_64.whl
+Requirement already satisfied: prompt-toolkit>=1 in /home/genesis/miniconda3/lib/python3.8/site-packages (from coconut-develop) (3.0.14)
+Requirement already satisfied: pygments>=2.3 in /home/genesis/miniconda3/lib/python3.8/site-packages (from coconut-develop) (2.7.4)
+Requirement already satisfied: wcwidth in /home/genesis/miniconda3/lib/python3.8/site-packages (from prompt-toolkit>=1->coconut-develop) (0.2.5)
+Installing collected packages: cPyparsing, coconut-develop
+Successfully installed cPyparsing-2.4.5.0.1.2 coconut-develop-1.4.3.post0.dev66
