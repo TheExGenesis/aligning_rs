@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "/home/genesis/miniconda3/envs/gt/bin/python",
+    "python.analysis.extraPaths": ["./graphEgtExperiments/SantosOct2006Mod/MediatorCompetitionAsRewire/mediatedEgtCompetition"]
+
+}

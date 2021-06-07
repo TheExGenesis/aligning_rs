@@ -1,0 +1,44 @@
+gen = x->x # import graph_tool.generation as 
+from agent import makeRandomAgent 
+"""
+N, m=1, c=None, gamma=1, directed=True
+
+N int
+Size of the network.
+
+m int (optional, default: 1)
+Out-degree of newly added vertices.
+
+c float (optional, default: 1 if directed == True else 0)
+Constant factor added to the probability of a vertex receiving an edge (see notes below).
+
+gamma float (optional, default: 1)
+Preferential attachment exponent. If gamma != 1, network is not SF (see notes in gt docs)
+"""
+# (N, m, c, gamma)
+#"""parameters for the network"""
+data priceNetworkParams(N is int, m is int, c is float, gamma is float, directed is bool) # match data
+  
+# (N, m) -> Graph
+baNetworkParams = priceNetworkParams$(c = 0.0, gamma = 1.0, directed = False ) # match data
+
+
+# genNetwork :: priceNetworkParams -> Graph
+# gen price network from graph_tools
+def genNetwork(p):
+  global gen
+  import graph_tool.generation as g
+  gen = g
+  match priceNetworkParams(N,m,c,gamma,directed) in p:
+    return gen.price_network(N=N, m=m, c=c, gamma=gamma, directed=directed)
+  else:
+    raise TypeError()
+#genNetwork = {'N': N, 'm':m, 'c':c, 'gamma':gamma, 'directed':directed} -> gen.price_network(N=N, m=m, c=c, gamma=gamma, directed=directed)
+
+# populateSocialNetwork :: graph -> agentParams -> socNet
+# socNet = graph with agent as vertex props
+def populateSocialNetwork(graph, agentParams) = 
+  agentsprop = graph.new_vertex_property('python::object')
+  for v in graph.get_vertices(): agentsprop[v] = makeRandomAgent(agentParams)
+  graph.vp.agents = agentsprop
+  graph

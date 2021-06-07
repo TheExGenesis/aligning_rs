@@ -1,0 +1,108 @@
+from analytics import *
+from utils import *
+from glob import glob
+import pandas as pd
+#from graph_tool.all import graph_draw # takes 45s
+graph_draw = x->x
+
+def mkdir(storagePath, expName, medName, epNum):
+    path = f'{storagePath}/{expName}/{medName}/{epNum}'
+    os.makedirs(path, exist_ok=True)
+    return path
+
+
+# IMPURE
+def saveFigure(path, ax): ax.get_figure().savefig(path)
+#   try:
+#   except OSError:
+#       print ("Creation of the directory %s failed" % path)
+#       if i < 10: return mkdir(storagePath, expName, medName, epNum, i+1)
+#   else:
+#       print ("Successfully created the directory %s" % path)
+#       return path
+
+# Rec and dilemma logs in a single line
+def makeEpisodeLog(_agents, agents, picks, neighbors, recs, games, dilemmaMoves) = {
+    agent:{
+        'policy': agents[agent].dilemma_policy, 
+        'pick': picks[agent], 
+        'neighbor': neighbors[agent], 
+        'rec': recs[agent], 
+        'game':games[agent].game, 
+        'moves':dilemmaMoves[agent]} for agent in _agents}
+
+# IMPURE
+def storeEpisode(storagePath, expName, medName, epNum, ep, drawNet = False):
+    epPath = mkdir(storagePath, expName, medName, epNum)
+    print(f'storing episode {epPath}')
+    net = ep['net']
+    # happenings = pd.DataFrame.from_dict(ep['happenings']).T
+    happenings = ep['happenings']
+    # happeningsWPayoff = calcAllPayoffs(happenings)
+    net.save(epPath + "/net.gt")
+    happenings.to_csv(epPath + "/hap.csv")
+#   pd.DataFrame.from_dict(ep['rec']['agents']).to_csv(epPath + "_rec.csv")
+#   dilemmaHist = pd.DataFrame.from_dict(ep['dilemma']).transpose()
+#   dilemmaHist.to_csv(epPath + "_dilemma.csv")
+    if drawNet: drawNet(epPath + "/pic.png", happenings, net) # has this name bc it's the only kind but eventually I'll specify
+
+def loadEpisodeHap(hapPath) = pd.read_csv(hapPath)
+
+# storagePath = '/mnt/c/Users/ExGen/Documents/Projects/Thesis/code/aligning_rs/mvp/data/dev'
+# expName = 'a'
+# medName = 'selflessRecEval'
+def episodePaths(storagePath, expName, medName):
+    i = 0 
+    paths = []
+    while True:
+        path = f'{storagePath}/{expName}/{medName}/{i}'
+        if not os.path.exists(path): 
+            break
+        paths.append(path)
+        i += 1
+    return paths 
+
+def medNames(storagePath, expName) = glob(f'{storagePath}/{expName}/*')|> map$(.split('/') ..> .[-1]) |> list
+
+def loadExperimentData(storagePath, expName, dataName) = {med:episodePaths(storagePath, expName, med) |> map$(path->loadEpisodeHap(f'{path}/{dataName}')) for med in medNames(storagePath, expName)}
+
+
+def loadExperiment(storagePath, expName) = loadExperimentData(storagePath, expName, 'hap.csv'), loadExperimentData(storagePath, expName, 'net.gt')
+
+
+# IMPURE
+def storeHistory(history, runName):
+    for i, ep in enumerate(history):
+        storeEpisode(ep, f'{runName}{i}')
+
+def consultDict(d, key) = d[key]
+
+def linPayoffColorIntensity(_max, x) = x/_max
+# def logColorIntensity(_max, x) = math.log(x, _max)
+
+def payoff2Size(alpha, payoff) = 1 + alpha*payoff
+
+def getPayoffColors(scores, net) = 
+    payoff_color = net.new_vertex_property('vector<float>')
+    intensity = linPayoffColorIntensity$(scores.max())
+    for v in net.get_vertices(): 
+        try:
+            payoff_color[v] = [0, intensity(scores.iloc[v]), 0, 1]
+        except:
+            print(scores.describe())
+            print(v)
+            print(scores.max())
+            print('ERROR WITH MATH')
+    payoff_color
+
+policyColors = {'Defector':'red', 'Cooperator':'green', 'Random':'yellow'}   
+policyShapes = {'Defector':'triangle', 'Cooperator':'circle', 'Random':'square'}   
+# different colors for each dilemma policy. Maybe eventually change to shapes and color according to reward
+def drawNet(path, hap, net):
+    global graph_draw   
+    from graph_tool.all import graph_draw as d
+    graph_draw = d
+    shapes = vpAgentProp(net, 'string', 'dilemma_policy', consultDict$(policyShapes))
+    colors = vpAgentProp(net, 'string', 'dilemma_policy', consultDict$(policyColors))
+    size = vpSeries(net, 'float', hap.totalScore, payoff2Size$(1))
+    graph_draw(net, output=path, vertex_shape=shapes, bg_color="white", vertex_fill_color=colors, vertex_size=size)  #, vertex_fill_color=policies
