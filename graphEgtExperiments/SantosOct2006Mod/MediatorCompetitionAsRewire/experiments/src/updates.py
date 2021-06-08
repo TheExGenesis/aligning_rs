@@ -2,7 +2,7 @@ import numpy as np
 from sampling import isLonely
 from mediators import useMed
 from random import random
-from games import C, D
+from defaultParams import C, D
 
 '''Structural Update'''
 # Makes a tie update object

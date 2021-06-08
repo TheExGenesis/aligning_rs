@@ -2,8 +2,8 @@ from defaultParams import _T, _R, _S, _P
 
 
 '''Games'''
-C = 'C'
-D = 'D'
+C = 1
+D = 0
 
 # Dictionary of game weights given T and S. R=1, P=0
 

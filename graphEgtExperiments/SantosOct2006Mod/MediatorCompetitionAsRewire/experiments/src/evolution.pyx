@@ -71,12 +71,14 @@ def cy_runEvolutionCompetitionEp(int N, float beta, float W1, float W2, float[:,
             stratUpdate = calcStrategyUpdate(strats, x, y, p)
             if saveHistory:
                 history.append(stratUpdate)
+                #print(f"saveHistory {history}")
             strats = updateStrat(strats, stratUpdate)
         else:
             graphUpdate = calcStructuralUpdate(
                 graph, strats, _x, y, p, medStrats)
             if saveHistory:
                 history.append(graphUpdate)
+                #print(f"saveHistory {history}")
             graph = updateTies(graph, graphUpdate)
     return graph, history
 
@@ -96,7 +98,7 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
         x = crandint(0, N-1)
         # strats, graph, history = cy_runEvolutionCompetitionEp(N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
         graph, history = cy_runEvolutionCompetitionEp(
-            N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
+            N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, saveHistory)
         # cy_runEvolutionCompetitionEp(
         #     N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
         if i % 5000 == 0:
@@ -115,49 +117,6 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
             "finalStrats": np.asarray(strats, dtype=np.intc),
             "initMedStrats": np.asarray(initialMedStrats, dtype=np.intc),
             "medStrats": np.asarray(medStrats, dtype=np.intc)}
-    # return {"graph": graph,
-    #     "history": pd.DataFrame(history, dtype="category"),
-    #     "initStrats": initialStrats,
-    #     "finalStrats": strats,
-    #     "initMedStrats": initialMedStrats,
-    #     "medStrats": medStrats}
-    # return {"graph": graph,
-    #         "history": pd.DataFrame(history, dtype="category"),
-    #         "initStrats": np.empty(N, dtype=np.intc),
-    #         "finalStrats": np.empty(N, dtype=np.intc),
-    #         "initMedStrats": np.empty(N, dtype=np.intc),
-    #         "medStrats": np.empty(N, dtype=np.intc)}
-    # return {"graph": graph,
-    #         "history": pd.DataFrame(history, dtype="category"),
-    #         "initStrats": initialStrats,
-    #         "finalStrats": initialStrats,
-    #         "initMedStrats": initialMedStrats,
-    #         "medStrats": initialMedStrats}
-    # return {"graph": graph,
-    #         "history": pd.DataFrame(history, dtype="category"),
-    #         "initStrats": np.asarray(cy_initStrats(N), dtype=np.intc),
-    #         "finalStrats": np.asarray(cy_initStrats(N), dtype=np.intc),
-    #         "initMedStrats": np.asarray(cy_initStrats(N), dtype=np.intc),
-    #         "medStrats": np.asarray(cy_initStrats(N), dtype=np.intc)}
-
-
-# Initializes strats, payoffs, history, graph and runs many evolution episodes, each for a random node x
-# runEvolution :: int -> graph -> [strat] -> [float] -> [[strat]]
-# def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
-#     print(f"cy_runCompe titionExperiment {ts}")
-#     cdef int[:] _strats
-#     _strats[...] = cy_initStrats(N) if strats is None else strats
-#     cdef int[:] _medStrats
-#     _medStrats[...] = cy_initMedStrats(
-#         N, medSet) if medStrats is None else medStrats
-#     cdef float[:, :, :] dilemma
-#     dilemma = cy_makeTSDilemma(ts[0], ts[1])
-#     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
-#         N=N, k=(k if k else _k))
-#     experimentResults = cy_genericRunEvolution(
-#         N, episode_n, W1, W2, dilemma, _medStrats, _strats, beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
-#     return experimentResults
-
 # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
 def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
     print(f"cy_runCompetitionExperiment {ts}")

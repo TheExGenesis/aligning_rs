@@ -2883,7 +2883,7 @@ static PyObject *__pyx_n_s_x;
 static PyObject *__pyx_n_s_x_2;
 static PyObject *__pyx_n_s_y;
 static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED int __pyx_v_N, float __pyx_v_beta, float __pyx_v_W1, float __pyx_v_W2, __Pyx_memviewslice __pyx_v_dilemma, PyObject *__pyx_v_graph, __Pyx_memviewslice __pyx_v_medStrats, __Pyx_memviewslice __pyx_v_strats, PyObject *__pyx_v_history, int __pyx_v__x, int __pyx_v_saveHistory); /* proto */
-static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_N, int __pyx_v_episode_n, float __pyx_v_W1, float __pyx_v_W2, __Pyx_memviewslice __pyx_v_dilemma, __Pyx_memviewslice __pyx_v_medStrats, __Pyx_memviewslice __pyx_v_strats, float __pyx_v_beta, PyObject *__pyx_v__graph, CYTHON_UNUSED int __pyx_v_k, PyObject *__pyx_v_history, CYTHON_UNUSED PyObject *__pyx_v_saveHistory); /* proto */
+static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_N, int __pyx_v_episode_n, float __pyx_v_W1, float __pyx_v_W2, __Pyx_memviewslice __pyx_v_dilemma, __Pyx_memviewslice __pyx_v_medStrats, __Pyx_memviewslice __pyx_v_strats, float __pyx_v_beta, PyObject *__pyx_v__graph, CYTHON_UNUSED int __pyx_v_k, PyObject *__pyx_v_history, PyObject *__pyx_v_saveHistory); /* proto */
 static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_N, int __pyx_v_episode_n, float __pyx_v_W1, float __pyx_v_W2, PyObject *__pyx_v_graph, PyObject *__pyx_v_ts, CYTHON_UNUSED __Pyx_memviewslice __pyx_v_medStrats, CYTHON_UNUSED __Pyx_memviewslice __pyx_v_strats, float __pyx_v_beta, int __pyx_v_k, PyObject *__pyx_v_medSet, PyObject *__pyx_v_history, int __pyx_v_saveHistory); /* proto */
 static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_graph, __Pyx_memviewslice __pyx_v_medStrats, __Pyx_memviewslice __pyx_v_strats, int __pyx_v_N, int __pyx_v_episode_n, float __pyx_v_W1, float __pyx_v_W2, PyObject *__pyx_v_ts, float __pyx_v_beta, int __pyx_v_k, CYTHON_UNUSED PyObject *__pyx_v_medSet, PyObject *__pyx_v_history, int __pyx_v_saveHistory); /* proto */
 static int __pyx_pf_7cpython_5array_5array___getbuffer__(arrayobject *__pyx_v_self, Py_buffer *__pyx_v_info, CYTHON_UNUSED int __pyx_v_flags); /* proto */
@@ -3945,7 +3945,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
  *             stratUpdate = calcStrategyUpdate(strats, x, y, p)
  *             if saveHistory:             # <<<<<<<<<<<<<<
  *                 history.append(stratUpdate)
- *             strats = updateStrat(strats, stratUpdate)
+ *                 #print(f"saveHistory {history}")
  */
       __pyx_t_14 = (__pyx_v_saveHistory != 0);
       if (__pyx_t_14) {
@@ -3954,8 +3954,8 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
  *             stratUpdate = calcStrategyUpdate(strats, x, y, p)
  *             if saveHistory:
  *                 history.append(stratUpdate)             # <<<<<<<<<<<<<<
+ *                 #print(f"saveHistory {history}")
  *             strats = updateStrat(strats, stratUpdate)
- *         else:
  */
         __pyx_t_15 = __Pyx_PyObject_Append(__pyx_v_history, __pyx_v_stratUpdate); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 73, __pyx_L1_error)
 
@@ -3964,20 +3964,20 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
  *             stratUpdate = calcStrategyUpdate(strats, x, y, p)
  *             if saveHistory:             # <<<<<<<<<<<<<<
  *                 history.append(stratUpdate)
- *             strats = updateStrat(strats, stratUpdate)
+ *                 #print(f"saveHistory {history}")
  */
       }
 
-      /* "evolution.pyx":74
- *             if saveHistory:
+      /* "evolution.pyx":75
  *                 history.append(stratUpdate)
+ *                 #print(f"saveHistory {history}")
  *             strats = updateStrat(strats, stratUpdate)             # <<<<<<<<<<<<<<
  *         else:
  *             graphUpdate = calcStructuralUpdate(
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_updateStrat); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_updateStrat); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_12 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 74, __pyx_L1_error)
+      __pyx_t_12 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 75, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       __pyx_t_3 = NULL;
       __pyx_t_7 = 0;
@@ -3994,7 +3994,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_t_12, __pyx_v_stratUpdate};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -4003,14 +4003,14 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_t_12, __pyx_v_stratUpdate};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       } else
       #endif
       {
-        __pyx_t_4 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         if (__pyx_t_3) {
           __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -4021,12 +4021,12 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
         __Pyx_GIVEREF(__pyx_v_stratUpdate);
         PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_7, __pyx_v_stratUpdate);
         __pyx_t_12 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       }
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_16 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_16.memview)) __PYX_ERR(0, 74, __pyx_L1_error)
+      __pyx_t_16 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_16.memview)) __PYX_ERR(0, 75, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __PYX_XDEC_MEMVIEW(&__pyx_v_strats, 1);
       __pyx_v_strats = __pyx_t_16;
@@ -4043,7 +4043,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       goto __pyx_L5;
     }
 
-    /* "evolution.pyx":76
+    /* "evolution.pyx":77
  *             strats = updateStrat(strats, stratUpdate)
  *         else:
  *             graphUpdate = calcStructuralUpdate(             # <<<<<<<<<<<<<<
@@ -4051,25 +4051,25 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
  *             if saveHistory:
  */
     /*else*/ {
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_calcStructuralUpdate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_calcStructuralUpdate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
 
-      /* "evolution.pyx":77
+      /* "evolution.pyx":78
  *         else:
  *             graphUpdate = calcStructuralUpdate(
  *                 graph, strats, _x, y, p, medStrats)             # <<<<<<<<<<<<<<
  *             if saveHistory:
  *                 history.append(graphUpdate)
  */
-      __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 78, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v__x); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v__x); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 78, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 78, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_8 = PyFloat_FromDouble(__pyx_v_p); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_8 = PyFloat_FromDouble(__pyx_v_p); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 78, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_11 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_11 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 78, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       __pyx_t_10 = NULL;
       __pyx_t_7 = 0;
@@ -4086,7 +4086,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[7] = {__pyx_t_10, __pyx_v_graph, __pyx_t_4, __pyx_t_12, __pyx_t_3, __pyx_t_8, __pyx_t_11};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 6+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 6+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -4099,7 +4099,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[7] = {__pyx_t_10, __pyx_v_graph, __pyx_t_4, __pyx_t_12, __pyx_t_3, __pyx_t_8, __pyx_t_11};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 6+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 6+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -4110,7 +4110,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       } else
       #endif
       {
-        __pyx_t_17 = PyTuple_New(6+__pyx_t_7); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 76, __pyx_L1_error)
+        __pyx_t_17 = PyTuple_New(6+__pyx_t_7); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 77, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_17);
         if (__pyx_t_10) {
           __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -4133,7 +4133,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
         __pyx_t_3 = 0;
         __pyx_t_8 = 0;
         __pyx_t_11 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
       }
@@ -4141,42 +4141,42 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       __pyx_v_graphUpdate = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "evolution.pyx":78
+      /* "evolution.pyx":79
  *             graphUpdate = calcStructuralUpdate(
  *                 graph, strats, _x, y, p, medStrats)
  *             if saveHistory:             # <<<<<<<<<<<<<<
  *                 history.append(graphUpdate)
- *             graph = updateTies(graph, graphUpdate)
+ *                 #print(f"saveHistory {history}")
  */
       __pyx_t_14 = (__pyx_v_saveHistory != 0);
       if (__pyx_t_14) {
 
-        /* "evolution.pyx":79
+        /* "evolution.pyx":80
  *                 graph, strats, _x, y, p, medStrats)
  *             if saveHistory:
  *                 history.append(graphUpdate)             # <<<<<<<<<<<<<<
+ *                 #print(f"saveHistory {history}")
  *             graph = updateTies(graph, graphUpdate)
- *     return graph, history
  */
-        __pyx_t_15 = __Pyx_PyObject_Append(__pyx_v_history, __pyx_v_graphUpdate); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 79, __pyx_L1_error)
+        __pyx_t_15 = __Pyx_PyObject_Append(__pyx_v_history, __pyx_v_graphUpdate); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 80, __pyx_L1_error)
 
-        /* "evolution.pyx":78
+        /* "evolution.pyx":79
  *             graphUpdate = calcStructuralUpdate(
  *                 graph, strats, _x, y, p, medStrats)
  *             if saveHistory:             # <<<<<<<<<<<<<<
  *                 history.append(graphUpdate)
- *             graph = updateTies(graph, graphUpdate)
+ *                 #print(f"saveHistory {history}")
  */
       }
 
-      /* "evolution.pyx":80
- *             if saveHistory:
+      /* "evolution.pyx":82
  *                 history.append(graphUpdate)
+ *                 #print(f"saveHistory {history}")
  *             graph = updateTies(graph, graphUpdate)             # <<<<<<<<<<<<<<
  *     return graph, history
  * 
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_updateTies); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_updateTies); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_17 = NULL;
       __pyx_t_7 = 0;
@@ -4193,7 +4193,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[3] = {__pyx_t_17, __pyx_v_graph, __pyx_v_graphUpdate};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
         __Pyx_GOTREF(__pyx_t_1);
       } else
@@ -4201,13 +4201,13 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
         PyObject *__pyx_temp[3] = {__pyx_t_17, __pyx_v_graph, __pyx_v_graphUpdate};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
         __Pyx_GOTREF(__pyx_t_1);
       } else
       #endif
       {
-        __pyx_t_11 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 80, __pyx_L1_error)
+        __pyx_t_11 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 82, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         if (__pyx_t_17) {
           __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_17); __pyx_t_17 = NULL;
@@ -4218,7 +4218,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
         __Pyx_INCREF(__pyx_v_graphUpdate);
         __Pyx_GIVEREF(__pyx_v_graphUpdate);
         PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_7, __pyx_v_graphUpdate);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       }
@@ -4230,15 +4230,15 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
   }
   __pyx_L3:;
 
-  /* "evolution.pyx":81
- *                 history.append(graphUpdate)
+  /* "evolution.pyx":83
+ *                 #print(f"saveHistory {history}")
  *             graph = updateTies(graph, graphUpdate)
  *     return graph, history             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_graph);
   __Pyx_GIVEREF(__pyx_v_graph);
@@ -4289,7 +4289,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "evolution.pyx":84
+/* "evolution.pyx":86
  * 
  * 
  * def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :, :] dilemma, int[:] medStrats, int[:] strats, float beta=0.001, _graph=None, int k=30, history=None, saveHistory=False):             # <<<<<<<<<<<<<<
@@ -4312,7 +4312,7 @@ static PyObject *__pyx_pw_9evolution_3cy_genericRunEvolution(PyObject *__pyx_sel
   PyObject *__pyx_v__graph = 0;
   CYTHON_UNUSED int __pyx_v_k;
   PyObject *__pyx_v_history = 0;
-  CYTHON_UNUSED PyObject *__pyx_v_saveHistory = 0;
+  PyObject *__pyx_v_saveHistory = 0;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4365,37 +4365,37 @@ static PyObject *__pyx_pw_9evolution_3cy_genericRunEvolution(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_episode_n)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 1); __PYX_ERR(0, 84, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 1); __PYX_ERR(0, 86, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_W1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 2); __PYX_ERR(0, 84, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 2); __PYX_ERR(0, 86, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_W2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 3); __PYX_ERR(0, 84, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 3); __PYX_ERR(0, 86, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_dilemma)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 4); __PYX_ERR(0, 84, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 4); __PYX_ERR(0, 86, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_medStrats)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 5); __PYX_ERR(0, 84, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 5); __PYX_ERR(0, 86, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (likely((values[6] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_strats)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 6); __PYX_ERR(0, 84, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, 6); __PYX_ERR(0, 86, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  7:
@@ -4429,7 +4429,7 @@ static PyObject *__pyx_pw_9evolution_3cy_genericRunEvolution(PyObject *__pyx_sel
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cy_genericRunEvolution") < 0)) __PYX_ERR(0, 84, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cy_genericRunEvolution") < 0)) __PYX_ERR(0, 86, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -4454,21 +4454,21 @@ static PyObject *__pyx_pw_9evolution_3cy_genericRunEvolution(PyObject *__pyx_sel
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_N = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_N == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L3_error)
-    __pyx_v_episode_n = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_episode_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L3_error)
-    __pyx_v_W1 = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_W1 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L3_error)
-    __pyx_v_W2 = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_W2 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L3_error)
-    __pyx_v_dilemma = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_float(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_dilemma.memview)) __PYX_ERR(0, 84, __pyx_L3_error)
-    __pyx_v_medStrats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_medStrats.memview)) __PYX_ERR(0, 84, __pyx_L3_error)
-    __pyx_v_strats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_strats.memview)) __PYX_ERR(0, 84, __pyx_L3_error)
+    __pyx_v_N = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_N == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
+    __pyx_v_episode_n = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_episode_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
+    __pyx_v_W1 = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_W1 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
+    __pyx_v_W2 = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_W2 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
+    __pyx_v_dilemma = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_float(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_dilemma.memview)) __PYX_ERR(0, 86, __pyx_L3_error)
+    __pyx_v_medStrats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_medStrats.memview)) __PYX_ERR(0, 86, __pyx_L3_error)
+    __pyx_v_strats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_strats.memview)) __PYX_ERR(0, 86, __pyx_L3_error)
     if (values[7]) {
-      __pyx_v_beta = __pyx_PyFloat_AsFloat(values[7]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L3_error)
+      __pyx_v_beta = __pyx_PyFloat_AsFloat(values[7]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
     } else {
       __pyx_v_beta = ((float)0.001);
     }
     __pyx_v__graph = values[8];
     if (values[9]) {
-      __pyx_v_k = __Pyx_PyInt_As_int(values[9]); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L3_error)
+      __pyx_v_k = __Pyx_PyInt_As_int(values[9]); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
     } else {
       __pyx_v_k = ((int)30);
     }
@@ -4477,7 +4477,7 @@ static PyObject *__pyx_pw_9evolution_3cy_genericRunEvolution(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 84, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cy_genericRunEvolution", 0, 7, 12, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 86, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("evolution.cy_genericRunEvolution", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4490,7 +4490,7 @@ static PyObject *__pyx_pw_9evolution_3cy_genericRunEvolution(PyObject *__pyx_sel
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_N, int __pyx_v_episode_n, float __pyx_v_W1, float __pyx_v_W2, __Pyx_memviewslice __pyx_v_dilemma, __Pyx_memviewslice __pyx_v_medStrats, __Pyx_memviewslice __pyx_v_strats, float __pyx_v_beta, PyObject *__pyx_v__graph, CYTHON_UNUSED int __pyx_v_k, PyObject *__pyx_v_history, CYTHON_UNUSED PyObject *__pyx_v_saveHistory) {
+static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_N, int __pyx_v_episode_n, float __pyx_v_W1, float __pyx_v_W2, __Pyx_memviewslice __pyx_v_dilemma, __Pyx_memviewslice __pyx_v_medStrats, __Pyx_memviewslice __pyx_v_strats, float __pyx_v_beta, PyObject *__pyx_v__graph, CYTHON_UNUSED int __pyx_v_k, PyObject *__pyx_v_history, PyObject *__pyx_v_saveHistory) {
   __Pyx_memviewslice __pyx_v_initialStrats = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_initialMedStrats = { 0, 0, { 0 }, { 0 }, { 0 } };
   CYTHON_UNUSED PyObject *__pyx_v_totalPayoffs = NULL;
@@ -4529,18 +4529,18 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
   __Pyx_RefNannySetupContext("cy_genericRunEvolution", 0);
   __Pyx_INCREF(__pyx_v_history);
 
-  /* "evolution.pyx":85
+  /* "evolution.pyx":87
  * 
  * def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :, :] dilemma, int[:] medStrats, int[:] strats, float beta=0.001, _graph=None, int k=30, history=None, saveHistory=False):
  *     history = [] if history == None else history             # <<<<<<<<<<<<<<
  *     cdef int[:] initialStrats, initialMedStrats
  *     initialStrats = np.empty(N, dtype=np.intc)
  */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_history, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_history, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
@@ -4551,112 +4551,112 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
   __Pyx_DECREF_SET(__pyx_v_history, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "evolution.pyx":87
+  /* "evolution.pyx":89
  *     history = [] if history == None else history
  *     cdef int[:] initialStrats, initialMedStrats
  *     initialStrats = np.empty(N, dtype=np.intc)             # <<<<<<<<<<<<<<
  *     initialMedStrats = np.empty(N, dtype=np.intc)
  *     initialStrats[...] = strats
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_intc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_intc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(__pyx_t_6, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(__pyx_t_6, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_initialStrats = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "evolution.pyx":88
+  /* "evolution.pyx":90
  *     cdef int[:] initialStrats, initialMedStrats
  *     initialStrats = np.empty(N, dtype=np.intc)
  *     initialMedStrats = np.empty(N, dtype=np.intc)             # <<<<<<<<<<<<<<
  *     initialStrats[...] = strats
  *     initialMedStrats[...] = medStrats
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_empty); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_empty); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_6);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6);
   __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 88, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_initialMedStrats = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "evolution.pyx":89
+  /* "evolution.pyx":91
  *     initialStrats = np.empty(N, dtype=np.intc)
  *     initialMedStrats = np.empty(N, dtype=np.intc)
  *     initialStrats[...] = strats             # <<<<<<<<<<<<<<
  *     initialMedStrats[...] = medStrats
  *     totalPayoffs = initPayoffs(N)
  */
-  if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_strats, __pyx_v_initialStrats, 1, 1, 0) < 0)) __PYX_ERR(0, 89, __pyx_L1_error)
+  if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_strats, __pyx_v_initialStrats, 1, 1, 0) < 0)) __PYX_ERR(0, 91, __pyx_L1_error)
 
-  /* "evolution.pyx":90
+  /* "evolution.pyx":92
  *     initialMedStrats = np.empty(N, dtype=np.intc)
  *     initialStrats[...] = strats
  *     initialMedStrats[...] = medStrats             # <<<<<<<<<<<<<<
  *     totalPayoffs = initPayoffs(N)
  *     graph = _graph
  */
-  if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_medStrats, __pyx_v_initialMedStrats, 1, 1, 0) < 0)) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_medStrats, __pyx_v_initialMedStrats, 1, 1, 0) < 0)) __PYX_ERR(0, 92, __pyx_L1_error)
 
-  /* "evolution.pyx":91
+  /* "evolution.pyx":93
  *     initialStrats[...] = strats
  *     initialMedStrats[...] = medStrats
  *     totalPayoffs = initPayoffs(N)             # <<<<<<<<<<<<<<
  *     graph = _graph
  *     cdef int i = 0
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_initPayoffs); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_initPayoffs); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -4671,13 +4671,13 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
   __pyx_t_5 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_1, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_4);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_totalPayoffs = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "evolution.pyx":92
+  /* "evolution.pyx":94
  *     initialMedStrats[...] = medStrats
  *     totalPayoffs = initPayoffs(N)
  *     graph = _graph             # <<<<<<<<<<<<<<
@@ -4687,7 +4687,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
   __Pyx_INCREF(__pyx_v__graph);
   __pyx_v_graph = __pyx_v__graph;
 
-  /* "evolution.pyx":93
+  /* "evolution.pyx":95
  *     totalPayoffs = initPayoffs(N)
  *     graph = _graph
  *     cdef int i = 0             # <<<<<<<<<<<<<<
@@ -4696,7 +4696,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
  */
   __pyx_v_i = 0;
 
-  /* "evolution.pyx":94
+  /* "evolution.pyx":96
  *     graph = _graph
  *     cdef int i = 0
  *     cdef int x = 0             # <<<<<<<<<<<<<<
@@ -4705,7 +4705,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
  */
   __pyx_v_x = 0;
 
-  /* "evolution.pyx":95
+  /* "evolution.pyx":97
  *     cdef int i = 0
  *     cdef int x = 0
  *     for i in range(episode_n):             # <<<<<<<<<<<<<<
@@ -4717,16 +4717,16 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
     __pyx_v_i = __pyx_t_10;
 
-    /* "evolution.pyx":96
+    /* "evolution.pyx":98
  *     cdef int x = 0
  *     for i in range(episode_n):
  *         x = crandint(0, N-1)             # <<<<<<<<<<<<<<
  *         # strats, graph, history = cy_runEvolutionCompetitionEp(N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
  *         graph, history = cy_runEvolutionCompetitionEp(
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_crandint); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 96, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_crandint); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_4 = __Pyx_PyInt_From_long((__pyx_v_N - 1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_From_long((__pyx_v_N - 1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_1 = NULL;
     __pyx_t_11 = 0;
@@ -4743,7 +4743,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_int_0, __pyx_t_4};
-      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 96, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -4752,14 +4752,14 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
       PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_int_0, __pyx_t_4};
-      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 96, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else
     #endif
     {
-      __pyx_t_2 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 96, __pyx_L1_error)
+      __pyx_t_2 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       if (__pyx_t_1) {
         __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -4770,47 +4770,47 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       __Pyx_GIVEREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_11, __pyx_t_4);
       __pyx_t_4 = 0;
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_2, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 96, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_2, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_x = __pyx_t_11;
 
-    /* "evolution.pyx":98
+    /* "evolution.pyx":100
  *         x = crandint(0, N-1)
  *         # strats, graph, history = cy_runEvolutionCompetitionEp(N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
  *         graph, history = cy_runEvolutionCompetitionEp(             # <<<<<<<<<<<<<<
- *             N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
+ *             N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, saveHistory)
  *         # cy_runEvolutionCompetitionEp(
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_cy_runEvolutionCompetitionEp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_cy_runEvolutionCompetitionEp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
 
-    /* "evolution.pyx":99
+    /* "evolution.pyx":101
  *         # strats, graph, history = cy_runEvolutionCompetitionEp(N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
  *         graph, history = cy_runEvolutionCompetitionEp(
- *             N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)             # <<<<<<<<<<<<<<
+ *             N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, saveHistory)             # <<<<<<<<<<<<<<
  *         # cy_runEvolutionCompetitionEp(
  *         #     N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
  */
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_W1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_W1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_W2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_W2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_13 = __pyx_memoryview_fromslice(__pyx_v_dilemma, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_13 = __pyx_memoryview_fromslice(__pyx_v_dilemma, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
-    __pyx_t_14 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_14 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_14);
-    __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_15);
-    __pyx_t_16 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_16 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 101, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_16);
     __pyx_t_17 = NULL;
     __pyx_t_11 = 0;
@@ -4826,8 +4826,8 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
     }
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_6)) {
-      PyObject *__pyx_temp[12] = {__pyx_t_17, __pyx_t_2, __pyx_t_4, __pyx_t_1, __pyx_t_12, __pyx_t_13, __pyx_v_graph, __pyx_t_14, __pyx_t_15, __pyx_v_history, __pyx_t_16, Py_False};
-      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 11+__pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+      PyObject *__pyx_temp[12] = {__pyx_t_17, __pyx_t_2, __pyx_t_4, __pyx_t_1, __pyx_t_12, __pyx_t_13, __pyx_v_graph, __pyx_t_14, __pyx_t_15, __pyx_v_history, __pyx_t_16, __pyx_v_saveHistory};
+      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 11+__pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -4842,8 +4842,8 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
     #endif
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
-      PyObject *__pyx_temp[12] = {__pyx_t_17, __pyx_t_2, __pyx_t_4, __pyx_t_1, __pyx_t_12, __pyx_t_13, __pyx_v_graph, __pyx_t_14, __pyx_t_15, __pyx_v_history, __pyx_t_16, Py_False};
-      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 11+__pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+      PyObject *__pyx_temp[12] = {__pyx_t_17, __pyx_t_2, __pyx_t_4, __pyx_t_1, __pyx_t_12, __pyx_t_13, __pyx_v_graph, __pyx_t_14, __pyx_t_15, __pyx_v_history, __pyx_t_16, __pyx_v_saveHistory};
+      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 11+__pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -4857,7 +4857,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
     } else
     #endif
     {
-      __pyx_t_18 = PyTuple_New(11+__pyx_t_11); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_18 = PyTuple_New(11+__pyx_t_11); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 100, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_18);
       if (__pyx_t_17) {
         __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_t_17); __pyx_t_17 = NULL;
@@ -4884,9 +4884,9 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       PyTuple_SET_ITEM(__pyx_t_18, 8+__pyx_t_11, __pyx_v_history);
       __Pyx_GIVEREF(__pyx_t_16);
       PyTuple_SET_ITEM(__pyx_t_18, 9+__pyx_t_11, __pyx_t_16);
-      __Pyx_INCREF(Py_False);
-      __Pyx_GIVEREF(Py_False);
-      PyTuple_SET_ITEM(__pyx_t_18, 10+__pyx_t_11, Py_False);
+      __Pyx_INCREF(__pyx_v_saveHistory);
+      __Pyx_GIVEREF(__pyx_v_saveHistory);
+      PyTuple_SET_ITEM(__pyx_t_18, 10+__pyx_t_11, __pyx_v_saveHistory);
       __pyx_t_2 = 0;
       __pyx_t_4 = 0;
       __pyx_t_1 = 0;
@@ -4895,7 +4895,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       __pyx_t_14 = 0;
       __pyx_t_15 = 0;
       __pyx_t_16 = 0;
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_18, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_18, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
     }
@@ -4906,7 +4906,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 98, __pyx_L1_error)
+        __PYX_ERR(0, 100, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -4919,15 +4919,15 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_t_18);
       #else
-      __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 100, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_18 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_18 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 100, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_18);
       #endif
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_16 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_16 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 100, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_16);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_19 = Py_TYPE(__pyx_t_16)->tp_iternext;
@@ -4935,7 +4935,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       __Pyx_GOTREF(__pyx_t_6);
       index = 1; __pyx_t_18 = __pyx_t_19(__pyx_t_16); if (unlikely(!__pyx_t_18)) goto __pyx_L5_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_18);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_19(__pyx_t_16), 2) < 0) __PYX_ERR(0, 98, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_19(__pyx_t_16), 2) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
       __pyx_t_19 = NULL;
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
       goto __pyx_L6_unpacking_done;
@@ -4943,15 +4943,15 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
       __pyx_t_19 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 98, __pyx_L1_error)
+      __PYX_ERR(0, 100, __pyx_L1_error)
       __pyx_L6_unpacking_done:;
     }
 
-    /* "evolution.pyx":98
+    /* "evolution.pyx":100
  *         x = crandint(0, N-1)
  *         # strats, graph, history = cy_runEvolutionCompetitionEp(N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
  *         graph, history = cy_runEvolutionCompetitionEp(             # <<<<<<<<<<<<<<
- *             N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
+ *             N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, saveHistory)
  *         # cy_runEvolutionCompetitionEp(
  */
     __Pyx_DECREF_SET(__pyx_v_graph, __pyx_t_6);
@@ -4959,7 +4959,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
     __Pyx_DECREF_SET(__pyx_v_history, __pyx_t_18);
     __pyx_t_18 = 0;
 
-    /* "evolution.pyx":102
+    /* "evolution.pyx":104
  *         # cy_runEvolutionCompetitionEp(
  *         #     N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
  *         if i % 5000 == 0:             # <<<<<<<<<<<<<<
@@ -4969,18 +4969,18 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
     __pyx_t_3 = ((__Pyx_mod_long(__pyx_v_i, 0x1388) == 0) != 0);
     if (__pyx_t_3) {
 
-      /* "evolution.pyx":104
+      /* "evolution.pyx":106
  *         if i % 5000 == 0:
  *             # print(f"i {i}")
  *             medEvoDone = any([x == N for x in Counter(medStrats).values()])             # <<<<<<<<<<<<<<
  *             stratEvoDone = any([x == N for x in Counter(strats).values()])
  *             if medEvoDone and stratEvoDone:
  */
-      __pyx_t_5 = PyList_New(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
+      __pyx_t_5 = PyList_New(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 106, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_n_s_Counter); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 104, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_n_s_Counter); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 106, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_16);
-      __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 104, __pyx_L1_error)
+      __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 106, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_15);
       __pyx_t_14 = NULL;
       if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_16))) {
@@ -4995,10 +4995,10 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       __pyx_t_6 = (__pyx_t_14) ? __Pyx_PyObject_Call2Args(__pyx_t_16, __pyx_t_14, __pyx_t_15) : __Pyx_PyObject_CallOneArg(__pyx_t_16, __pyx_t_15);
       __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
       __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 104, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 106, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-      __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_values); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 104, __pyx_L1_error)
+      __pyx_t_16 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_values); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 106, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_16);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -5013,16 +5013,16 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       }
       __pyx_t_18 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_16, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_16);
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 104, __pyx_L1_error)
+      if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 106, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_18);
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
       if (likely(PyList_CheckExact(__pyx_t_18)) || PyTuple_CheckExact(__pyx_t_18)) {
         __pyx_t_16 = __pyx_t_18; __Pyx_INCREF(__pyx_t_16); __pyx_t_20 = 0;
         __pyx_t_21 = NULL;
       } else {
-        __pyx_t_20 = -1; __pyx_t_16 = PyObject_GetIter(__pyx_t_18); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 104, __pyx_L1_error)
+        __pyx_t_20 = -1; __pyx_t_16 = PyObject_GetIter(__pyx_t_18); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 106, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_16);
-        __pyx_t_21 = Py_TYPE(__pyx_t_16)->tp_iternext; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 104, __pyx_L1_error)
+        __pyx_t_21 = Py_TYPE(__pyx_t_16)->tp_iternext; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 106, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
       for (;;) {
@@ -5030,17 +5030,17 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
           if (likely(PyList_CheckExact(__pyx_t_16))) {
             if (__pyx_t_20 >= PyList_GET_SIZE(__pyx_t_16)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_18 = PyList_GET_ITEM(__pyx_t_16, __pyx_t_20); __Pyx_INCREF(__pyx_t_18); __pyx_t_20++; if (unlikely(0 < 0)) __PYX_ERR(0, 104, __pyx_L1_error)
+            __pyx_t_18 = PyList_GET_ITEM(__pyx_t_16, __pyx_t_20); __Pyx_INCREF(__pyx_t_18); __pyx_t_20++; if (unlikely(0 < 0)) __PYX_ERR(0, 106, __pyx_L1_error)
             #else
-            __pyx_t_18 = PySequence_ITEM(__pyx_t_16, __pyx_t_20); __pyx_t_20++; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 104, __pyx_L1_error)
+            __pyx_t_18 = PySequence_ITEM(__pyx_t_16, __pyx_t_20); __pyx_t_20++; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 106, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_18);
             #endif
           } else {
             if (__pyx_t_20 >= PyTuple_GET_SIZE(__pyx_t_16)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_18 = PyTuple_GET_ITEM(__pyx_t_16, __pyx_t_20); __Pyx_INCREF(__pyx_t_18); __pyx_t_20++; if (unlikely(0 < 0)) __PYX_ERR(0, 104, __pyx_L1_error)
+            __pyx_t_18 = PyTuple_GET_ITEM(__pyx_t_16, __pyx_t_20); __Pyx_INCREF(__pyx_t_18); __pyx_t_20++; if (unlikely(0 < 0)) __PYX_ERR(0, 106, __pyx_L1_error)
             #else
-            __pyx_t_18 = PySequence_ITEM(__pyx_t_16, __pyx_t_20); __pyx_t_20++; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 104, __pyx_L1_error)
+            __pyx_t_18 = PySequence_ITEM(__pyx_t_16, __pyx_t_20); __pyx_t_20++; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 106, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_18);
             #endif
           }
@@ -5050,39 +5050,39 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
               if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else __PYX_ERR(0, 104, __pyx_L1_error)
+              else __PYX_ERR(0, 106, __pyx_L1_error)
             }
             break;
           }
           __Pyx_GOTREF(__pyx_t_18);
         }
-        __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_18); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_18); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 106, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
         __pyx_v_x = __pyx_t_11;
-        __pyx_t_18 = __Pyx_PyBool_FromLong((__pyx_v_x == __pyx_v_N)); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 104, __pyx_L1_error)
+        __pyx_t_18 = __Pyx_PyBool_FromLong((__pyx_v_x == __pyx_v_N)); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 106, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_18);
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_5, (PyObject*)__pyx_t_18))) __PYX_ERR(0, 104, __pyx_L1_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_5, (PyObject*)__pyx_t_18))) __PYX_ERR(0, 106, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
       }
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-      __pyx_t_16 = __Pyx_PyObject_CallOneArg(__pyx_builtin_any, __pyx_t_5); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 104, __pyx_L1_error)
+      __pyx_t_16 = __Pyx_PyObject_CallOneArg(__pyx_builtin_any, __pyx_t_5); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 106, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_16);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_XDECREF_SET(__pyx_v_medEvoDone, __pyx_t_16);
       __pyx_t_16 = 0;
 
-      /* "evolution.pyx":105
+      /* "evolution.pyx":107
  *             # print(f"i {i}")
  *             medEvoDone = any([x == N for x in Counter(medStrats).values()])
  *             stratEvoDone = any([x == N for x in Counter(strats).values()])             # <<<<<<<<<<<<<<
  *             if medEvoDone and stratEvoDone:
  *                 break
  */
-      __pyx_t_16 = PyList_New(0); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 105, __pyx_L1_error)
+      __pyx_t_16 = PyList_New(0); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_16);
-      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Counter); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 105, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_Counter); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 105, __pyx_L1_error)
+      __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_15);
       __pyx_t_14 = NULL;
       if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -5097,10 +5097,10 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       __pyx_t_18 = (__pyx_t_14) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_14, __pyx_t_15) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_15);
       __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
       __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-      if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 105, __pyx_L1_error)
+      if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_18);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_values); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 105, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_values); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
       __pyx_t_18 = NULL;
@@ -5115,16 +5115,16 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
       }
       __pyx_t_5 = (__pyx_t_18) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_18) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
       __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
         __pyx_t_6 = __pyx_t_5; __Pyx_INCREF(__pyx_t_6); __pyx_t_20 = 0;
         __pyx_t_21 = NULL;
       } else {
-        __pyx_t_20 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 105, __pyx_L1_error)
+        __pyx_t_20 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 107, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_21 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 105, __pyx_L1_error)
+        __pyx_t_21 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 107, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       for (;;) {
@@ -5132,17 +5132,17 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
           if (likely(PyList_CheckExact(__pyx_t_6))) {
             if (__pyx_t_20 >= PyList_GET_SIZE(__pyx_t_6)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_20); __Pyx_INCREF(__pyx_t_5); __pyx_t_20++; if (unlikely(0 < 0)) __PYX_ERR(0, 105, __pyx_L1_error)
+            __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_20); __Pyx_INCREF(__pyx_t_5); __pyx_t_20++; if (unlikely(0 < 0)) __PYX_ERR(0, 107, __pyx_L1_error)
             #else
-            __pyx_t_5 = PySequence_ITEM(__pyx_t_6, __pyx_t_20); __pyx_t_20++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
+            __pyx_t_5 = PySequence_ITEM(__pyx_t_6, __pyx_t_20); __pyx_t_20++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_5);
             #endif
           } else {
             if (__pyx_t_20 >= PyTuple_GET_SIZE(__pyx_t_6)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_20); __Pyx_INCREF(__pyx_t_5); __pyx_t_20++; if (unlikely(0 < 0)) __PYX_ERR(0, 105, __pyx_L1_error)
+            __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_20); __Pyx_INCREF(__pyx_t_5); __pyx_t_20++; if (unlikely(0 < 0)) __PYX_ERR(0, 107, __pyx_L1_error)
             #else
-            __pyx_t_5 = PySequence_ITEM(__pyx_t_6, __pyx_t_20); __pyx_t_20++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
+            __pyx_t_5 = PySequence_ITEM(__pyx_t_6, __pyx_t_20); __pyx_t_20++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_5);
             #endif
           }
@@ -5152,46 +5152,46 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
               if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else __PYX_ERR(0, 105, __pyx_L1_error)
+              else __PYX_ERR(0, 107, __pyx_L1_error)
             }
             break;
           }
           __Pyx_GOTREF(__pyx_t_5);
         }
-        __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_v_x = __pyx_t_11;
-        __pyx_t_5 = __Pyx_PyBool_FromLong((__pyx_v_x == __pyx_v_N)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyBool_FromLong((__pyx_v_x == __pyx_v_N)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_16, (PyObject*)__pyx_t_5))) __PYX_ERR(0, 105, __pyx_L1_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_16, (PyObject*)__pyx_t_5))) __PYX_ERR(0, 107, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_any, __pyx_t_16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 105, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_any, __pyx_t_16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
       __Pyx_XDECREF_SET(__pyx_v_stratEvoDone, __pyx_t_6);
       __pyx_t_6 = 0;
 
-      /* "evolution.pyx":106
+      /* "evolution.pyx":108
  *             medEvoDone = any([x == N for x in Counter(medStrats).values()])
  *             stratEvoDone = any([x == N for x in Counter(strats).values()])
  *             if medEvoDone and stratEvoDone:             # <<<<<<<<<<<<<<
  *                 break
  *             if W2 == inf and medEvoDone:
  */
-      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_v_medEvoDone); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 106, __pyx_L1_error)
+      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_v_medEvoDone); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 108, __pyx_L1_error)
       if (__pyx_t_22) {
       } else {
         __pyx_t_3 = __pyx_t_22;
         goto __pyx_L13_bool_binop_done;
       }
-      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_v_stratEvoDone); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 106, __pyx_L1_error)
+      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_v_stratEvoDone); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 108, __pyx_L1_error)
       __pyx_t_3 = __pyx_t_22;
       __pyx_L13_bool_binop_done:;
       if (__pyx_t_3) {
 
-        /* "evolution.pyx":107
+        /* "evolution.pyx":109
  *             stratEvoDone = any([x == N for x in Counter(strats).values()])
  *             if medEvoDone and stratEvoDone:
  *                 break             # <<<<<<<<<<<<<<
@@ -5200,7 +5200,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
  */
         goto __pyx_L4_break;
 
-        /* "evolution.pyx":106
+        /* "evolution.pyx":108
  *             medEvoDone = any([x == N for x in Counter(medStrats).values()])
  *             stratEvoDone = any([x == N for x in Counter(strats).values()])
  *             if medEvoDone and stratEvoDone:             # <<<<<<<<<<<<<<
@@ -5209,33 +5209,33 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
  */
       }
 
-      /* "evolution.pyx":108
+      /* "evolution.pyx":110
  *             if medEvoDone and stratEvoDone:
  *                 break
  *             if W2 == inf and medEvoDone:             # <<<<<<<<<<<<<<
  *                 break
  *             if W1 == 0 and stratEvoDone:
  */
-      __pyx_t_6 = PyFloat_FromDouble(__pyx_v_W2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_6 = PyFloat_FromDouble(__pyx_v_W2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 110, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_n_s_inf); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_n_s_inf); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 110, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_16);
-      __pyx_t_5 = PyObject_RichCompare(__pyx_t_6, __pyx_t_16, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_5 = PyObject_RichCompare(__pyx_t_6, __pyx_t_16, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 110, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 110, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       if (__pyx_t_22) {
       } else {
         __pyx_t_3 = __pyx_t_22;
         goto __pyx_L16_bool_binop_done;
       }
-      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_v_medEvoDone); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_v_medEvoDone); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 110, __pyx_L1_error)
       __pyx_t_3 = __pyx_t_22;
       __pyx_L16_bool_binop_done:;
       if (__pyx_t_3) {
 
-        /* "evolution.pyx":109
+        /* "evolution.pyx":111
  *                 break
  *             if W2 == inf and medEvoDone:
  *                 break             # <<<<<<<<<<<<<<
@@ -5244,7 +5244,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
  */
         goto __pyx_L4_break;
 
-        /* "evolution.pyx":108
+        /* "evolution.pyx":110
  *             if medEvoDone and stratEvoDone:
  *                 break
  *             if W2 == inf and medEvoDone:             # <<<<<<<<<<<<<<
@@ -5253,7 +5253,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
  */
       }
 
-      /* "evolution.pyx":110
+      /* "evolution.pyx":112
  *             if W2 == inf and medEvoDone:
  *                 break
  *             if W1 == 0 and stratEvoDone:             # <<<<<<<<<<<<<<
@@ -5266,12 +5266,12 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
         __pyx_t_3 = __pyx_t_22;
         goto __pyx_L19_bool_binop_done;
       }
-      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_v_stratEvoDone); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_v_stratEvoDone); if (unlikely(__pyx_t_22 < 0)) __PYX_ERR(0, 112, __pyx_L1_error)
       __pyx_t_3 = __pyx_t_22;
       __pyx_L19_bool_binop_done:;
       if (__pyx_t_3) {
 
-        /* "evolution.pyx":111
+        /* "evolution.pyx":113
  *                 break
  *             if W1 == 0 and stratEvoDone:
  *                 break             # <<<<<<<<<<<<<<
@@ -5280,7 +5280,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
  */
         goto __pyx_L4_break;
 
-        /* "evolution.pyx":110
+        /* "evolution.pyx":112
  *             if W2 == inf and medEvoDone:
  *                 break
  *             if W1 == 0 and stratEvoDone:             # <<<<<<<<<<<<<<
@@ -5289,7 +5289,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
  */
       }
 
-      /* "evolution.pyx":102
+      /* "evolution.pyx":104
  *         # cy_runEvolutionCompetitionEp(
  *         #     N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
  *         if i % 5000 == 0:             # <<<<<<<<<<<<<<
@@ -5300,7 +5300,7 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
   }
   __pyx_L4_break:;
 
-  /* "evolution.pyx":112
+  /* "evolution.pyx":114
  *             if W1 == 0 and stratEvoDone:
  *                 break
  *     return {"graph": graph,             # <<<<<<<<<<<<<<
@@ -5308,186 +5308,186 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
  *             "initStrats": np.asarray(initialStrats, dtype=np.intc),
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_graph, __pyx_v_graph) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_graph, __pyx_v_graph) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
 
-  /* "evolution.pyx":113
+  /* "evolution.pyx":115
  *                 break
  *     return {"graph": graph,
  *             "history": pd.DataFrame(history, dtype="category"),             # <<<<<<<<<<<<<<
  *             "initStrats": np.asarray(initialStrats, dtype=np.intc),
  *             "finalStrats": np.asarray(strats, dtype=np.intc),
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_n_s_pd); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_16, __pyx_n_s_pd); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 115, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_16, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 115, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 115, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __Pyx_INCREF(__pyx_v_history);
   __Pyx_GIVEREF(__pyx_v_history);
   PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_v_history);
-  __pyx_t_18 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 115, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  if (PyDict_SetItem(__pyx_t_18, __pyx_n_s_dtype, __pyx_n_s_category) < 0) __PYX_ERR(0, 113, __pyx_L1_error)
-  __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_16, __pyx_t_18); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 113, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_18, __pyx_n_s_dtype, __pyx_n_s_category) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_16, __pyx_t_18); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 115, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_history, __pyx_t_15) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_history, __pyx_t_15) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
 
-  /* "evolution.pyx":114
+  /* "evolution.pyx":116
  *     return {"graph": graph,
  *             "history": pd.DataFrame(history, dtype="category"),
  *             "initStrats": np.asarray(initialStrats, dtype=np.intc),             # <<<<<<<<<<<<<<
  *             "finalStrats": np.asarray(strats, dtype=np.intc),
  *             "initMedStrats": np.asarray(initialMedStrats, dtype=np.intc),
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_np); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_np); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
-  __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_asarray); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_asarray); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-  __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_initialStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_15 = __pyx_memoryview_fromslice(__pyx_v_initialStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
-  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __Pyx_GIVEREF(__pyx_t_15);
   PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_15);
   __pyx_t_15 = 0;
-  __pyx_t_15 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_15 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_intc); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_intc); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (PyDict_SetItem(__pyx_t_15, __pyx_n_s_dtype, __pyx_t_14) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_15, __pyx_n_s_dtype, __pyx_t_14) < 0) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_t_16, __pyx_t_15); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_t_16, __pyx_t_15); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_initStrats, __pyx_t_14) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_initStrats, __pyx_t_14) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
-  /* "evolution.pyx":115
+  /* "evolution.pyx":117
  *             "history": pd.DataFrame(history, dtype="category"),
  *             "initStrats": np.asarray(initialStrats, dtype=np.intc),
  *             "finalStrats": np.asarray(strats, dtype=np.intc),             # <<<<<<<<<<<<<<
  *             "initMedStrats": np.asarray(initialMedStrats, dtype=np.intc),
  *             "medStrats": np.asarray(medStrats, dtype=np.intc)}
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_np); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_np); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_asarray); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_asarray); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __pyx_t_14 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_14 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __Pyx_GIVEREF(__pyx_t_14);
   PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_14);
   __pyx_t_14 = 0;
-  __pyx_t_14 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __Pyx_GetModuleGlobalName(__pyx_t_18, __pyx_n_s_np); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_18, __pyx_n_s_np); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_intc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_intc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_16, __pyx_t_14); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_16, __pyx_t_14); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_finalStrats, __pyx_t_6) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_finalStrats, __pyx_t_6) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "evolution.pyx":116
+  /* "evolution.pyx":118
  *             "initStrats": np.asarray(initialStrats, dtype=np.intc),
  *             "finalStrats": np.asarray(strats, dtype=np.intc),
  *             "initMedStrats": np.asarray(initialMedStrats, dtype=np.intc),             # <<<<<<<<<<<<<<
  *             "medStrats": np.asarray(medStrats, dtype=np.intc)}
- *     # return {"graph": graph,
+ * # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_asarray); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_asarray); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_initialMedStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_initialMedStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __Pyx_GIVEREF(__pyx_t_6);
   PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_6);
   __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_np); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_np); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
-  __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_intc); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_intc); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_t_18) < 0) __PYX_ERR(0, 116, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_t_18) < 0) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_16, __pyx_t_6); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_16, __pyx_t_6); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_initMedStrats, __pyx_t_18) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_initMedStrats, __pyx_t_18) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
 
-  /* "evolution.pyx":117
+  /* "evolution.pyx":119
  *             "finalStrats": np.asarray(strats, dtype=np.intc),
  *             "initMedStrats": np.asarray(initialMedStrats, dtype=np.intc),
  *             "medStrats": np.asarray(medStrats, dtype=np.intc)}             # <<<<<<<<<<<<<<
- *     # return {"graph": graph,
- *     #     "history": pd.DataFrame(history, dtype="category"),
+ * # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
+ * def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_18, __pyx_n_s_np); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_18, __pyx_n_s_np); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_asarray); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_asarray); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  __pyx_t_18 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_18 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_16 = PyTuple_New(1); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
   __Pyx_GIVEREF(__pyx_t_18);
   PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_18);
   __pyx_t_18 = 0;
-  __pyx_t_18 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
-  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_np); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_np); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_intc); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_intc); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  if (PyDict_SetItem(__pyx_t_18, __pyx_n_s_dtype, __pyx_t_15) < 0) __PYX_ERR(0, 117, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_18, __pyx_n_s_dtype, __pyx_t_15) < 0) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-  __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_16, __pyx_t_18); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_16, __pyx_t_18); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
   __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_medStrats, __pyx_t_15) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_medStrats, __pyx_t_15) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
   __pyx_r = __pyx_t_5;
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "evolution.pyx":84
+  /* "evolution.pyx":86
  * 
  * 
  * def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :, :] dilemma, int[:] medStrats, int[:] strats, float beta=0.001, _graph=None, int k=30, history=None, saveHistory=False):             # <<<<<<<<<<<<<<
@@ -5528,8 +5528,8 @@ static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "evolution.pyx":162
- * 
+/* "evolution.pyx":121
+ *             "medStrats": np.asarray(medStrats, dtype=np.intc)}
  * # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
  * def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):             # <<<<<<<<<<<<<<
  *     print(f"cy_runCompetitionExperiment {ts}")
@@ -5680,7 +5680,7 @@ static PyObject *__pyx_pw_9evolution_5cy_runCompetitionExperiment(PyObject *__py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cy_runCompetitionExperiment") < 0)) __PYX_ERR(0, 162, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cy_runCompetitionExperiment") < 0)) __PYX_ERR(0, 121, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -5715,60 +5715,60 @@ static PyObject *__pyx_pw_9evolution_5cy_runCompetitionExperiment(PyObject *__py
       }
     }
     if (values[0]) {
-      __pyx_v_N = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_N == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
+      __pyx_v_N = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_N == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
     } else {
       __pyx_v_N = __pyx_k__3;
     }
     if (values[1]) {
-      __pyx_v_episode_n = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_episode_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
+      __pyx_v_episode_n = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_episode_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
     } else {
       __pyx_v_episode_n = __pyx_k__4;
     }
     if (values[2]) {
-      __pyx_v_W1 = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_W1 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
+      __pyx_v_W1 = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_W1 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
     } else {
       __pyx_v_W1 = __pyx_k__5;
     }
     if (values[3]) {
-      __pyx_v_W2 = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_W2 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
+      __pyx_v_W2 = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_W2 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
     } else {
       __pyx_v_W2 = __pyx_k__6;
     }
     __pyx_v_graph = values[4];
     __pyx_v_ts = values[5];
     if (values[6]) {
-      __pyx_v_medStrats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_medStrats.memview)) __PYX_ERR(0, 162, __pyx_L3_error)
+      __pyx_v_medStrats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_medStrats.memview)) __PYX_ERR(0, 121, __pyx_L3_error)
     } else {
       __pyx_v_medStrats = __pyx_k__7;
       __PYX_INC_MEMVIEW(&__pyx_v_medStrats, 1);
     }
     if (values[7]) {
-      __pyx_v_strats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[7], PyBUF_WRITABLE); if (unlikely(!__pyx_v_strats.memview)) __PYX_ERR(0, 162, __pyx_L3_error)
+      __pyx_v_strats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[7], PyBUF_WRITABLE); if (unlikely(!__pyx_v_strats.memview)) __PYX_ERR(0, 121, __pyx_L3_error)
     } else {
       __pyx_v_strats = __pyx_k__8;
       __PYX_INC_MEMVIEW(&__pyx_v_strats, 1);
     }
     if (values[8]) {
-      __pyx_v_beta = __pyx_PyFloat_AsFloat(values[8]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
+      __pyx_v_beta = __pyx_PyFloat_AsFloat(values[8]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
     } else {
       __pyx_v_beta = ((float)0.005);
     }
     if (values[9]) {
-      __pyx_v_k = __Pyx_PyInt_As_int(values[9]); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
+      __pyx_v_k = __Pyx_PyInt_As_int(values[9]); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
     } else {
       __pyx_v_k = ((int)30);
     }
     __pyx_v_medSet = values[10];
     __pyx_v_history = values[11];
     if (values[12]) {
-      __pyx_v_saveHistory = __Pyx_PyObject_IsTrue(values[12]); if (unlikely((__pyx_v_saveHistory == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
+      __pyx_v_saveHistory = __Pyx_PyObject_IsTrue(values[12]); if (unlikely((__pyx_v_saveHistory == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L3_error)
     } else {
       __pyx_v_saveHistory = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("cy_runCompetitionExperiment", 0, 0, 13, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 162, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cy_runCompetitionExperiment", 0, 0, 13, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 121, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("evolution.cy_runCompetitionExperiment", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5807,33 +5807,33 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cy_runCompetitionExperiment", 0);
 
-  /* "evolution.pyx":163
+  /* "evolution.pyx":122
  * # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
  * def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
  *     print(f"cy_runCompetitionExperiment {ts}")             # <<<<<<<<<<<<<<
  *     # cdef int[:] _strats
  *     # _strats[...] = cy_initStrats(N) if strats is None else strats
  */
-  __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_ts, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_ts, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_kp_u_cy_runCompetitionExperiment, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_kp_u_cy_runCompetitionExperiment, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "evolution.pyx":169
+  /* "evolution.pyx":128
  *     # _medStrats[...] = cy_initMedStrats(N, medSet) if medStrats is None else medStrats
  *     cdef float[:, :, :] dilemma
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])             # <<<<<<<<<<<<<<
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_cy_makeTSDilemma); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_cy_makeTSDilemma); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_ts, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_ts, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_ts, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_ts, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -5850,7 +5850,7 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_3, __pyx_t_4};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5860,7 +5860,7 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_3, __pyx_t_4};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5868,7 +5868,7 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -5879,27 +5879,27 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_4);
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_float(__pyx_t_2, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_float(__pyx_t_2, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_dilemma = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "evolution.pyx":170
+  /* "evolution.pyx":129
  *     cdef float[:, :, :] dilemma
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(             # <<<<<<<<<<<<<<
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(
  */
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_graph); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_graph); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 129, __pyx_L1_error)
   if (__pyx_t_9) {
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 170, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -5913,50 +5913,50 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_4, __pyx_v_graph) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_graph);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_2 = __pyx_t_1;
     __pyx_t_1 = 0;
   } else {
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_initUniformRandomGraph); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_initUniformRandomGraph); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
 
-    /* "evolution.pyx":171
+    /* "evolution.pyx":130
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))             # <<<<<<<<<<<<<<
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, cy_initMedStrats(N, medSet), cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  */
-    __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 171, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 171, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_N, __pyx_t_4) < 0) __PYX_ERR(0, 171, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_N, __pyx_t_4) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if ((__pyx_v_k != 0)) {
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 171, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 130, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_4 = __pyx_t_3;
       __pyx_t_3 = 0;
     } else {
-      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_k_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 171, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_k_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 130, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_4 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_k, __pyx_t_4) < 0) __PYX_ERR(0, 171, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_k, __pyx_t_4) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "evolution.pyx":170
+    /* "evolution.pyx":129
  *     cdef float[:, :, :] dilemma
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(             # <<<<<<<<<<<<<<
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(
  */
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 170, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -5966,36 +5966,36 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   __pyx_v__graph = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "evolution.pyx":172
+  /* "evolution.pyx":131
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(             # <<<<<<<<<<<<<<
  *         N, episode_n, W1, W2, dilemma, cy_initMedStrats(N, medSet), cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  *     return experimentResults
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cy_genericRunEvolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cy_genericRunEvolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "evolution.pyx":173
+  /* "evolution.pyx":132
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, cy_initMedStrats(N, medSet), cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory)             # <<<<<<<<<<<<<<
  *     return experimentResults
  * 
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_episode_n); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_episode_n); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_W1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_W1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_W2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_W2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_dilemma, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_dilemma, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_cy_initMedStrats); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_n_s_cy_initMedStrats); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __pyx_t_13 = NULL;
   __pyx_t_6 = 0;
@@ -6012,7 +6012,7 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_11)) {
     PyObject *__pyx_temp[3] = {__pyx_t_13, __pyx_t_12, __pyx_v_medSet};
-    __pyx_t_10 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 173, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -6021,14 +6021,14 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
     PyObject *__pyx_temp[3] = {__pyx_t_13, __pyx_t_12, __pyx_v_medSet};
-    __pyx_t_10 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 173, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   } else
   #endif
   {
-    __pyx_t_14 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 173, __pyx_L1_error)
+    __pyx_t_14 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_14);
     if (__pyx_t_13) {
       __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13); __pyx_t_13 = NULL;
@@ -6039,14 +6039,14 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
     __Pyx_GIVEREF(__pyx_v_medSet);
     PyTuple_SET_ITEM(__pyx_t_14, 1+__pyx_t_6, __pyx_v_medSet);
     __pyx_t_12 = 0;
-    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_14, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 173, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_14, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
   }
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_cy_initStrats); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_cy_initStrats); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __pyx_t_13 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_14))) {
@@ -6061,12 +6061,12 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   __pyx_t_11 = (__pyx_t_13) ? __Pyx_PyObject_Call2Args(__pyx_t_14, __pyx_t_13, __pyx_t_12) : __Pyx_PyObject_CallOneArg(__pyx_t_14, __pyx_t_12);
   __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __pyx_t_14 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_14 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __Pyx_GetModuleGlobalName(__pyx_t_13, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_13, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __pyx_t_15 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_13))) {
@@ -6080,20 +6080,20 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   }
   __pyx_t_12 = (__pyx_t_15) ? __Pyx_PyObject_Call2Args(__pyx_t_13, __pyx_t_15, __pyx_v__graph) : __Pyx_PyObject_CallOneArg(__pyx_t_13, __pyx_v__graph);
   __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-  if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
 
-  /* "evolution.pyx":172
+  /* "evolution.pyx":131
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(             # <<<<<<<<<<<<<<
  *         N, episode_n, W1, W2, dilemma, cy_initMedStrats(N, medSet), cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  *     return experimentResults
  */
-  __pyx_t_15 = PyTuple_New(11); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_15 = PyTuple_New(11); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_t_4);
@@ -6129,28 +6129,28 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   __pyx_t_12 = 0;
   __pyx_t_13 = 0;
 
-  /* "evolution.pyx":173
+  /* "evolution.pyx":132
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, cy_initMedStrats(N, medSet), cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory)             # <<<<<<<<<<<<<<
  *     return experimentResults
  * 
  */
-  __pyx_t_13 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  __pyx_t_12 = __Pyx_PyBool_FromLong(__pyx_v_saveHistory); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyBool_FromLong(__pyx_v_saveHistory); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_saveHistory, __pyx_t_12) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_saveHistory, __pyx_t_12) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "evolution.pyx":172
+  /* "evolution.pyx":131
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(             # <<<<<<<<<<<<<<
  *         N, episode_n, W1, W2, dilemma, cy_initMedStrats(N, medSet), cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  *     return experimentResults
  */
-  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_15, __pyx_t_13); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_15, __pyx_t_13); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
@@ -6158,7 +6158,7 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   __pyx_v_experimentResults = __pyx_t_12;
   __pyx_t_12 = 0;
 
-  /* "evolution.pyx":174
+  /* "evolution.pyx":133
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, cy_initMedStrats(N, medSet), cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  *     return experimentResults             # <<<<<<<<<<<<<<
@@ -6170,8 +6170,8 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   __pyx_r = __pyx_v_experimentResults;
   goto __pyx_L0;
 
-  /* "evolution.pyx":162
- * 
+  /* "evolution.pyx":121
+ *             "medStrats": np.asarray(medStrats, dtype=np.intc)}
  * # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
  * def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):             # <<<<<<<<<<<<<<
  *     print(f"cy_runCompetitionExperiment {ts}")
@@ -6206,7 +6206,7 @@ static PyObject *__pyx_pf_9evolution_4cy_runCompetitionExperiment(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "evolution.pyx":176
+/* "evolution.pyx":135
  *     return experimentResults
  * 
  * def cy_continueCompetitionExperiment(graph, int[:] medStrats, int[:] strats, int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, ts=(_T,_S), float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):             # <<<<<<<<<<<<<<
@@ -6285,13 +6285,13 @@ static PyObject *__pyx_pw_9evolution_7cy_continueCompetitionExperiment(PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_medStrats)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cy_continueCompetitionExperiment", 0, 3, 13, 1); __PYX_ERR(0, 176, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_continueCompetitionExperiment", 0, 3, 13, 1); __PYX_ERR(0, 135, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_strats)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("cy_continueCompetitionExperiment", 0, 3, 13, 2); __PYX_ERR(0, 176, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_continueCompetitionExperiment", 0, 3, 13, 2); __PYX_ERR(0, 135, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -6355,7 +6355,7 @@ static PyObject *__pyx_pw_9evolution_7cy_continueCompetitionExperiment(PyObject 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cy_continueCompetitionExperiment") < 0)) __PYX_ERR(0, 176, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cy_continueCompetitionExperiment") < 0)) __PYX_ERR(0, 135, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -6387,50 +6387,50 @@ static PyObject *__pyx_pw_9evolution_7cy_continueCompetitionExperiment(PyObject 
       }
     }
     __pyx_v_graph = values[0];
-    __pyx_v_medStrats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_medStrats.memview)) __PYX_ERR(0, 176, __pyx_L3_error)
-    __pyx_v_strats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_strats.memview)) __PYX_ERR(0, 176, __pyx_L3_error)
+    __pyx_v_medStrats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_medStrats.memview)) __PYX_ERR(0, 135, __pyx_L3_error)
+    __pyx_v_strats = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_strats.memview)) __PYX_ERR(0, 135, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_N = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_N == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
+      __pyx_v_N = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_N == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
     } else {
       __pyx_v_N = __pyx_k__11;
     }
     if (values[4]) {
-      __pyx_v_episode_n = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_episode_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
+      __pyx_v_episode_n = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_episode_n == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
     } else {
       __pyx_v_episode_n = __pyx_k__12;
     }
     if (values[5]) {
-      __pyx_v_W1 = __pyx_PyFloat_AsFloat(values[5]); if (unlikely((__pyx_v_W1 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
+      __pyx_v_W1 = __pyx_PyFloat_AsFloat(values[5]); if (unlikely((__pyx_v_W1 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
     } else {
       __pyx_v_W1 = __pyx_k__13;
     }
     if (values[6]) {
-      __pyx_v_W2 = __pyx_PyFloat_AsFloat(values[6]); if (unlikely((__pyx_v_W2 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
+      __pyx_v_W2 = __pyx_PyFloat_AsFloat(values[6]); if (unlikely((__pyx_v_W2 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
     } else {
       __pyx_v_W2 = __pyx_k__14;
     }
     __pyx_v_ts = values[7];
     if (values[8]) {
-      __pyx_v_beta = __pyx_PyFloat_AsFloat(values[8]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
+      __pyx_v_beta = __pyx_PyFloat_AsFloat(values[8]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
     } else {
       __pyx_v_beta = ((float)0.005);
     }
     if (values[9]) {
-      __pyx_v_k = __Pyx_PyInt_As_int(values[9]); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
+      __pyx_v_k = __Pyx_PyInt_As_int(values[9]); if (unlikely((__pyx_v_k == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
     } else {
       __pyx_v_k = ((int)30);
     }
     __pyx_v_medSet = values[10];
     __pyx_v_history = values[11];
     if (values[12]) {
-      __pyx_v_saveHistory = __Pyx_PyObject_IsTrue(values[12]); if (unlikely((__pyx_v_saveHistory == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L3_error)
+      __pyx_v_saveHistory = __Pyx_PyObject_IsTrue(values[12]); if (unlikely((__pyx_v_saveHistory == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
     } else {
       __pyx_v_saveHistory = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("cy_continueCompetitionExperiment", 0, 3, 13, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 176, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cy_continueCompetitionExperiment", 0, 3, 13, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 135, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("evolution.cy_continueCompetitionExperiment", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6469,33 +6469,33 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cy_continueCompetitionExperiment", 0);
 
-  /* "evolution.pyx":177
+  /* "evolution.pyx":136
  * 
  * def cy_continueCompetitionExperiment(graph, int[:] medStrats, int[:] strats, int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, ts=(_T,_S), float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
  *     print(f"cy_continueCompetitionExperiment {ts}")             # <<<<<<<<<<<<<<
  *     # cdef int[:] _strats
  *     # _strats[...] = cy_initStrats(N) if strats is None else strats
  */
-  __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_ts, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_v_ts, __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_kp_u_cy_continueCompetitionExperiment, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_kp_u_cy_continueCompetitionExperiment, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 177, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "evolution.pyx":183
+  /* "evolution.pyx":142
  *     # _medStrats[...] = cy_initMedStrats(N, medSet) if medStrats is None else medStrats
  *     cdef float[:, :, :] dilemma
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])             # <<<<<<<<<<<<<<
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_cy_makeTSDilemma); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_cy_makeTSDilemma); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_ts, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_ts, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_ts, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_ts, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -6512,7 +6512,7 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_3, __pyx_t_4};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -6522,7 +6522,7 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_3, __pyx_t_4};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -6530,7 +6530,7 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -6541,27 +6541,27 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_4);
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_float(__pyx_t_2, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_float(__pyx_t_2, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_dilemma = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "evolution.pyx":184
+  /* "evolution.pyx":143
  *     cdef float[:, :, :] dilemma
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(             # <<<<<<<<<<<<<<
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(
  */
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_graph); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_graph); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 143, __pyx_L1_error)
   if (__pyx_t_9) {
-    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -6575,50 +6575,50 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
     }
     __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_4, __pyx_v_graph) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_graph);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_2 = __pyx_t_1;
     __pyx_t_1 = 0;
   } else {
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_initUniformRandomGraph); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_initUniformRandomGraph); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
 
-    /* "evolution.pyx":185
+    /* "evolution.pyx":144
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))             # <<<<<<<<<<<<<<
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, medStrats, strats, beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  */
-    __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 185, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 185, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_N, __pyx_t_4) < 0) __PYX_ERR(0, 185, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_N, __pyx_t_4) < 0) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if ((__pyx_v_k != 0)) {
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 144, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_4 = __pyx_t_3;
       __pyx_t_3 = 0;
     } else {
-      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_k_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_k_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 144, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_4 = __pyx_t_3;
       __pyx_t_3 = 0;
     }
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_k, __pyx_t_4) < 0) __PYX_ERR(0, 185, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_k, __pyx_t_4) < 0) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "evolution.pyx":184
+    /* "evolution.pyx":143
  *     cdef float[:, :, :] dilemma
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(             # <<<<<<<<<<<<<<
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(
  */
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -6628,39 +6628,39 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
   __pyx_v__graph = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "evolution.pyx":186
+  /* "evolution.pyx":145
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(             # <<<<<<<<<<<<<<
  *         N, episode_n, W1, W2, dilemma, medStrats, strats, beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  *     return experimentResults
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cy_genericRunEvolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cy_genericRunEvolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "evolution.pyx":187
+  /* "evolution.pyx":146
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, medStrats, strats, beta, deepcopy(_graph), k, history, saveHistory=saveHistory)             # <<<<<<<<<<<<<<
  *     return experimentResults
  */
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_episode_n); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_episode_n); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_W1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_W1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_W2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_W2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_dilemma, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_dilemma, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_medStrats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_11 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_11 = __pyx_memoryview_fromslice(__pyx_v_strats, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_14, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __pyx_t_15 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_14))) {
@@ -6674,20 +6674,20 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
   }
   __pyx_t_13 = (__pyx_t_15) ? __Pyx_PyObject_Call2Args(__pyx_t_14, __pyx_t_15, __pyx_v__graph) : __Pyx_PyObject_CallOneArg(__pyx_t_14, __pyx_v__graph);
   __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-  if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 187, __pyx_L1_error)
+  if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __pyx_t_14 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyInt_From_int(__pyx_v_k); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
 
-  /* "evolution.pyx":186
+  /* "evolution.pyx":145
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(             # <<<<<<<<<<<<<<
  *         N, episode_n, W1, W2, dilemma, medStrats, strats, beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  *     return experimentResults
  */
-  __pyx_t_15 = PyTuple_New(11); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_15 = PyTuple_New(11); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_t_4);
@@ -6723,27 +6723,27 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
   __pyx_t_13 = 0;
   __pyx_t_14 = 0;
 
-  /* "evolution.pyx":187
+  /* "evolution.pyx":146
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, medStrats, strats, beta, deepcopy(_graph), k, history, saveHistory=saveHistory)             # <<<<<<<<<<<<<<
  *     return experimentResults
  */
-  __pyx_t_14 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_13 = __Pyx_PyBool_FromLong(__pyx_v_saveHistory); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyBool_FromLong(__pyx_v_saveHistory); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_saveHistory, __pyx_t_13) < 0) __PYX_ERR(0, 187, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_14, __pyx_n_s_saveHistory, __pyx_t_13) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "evolution.pyx":186
+  /* "evolution.pyx":145
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))
  *     experimentResults = cy_genericRunEvolution(             # <<<<<<<<<<<<<<
  *         N, episode_n, W1, W2, dilemma, medStrats, strats, beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  *     return experimentResults
  */
-  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_15, __pyx_t_14); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_15, __pyx_t_14); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
@@ -6751,7 +6751,7 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
   __pyx_v_experimentResults = __pyx_t_13;
   __pyx_t_13 = 0;
 
-  /* "evolution.pyx":188
+  /* "evolution.pyx":147
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, medStrats, strats, beta, deepcopy(_graph), k, history, saveHistory=saveHistory)
  *     return experimentResults             # <<<<<<<<<<<<<<
@@ -6761,7 +6761,7 @@ static PyObject *__pyx_pf_9evolution_6cy_continueCompetitionExperiment(CYTHON_UN
   __pyx_r = __pyx_v_experimentResults;
   goto __pyx_L0;
 
-  /* "evolution.pyx":176
+  /* "evolution.pyx":135
  *     return experimentResults
  * 
  * def cy_continueCompetitionExperiment(graph, int[:] medStrats, int[:] strats, int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, ts=(_T,_S), float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):             # <<<<<<<<<<<<<<
@@ -22483,8 +22483,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 95, __pyx_L1_error)
-  __pyx_builtin_any = __Pyx_GetBuiltinName(__pyx_n_s_any); if (!__pyx_builtin_any) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_builtin_any = __Pyx_GetBuiltinName(__pyx_n_s_any); if (!__pyx_builtin_any) __PYX_ERR(0, 106, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 109, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(2, 884, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(3, 133, __pyx_L1_error)
@@ -22728,41 +22728,41 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__36);
   __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(11, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_evolution_pyx, __pyx_n_s_cy_runEvolutionCompetitionEp, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 44, __pyx_L1_error)
 
-  /* "evolution.pyx":84
+  /* "evolution.pyx":86
  * 
  * 
  * def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :, :] dilemma, int[:] medStrats, int[:] strats, float beta=0.001, _graph=None, int k=30, history=None, saveHistory=False):             # <<<<<<<<<<<<<<
  *     history = [] if history == None else history
  *     cdef int[:] initialStrats, initialMedStrats
  */
-  __pyx_tuple__38 = PyTuple_Pack(20, __pyx_n_s_N, __pyx_n_s_episode_n, __pyx_n_s_W1, __pyx_n_s_W2, __pyx_n_s_dilemma, __pyx_n_s_medStrats, __pyx_n_s_strats, __pyx_n_s_beta, __pyx_n_s_graph_2, __pyx_n_s_k, __pyx_n_s_history, __pyx_n_s_saveHistory, __pyx_n_s_initialStrats, __pyx_n_s_initialMedStrats, __pyx_n_s_totalPayoffs, __pyx_n_s_graph, __pyx_n_s_i, __pyx_n_s_x_2, __pyx_n_s_medEvoDone, __pyx_n_s_stratEvoDone); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_tuple__38 = PyTuple_Pack(20, __pyx_n_s_N, __pyx_n_s_episode_n, __pyx_n_s_W1, __pyx_n_s_W2, __pyx_n_s_dilemma, __pyx_n_s_medStrats, __pyx_n_s_strats, __pyx_n_s_beta, __pyx_n_s_graph_2, __pyx_n_s_k, __pyx_n_s_history, __pyx_n_s_saveHistory, __pyx_n_s_initialStrats, __pyx_n_s_initialMedStrats, __pyx_n_s_totalPayoffs, __pyx_n_s_graph, __pyx_n_s_i, __pyx_n_s_x_2, __pyx_n_s_medEvoDone, __pyx_n_s_stratEvoDone); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__38);
   __Pyx_GIVEREF(__pyx_tuple__38);
-  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(12, 0, 20, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_evolution_pyx, __pyx_n_s_cy_genericRunEvolution, 84, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(12, 0, 20, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_evolution_pyx, __pyx_n_s_cy_genericRunEvolution, 86, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 86, __pyx_L1_error)
 
-  /* "evolution.pyx":162
- * 
+  /* "evolution.pyx":121
+ *             "medStrats": np.asarray(medStrats, dtype=np.intc)}
  * # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
  * def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):             # <<<<<<<<<<<<<<
  *     print(f"cy_runCompetitionExperiment {ts}")
  *     # cdef int[:] _strats
  */
-  __pyx_tuple__40 = PyTuple_Pack(16, __pyx_n_s_N, __pyx_n_s_episode_n, __pyx_n_s_W1, __pyx_n_s_W2, __pyx_n_s_graph, __pyx_n_s_ts, __pyx_n_s_medStrats, __pyx_n_s_strats, __pyx_n_s_beta, __pyx_n_s_k, __pyx_n_s_medSet, __pyx_n_s_history, __pyx_n_s_saveHistory, __pyx_n_s_dilemma, __pyx_n_s_graph_2, __pyx_n_s_experimentResults); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_tuple__40 = PyTuple_Pack(16, __pyx_n_s_N, __pyx_n_s_episode_n, __pyx_n_s_W1, __pyx_n_s_W2, __pyx_n_s_graph, __pyx_n_s_ts, __pyx_n_s_medStrats, __pyx_n_s_strats, __pyx_n_s_beta, __pyx_n_s_k, __pyx_n_s_medSet, __pyx_n_s_history, __pyx_n_s_saveHistory, __pyx_n_s_dilemma, __pyx_n_s_graph_2, __pyx_n_s_experimentResults); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
-  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(13, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_evolution_pyx, __pyx_n_s_cy_runCompetitionExperiment_2, 162, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(13, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_evolution_pyx, __pyx_n_s_cy_runCompetitionExperiment_2, 121, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 121, __pyx_L1_error)
 
-  /* "evolution.pyx":176
+  /* "evolution.pyx":135
  *     return experimentResults
  * 
  * def cy_continueCompetitionExperiment(graph, int[:] medStrats, int[:] strats, int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, ts=(_T,_S), float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):             # <<<<<<<<<<<<<<
  *     print(f"cy_continueCompetitionExperiment {ts}")
  *     # cdef int[:] _strats
  */
-  __pyx_tuple__42 = PyTuple_Pack(16, __pyx_n_s_graph, __pyx_n_s_medStrats, __pyx_n_s_strats, __pyx_n_s_N, __pyx_n_s_episode_n, __pyx_n_s_W1, __pyx_n_s_W2, __pyx_n_s_ts, __pyx_n_s_beta, __pyx_n_s_k, __pyx_n_s_medSet, __pyx_n_s_history, __pyx_n_s_saveHistory, __pyx_n_s_dilemma, __pyx_n_s_graph_2, __pyx_n_s_experimentResults); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_tuple__42 = PyTuple_Pack(16, __pyx_n_s_graph, __pyx_n_s_medStrats, __pyx_n_s_strats, __pyx_n_s_N, __pyx_n_s_episode_n, __pyx_n_s_W1, __pyx_n_s_W2, __pyx_n_s_ts, __pyx_n_s_beta, __pyx_n_s_k, __pyx_n_s_medSet, __pyx_n_s_history, __pyx_n_s_saveHistory, __pyx_n_s_dilemma, __pyx_n_s_graph_2, __pyx_n_s_experimentResults); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__42);
   __Pyx_GIVEREF(__pyx_tuple__42);
-  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(13, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_evolution_pyx, __pyx_n_s_cy_continueCompetitionExperiment_2, 176, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(13, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_evolution_pyx, __pyx_n_s_cy_continueCompetitionExperiment_2, 135, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) __PYX_ERR(0, 135, __pyx_L1_error)
 
   /* "View.MemoryView":286
  *         return self.name
@@ -23817,50 +23817,50 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_cy_runEvolutionCompetitionEp, __pyx_t_2) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "evolution.pyx":84
+  /* "evolution.pyx":86
  * 
  * 
  * def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :, :] dilemma, int[:] medStrats, int[:] strats, float beta=0.001, _graph=None, int k=30, history=None, saveHistory=False):             # <<<<<<<<<<<<<<
  *     history = [] if history == None else history
  *     cdef int[:] initialStrats, initialMedStrats
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9evolution_3cy_genericRunEvolution, NULL, __pyx_n_s_evolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9evolution_3cy_genericRunEvolution, NULL, __pyx_n_s_evolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cy_genericRunEvolution, __pyx_t_2) < 0) __PYX_ERR(0, 84, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cy_genericRunEvolution, __pyx_t_2) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "evolution.pyx":162
- * 
+  /* "evolution.pyx":121
+ *             "medStrats": np.asarray(medStrats, dtype=np.intc)}
  * # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
  * def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):             # <<<<<<<<<<<<<<
  *     print(f"cy_runCompetitionExperiment {ts}")
  *     # cdef int[:] _strats
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_N_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_N_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_k__3 = __pyx_t_3;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_episode_n_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_episode_n_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_k__4 = __pyx_t_3;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_W); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_W); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_k__5 = __pyx_t_4;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_W2_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_W2_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_2); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_k__6 = __pyx_t_4;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_T); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_T); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_S); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_S); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2);
@@ -23871,56 +23871,56 @@ if (!__Pyx_RefNanny) {
   __pyx_k_ = __pyx_t_5;
   __Pyx_GIVEREF(__pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(Py_None, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(Py_None, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 121, __pyx_L1_error)
   __pyx_k__7 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(Py_None, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(Py_None, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 121, __pyx_L1_error)
   __pyx_k__8 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_medSet_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_medSet_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_k__2 = __pyx_t_5;
   __Pyx_GIVEREF(__pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_9evolution_5cy_runCompetitionExperiment, NULL, __pyx_n_s_evolution); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_9evolution_5cy_runCompetitionExperiment, NULL, __pyx_n_s_evolution); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cy_runCompetitionExperiment_2, __pyx_t_5) < 0) __PYX_ERR(0, 162, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cy_runCompetitionExperiment_2, __pyx_t_5) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "evolution.pyx":176
+  /* "evolution.pyx":135
  *     return experimentResults
  * 
  * def cy_continueCompetitionExperiment(graph, int[:] medStrats, int[:] strats, int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, ts=(_T,_S), float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):             # <<<<<<<<<<<<<<
  *     print(f"cy_continueCompetitionExperiment {ts}")
  *     # cdef int[:] _strats
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_N_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_N_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_k__11 = __pyx_t_3;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_episode_n_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_episode_n_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_k__12 = __pyx_t_3;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_W); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_W); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_k__13 = __pyx_t_4;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_W2_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_W2_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_t_5); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_k__14 = __pyx_t_4;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_T); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_T); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_S); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_S); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_5);
@@ -23931,14 +23931,14 @@ if (!__Pyx_RefNanny) {
   __pyx_k__9 = __pyx_t_2;
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_medSet_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_medSet_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_k__10 = __pyx_t_2;
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9evolution_7cy_continueCompetitionExperiment, NULL, __pyx_n_s_evolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9evolution_7cy_continueCompetitionExperiment, NULL, __pyx_n_s_evolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cy_continueCompetitionExperiment_2, __pyx_t_2) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cy_continueCompetitionExperiment_2, __pyx_t_2) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "evolution.pyx":1
