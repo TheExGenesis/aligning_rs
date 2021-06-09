@@ -92,6 +92,7 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
     initialMedStrats[...] = medStrats
     totalPayoffs = initPayoffs(N)
     graph = _graph
+    graph.set_fast_edge_removal(True)
     cdef int i = 0
     cdef int x = 0
     for i in range(episode_n):
