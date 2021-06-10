@@ -77,6 +77,8 @@ int2Med = {0: useNoMed, 1: useGoodMed,
            2: useBadMed, 3: useRandomMed, 4: useFairMed}
 int2MedName = {0: "NO_MED", 1: "GOOD_MED",
                2: "BAD_MED", 3: "RANDOM_MED", 4: "FAIR_MED"}
+medName2Int = {NO_MED: 0, GOOD_MED: 1,
+               BAD_MED: 2, RANDOM_MED: 3, FAIR_MED: 4}
 
 
 def useMed(medStrat, graph, strats, medStrats, y, x):

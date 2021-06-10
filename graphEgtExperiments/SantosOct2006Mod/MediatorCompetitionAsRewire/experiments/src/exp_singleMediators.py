@@ -24,7 +24,7 @@ def cy_competitionFullEvo(episode_n=1000, medSet=[0, 1], saveHistory=False, save
     return run
 
 
-def saveCompetitionExper    iment(N=_N, episode_n=_episode_n, W1=_W, W2=_W2, graph=None, ts=(_T, _S), medStrats=None, strats=None, beta=0.005, k=30, medSet=_medSet, history=None, saveHistory=False, dir_path="./data"):
+def saveCompetitionExperiment(N=_N, episode_n=_episode_n, W1=_W, W2=_W2, graph=None, ts=(_T, _S), medStrats=None, strats=None, beta=0.005, k=30, medSet=_medSet, history=None, saveHistory=False, dir_path="./data"):
     print(f"running experiment. medSet {medSet} ts {ts}")
     run = cy_runCompetitionExperiment(N=N, episode_n=episode_n, W1=W1, W2=W2,
                                       ts=ts, beta=beta, k=k, saveHistory=True, history=[], medSet=medSet)
