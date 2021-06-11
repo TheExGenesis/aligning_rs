@@ -75,3 +75,57 @@ def loadResFn(filename, dir_path='./data'):
         res = pickle.load(file)
         print(f"loaded {filename}")
         return res
+
+# newly copied in Jun 11:
+
+def filename2W(fn):
+    import re
+    return int(re.search(r".*W1-([0-9]+).*", fn).group(1))
+
+def filename2MedPair(fn):
+    import re
+    try:
+        matches = re.search(r".*medSet-([0-9]+)-([0-9]+).*", fn)
+        med1 = int(matches.group(1))
+        med2 = int(matches.group(2))
+        return (med1, med2)
+    except AttributeError as error:
+        print(f"filename: {fn}")
+        print(f"error: {error.args}")
+        raise error
+
+
+# loads a pickle
+def loadPickle(path):
+    import pickle
+    with open(path, "rb") as file:
+        res = pickle.load(file)
+        print(f"loaded {path}")
+        return res
+
+#  dict comprehension where values are lists keys are given by applying a function fn to items
+# Make a list into a dict, get keys by applying fn to list values
+def dictOfLists(my_list, fn=lambda x: x):
+    new_dict = {}
+    for value in my_list:
+        key = fn(value)
+        if key in new_dict:
+            new_dict[key].append(value)
+        else:
+            new_dict[key] = [value]
+    return new_dict
+
+# recursively find all pickles in a dir
+def getAllPickles(dir_name):
+    return [os.path.join(root, name)
+            for root, dirs, files in os.walk(dir_name)
+            for name in files
+            if name.endswith(".pkl")]
+# load all filenames in dir and its subdirs into 1 experiment dict where keys are W values
+
+# key_fn is a function to extract a key from the filename
+def loadExperiment(dir_name, key_fn):
+    filenames = getAllPickles(dir_name)
+    res = {k: [loadPickle(fn) for fn in fns]
+           for k, fns in dictOfLists(filenames, key_fn).items()}
+    return res
