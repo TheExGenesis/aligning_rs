@@ -123,82 +123,11 @@ def loadExperiment(dir_name):
     return res
 
 
-# n_trials = 1
-# # results = [tsMatrixSim(M=5, episode_n=10000, save=True) for i in range(n_trials)]
-# results = [tsMatrixSim(M=5, episode_n=10000, save=False)
-#            for i in range(n_trials)]
-# plotCoop(results)
-# fig.savefig("./data/coopLandscape.png")
-
-# %%
-% % time
-# run for each w and plot
-n_trials = 10
-episode_n = 100000
-ws = [0, 1, 2, 3, 4]
-# run n_trials of matrix of games for each w
-w_results = {w: [tsMatrixSim(M=5, episode_n=episode_n, W1=w, save=True)
-                 for i in range(n_trials)] for w in ws}
-# save all of them
-saveRes(runs,   makeCompetitionName({"episode_n": episode_n, "ws": ws, "n_trials": n_trials}),
-        dir_path=f"../data/exp_no_med_{timestamp()}")
-size = 4
-n = len(list(w_results.items()))
-fig, ax = plt.subplots(1, n, figsize=((n+1)*size, size))
-for i, (k, results) in enumerate(w_results.items()):
-    c = coop(results)
-    df = pd.DataFrame(zip(list(c.values()), *transposeList(list(c.keys()))),
-                      columns=["coops", 't', 's']).pivot('s', 't', "coops").iloc[::-1]
-    plt.subplot(1, n, i+1)
-    sns.heatmap(df, annot=True, cbar=True, xticklabels=2,
-                yticklabels=2, vmin=0, vmax=1, ax=plt.gca()).set(title=f"Avg. final cooperators, W1={k}, ep_n={episode_n}")
-    fig.savefig(
-        f'../plots/{makeCompetitionName({"medSet":"NO_MED", "n_eps":episode_n, "n_trials": n_trials})}.png')
-
-# %%
-
-
-# %%
-# CONTINUE RUN, SAVE, PLOT, SAVE PLOT
-
-# load run
-w_results = loadExperiment("../data/NO_MED-100k")
-# continue run
-ws = [0, 1, 2, 3, 4]
-n_trials = 10
-gameParams = genTSParams(5)
-for w in ws:
-    for i in range(n_trials):
-        for ts in gameParams:
-            cur_res = w_results[w][i][ts]
-            w_results[w][i][ts] = cy_continueCompetitionExperiment(
-                cur_res['graph'], cur_res['medStrats'], cur_res['finalStrats'], N=500, episode_n=100000, W1=w, W2=0, ts=ts, beta=0.005, k=30, medSet=[0])
-# save whole run
-episode_n = 100000
-experiment_name = makeCompetitionName(
-    {"medSet": "NO_MED", "n_eps": episode_n*3, "n_trials": n_trials})+"_"+timestamp()
-saveRes(w_results, experiment_name,
-        dir_path=f"../data/{experiment_name}")
-size = 4
-n = len(list(w_results.items()))
-fig, ax = plt.subplots(1, n, figsize=((n+1)*size, size))
-for i, (k, results) in enumerate(w_results.items()):
-    c = coop(results)
-    df = pd.DataFrame(zip(list(c.values()), *transposeList(list(c.keys()))),
-                      columns=["coops", 't', 's']).pivot('s', 't', "coops").iloc[::-1]
-    plt.subplot(1, n, i+1)
-    sns.heatmap(df, annot=True, cbar=True, xticklabels=2,
-                yticklabels=2, vmin=0, vmax=1, ax=plt.gca()).set(title=f"Avg. final cooperators, W1={k}, ep_n={episode_n}")
-    fig.savefig(
-        f'../plots/{experiment_name}.png')
-
-
 # %%
 # RUN N_TRIALS OF A MATRIX FOR EACH W AND FOR EACH MEDIATOR
-
 # run for each w and med
 n_trials = 10
-episode_n = 100000
+episode_n = 400000
 ws = [0.5, 1, 2, 3]
 medSet = [1, 2, 3, 4]
 # run for each mediator
