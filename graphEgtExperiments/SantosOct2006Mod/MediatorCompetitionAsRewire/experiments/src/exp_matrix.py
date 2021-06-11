@@ -1,4 +1,7 @@
 # %%
+# import matplotlib
+# matplotlib.use('Agg')
+# plt = matplotlib.pyplot
 import matplotlib.pyplot as plt
 from itertools import chain
 from utils import transposeList
@@ -131,17 +134,18 @@ def loadExperiment(dir_name):
 # fig.savefig("./data/coopLandscape.png")
 
 # %%
-% % time
+#%% time
 # run for each w and plot
 n_trials = 1
-episode_n = 300000
+episode_n = 3000
 ws = [0.5, 1, 2, 3]
 # run n_trials of matrix of games for each w
 w_results = {w: [tsMatrixSim(M=5, episode_n=episode_n, W1=w, save=True)
                  for i in range(n_trials)] for w in ws}
+print(w_results)
 # save all of them
-# saveRes(runs,   makeCompetitionName({"episode_n": episode_n, "ws": ws, "n_trials": n_trials}),
-#         dir_path=f"../data/exp_no_med_{timestamp()}")
+saveRes(w_results,   makeCompetitionName({"episode_n": episode_n, "ws": ws, "n_trials": n_trials}),
+        dir_path=f"../data/exp_no_med_{timestamp()}")
 size = 4
 n = len(list(w_results.items()))
 fig, ax = plt.subplots(1, n, figsize=((n+1)*size, size))
@@ -152,6 +156,6 @@ for i, (k, results) in enumerate(w_results.items()):
     plt.subplot(1, n, i+1)
     sns.heatmap(df, annot=True, cbar=True, xticklabels=2,
                 yticklabels=2, vmin=0, vmax=1, ax=plt.gca()).set(title=f"Avg. final cooperators, W1={k}, ep_n={episode_n}")
-    # fig.savefig(
-    #     f'../plots/{makeCompetitionName({"medSet":"NO_MED", "n_eps":episode_n, "n_trials": n_trials})}.png')
+    fig.savefig(
+        f'../plots/{makeCompetitionName({"medSet":"NO_MED", "n_eps":episode_n, "n_trials": n_trials})}.png')
 # %%
