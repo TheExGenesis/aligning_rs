@@ -1,7 +1,8 @@
 from utils import flatten, pipe
 import numpy as np
-# get first degree neighbors of the nodes ids
+from optimized.cyFns import crandint
 
+# get first degree neighbors of the nodes ids
 
 flattenUnique = pipe(flatten, set, list)
 
@@ -43,26 +44,57 @@ def isFinished(graph, triedList):
     return len(triedList) == graph.num_vertices()
 # sample neighbors of x filtered by a function prioritizing closest neighbors and moving outward in rings if none available
 
+# old less efficient fns
+# def filterEgoSample(graph, filterFn, ids):
+#     neighbors = getNeighbors(graph, ids)
+#     elligibleNeighbors = list(filter(filterFn, neighbors))
+#     if not elligibleNeighbors:
+#         if isFinished(graph, neighbors):
+#             return None
+#         return filterEgoSample(graph, filterFn, neighbors)
+#     return np.random.choice(elligibleNeighbors)
+
+
+# # exclude first neighbors
+# def filterEgoSampleUnique(graph, filterFn, id):
+#     def excludeFirstNeighbors(x): return x not in (
+#         [id] + list(graph.get_all_neighbors(id)))
+#     return filterEgoSample(graph, lambda x: excludeFirstNeighbors(x) and filterFn(x), [id])
+
+
+# def sampleEgoStrat(graph, strats, strat, id):
+#     return filterEgoSampleUnique(graph, lambda x: strats[x] == strat, id)
 
 def filterEgoSample(graph, filterFn, ids):
-    neighbors = getNeighbors(graph, ids)
-    elligibleNeighbors = list(filter(filterFn, neighbors))
-    if not elligibleNeighbors:
-        if isFinished(graph, neighbors):
-            return None
-        return filterEgoSample(graph, filterFn, neighbors)
-    return np.random.choice(elligibleNeighbors)
+    rng = np.random.default_rng()
+    rng.shuffle(ids)  # shuffle ids to check the neighbors for each randomly
+    total_neighbors = []
+    for id in ids:
+        neighbors = graph.get_all_neighbors(id)
+        eligible = list(filter(filterFn, neighbors))
+        if len(eligible) > 0:  # if eligible, take a random one
+            return eligible[crandint(0, len(eligible)-1)]
+        else:  # if none eligible, add neighbors to the total pool
+            np.concatenate((total_neighbors, neighbors), axis=None)
+            continue
+    if len(total_neighbors) == graph.num_vertices():
+        return None
+    return filterEgoSample(graph, filterFn, neighbors)
 
 
 # exclude first neighbors
 def filterEgoSampleUnique(graph, filterFn, id):
-    def excludeFirstNeighbors(x): return x not in (
-        [id] + list(graph.get_all_neighbors(id)))
+    first_neighbors = set([id]).union(set(graph.get_all_neighbors(id)))
+    def excludeFirstNeighbors(x): return not x in first_neighbors
     return filterEgoSample(graph, lambda x: excludeFirstNeighbors(x) and filterFn(x), [id])
 
 
 def sampleEgoStrat(graph, strats, strat, id):
-    return filterEgoSampleUnique(graph, lambda x: strats[x] == strat, id)
+    ineligible_ids = np.argwhere(strats != strat).flatten()
+    first_neighbors = set([id]).union(set(graph.get_all_neighbors(id)))
+    to_exclude = first_neighbors.union(ineligible_ids)
+    def excludeFirstNeighborsAndWrongStrat(x): return not (x in to_exclude)
+    return filterEgoSampleUnique(graph, excludeFirstNeighborsAndWrongStrat, id)
 
 
 ''' Neighbor Sampling'''
@@ -115,16 +147,28 @@ def eligibleNewFriends(graph, b, a):
 
 # %%
 
+# old , less efficient
+# def sampleStratEligible(graph, strats, strat, x):
+#     def filterStrat(x): return x[1] == strat
+#     def filterStrats(xs): return filter(filterStrat, xs)
+#     ofStrat = pipe(enumerate, filterStrats, mapNth(0), list)(strats)
+#     if not ofStrat:
+#         return None
+#     else:
+#         eligible = list(
+#             set(ofStrat) - set(graph.get_all_neighbors(x)) - set([x]))
+#         if not eligible:
+#             return None
+#         return np.random.choice(eligible)
+
 
 def sampleStratEligible(graph, strats, strat, x):
-    def filterStrat(x): return x[1] == strat
-    def filterStrats(xs): return filter(filterStrat, xs)
-    ofStrat = pipe(enumerate, filterStrats, mapNth(0), list)(strats)
-    if not ofStrat:
+    ofStrat = np.argwhere(strats == strat).flatten()
+    if ofStrat.shape[0] == 0:
         return None
     else:
         eligible = list(
             set(ofStrat) - set(graph.get_all_neighbors(x)) - set([x]))
-        if not eligible:
+        if len(eligible) <= 0:
             return None
-        return np.random.choice(eligible)
+        return eligible[crandint(0, len(eligible)-1)]

@@ -1,6 +1,7 @@
 from sampling import eligibleNewFriends, sampleStratEligible, sampleEgoStrat, filterEgoSampleUnique
 from games import C, D
 import numpy as np
+from optimized.cyFns import crandint
 '''Mediators'''
 # No mediator, recommends a neighbor of y
 
@@ -27,13 +28,15 @@ def useBadMed(graph, strats, y, x):
 
 
 def useRandomMed(graph, strats, y, x):
-    return np.random.choice(list(set(graph.get_vertices()) - set(graph.get_all_neighbors(x)) - set([x])))
+    eligible = list(set(range(len(strats))) -
+                    set(graph.get_all_neighbors(x)) - set([x]))
+    return None if len(eligible) <= 0 else eligible[crandint(0, len(eligible)-1)]
 
 # Recs D to D and C to C
 
 
 def useFairMed(graph, strats, y, x):
-    z = sampleStratEligible(graph, strats, strats[int(x)], x)
+    z = sampleStratEligible(graph, strats, strats[x], x)
     return None if not z else z
 
 
@@ -63,7 +66,7 @@ NO_MED = 'NO_MED'
 RANDOM_MED = 'RANDOM_MED'
 FAIR_MED = 'FAIR_MED'
 
-_medSet = [NO_MED, GOOD_MED, FAIR_MED, RANDOM_MED, BAD_MED]
+_medSet = [NO_MED, GOOD_MED, BAD_MED, RANDOM_MED, FAIR_MED]
 
 
 def initMedStrats(N, medSet):

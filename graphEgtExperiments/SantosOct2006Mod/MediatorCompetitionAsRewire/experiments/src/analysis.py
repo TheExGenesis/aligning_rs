@@ -4,6 +4,7 @@ import seaborn as sns
 import pandas as pd
 from itertools import chain
 from functools import reduce
+from graph_tool.stats import vertex_hist, vertex_average
 
 
 def countUpdateTypes(history):
@@ -12,11 +13,11 @@ def countUpdateTypes(history):
 
 
 def nEmptyRewires(history):
-    return  len(list(filter(lambda x: x["updateType"] == "rewire" and x['old'] == x['new'], history)))
+    return len(list(filter(lambda x: x["updateType"] == "rewire" and x['old'] == x['new'], history)))
 
 
 def nEmptyStratChanges(history):
-    return  len(list(filter(lambda x: x["updateType"] == "strat" and x['old'] == x['new'], history)))
+    return len(list(filter(lambda x: x["updateType"] == "strat" and x['old'] == x['new'], history)))
 
 
 def historyStats(history):
@@ -27,7 +28,8 @@ def historyStats(history):
 
 def coopCountsRes(res):
     gameParams = list(res[0].keys())
-    coopCounts = {game: list(map(lambda x: coopCount(x[game]['finalStrats']), res)) for game in gameParams}
+    coopCounts = {game: list(map(lambda x: coopCount(
+        x[game]['finalStrats']), res)) for game in gameParams}
     return coopCounts
 
 
@@ -53,9 +55,30 @@ def avgFractionCoop(N, res):
 def pickKeyMany(key, obj):
     return lambda x: map(obj[key], x)
 
-#just copied in Jun 11
+
+def avgSquares(graph):
+    counts, degrees = vertex_hist(graph, 'out')
+    return np.sum([(degrees[i]**2)*counts[i]
+                   for i in range(len(counts))])/graph.num_vertices()
+
+
+def squaredAvg(graph):
+    return vertex_average(graph, 'out')[0]**2
+
+
+def heterogeneity(graph):
+    return avgSquares(graph) - squaredAvg(graph)
+
+
+def maxDegree(graph):
+    return np.max(graph.get_out_degrees(graph.get_vertices()))
+
+
+# just copied in Jun 11
 
 # list of dicts to dict of lists
+
+
 def list2Dict(runs):
     all_keys = set(chain(*[x.keys() for x in runs]))
     return {k: [run[k] for run in runs] for k in all_keys}
@@ -71,11 +94,13 @@ def coop(runs):
 # takes list of dicts of results
 
 
+def makeMedDf(res): return pd.DataFrame(
+    {k: Counter(r["medStrats"]) for k, r in res.items()}).fillna(0)
+
+
 def medCountsDf(results):
     N = list(results[0].values())[0]["initStrats"].size
     n_trials = len(results)
-    def makeMedDf(res): return pd.DataFrame(
-        {k: Counter(r["medStrats"]) for k, r in res.items()}).fillna(0)
     counts = reduce(lambda x, y: x+y, [makeMedDf(res)
                     for res in results])/n_trials
     return counts/N
@@ -87,4 +112,3 @@ def plotCoop(results):
                       columns=["coops", 't', 's']).pivot('s', 't', "coops").iloc[::-1]
     fig = sns.heatmap(df, annot=True, cbar=True, xticklabels=2,
                       yticklabels=2, vmin=0, vmax=1).set(title="Avg. final cooperators")
-
