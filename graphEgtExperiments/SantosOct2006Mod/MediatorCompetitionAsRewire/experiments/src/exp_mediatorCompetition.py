@@ -56,7 +56,7 @@ def wsMatrixSim(medSet=[0, 1, 2, 3, 4], w1s=[0.5, 1, 2, 3], w2s=[0.5, 1, 2, 3], 
 
 
 # %%
-# RUN N_TRIALS OF A MATRIX FOR EACH W AND FOR EACH MEDIATOR
+# RUN N_TRIALS OF A MATRIX FOR EACH W AND \FOR EACH MEDIATOR
 
 
 # run for each w and med

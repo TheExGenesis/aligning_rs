@@ -8,6 +8,7 @@ import graph_tool as gt
 import seaborn as sns
 from defaultParams import _T, _R, _S, _P, C, D
 from utils import transposeList
+from analysis import *
 
 
 def drawGraph(graph, strats=None, mplfig=None):
@@ -80,20 +81,6 @@ def plotDD(graph):
 
 def plotCDD(graph):
     return plotDegreeLog(lambda y: np.flip(np.cumsum(np.flip(y)))/graph.num_vertices(), graph, ylabel="$D(k)$")
-
-
-def avgSquares(graph):
-    counts, degrees = gt.stats.vertex_hist(graph, 'out')
-    return np.sum([(degrees[i]**2)*counts[i]
-                   for i in range(len(counts))])/graph.num_vertices()
-
-
-def squaredAvg(graph):
-    gt.stats.vertex_average(graph, 'out')[0]**2
-
-
-def heterogeneity(graph):
-    return avgSquares(graph) - squaredAvg(graph)
 
 
 def plotLandscape(ts, vals, axis=None, valName=''):
@@ -296,9 +283,6 @@ def plotBetasCoopByW(unif_res):
 def plotBetasMaxKByW(unif_res):
     return pd.DataFrame({beta: [maxDegree(x['graph']) for w, x in res.items()] for beta, res in unif_res.items()}, index=list(unif_res.values())[0].keys()).plot.line()
 
-
-def maxDegree(graph):
-    return np.max(graph.get_out_degrees(graph.get_vertices()))
 
 # Multi Plots
 

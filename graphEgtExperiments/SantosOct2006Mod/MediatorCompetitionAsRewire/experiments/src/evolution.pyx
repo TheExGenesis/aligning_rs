@@ -55,8 +55,6 @@ def cy_runEvolutionCompetitionEp(int N, float beta, float W1, float W2, float[:,
     rint1 = rand()
     r = rint1 / float(RAND_MAX)
     cdef bint doMedUpdate = r * (1+W2) > 1
-    # print(
-    #     f"updating. doMedUpdate {str(doMedUpdate)} W1={W2} updateProb={rint1 * (1+W2)} r={r} rint={rint1} RAND_MAX={RAND_MAX}")
     if doMedUpdate:
         medUpdate = calcMedUpdate(medStrats, x, y, p)
         if saveHistory:
@@ -66,19 +64,16 @@ def cy_runEvolutionCompetitionEp(int N, float beta, float W1, float W2, float[:,
         rint2 = rand()
         r = rint2 / float(RAND_MAX)
         doStratUpdate = r * (1+W1) <= 1
-        # print(f"updating. doStratUpdate {str(doStratUpdate)} W1={W1} r={r} rint={rint2} RAND_MAX={RAND_MAX}")
         if doStratUpdate:
             stratUpdate = calcStrategyUpdate(strats, x, y, p)
             if saveHistory:
                 history.append(stratUpdate)
-                #print(f"saveHistory {history}")
             strats = updateStrat(strats, stratUpdate)
         else:
             graphUpdate = calcStructuralUpdate(
                 graph, strats, _x, y, p, medStrats)
             if saveHistory:
                 history.append(graphUpdate)
-                #print(f"saveHistory {history}")
             graph = updateTies(graph, graphUpdate)
     return graph, history
 
@@ -97,13 +92,9 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
     cdef int x = 0
     for i in range(episode_n):
         x = crandint(0, N-1)
-        # strats, graph, history = cy_runEvolutionCompetitionEp(N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
         graph, history = cy_runEvolutionCompetitionEp(
             N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, saveHistory)
-        # cy_runEvolutionCompetitionEp(
-        #     N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, False)
         if i % 5000 == 0:
-            # print(f"i {i}")
             medEvoDone = any([x == N for x in Counter(medStrats).values()])
             stratEvoDone = any([x == N for x in Counter(strats).values()])
             if medEvoDone and stratEvoDone:
@@ -121,10 +112,6 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
 # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
 def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
     print(f"cy_runCompetitionExperiment {ts}")
-    # cdef int[:] _strats
-    # _strats[...] = cy_initStrats(N) if strats is None else strats
-    # cdef int[:] _medStrats
-    # _medStrats[...] = cy_initMedStrats(N, medSet) if medStrats is None else medStrats
     cdef float[:, :, :] dilemma
     dilemma = cy_makeTSDilemma(ts[0], ts[1])
     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
@@ -135,10 +122,6 @@ def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W,
 
 def cy_continueCompetitionExperiment(graph, int[:] medStrats, int[:] strats, int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, ts=(_T,_S), float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
     print(f"cy_continueCompetitionExperiment {ts}")
-    # cdef int[:] _strats
-    # _strats[...] = cy_initStrats(N) if strats is None else strats
-    # cdef int[:] _medStrats
-    # _medStrats[...] = cy_initMedStrats(N, medSet) if medStrats is None else medStrats
     cdef float[:, :, :] dilemma
     dilemma = cy_makeTSDilemma(ts[0], ts[1])
     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
