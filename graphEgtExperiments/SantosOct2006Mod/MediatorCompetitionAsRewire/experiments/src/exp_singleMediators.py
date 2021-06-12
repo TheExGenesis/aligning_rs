@@ -57,7 +57,7 @@ def tsMatrixSim(med=0, M=2, episode_n=10000, W1=1, saveHistory=False, save=True)
 # RUN N_TRIALS OF A MATRIX FOR EACH W AND FOR EACH MEDIATOR
 # run for each w and med
 n_trials = 10
-episode_n = 100
+episode_n = 1000000
 ws = [0.5, 1, 2, 3]
 medSet = [1, 2, 3, 4]
 # run for each mediator
