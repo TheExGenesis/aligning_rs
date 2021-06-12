@@ -52,105 +52,41 @@ def tsMatrixSim(med=0, M=2, episode_n=10000, W1=1, saveHistory=False, save=True)
     print("ending tsMatrixSim")
     return runs
 
-# list of dicts
-
-
-def list2Dict(runs):
-    all_keys = set(chain(*[x.keys() for x in runs]))
-    return {k: [run[k] for run in runs] for k in all_keys}
-
-# dict of lists
-
-
-def coop(runs):
-    runsByGame = list2Dict(runs).items()
-    N = list(runs[0].values())[0]["initStrats"].size
-    return {k: np.array([run['finalStrats'] for run in gameRuns]).sum(axis=1).mean()/N for k, gameRuns in runsByGame}
-
-
-def plotCoop(results):
-    c = coop(results)
-    df = pd.DataFrame(zip(list(c.values()), *transposeList(list(c.keys()))),
-                      columns=["coops", 't', 's']).pivot('s', 't', "coops").iloc[::-1]
-    fig = sns.heatmap(df, annot=True, cbar=True, xticklabels=2,
-                      yticklabels=2, vmin=0, vmax=1).set(title="Avg. final cooperators")
-
-
-# finds the W1 parameter in a filename in the form "...W1-{w}..."
-
-
-def filename2W(fn):
-    import re
-    return int(re.search(r".*W1-([0-9]+).*", fn).group(1))
-
-
-# loads a pickle
-def loadPickle(path):
-    import pickle
-    with open(path, "rb") as file:
-        res = pickle.load(file)
-        print(f"loaded {path}")
-        return res
-
-#  dict comprehension where values are lists keys are given by applying a function fn to items
-
-
-def dictOfLists(my_list, fn=lambda x: x):
-    new_dict = {}
-    for value in my_list:
-        key = fn(value)
-        if key in new_dict:
-            new_dict[key].append(value)
-        else:
-            new_dict[key] = [value]
-    return new_dict
-
-# recursively find all pickles in a dir
-
-
-def getAllPickles(dir_name):
-    return [os.path.join(root, name)
-            for root, dirs, files in os.walk("../data")
-            for name in files
-            if name.endswith(".pkl")]
-# load all filenames in dir and its subdirs into 1 experiment dict where keys are W values
-
-
-def loadExperiment(dir_name):
-    filenames = getAllPickles(dir_name)
-    res = {k: [loadPickle(fn) for fn in fns]
-           for k, fns in dictOfLists(filenames, filename2W).items()}
-    return res
-
 
 # %%
 # RUN N_TRIALS OF A MATRIX FOR EACH W AND FOR EACH MEDIATOR
 # run for each w and med
 n_trials = 10
-episode_n = 400000
+episode_n = 100
 ws = [0.5, 1, 2, 3]
 medSet = [1, 2, 3, 4]
 # run for each mediator
-for med in medSet:
+
+size = 4
+n = len(list(w_results.items()))
+fig, ax = plt.subplots(len(medSet), n, figsize=(
+    (n+1)*size, (len(medSet)+1)*size))
+plt.suptitle(f"Avg. final coop {experiment_name}")
+
+
+run_name = f"single_med_{timestamp()}"
+dir_path = f"../data/{run_name}"
+for j, med in enumerate(medSet):
     # run n_trials of matrix of games for each w
-    w_results = {w: [tsMatrixSim(med=med, M=5, episode_n=episode_n, W1=w, save=True)
+    w_results = {w: [tsMatrixSim(med=med, M=5, episode_n=episode_n, W1=w, save=False)
                      for i in range(n_trials)] for w in ws}
     # save whole run
     experiment_name = makeCompetitionName(
         {"medSet": int2MedName[med], "n_eps": episode_n, "n_trials": n_trials})+"_"+timestamp()
-    saveRes(w_results, experiment_name,
-            dir_path=f"../data/{experiment_name}")
-    size = 4
-    n = len(list(w_results.items()))
-    fig, ax = plt.subplots(1, n, figsize=((n+1)*size, size))
+    saveRes(w_results, experiment_name, dir_path=dir_path)
     for i, (k, results) in enumerate(w_results.items()):
         c = coop(results)
         df = pd.DataFrame(zip(list(c.values()), *transposeList(list(c.keys()))),
                           columns=["coops", 't', 's']).pivot('s', 't', "coops").iloc[::-1]
-        plt.subplot(1, n, i+1)
+        plt.subplot(len(medSet), n, j*n+i+1)
         sns.heatmap(df, annot=True, cbar=True, xticklabels=2,
-                    yticklabels=2, vmin=0, vmax=1, ax=plt.gca()).set(title=f"Avg. final coop, {int2MedName[med]}, W1={k}, ep_n={episode_n}, n_trials={n_trials}")
-        fig.savefig(
-            f'../plots/{experiment_name}.png')
+                    yticklabels=2, vmin=0, vmax=1, ax=plt.gca()).set(title=f"{int2MedName[med]}, W1={k}")
+fig.savefig(
+    f'../data/{run_name}/{experiment_name}.png')
 
 # %%

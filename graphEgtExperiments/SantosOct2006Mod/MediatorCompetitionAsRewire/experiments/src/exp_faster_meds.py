@@ -27,18 +27,6 @@ x, y = crandint(0, N-1), crandint(0, N-1)
 # %%
 
 
-# get first degree neighbors of the nodes ids
-flattenUnique = pipe(flatten, set, list)
-
-
-def isFinished(graph, triedList):
-    return len(triedList) == graph.num_vertices()
-
-
-def getNeighbors(graph, ids):
-    return flattenUnique([graph.get_all_neighbors(id) for id in ids])
-
-
 def filterEgoSample(graph, filterFn, ids):
     rng = np.random.default_rng()
     rng.shuffle(ids)  # shuffle ids to check the neighbors for each randomly
