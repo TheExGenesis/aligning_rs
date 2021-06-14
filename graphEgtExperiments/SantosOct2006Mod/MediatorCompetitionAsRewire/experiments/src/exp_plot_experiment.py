@@ -17,9 +17,6 @@ def plotExperiment(results, episode_n=1000000, n_trials=11):
         size = 4
         fig, ax = plt.subplots(1, n, figsize=((n+1)*size, size))
         plt.suptitle(experiment_name)
-        c = coop(res)
-        coop_df = pd.DataFrame(zip(list(c.values()), *transposeList(list(c.keys()))),
-                               columns=["coops", 'w1s', 'w2s']).pivot('w2s', 'w1s', "coops").iloc[::-1]
         coop_df = coop(res).transpose().unstack()
         med_count_df = medCountsDf(res).transpose().unstack()
         plt.subplot(1, n, 1)

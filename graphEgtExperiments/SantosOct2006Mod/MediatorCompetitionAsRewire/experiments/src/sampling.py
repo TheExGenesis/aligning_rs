@@ -90,7 +90,7 @@ def filterEgoSampleUnique(graph, filterFn, id):
 
 
 def sampleEgoStrat(graph, strats, strat, id):
-    ineligible_ids = np.argwhere(strats != strat).flatten()
+    ineligible_ids = np.argwhere(np.array(strats) != strat).flatten()
     first_neighbors = set([id]).union(set(graph.get_all_neighbors(id)))
     to_exclude = first_neighbors.union(ineligible_ids)
     def excludeFirstNeighborsAndWrongStrat(x): return not (x in to_exclude)
@@ -163,7 +163,7 @@ def eligibleNewFriends(graph, b, a):
 
 
 def sampleStratEligible(graph, strats, strat, x):
-    ofStrat = np.argwhere(strats == strat).flatten()
+    ofStrat = np.argwhere(np.array(strats) == strat).flatten()
     if ofStrat.shape[0] == 0:
         return None
     else:

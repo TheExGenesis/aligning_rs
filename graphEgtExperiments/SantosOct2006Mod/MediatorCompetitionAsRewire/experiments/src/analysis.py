@@ -83,13 +83,12 @@ def list2Dict(runs):
     all_keys = set(chain(*[x.keys() for x in runs]))
     return {k: [run[k] for run in runs] for k in all_keys}
 
-# dict of lists
 
-
-def coop(runs):
-    runsByGame = list2Dict(runs).items()
+# list of dicts -> dict of lists (trials)
+def coop(runs_list_of_dicts):
+    runs_dict_of_lists = list2Dict(runs).items()
     N = list(runs[0].values())[0]["initStrats"].size
-    return {k: np.array([run['finalStrats'] for run in gameRuns]).sum(axis=1).mean()/N for k, gameRuns in runsByGame}
+    return {k: np.array([run['finalStrats'] for run in gameRuns]).sum(axis=1).mean()/N for k, gameRuns in runs_dict_of_lists}
 
 # takes list of dicts of results
 
