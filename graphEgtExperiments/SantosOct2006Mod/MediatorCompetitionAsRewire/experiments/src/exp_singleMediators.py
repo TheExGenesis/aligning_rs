@@ -57,15 +57,17 @@ def tsMatrixSim(med=0, M=2, episode_n=10000, W1=1, saveHistory=False, save=True)
 # RUN N_TRIALS OF A MATRIX FOR EACH W AND FOR EACH MEDIATOR
 # run for each w and med
 n_trials = 10
-episode_n = 1000000
+episode_n = 10
 ws = [0.5, 1, 2, 3]
 medSet = [1, 2, 3, 4]
 # run for each mediator
 
 size = 4
-n = len(list(w_results.items()))
+n = len(ws)
 fig, ax = plt.subplots(len(medSet), n, figsize=(
     (n+1)*size, (len(medSet)+1)*size))
+experiment_name = makeCompetitionName(
+    {"n_eps": episode_n, "n_trials": n_trials})
 plt.suptitle(f"Avg. final coop {experiment_name}")
 
 
