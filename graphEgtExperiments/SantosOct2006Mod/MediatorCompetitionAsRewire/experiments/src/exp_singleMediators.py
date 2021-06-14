@@ -57,7 +57,8 @@ def tsMatrixSim(med=0, M=2, episode_n=10000, W1=1, saveHistory=False, save=True)
 # RUN N_TRIALS OF A MATRIX FOR EACH W AND FOR EACH MEDIATOR
 # run for each w and med
 n_trials = 10
-episode_n = 10
+episode_n = 1000000
+# episode_n = 1000000
 ws = [0.5, 1, 2, 3]
 medSet = [1, 2, 3, 4]
 # run for each mediator
@@ -66,20 +67,18 @@ size = 4
 n = len(ws)
 fig, ax = plt.subplots(len(medSet), n, figsize=(
     (n+1)*size, (len(medSet)+1)*size))
-experiment_name = makeCompetitionName(
-    {"n_eps": episode_n, "n_trials": n_trials})
-plt.suptitle(f"Avg. final coop {experiment_name}")
 
-
-run_name = f"single_med_{timestamp()}"
+param_name = makeCompetitionName(
+    {"medSet": medSet, "ws": ws, "n_eps": episode_n, "n_trials": n_trials})
+plt.suptitle(f"Single mediator avg final coop: {param_name}")
+run_name = f"single_med_{param_name}_{timestamp()}"
 dir_path = f"../data/{run_name}"
 for j, med in enumerate(medSet):
     # run n_trials of matrix of games for each w
     w_results = {w: [tsMatrixSim(med=med, M=5, episode_n=episode_n, W1=w, save=False)
                      for i in range(n_trials)] for w in ws}
     # save whole run
-    experiment_name = makeCompetitionName(
-        {"medSet": int2MedName[med], "n_eps": episode_n, "n_trials": n_trials})+"_"+timestamp()
+    experiment_name = makeCompetitionName({"medSet": int2MedName[med]})
     saveRes(w_results, experiment_name, dir_path=dir_path)
     for i, (k, results) in enumerate(w_results.items()):
         c = coop(results)
@@ -88,7 +87,6 @@ for j, med in enumerate(medSet):
         plt.subplot(len(medSet), n, j*n+i+1)
         sns.heatmap(df, annot=True, cbar=True, xticklabels=2,
                     yticklabels=2, vmin=0, vmax=1, ax=plt.gca()).set(title=f"{int2MedName[med]}, W1={k}")
-fig.savefig(
-    f'../data/{run_name}/{experiment_name}.png')
+fig.savefig(f'../data/{run_name}/{param_name}.png')
 
 # %%

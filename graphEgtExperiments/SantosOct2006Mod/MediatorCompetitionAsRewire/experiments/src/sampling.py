@@ -161,9 +161,25 @@ def eligibleNewFriends(graph, b, a):
 #             return None
 #         return np.random.choice(eligible)
 
+# Samples only from a certain strategy
+
 
 def sampleStratEligible(graph, strats, strat, x):
     ofStrat = np.argwhere(np.array(strats) == strat).flatten()
+    if ofStrat.shape[0] == 0:
+        return None
+    else:
+        eligible = list(
+            set(ofStrat) - set(graph.get_all_neighbors(x)) - set([x]))
+        if len(eligible) <= 0:
+            return None
+        return eligible[crandint(0, len(eligible)-1)]
+
+
+# Samples only from a certain strategy and from a certain mediator (Xclusive)
+def sampleStratEligibleX(graph, strats, medStrats, strat, medStrat, x):
+    ofStrat = np.argwhere(np.logical_and(
+        np.array(strats) == strat, np.array(medStrats) == medStrat)).flatten()
     if ofStrat.shape[0] == 0:
         return None
     else:
