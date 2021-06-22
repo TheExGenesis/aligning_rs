@@ -11,6 +11,7 @@ from mediators import _medSet
 from evolution import *
 from itertools import product, combinations
 from functools import reduce
+from dataframe import makeEntry2
 
 
 def wsMatrixSim(medSet=[0, 1, 2, 3, 4], w1s=[0.5, 1, 2, 3], w2s=[0.5, 1, 2, 3], episode_n=10000, ts=(2.0, -1.0), saveHistory=False, save=False):
