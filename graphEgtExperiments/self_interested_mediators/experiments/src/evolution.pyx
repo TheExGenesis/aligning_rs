@@ -55,6 +55,7 @@ def cy_runEvolutionCompetitionEp(int N, float beta, float W1, float W2, float[:,
     rint1 = rand()
     r = rint1 / float(RAND_MAX)
     cdef bint doMedUpdate = r * (1+W2) > 1
+    cdef did_rewire = 0
     if doMedUpdate:
         medUpdate = calcMedUpdate(medStrats, x, y, p)
         if saveHistory:
@@ -75,7 +76,8 @@ def cy_runEvolutionCompetitionEp(int N, float beta, float W1, float W2, float[:,
             if saveHistory:
                 history.append(graphUpdate)
             graph = updateTies(graph, graphUpdate)
-    return graph, history
+            did_rewire = 1 if graphUpdate['old'] != graphUpdate['new'] else 0
+    return graph, history, did_rewire
 
 
 def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :, :] dilemma, int[:] medStrats, int[:] strats, float beta=0.001, graph=None, int k=30, history=None, saveHistory=False):
@@ -90,10 +92,14 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
     graph.set_fast_edge_removal(True)
     cdef int i = 0
     cdef int x = 0
+    t,s = dilemma[1][0]
+    cdef int rewire_n = 0
+    cdef float total_payoff
     for i in range(episode_n):
         x = crandint(0, N-1)
-        graph, history = cy_runEvolutionCompetitionEp(
+        graph, history, did_rewire = cy_runEvolutionCompetitionEp(
             N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, saveHistory)
+        rewire_n += did_rewire
         if i % 5000 == 0:
             medEvoDone = any([x == N for x in Counter(medStrats).values()])
             stratEvoDone = any([x == N for x in Counter(strats).values()])
@@ -108,7 +114,10 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
             "initStrats": np.asarray(initialStrats, dtype=np.intc),
             "finalStrats": np.asarray(strats, dtype=np.intc),
             "initMedStrats": np.asarray(initialMedStrats, dtype=np.intc),
-            "medStrats": np.asarray(medStrats, dtype=np.intc)}
+            "medStrats": np.asarray(medStrats, dtype=np.intc),
+            "rewire_n": rewire_n,
+            "stop_n":i,
+            "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats)}}
 # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
 def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
     print(f"cy_runCompetitionExperiment {ts}")

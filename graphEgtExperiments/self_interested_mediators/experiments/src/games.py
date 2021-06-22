@@ -45,3 +45,9 @@ def nodeCumPayoffs(dilemma, graph, strats, x):
 
 def pairCumPayoffs(dilemma, graph, strats, a, b):
     return [nodeCumPayoffs(dilemma, graph, strats, a), nodeCumPayoffs(dilemma, graph, strats, b)]
+
+# return a list of payoffs for each node
+
+
+def calcPayoffs(dilemma, graph, strats):
+    return [nodeCumPayoffs(dilemma, graph, strats, x) for x in graph.get_vertices()]

@@ -128,16 +128,6 @@ cpdef float cy_playDilemmaP1(float[:,:,:] dilemma, int[:] strats, int id1, int i
     cdef int s2 = strats[id2]
     return dilemma[s1][s2][0]
 
-# cpdef float cy_nodeCumPayoffs(float[:,:,:] dilemma, graph, int[:] strats, int x):
-#     cdef float totalPayoff=0
-#     cdef long[:] neighbors = graph.get_all_neighbors(x) 
-#     cdef int i = 0
-#     try:
-#         for i in range(neighbors.shape[0]):
-#             totalPayoff += cy_playDilemmaP1(dilemma, strats, x, neighbors[i])
-#         return totalPayoff
-#     except:
-#         return 0
 
 cpdef float cy_nodeCumPayoffs(float[:,:,:] dilemma, long[:] neighbors, int[:] strats, int x):
     cdef float totalPayoff=0
@@ -148,14 +138,3 @@ cpdef float cy_nodeCumPayoffs(float[:,:,:] dilemma, long[:] neighbors, int[:] st
     return totalPayoff
 
 
-from init import initUniformRandomGraph
-cpdef test():
-    N=50
-    dilemma = cy_makeDilemma()
-    strats = cy_initStrats(N)
-    graph = initUniformRandomGraph(N)
-    x=crandint(0,N-1)
-    cy_nodeCumPayoffs(dilemma, graph.get_all_neighbors(x), strats, x)
-
-
-# sampling
