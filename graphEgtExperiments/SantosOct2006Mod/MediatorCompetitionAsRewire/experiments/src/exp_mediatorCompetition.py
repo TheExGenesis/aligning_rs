@@ -65,8 +65,7 @@ episode_n = 1000000
 w1s = [0.5, 1, 2, 3]
 w2s = [0.5, 1, 2, 3]
 # sets of 2 mediators
-medSets = [[medName2Int[NO_MED], medName2Int[m]] for m in [GOOD_MED, BAD_MED, FAIR_MED, RANDOM_MED]] + [[medName2Int[RANDOM_MED],
-                                                                                                         medName2Int[m]] for m in [GOOD_MED, BAD_MED, FAIR_MED]] + [[medName2Int[FAIR_MED], medName2Int[m]] for m in [GOOD_MED, BAD_MED]]
+medSets = [[medName2Int["NO_MED"], medName2Int[m]] for m in ["GOOD_MED", "BAD_MED", "FAIR_MED", "RANDOM_MED"]] + [[medName2Int["RANDOM_MED"], medName2Int[m]] for m in ["GOOD_MED", "BAD_MED", "FAIR_MED"]] + [[medName2Int["FAIR_MED"], medName2Int[m]] for m in ["GOOD_MED", "BAD_MED"]]                                                                                                         medName2Int[m]] for m in [GOOD_MED, BAD_MED, FAIR_MED]] + [[medName2Int[FAIR_MED], medName2Int[m]] for m in [GOOD_MED, BAD_MED]]
 ts = (2.0, -1.0)
 # run for each mediator
 for i, medSet in enumerate(medSets):
@@ -80,7 +79,7 @@ for i, medSet in enumerate(medSets):
             dir_path=f"../data/med_competition/{experiment_name}")
     c = coop(results)
     coop_df = pd.DataFrame(zip(list(c.values()), *transposeList(list(c.keys()))),
-                           columns=["coops", 'w1s', 'w2s']).pivot('w2s', 'w1s', "coops").iloc[::-1]
+                           columns=["coops", 'w1s', 'w2s']).pivot('w2s', 'w1s', "coops").iloc[: : -1]
     med_count_df = medCountsDf(results)
     print(med_count_df)
     plt.figure(i)  # creates a new figure

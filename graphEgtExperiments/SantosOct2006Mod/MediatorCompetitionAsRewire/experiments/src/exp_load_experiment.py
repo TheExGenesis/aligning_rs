@@ -23,15 +23,5 @@ def loadOvernight():
 # load single med experiments
 
 # returns med as a string
-def filename2Med(fn):
-    import re
-    try:
-        matches = re.search(r".*medSet-([0-9A-Z_]+)_n_eps.*", fn)
-        med1 = matches.group(1)
-        return med1
-    except AttributeError as error:
-        print(f"filename: {fn}")
-        print(f"error: {error.args}")
-        raise error
 
 # %%

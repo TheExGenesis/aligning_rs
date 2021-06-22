@@ -129,8 +129,6 @@ str2Med = {"NO_MED": useNoMed, "GOOD_MED": useGoodMed,
 int2Med = {i: medFn for i, (medName, medFn) in enumerate(str2Med.items())}
 # int2Med = {0: useNoMed, 1: useGoodMed,
 #            2: useBadMed, 3: useRandomMed, 4: useFairMed}
-int2MedX = {0: useNoMed, 1: useGoodMedX,
-            2: useBadMedX, 3: useRandomMedX, 4: useFairMedX}
 int2MedName = {i: medName for i,
                (medName, medFn) in enumerate(str2Med.items())}
 # int2MedName = {0: "NO_MED", 1: "GOOD_MED",
