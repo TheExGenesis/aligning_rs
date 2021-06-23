@@ -12,6 +12,7 @@ from evolution import *
 from itertools import product, combinations
 from functools import reduce
 from dataframe import makeEntry2
+import seaborn as sns
 
 
 def wsMatrixSim(medSet=[0, 1, 2, 3, 4], w1s=[0.5, 1, 2, 3], w2s=[0.5, 1, 2, 3], episode_n=10000, ts=(2.0, -1.0), saveHistory=False, save=False):
@@ -37,7 +38,7 @@ def wsMatrixSim(medSet=[0, 1, 2, 3, 4], w1s=[0.5, 1, 2, 3], w2s=[0.5, 1, 2, 3], 
 
 # run for each w and med
 n_trials = 10
-episode_n = 1000
+episode_n = 1000000
 w1s = [0.5, 1, 2, 3]
 w2s = [0.5, 1, 2, 3]
 # sets of 3 mediators
@@ -59,8 +60,9 @@ dir_path = f"../data/{run_name}"
 # run for each mediator
 for i, medSet in enumerate(medSets):
     # run n_trials of matrix of games for each w
-    results = [makeEntry2(res) for res in wsMatrixSim(medSet=medSet, w1s=w1s, w2s=w2s,
-                                                      episode_n=episode_n, ts=ts, saveHistory=False, save=False) for i in range(n_trials)]
+    trials_results = [[makeEntry2(res) for res in wsMatrixSim(
+        medSet=medSet, w1s=w1s, w2s=w2s, episode_n=episode_n, ts=ts, saveHistory=False, save=False)] for i in range(n_trials)]
+    results = [r for res in trials_results for r in res]
     # save whole run
     experiment_name = makeCompetitionName(
         {"medSet": [int2MedName[med] for med in medSet]})
@@ -68,3 +70,88 @@ for i, medSet in enumerate(medSets):
 
 
 # %%
+# loading
+def plotting_df():
+    res = loadExperimentDf(
+        "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/exclusive_3_med_competition_jun-22-2021")
+    res = [r for run in res for r in run]
+    df = pd.DataFrame(res, columns=makeColumns()).fillna(0)
+    df_means = df.groupby([*[x for x in df.columns if x[0] == "med"],
+                           ("params", "W1"), ("params", "W2")]).mean()
+    df_means["med_freqs"].iloc[0].plot.bar()  # 1barplot
+    # select by ws
+    df_means["med_freqs"][(df_means["med_freqs"].index.get_level_values(('params', 'W1')) == 0.5) & (
+        df_means["med_freqs"].index.get_level_values(('params', 'W2')) == 0.5)]
+    # no_med as base
+    df_means["med_freqs"][df_means["med_freqs"].index.get_level_values(
+        ('med', 'NO_MED')) == 1.0].plot.bar()
+    # random as base
+    df_means["med_freqs"][df_means["med_freqs"].index.get_level_values(
+        ('med', 'RANDOM_MED')) == 1.0].plot.bar()
+    df_by_ws_nomed = df_means["med_freqs"][(df_means["med_freqs"].index.get_level_values(('params', 'W1')) == 0.5) & (
+        df_means["med_freqs"].index.get_level_values(('params', 'W2')) == 0.5) & (df_means["med_freqs"].index.get_level_values(('med', 'NO_MED')) == 1.0)]
+    # adding columns
+    df['meds'] = df['med'].apply(lambda r: tuple(
+        c for c in df['med'].columns if r[c] == 1), axis=1)  # tuples of mediators
+    # tuples of ws pairs
+    df['ws'] = list(zip(df[('params', 'W1')], df[('params', 'W2')]))
+    df.groupby(['ws', 'meds']).mean()
+    # barplot grid
+    df_freqs = df_means['med_freqs'].reset_index()
+    tidy = df_freqs.melt(id_vars=['ws', 'meds'], value_vars=df['med'].columns)
+    sns.catplot(x='meds', y='value', hue='variable', col="ws",
+                data=tidy, kind="bar", col_wrap=4, aspect=4)
+
+# %%
+# heatmap for coop/heterogeneity/etc
+
+
+def draw_heatmap(*args, **kwargs):
+    data = kwargs.pop('data')
+    d = data.pivot(index=args[1], columns=args[0], values=args[2])
+    sns.heatmap(d, **kwargs)
+
+
+df = df.groupby([*[x for x in df.columns if x[0] == "med"],
+                 ("params", "W1"), ("params", "W2")]).mean().reset_index()
+df['meds'] = df['med'].apply(lambda r: tuple(
+    c for c in df['med'].columns if r[c] == 1), axis=1)
+
+# coop
+df2 = df.melt(id_vars=["meds"]+[x for x in df.columns if x[0] ==
+              "params"], value_vars=[("agents", "coop_freq")], value_name='coop')
+df2['W1'] = df2[('params', 'W1')]
+df2['W2'] = df2[('params', 'W2')]
+fg = sns.FacetGrid(df2, col='meds', col_wrap=4, aspect=1.5)
+fg.map_dataframe(draw_heatmap, "W1", "W2", 'coop',
+                 cbar=True, square=True, vmin=0, vmax=1)
+
+# heterogeneity
+df2 = df.melt(id_vars=["meds"]+[x for x in df.columns if x[0] == "params"],
+              value_vars=[("net", "heterogeneity")], value_name='heterogeneity')
+df2['W1'] = df2[('params', 'W1')]
+df2['W2'] = df2[('params', 'W2')]
+fg = sns.FacetGrid(df2, col='meds', col_wrap=4, aspect=1.5)
+fg.map_dataframe(draw_heatmap, "W1", "W2", 'heterogeneity',
+                 cbar=True, square=True, vmin=0, vmax=df2['heterogeneity'].max())
+fg.fig.get_axes()[0].invert_yaxis()  # %%
+
+# k_max
+df2 = df.melt(id_vars=["meds"]+[x for x in df.columns if x[0] ==
+              "params"], value_vars=[("net", "k_max")], value_name='k_max')
+df2['W1'] = df2[('params', 'W1')]
+df2['W2'] = df2[('params', 'W2')]
+fg = sns.FacetGrid(df2, col='meds', col_wrap=4, aspect=1.5)
+fg.map_dataframe(draw_heatmap, "W1", "W2", 'k_max', cbar=True,
+                 square=True, vmin=df2['k_max'].min(), vmax=df2['k_max'].max())
+fg.fig.get_axes()[0].invert_yaxis()
+
+# rewire_n
+df2 = df.melt(id_vars=["meds"]+[x for x in df.columns if x[0] ==
+              "params"], value_vars=[("net", "rewire_n")], value_name='rewire_n')
+df2['W1'] = df2[('params', 'W1')]
+df2['W2'] = df2[('params', 'W2')]
+fg = sns.FacetGrid(df2, col='meds', col_wrap=4, aspect=1.5)
+fg.map_dataframe(draw_heatmap, "W1", "W2", 'rewire_n', cbar=True,
+                 square=True, vmin=df2['rewire_n'].min(), vmax=df2['rewire_n'].max())
+fg.fig.get_axes()[0].invert_yaxis()

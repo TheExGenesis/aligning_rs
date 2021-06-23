@@ -17,29 +17,18 @@ def makeColumns():
     params = list(product(["params"], ["W1", "W2", "N", "episode_n"]))
     game = list(product(["game"], ["t", "s"]))
     med_freqs = list(product(["med_freqs"], int2MedName.values()))
-    agent_stats = list(product(["agents"], ["coop_freq"]))
-    net_metrics = list(product(["net"], ["heterogeneity", "k_max"]))
+    agent_stats = list(
+        product(["agents"], ["coop_freq", "payoff_mean", "payoff_var"]))
+    net_metrics = list(
+        product(["net"], ["heterogeneity", "k_max", "rewire_n", "stop_n"]))
     cols = pd.MultiIndex.from_tuples(
         meds+params+game+med_freqs+agent_stats+net_metrics)
     return cols
 
 
-def makeDfMedWs(results):
-    pd.DataFrame(columns=makeColumns())
+def makeExperimentsDf(results):
+    return pd.DataFrame(results, columns=makeColumns()).fillna(0)
 
-
-def makeEntry(res, N, episode_n, W1, W2, medSet, t, s):
-    params = {("params", "W1"): W1, ("params", "W2"): W2,
-              ("params", "N"): N, ("params", "episode_n"): episode_n}
-    med = {("med", int2MedName[med]): 1 for med in medSet}
-    game = {("game", "t"): t, ("game", "s"): s, }
-    med_freqs = {("med_freqs", int2MedName[med]): cnt /
-                 N for med, cnt in Counter(res["medStrats"]).items()}
-    agent_stats = {("agents", "coop_freq"): res["finalStrats"].sum()/N}
-    net_metrics = {("net", "heterogeneity"): heterogeneity(
-        res['graph']), ("net", "k_max"): maxDegree(res['graph'])}  # TODO
-    df = {**params, **med, **game, **med_freqs, **agent_stats, **net_metrics}
-    return df
 
 # from most recent results which include parmams dict and rewire_n
 
@@ -58,9 +47,24 @@ def makeEntry2(res):
     agent_stats = {("agents", "coop_freq"): res["finalStrats"].mean(
     ), ("agents", "payoff_mean"): payoffs.mean(), ("agents", "payoff_var"): payoffs.var()}
     net_metrics = {("net", "heterogeneity"): heterogeneity(
-        res['graph']), ("net", "k_max"): maxDegree(res['graph']), ("net", "rewire_n"): res['rewire_n'], ("net", "rewire_n"): res['stop_n']}  # TODO
+        res['graph']), ("net", "k_max"): maxDegree(res['graph']), ("net", "rewire_n"): res['rewire_n'], ("net", "stop_n"): res['stop_n']}  # TODO
     df = {**params, **med, **game, **med_freqs, **agent_stats, **net_metrics}
     return df
+
+
+def makeEntry(res, N, episode_n, W1, W2, medSet, t, s):
+    params = {("params", "W1"): W1, ("params", "W2"): W2,
+              ("params", "N"): N, ("params", "episode_n"): episode_n}
+    med = {("med", int2MedName[med]): 1 for med in medSet}
+    game = {("game", "t"): t, ("game", "s"): s, }
+    med_freqs = {("med_freqs", int2MedName[med]): cnt /
+                 N for med, cnt in Counter(res["medStrats"]).items()}
+    agent_stats = {("agents", "coop_freq"): res["finalStrats"].sum()/N}
+    net_metrics = {("net", "heterogeneity"): heterogeneity(
+        res['graph']), ("net", "k_max"): maxDegree(res['graph'])}  # TODO
+    df = {**params, **med, **game, **med_freqs, **agent_stats, **net_metrics}
+    return df
+
 
 # (meds->trials->ws->res)
 

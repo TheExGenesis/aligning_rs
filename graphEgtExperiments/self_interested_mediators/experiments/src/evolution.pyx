@@ -90,12 +90,13 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
     totalPayoffs = initPayoffs(N)
     graph = graph
     graph.set_fast_edge_removal(True)
-    cdef int i = 0
+    cdef int timestep = 0
     cdef int x = 0
     t,s = dilemma[1][0]
     cdef int rewire_n = 0
     cdef float total_payoff
     for i in range(episode_n):
+        timestep=i
         x = crandint(0, N-1)
         graph, history, did_rewire = cy_runEvolutionCompetitionEp(
             N, beta, W1, W2, dilemma, graph, medStrats, strats, history, x, saveHistory)
@@ -116,7 +117,7 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
             "initMedStrats": np.asarray(initialMedStrats, dtype=np.intc),
             "medStrats": np.asarray(medStrats, dtype=np.intc),
             "rewire_n": rewire_n,
-            "stop_n":i,
+            "stop_n":timestep,
             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats)}}
 # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
 def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):

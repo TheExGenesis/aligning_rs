@@ -150,3 +150,7 @@ def loadExperiment(dir_name, key_fn):
     res = {k: [loadPickle(fn) for fn in fns]
            for k, fns in dictOfLists(filenames, key_fn).items()}
     return res
+
+
+def loadExperimentDf(dir_name):
+    return [loadPickle(fn) for fn in getAllPickles(dir_name)]
