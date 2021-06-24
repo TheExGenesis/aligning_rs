@@ -21,8 +21,10 @@ def makeColumns():
         product(["agents"], ["coop_freq", "payoff_mean", "payoff_var"]))
     net_metrics = list(
         product(["net"], ["heterogeneity", "k_max", "rewire_n", "stop_n"]))
+    meta_metrics = list(
+        product(["meta"], ["timestamp"]))
     cols = pd.MultiIndex.from_tuples(
-        meds+params+game+med_freqs+agent_stats+net_metrics)
+        meds+params+game+med_freqs+agent_stats+net_metrics+meta_metrics)
     return cols
 
 
@@ -48,6 +50,7 @@ def makeEntry2(res):
     ), ("agents", "payoff_mean"): payoffs.mean(), ("agents", "payoff_var"): payoffs.var()}
     net_metrics = {("net", "heterogeneity"): heterogeneity(
         res['graph']), ("net", "k_max"): maxDegree(res['graph']), ("net", "rewire_n"): res['rewire_n'], ("net", "stop_n"): res['stop_n']}  # TODO
+    net_metrics = {("meta", "timestamp"): res['timestamp']}
     df = {**params, **med, **game, **med_freqs, **agent_stats, **net_metrics}
     return df
 

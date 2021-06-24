@@ -100,10 +100,17 @@ GOOD_MED = 'GOOD_MED'
 BAD_MED = 'BAD_MED'
 RANDOM_MED = 'RANDOM_MED'
 FAIR_MED = 'FAIR_MED'
-GOOD_MED_X = 'GOOD_MED'
-BAD_MED_X = 'BAD_MED'
-RANDOM_MED_X = 'RANDOM_MED'
-FAIR_MED_X = 'FAIR_MED'
+
+GOOD_MED_X = 'GOOD_MED_X'
+BAD_MED_X = 'BAD_MED_X'
+RANDOM_MED_X = 'RANDOM_MED_X'
+FAIR_MED_X = 'FAIR_MED_X'
+
+GOOD_MED_LOCAL = 'GOOD_MED_LOCAL'
+BAD_MED_LOCAL = 'BAD_MED_LOCAL'
+RANDOM_MED_LOCAL = 'RANDOM_MED_LOCAL'
+FAIR_MED_LOCAL = 'FAIR_MED_LOCAL'
+
 
 _medSet = ["NO_MED",
            "GOOD_MED",
@@ -113,7 +120,11 @@ _medSet = ["NO_MED",
            "GOOD_MED_X",
            "BAD_MED_X",
            "RANDOM_MED_X",
-           "FAIR_MED_X"]
+           "FAIR_MED_X",
+           'GOOD_MED_LOCAL',
+           'BAD_MED_LOCAL',
+           'RANDOM_MED_LOCAL',
+           'FAIR_MED_LOCAL']
 
 
 def initMedStrats(N, medSet):
@@ -123,9 +134,13 @@ def initMedStrats(N, medSet):
 # use this as source of truth
 str2Med = {"NO_MED": useNoMed, "GOOD_MED": useGoodMed,
            "BAD_MED": useBadMed, "RANDOM_MED": useRandomMed,
-           "FAIR_MED": useFairMed, "GOOD_MED_X": useGoodMedX,
+           "FAIR_MED": useFairMed,
+           "GOOD_MED_X": useGoodMedX,
            "BAD_MED_X": useBadMedX, "RANDOM_MED_X": useRandomMedX,
-           "FAIR_MED_X": useFairMedX}
+           "FAIR_MED_X": useFairMedX,
+           'GOOD_MED_LOCAL': useLocalGoodMed,
+           'BAD_MED_LOCAL': useLocalBadMed, 'RANDOM_MED_LOCAL': useLocalRandomMed,
+           'FAIR_MED_LOCAL': useLocalFairMed}
 int2Med = {i: medFn for i, (medName, medFn) in enumerate(str2Med.items())}
 # int2Med = {0: useNoMed, 1: useGoodMed,
 #            2: useBadMed, 3: useRandomMed, 4: useFairMed}
@@ -139,8 +154,12 @@ medName2Int = {medName: i for i,
 #                BAD_MED: 2, RANDOM_MED: 3, FAIR_MED: 4}
 
 
+non_exclusive = [medName2Int[name]
+                 for name in ["GOOD_MED", "BAD_MED", "RANDOM_MED", "FAIR_MED"]]
 exclusive = [medName2Int[name]
              for name in ["GOOD_MED_X", "BAD_MED_X", "RANDOM_MED_X", "FAIR_MED_X"]]
+local_meds = [medName2Int[name]
+              for name in ["GOOD_MED_LOCAL", "BAD_MED_LOCAL", "RANDOM_MED_LOCAL", "FAIR_MED_LOCAL"]]
 
 
 def useMed(medStrat, graph, strats, medStrats, y, x):

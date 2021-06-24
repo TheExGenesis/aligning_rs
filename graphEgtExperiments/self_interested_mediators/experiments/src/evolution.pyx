@@ -8,7 +8,7 @@ import array
 from time import time
 from math import inf
 import numpy as np
-from egt_io import saveRes, makeCompetitionName
+from egt_io import saveRes, makeCompetitionName,timestamp
 from sampling import sampleNeighbor, isLonely
 from updates import updateTies, calcStructuralUpdate, TieUpdate
 import pandas as pd
@@ -118,6 +118,7 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
             "medStrats": np.asarray(medStrats, dtype=np.intc),
             "rewire_n": rewire_n,
             "stop_n":timestep,
+            "timestamp":timestamp(),
             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats)}}
 # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
 def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
