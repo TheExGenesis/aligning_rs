@@ -11,15 +11,17 @@ from mediators import _medSet
 from evolution import *
 from itertools import product, combinations
 from functools import reduce
-from dataframe import makeEntry2
+from dataframe import makeEntry2, makeColumns
 import seaborn as sns
 
 
 # %%
 # loading
 # def plotting_df():
+# res = loadExperimentDf("/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/exclusive_3_med_competition_jun-22-2021")
+# res = loadExperimentDf("/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/vanilla_all_med_competition_jun-24-2021_1929")
 res = loadExperimentDf(
-    "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/exclusive_3_med_competition_jun-22-2021")
+    "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/exp_all_competition")
 res = [r for run in res for r in run]
 df = pd.DataFrame(res, columns=makeColumns()).fillna(0)
 df_means = df.groupby([*[x for x in df.columns if x[0] == "med"],
