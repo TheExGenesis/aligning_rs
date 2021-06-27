@@ -122,7 +122,6 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats)}}
 # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
 def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
-    print(f"cy_runCompetitionExperiment {ts}")
     cdef float[:, :, :] dilemma
     dilemma = cy_makeTSDilemma(ts[0], ts[1])
     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
@@ -132,7 +131,6 @@ def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W,
     return experimentResults
 
 def cy_continueCompetitionExperiment(graph, int[:] medStrats, int[:] strats, int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, ts=(_T,_S), float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):
-    print(f"cy_continueCompetitionExperiment {ts}")
     cdef float[:, :, :] dilemma
     dilemma = cy_makeTSDilemma(ts[0], ts[1])
     _graph = deepcopy(graph) if graph else initUniformRandomGraph(

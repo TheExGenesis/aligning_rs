@@ -155,15 +155,17 @@ medName2Int = {medName: i for i,
 
 
 non_exclusive = [medName2Int[name]
-                 for name in ["GOOD_MED", "BAD_MED", "RANDOM_MED", "FAIR_MED"]]
+                 for name in ["NO_MED", "GOOD_MED", "BAD_MED", "RANDOM_MED", "FAIR_MED"]]
 exclusive = [medName2Int[name]
-             for name in ["GOOD_MED_X", "BAD_MED_X", "RANDOM_MED_X", "FAIR_MED_X"]]
+             for name in ["NO_MED", "GOOD_MED_X", "BAD_MED_X", "RANDOM_MED_X", "FAIR_MED_X"]]
 local_meds = [medName2Int[name]
-              for name in ["GOOD_MED_LOCAL", "BAD_MED_LOCAL", "RANDOM_MED_LOCAL", "FAIR_MED_LOCAL"]]
+              for name in ["NO_MED", "GOOD_MED_LOCAL", "BAD_MED_LOCAL", "RANDOM_MED_LOCAL", "FAIR_MED_LOCAL"]]
 
 
 def useMed(medStrat, graph, strats, medStrats, y, x):
-    if medStrat in exclusive:
+    exclusive_medset = [medName2Int[name]
+                        for name in ["GOOD_MED_X", "BAD_MED_X", "RANDOM_MED_X", "FAIR_MED_X"]]
+    if medStrat in exclusive_medset:
         return int2Med[medStrat](graph, strats, medStrats,  y, x)
     else:
         return int2Med[medStrat](graph, strats, y, x)

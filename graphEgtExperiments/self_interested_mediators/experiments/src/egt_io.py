@@ -63,6 +63,15 @@ def saveRes(res, _name, dir_path='./data'):
         print(f"saved {name}.pkl")
 
 
+def saveDf(df, _name, dir_path='./data'):
+    dir_path = f"{dir_path}/{timestamp()}"
+    name = renameDuplicate(makePklPath, _name, dir_path=dir_path)
+    path = f"{dir_path}/{name}.csv"
+    os.makedirs(dir_path, exist_ok=True)
+    df.to_csv(path)
+    print(f"saved {name}.csv")
+
+
 def loadRes(name, dir_path='./data'):
     with open(f"{dir_path}/{name}.pkl", "rb") as file:
         res = pickle.load(file)

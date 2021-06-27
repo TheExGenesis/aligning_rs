@@ -50,8 +50,9 @@ def makeEntry2(res):
     ), ("agents", "payoff_mean"): payoffs.mean(), ("agents", "payoff_var"): payoffs.var()}
     net_metrics = {("net", "heterogeneity"): heterogeneity(
         res['graph']), ("net", "k_max"): maxDegree(res['graph']), ("net", "rewire_n"): res['rewire_n'], ("net", "stop_n"): res['stop_n']}  # TODO
-    net_metrics = {("meta", "timestamp"): res['timestamp']}
-    df = {**params, **med, **game, **med_freqs, **agent_stats, **net_metrics}
+    meta_metrics = {("meta", "timestamp"): res['timestamp']}
+    df = {**params, **med, **game, **med_freqs, **
+          agent_stats, **net_metrics, **meta_metrics}
     return df
 
 
