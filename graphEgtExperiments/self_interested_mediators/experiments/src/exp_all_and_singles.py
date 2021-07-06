@@ -64,16 +64,14 @@ df = pd.DataFrame([makeEntry2(cy_runCompetitionExperiment(N=500, episode_n=10000
 
 
 # %%
-episode_n = 30
-# episode_n = 1000000
+episode_n = 1000000
 w1s = [0.5, 1, 2, 3, 4, inf]
 w2s = [0, 0.01, 0.03, 0.1, 0.5]
 ts = (2.0, -1.0)
 
 
 # non-exclusive meds
-n_trials = 2
-# n_trials = 100
+n_trials = 100
 run_name = f"vanilla_all_med_competition_{timestamp()}"
 dir_path = f"../data/{run_name}"
 experiment_name = makeCompetitionName({"medSet": "non_exclusive"})
@@ -86,8 +84,7 @@ saveDf(results, experiment_name, dir_path)
 print(f"Saved {run_name}")
 
 # exclusive meds
-n_trials = 2
-# n_trials = 100
+n_trials = 100
 run_name = f"exclusive_all_med_competition_{timestamp()}"
 dir_path = f"../data/{run_name}"
 experiment_name = makeCompetitionName({"medSet": "exclusive"})
@@ -101,8 +98,7 @@ print(f"Saved {run_name}")
 
 
 # single meds
-n_trials = 2
-# n_trials = 30
+n_trials = 30
 run_name = f"single_meds_ts_{timestamp()}"
 dir_path = f"../data/{run_name}"
 print(f"Running {run_name}")
@@ -115,16 +111,16 @@ for med in non_exclusive:
     saveDf(results, experiment_name, dir_path)
 print(f"Saved {run_name}")
 
+# %%
 # no rewire
-n_trials = 2
-# n_trials = 100
+n_trials = 100
 run_name = f"baseline_no_rewire_{timestamp()}"
 dir_path = f"../data/{run_name}"
 experiment_name = makeCompetitionName({"baseline": "no_rewire"})
 print(f"Running {run_name}")
-trials_results = [makeEntry2(res) for res in tsMatrixSim(
+ts_res = [tsMatrixSim(
     med=0, M=7, episode_n=episode_n, W1=0, save=False) for i in range(n_trials)]
-results = pd.DataFrame(
-    [r for res in trials_results for r in res], columns=makeColumns()).fillna(0)
+results = pd.DataFrame([makeEntry2(
+    res) for trial in ts_res for res in trial], columns=makeColumns()).fillna(0)
 saveDf(results, experiment_name, dir_path)
 print(f"Saved {run_name}")
