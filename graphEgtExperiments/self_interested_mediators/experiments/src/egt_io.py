@@ -6,6 +6,7 @@ import time
 import os
 import fnmatch
 import shutil
+import pandas as pd
 
 
 def timestamp():
@@ -162,4 +163,12 @@ def loadExperiment(dir_name, key_fn):
 
 
 def loadExperimentDf(dir_name):
+    all_csvs = [os.path.join(root, name)
+                for root, dirs, files in os.walk(dir_name)
+                for name in files
+                if name.endswith(".csv")]
+    return [pd.read_csv(fn, header=[0, 1], index_col=0) for fn in all_csvs]
+
+
+def loadExperimentPkl(dir_name):
     return [loadPickle(fn) for fn in getAllPickles(dir_name)]

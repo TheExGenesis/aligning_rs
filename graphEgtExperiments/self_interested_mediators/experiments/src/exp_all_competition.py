@@ -29,8 +29,32 @@ def wsMatrixSim(medSet=[0, 1, 2, 3, 4], w1s=[0.5, 1, 2, 3], w2s=[0.5, 1, 2, 3], 
             dir_path="../data")
     return runs
 
+# single ts heatmap simulation
 
-# finds the W1 parameter in a filename in the form "...W1-{w}..."
+
+def tsMatrixSim(med=0, M=6, episode_n=10000, W1=1, saveHistory=False, save=True):
+    gameParams = genTSParams(M)
+    medSet = [med]
+    N = 500
+    W2 = 0
+    beta = 0.005
+    k = 30
+    # runs = {ts: saveCompetitionExperiment(N =N, episode_n=episode_n, W1=W1, W2=W2, ts=ts, beta=beta, k=k, saveHistory=False, history=[], medSet=medSet) for ts in gameParams}
+    runs = {ts: cy_runCompetitionExperiment(N=N, episode_n=episode_n, W1=W1, W2=W2, ts=ts,
+                                            beta=beta, k=k, saveHistory=saveHistory, history=[], medSet=medSet) for ts in gameParams}
+    if save:
+        print(f"saving {medSet, N, episode_n, beta, W1, W2, k}")
+        saveRes(runs,   makeCompetitionName(
+            {"medSet": medSet, "N": N, "episode_n": episode_n, "beta": beta, "W1": W1, "W2": W2, "k": k}),
+            dir_path="../data")
+    print("ending tsMatrixSim")
+    return runs
+
+
+# %%
+# hands on experiments
+df = pd.DataFrame([makeEntry2(cy_runCompetitionExperiment(N=500, episode_n=1000000, W1=0.5, W2=0.1, ts=(
+    2, -1), beta=0.005, k=30, medSet=non_exclusive, endOnStratConverge=True)) for i in range(30)], columns=makeColumns()).fillna(0)
 
 # %%
 # RUN N_TRIALS OF A MATRIX FOR EACH W AND \FOR EACH MEDIATOR
@@ -101,4 +125,3 @@ for i, medSet in enumerate([[m] for m in non_exclusive]):
         {"medSet": medSet})
     saveDf(results, experiment_name, dir_path)
 print(f"Saved {run_name}")
-, <

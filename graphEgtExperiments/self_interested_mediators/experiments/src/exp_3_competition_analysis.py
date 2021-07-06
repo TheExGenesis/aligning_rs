@@ -1,4 +1,5 @@
 # %%
+import ipywidgets
 import matplotlib.pyplot as plt
 from itertools import chain
 from utils import transposeList
@@ -13,6 +14,7 @@ from itertools import product, combinations
 from functools import reduce
 from dataframe import makeEntry2, makeColumns
 import seaborn as sns
+import pandas as pd
 
 
 # %%
@@ -22,6 +24,7 @@ import seaborn as sns
 # res = loadExperimentDf("/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/vanilla_all_med_competition_jun-24-2021_1929")
 res = loadExperimentDf(
     "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/exp_all_competition")
+
 res = [r for run in res for r in run]
 df = pd.DataFrame(res, columns=makeColumns()).fillna(0)
 df_means = df.groupby([*[x for x in df.columns if x[0] == "med"],
@@ -49,6 +52,17 @@ df_freqs = df_means['med_freqs'].reset_index()
 tidy = df_freqs.melt(id_vars=['ws', 'meds'], value_vars=df['med'].columns)
 sns.catplot(x='meds', y='value', hue='variable', col="ws",
             data=tidy, kind="bar", col_wrap=4, aspect=4)
+
+# %%
+# loading results from jul2
+res = loadExperimentDf(
+    "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/jul-2")
+df = pd.concat(res, ignore_index=True)
+df['meds'] = df['med'].apply(lambda r: tuple(
+    c for c in df['med'].columns if r[c] == 1), axis=1)  # tuples of mediators
+# tuples of ws pairs
+df['ws'] = list(zip(df[('params', 'W1')], df[('params', 'W2')]))
+df_mean = df.groupby(["meds", "ws"]).mean()
 
 # %%
 # big grid for heatmap for coop/heterogeneity/etc
@@ -106,6 +120,7 @@ fg.fig.get_axes()[0].invert_yaxis()
 
 # %%
 # interactive
+
 w1s = pd.unique(df[("params", "W1")])
 W1 = ipywidgets.Select(
     options=w1s,
@@ -135,28 +150,33 @@ def plot_bar(df, w1, w2, medSet):
     return df[df[("ws") == (w1, w2)] & df[("meds") == medSet]].plot.bar()
 
 
-ipywidgets.interact(plot_bar, df=df, W1=W1, W2=W2, medSet=medSet)
+ipywidgets.interact(plot_bar, df=df, w1=W1, w2=W2, medSet=medSet)
+#%%
+# w1, w2 = 0.5, 1.0
+# medSet = ("NO_MED", "GOOD_MED_X", "BAD_MED_X")
+# df2 = df_mean.reset_index(col_level=1).melt(id_vars=[(
+#     "", "meds"), ("", "ws")], value_vars=[("agents", "coop_freq")], value_name='coop')
+# df_mean.loc[[(('NO_MED', 'BAD_MED_X', 'FAIR_MED_X'), (0.5, 0.5))]]
 
-w1, w2 = 0.5, 1.0
-medSet = ("NO_MED", "GOOD_MED_X", "BAD_MED_X")
-df2 = df_mean.reset_index(col_level=1).melt(id_vars=[(
-    "", "meds"), ("", "ws")], value_vars=[("agents", "coop_freq")], value_name='coop')
-df_mean.loc[[(('NO_MED', 'BAD_MED_X', 'FAIR_MED_X'), (0.5, 0.5))]]
-
-w1, w2 = 0.5, 1.0
-medSet = ("NO_MED", "GOOD_MED_X", "BAD_MED_X")
-df2 = df_mean.reset_index(col_level=1).melt(id_vars=[(
-    "", "meds"), ("", "ws")], value_vars=[("agents", "coop_freq")], value_name='coop')
-df_mean.loc[[(('NO_MED', 'BAD_MED_X', 'FAIR_MED_X'), (0.5, 0.5))]]
+# w1, w2 = 0.5, 1.0
+# medSet = ("NO_MED", "GOOD_MED_X", "BAD_MED_X")
+# df2 = df_mean.reset_index(col_level=1).melt(id_vars=[(
+#     "", "meds"), ("", "ws")], value_vars=[("agents", "coop_freq")], value_name='coop')
+# df_mean.loc[[(('NO_MED', 'BAD_MED_X', 'FAIR_MED_X'), (0.5, 0.5))]]
 
 
+#%%
+# plot 5 heatmaps for each mediator set + 1 barplot per w1,w2 combo
 def plot_bar(w1, w2, medSet):
     n = 6
     size = 4
     fig, ax = plt.subplots(1, n, figsize=((n+1)*size, size))
     plt.suptitle(f"Mediators: {medSet}, w1={w1}, w2={w2}")
-    df_mean.loc[[(medSet, (w1, w2))]]['med_freqs'].plot.bar(
-        ax=ax[0], xlabel="mediators", ylim=(0, 1), xticks=[])
+    med_freq_ax=df_mean.loc[[(medSet, (w1, w2))]]['med_freqs'].plot.bar(
+        ax=ax[0], xlabel="mediators", ylim=(0, 1), xticks=[], label=str())
+    med_freq_ax.set_title("Mediator freqs",color='black')
+    med_freq_ax.legend(bbox_to_anchor=(1.0, 1.0))
+    med_freq_ax.plot()
     df_pivoted = df_mean.loc[medSet].pivot(
         index=[("params", "W1")], columns=[("params", "W2")])
     w1s, w2s = list(df_pivoted[("agents", "coop_freq")].index), list(
@@ -171,6 +191,7 @@ def plot_bar(w1, w2, medSet):
     ), yticklabels=w1s, xticklabels=w2s, annot=True, square=True, ax=ax[4]).set(title=f"Avg. final #rewires")
     sns.heatmap(df_pivoted[("net", "stop_n")], vmin=df_mean[('net', 'stop_n')].min(), vmax=df_mean[('net', 'stop_n')].max(
     ), yticklabels=w1s, xticklabels=w2s, annot=True, square=True, ax=ax[5]).set(title=f"Avg. final stop time")
+    fig.tight_layout() 
 
 
 ipywidgets.interact(plot_bar,
@@ -178,3 +199,10 @@ ipywidgets.interact(plot_bar,
                     w2=list(pd.unique(df_mean[("params", "W2")])),
                     medSet=list(pd.unique(df_mean.index.get_level_values(0)))
                     )
+
+# %%
+
+# Custom the color, add shade and bandwidth
+sns.kdeplot(x=df.sepal_width, y=df.sepal_length,
+            cmap="Reds", shade=True, bw_adjust=.5)
+plt.show()

@@ -14,7 +14,8 @@ import numpy as np
 def makeColumns():
     medNames = list(int2MedName.values())
     meds = list(product(["med"], int2MedName.values()))
-    params = list(product(["params"], ["W1", "W2", "N", "episode_n"]))
+    params = list(product(["params"], ["W1", "W2", "N",
+                  "episode_n", "beta", "k", "endOnStratConverge"]))
     game = list(product(["game"], ["t", "s"]))
     med_freqs = list(product(["med_freqs"], int2MedName.values()))
     agent_stats = list(
@@ -27,6 +28,8 @@ def makeColumns():
         meds+params+game+med_freqs+agent_stats+net_metrics+meta_metrics)
     return cols
 
+# TODO dynamic makeColumns based on df
+
 
 def makeExperimentsDf(results):
     return pd.DataFrame(results, columns=makeColumns()).fillna(0)
@@ -36,9 +39,12 @@ def makeExperimentsDf(results):
 
 
 def makeEntry2(res):
-    params = {("params", "W1"): res["params"]["W1"], ("params", "W2"): res["params"]["W2"],
-              ("params", "N"): res["params"]["N"], ("params", "episode_n"): res["params"]["episode_n"],
-              ("params", "k"): res["params"]["k"], ("params", "beta"): res["params"]["beta"]}
+    non_params = ["t", "s", ]
+    params = {("params", key): val for key,
+              val in res["params"].items() if key not in non_params}
+    # params = {("params", "W1"): res["params"]["W1"], ("params", "W2"): res["params"]["W2"],
+    #           ("params", "N"): res["params"]["N"], ("params", "episode_n"): res["params"]["episode_n"],
+    #           ("params", "k"): res["params"]["k"], ("params", "beta"): res["params"]["beta"]}
     med = {("med", int2MedName[med]): 1 for med in res["params"]["medSet"]}
     game = {("game", "t"): res["params"]["t"],
             ("game", "s"): res["params"]["s"], }
