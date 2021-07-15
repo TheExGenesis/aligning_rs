@@ -95,7 +95,7 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
     graph.set_fast_edge_removal(True)
     cdef int timestep = 0
     cdef int x = 0
-    t,s = dilemma[1][0]
+    t,s = dilemma[0][1]
     cdef int rewire_n = 0
     cdef float total_payoff
     for i in range(episode_n):
@@ -124,7 +124,7 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
             "timestamp":timestamp(),
             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats), "endOnStratConverge":endOnStratConverge}}
 # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
-def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False, bint endOnStratConverge = False):
+def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False, bint endOnStratConverge = True):
     cdef float[:, :, :] dilemma
     dilemma = cy_makeTSDilemma(ts[0], ts[1])
     _graph = deepcopy(graph) if graph else initUniformRandomGraph(

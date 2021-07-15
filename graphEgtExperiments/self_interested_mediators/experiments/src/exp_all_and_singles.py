@@ -47,14 +47,8 @@ def tsMatrixSim(med=0, M=6, episode_n=10000, W1=1, saveHistory=False, save=False
         saveRes(runs,   makeCompetitionName(
             {"medSet": medSet, "N": N, "episode_n": episode_n, "beta": beta, "W1": W1, "W2": W2, "k": k}),
             dir_path="../data")
-    print("ending tsMatrixSim")
+    # print("ending tsMatrixSim")
     return runs
-
-
-# %%
-# hands on experiments
-df = pd.DataFrame([makeEntry2(cy_runCompetitionExperiment(N=500, episode_n=1000000, W1=0.5, W2=0.1, ts=(
-    2, -1), beta=0.005, k=30, medSet=non_exclusive, endOnStratConverge=True)) for i in range(30)], columns=makeColumns()).fillna(0)
 
 # %%
 # RUN N_TRIALS OF A MATRIX FOR EACH W AND \FOR EACH MEDIATOR
@@ -70,40 +64,43 @@ w2s = [0, 0.01, 0.03, 0.1, 0.5]
 ts = (2.0, -1.0)
 
 
-# non-exclusive meds
-n_trials = 100
-run_name = f"vanilla_all_med_competition_{timestamp()}"
-dir_path = f"../data/{run_name}"
-experiment_name = makeCompetitionName({"medSet": "non_exclusive"})
-print(f"Running {run_name}")
-trials_results = [[makeEntry2(res) for res in wsMatrixSim(medSet=non_exclusive, w1s=w1s, w2s=w2s,
-                                                          episode_n=episode_n, ts=ts, saveHistory=False, save=False)] for i in range(n_trials)]
-results = pd.DataFrame(
-    [r for res in trials_results for r in res], columns=makeColumns()).fillna(0)
-saveDf(results, experiment_name, dir_path)
-print(f"Saved {run_name}")
+# # non-exclusive meds
+# n_trials = 100
+# run_name = f"vanilla_all_med_competition_{timestamp()}"
+# dir_path = f"../data/{run_name}"
+# experiment_name = makeCompetitionName({"medSet": "non_exclusive"})
+# print(f"Running {run_name}")
+# trials_results = [[makeEntry2(res) for res in wsMatrixSim(medSet=non_exclusive, w1s=w1s, w2s=w2s,
+#                                                           episode_n=episode_n, ts=ts, saveHistory=False, save=False)] for i in range(n_trials)]
+# results = pd.DataFrame(
+#     [r for res in trials_results for r in res], columns=makeColumns()).fillna(0)
+# saveDf(results, experiment_name, dir_path)
+# print(f"Saved {run_name}")
 
-# exclusive meds
-n_trials = 100
-run_name = f"exclusive_all_med_competition_{timestamp()}"
-dir_path = f"../data/{run_name}"
-experiment_name = makeCompetitionName({"medSet": "exclusive"})
-print(f"Running {run_name}")
-trials_results = [[makeEntry2(res) for res in wsMatrixSim(medSet=exclusive, w1s=w1s, w2s=w2s,
-                                                          episode_n=episode_n, ts=ts, saveHistory=False, save=False)] for i in range(n_trials)]
-results = pd.DataFrame(
-    [r for res in trials_results for r in res], columns=makeColumns()).fillna(0)
-saveDf(results, experiment_name, dir_path)
-print(f"Saved {run_name}")
+# # exclusive meds
+# n_trials = 100
+# run_name = f"exclusive_all_med_competition_{timestamp()}"
+# dir_path = f"../data/{run_name}"
+# experiment_name = makeCompetitionName({"medSet": "exclusive"})
+# print(f"Running {run_name}")
+# trials_results = [[makeEntry2(res) for res in wsMatrixSim(medSet=exclusive, w1s=w1s, w2s=w2s,
+#                                                           episode_n=episode_n, ts=ts, saveHistory=False, save=False)] for i in range(n_trials)]
+# results = pd.DataFrame(
+#     [r for res in trials_results for r in res], columns=makeColumns()).fillna(0)
+# saveDf(results, experiment_name, dir_path)
+# print(f"Saved {run_name}")
 
 
 # single meds
+episode_n = 100000
+w1s = [0.5, 1, 2, 3, 4, inf]
 n_trials = 30
 run_name = f"single_meds_ts_{timestamp()}"
 dir_path = f"../data/{run_name}"
+M = 7
 print(f"Running {run_name}")
 for med in non_exclusive:
-    ts_res = [tsMatrixSim(med=med, M=7, episode_n=episode_n, W1=w, save=False)
+    ts_res = [tsMatrixSim(med=med, M=M, episode_n=episode_n, W1=w, save=False)
               for w in w1s for i in range(n_trials)]
     results = pd.DataFrame(
         [makeEntry2(res) for trial in ts_res for res in trial], columns=makeColumns()).fillna(0)
@@ -113,13 +110,13 @@ print(f"Saved {run_name}")
 
 # %%
 # no rewire
-n_trials = 100
+n_trials = 30
 run_name = f"baseline_no_rewire_{timestamp()}"
 dir_path = f"../data/{run_name}"
 experiment_name = makeCompetitionName({"baseline": "no_rewire"})
 print(f"Running {run_name}")
 ts_res = [tsMatrixSim(
-    med=0, M=7, episode_n=episode_n, W1=0, save=False) for i in range(n_trials)]
+    med=0, M=M, episode_n=episode_n, W1=0, save=False) for i in range(n_trials)]
 results = pd.DataFrame([makeEntry2(
     res) for trial in ts_res for res in trial], columns=makeColumns()).fillna(0)
 saveDf(results, experiment_name, dir_path)
