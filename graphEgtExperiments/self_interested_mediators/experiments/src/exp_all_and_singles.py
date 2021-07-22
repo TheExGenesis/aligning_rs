@@ -20,8 +20,9 @@ def wsMatrixSim(medSet=[0, 1, 2, 3, 4], w1s=[0.5, 1, 2, 3], w2s=[0.5, 1, 2, 3], 
     N = 500
     beta = 0.005
     k = 30
+    # smallMedInit = True # if true, the mediator will be initialized with 90% no_med and 10% from meds in the set
     runs = [cy_runCompetitionExperiment(N=N, episode_n=episode_n, W1=w1, W2=w2, ts=ts,
-                                        beta=beta, k=k, saveHistory=saveHistory, history=[], medSet=medSet) for w1, w2 in product(w1s, w2s)]
+                                        beta=beta, k=k, smallMedInit=True, saveHistory=saveHistory, history=[], medSet=medSet) for w1, w2 in product(w1s, w2s)]
     if save:
         print(f"saving {medSet, N, episode_n, beta, w1s, w2s, k}")
         saveRes(runs,   makeCompetitionName(

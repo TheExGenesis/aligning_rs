@@ -123,14 +123,30 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
             "stop_n":timestep,
             "timestamp":timestamp(),
             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats), "endOnStratConverge":endOnStratConverge}}
+
+def initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):
+    cdef int[:] medStrats
+    medStrats = np.zeros(N, dtype=np.intc)
+    seed_size = floor(N * baseline_proportion)
+    seed_population_init = np.zeros(seed_size, dtype=np.intc)
+    seed_population_split = np.array_split(seed_population_init, len(medSet))
+    for i in range(len(medSet)):
+        seed_population_split[i].fill(medSet[i])
+    np.concatenate(seed_population_split, axis=0, out=seed_population_init)
+    baseline_population = np.full(N-seed_size, baseline_med, dtype=np.intc)
+    medStrats = np.concatenate((seed_population_init, baseline_population), axis=0)
+    np.random.shuffle(medStrats)
+    return medStrats
+
 # I should be able to take strats and medStrats but for debugging purposes, I'm making it make them from scratch every
-def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False, bint endOnStratConverge = True):
+def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, graph=None, ts=(_T, _S), int[:] medStrats=None, int[:] strats=None, float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False, bint endOnStratConverge = True, bint smallMedInit = False):
     cdef float[:, :, :] dilemma
     dilemma = cy_makeTSDilemma(ts[0], ts[1])
     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
         N=N, k=(k if k else _k))
+    medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
     experimentResults = cy_genericRunEvolution(
-        N, episode_n, W1, W2, dilemma, cy_initMedStrats(N, medSet), cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory, endOnStratConverge=endOnStratConverge)
+        N, episode_n, W1, W2, dilemma, medStrats, cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory, endOnStratConverge=endOnStratConverge)
     return experimentResults
 
 def cy_continueCompetitionExperiment(graph, int[:] medStrats, int[:] strats, int N=_N, int episode_n=_episode_n, float W1=_W, float W2=_W2, ts=(_T,_S), float beta=0.005, int k=30, medSet=_medSet, history=None, bint saveHistory=False):

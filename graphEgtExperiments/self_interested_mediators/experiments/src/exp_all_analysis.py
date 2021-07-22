@@ -1,4 +1,6 @@
 # %%
+from evolution import *
+import ast
 import ipywidgets
 import matplotlib.pyplot as plt
 from itertools import chain
@@ -9,19 +11,19 @@ from defaultParams import _episode_n, _N, _W, _W2, _k, _T, _S
 from defaultParams import *
 from mediators import *
 from mediators import _medSet
-from evolution import *
 from itertools import product, combinations
 from functools import reduce
 from dataframe import makeEntry2, makeColumns
 import seaborn as sns
 import pandas as pd
 
+# %%
 
 # %%
-# loading results from jul2
+# loading results from date run
 # res = loadExperimentDf("/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/analyzed/jul-2")
-res = loadExperimentDf(
-    "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/jul7_most_complete_to_date")
+path = "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/jul7_most_complete_to_date"
+res = loadExperimentDf(path)
 df = pd.concat(res, ignore_index=True)
 df = df.round(3)
 df[[('game', 't'), ('game', 's')]] = df[[('game', 's'), ('game', 't')]]
@@ -33,40 +35,95 @@ df['ts'] = list(zip(df[('game', 't')], df[('game', 's')]))
 df_mean = df.groupby(["meds", "ws"]).mean()
 df_mean_ts = df.groupby(["meds", ("params", "W1"), "ts"]).mean()
 # %%
+# loading results from df
+# path = "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/jul7_most_complete_to_date/jul7.csv"
+# path = "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/jul16/jul16_singles_df.csv"
+path = "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/jul7_most_complete_to_date/jul7.csv"
+converter_tuples = {"meds": ast.literal_eval,
+                    "ts": ast.literal_eval, "ws": lambda x: eval(x)}
+# converter_tuples = {"meds": ast.literal_eval, "ws": ast.literal_eval, "ts": ast.literal_eval}
+df = pd.read_csv(path, header=[0, 1], index_col=0, converters=converter_tuples)
+df = df.round(3)
+df = df.rename(columns={'Unnamed: 44_level_1': '',
+               'Unnamed: 45_level_1': '', 'Unnamed: 46_level_1': ''}, level=1)
+df_mean = df.groupby(["meds", "ws"]).mean()
+df_mean_ts = df.groupby(["meds", ("params", "W1"), "ts"]).mean()
+
+
+# %%
+single_100k_df = df[df['meds'].apply(
+    lambda x: len(x) == 1) & (df['meds'] != ("NO_MED",))]
+df = single_100k_df[single_100k_df[("params", "W1")] != inf]
+df_mean = df.groupby(["meds", "ws"]).mean()
+df_mean_ts = df.groupby(["meds", ("params", "W1"), "ts"]).mean()
+
+# %%
+# plot many
+w1s = list(pd.unique(df_mean_ts.index.get_level_values(1)))
+medSets = list(pd.unique(df_mean_ts.index.get_level_values(0)))
+singleMedSets = [m for m in medSets if len(m) == 1]
+single_w1s = w1s
+
+for m in singleMedSets:
+    for w1 in single_w1s:
+        plot_ts(w1, m)
+
+# %%
 # big grid for heatmap for coop/heterogeneity/etc
 
 # %%
 # plot 5 heatmaps for each mediator set + 1 barplot per w1,w2 combo
 
 
-def plot_bar(w1, w2, medSet):
-    n = 6
+def plot_heatmap(df, vmin, vmax, yticklabels, xticklabels, title='', ax=None, interpolate=True):
+    if not interpolate:
+        return sns.heatmap(df, vmin=0, vmax=1, yticklabels=yticklabels, xticklabels=xticklabels, annot=True, square=True, ax=ax).set(title=title)
+    else:
+        if not ax:
+            print("not ax")
+            ax = plt.gca()
+        im = ax.imshow(df, interpolation='lanczos', vmin=vmin, vmax=vmax)
+        ax.set_xticks(np.arange(len(xticklabels)))
+        ax.set_yticks(np.arange(len(yticklabels)))
+        ax.set_xticklabels(xticklabels)
+        ax.set_yticklabels(yticklabels)
+        ax.set_title(title)
+        cbar = ax.figure.colorbar(im, ax=ax)
+        # cbar.ax.set_ylabel(cbarlabel, rotation=-90, va="bottom")
+
+        return im
+
+
+def plot_competition(medSet, df):
+    interpolate = False
+    df_mean = df.groupby(["meds", "ws"]).mean()
+    n = 5
     size = 5
     fig, ax = plt.subplots(1, n, figsize=((n+1)*size, size))
-    plt.suptitle(f"Mediators: {medSet}, w1={w1}, w2={w2}")
-    med_freq_ax = df_mean.loc[[(medSet, (w1, w2))]]['med_freqs'].plot.bar(
-        ax=ax[0], xlabel="mediators", ylim=(0, 1), xticks=[], label=str())
-    med_freq_ax.set_title("Mediator freqs", color='black')
-    med_freq_ax.legend(bbox_to_anchor=(1.0, 1.0))
-    med_freq_ax.plot()
     df_pivoted = df_mean.loc[medSet].pivot(
         index=[("params", "W1")], columns=[("params", "W2")])
-    w1s, w2s = list(df_pivoted[("agents", "coop_freq")].index), list(
-        df_pivoted[("agents", "coop_freq")].columns)
-    sns.heatmap(df_pivoted[("agents", "coop_freq")], vmin=0, vmax=1, yticklabels=w1s,
-                xticklabels=w2s, annot=True, square=True, ax=ax[1], ).set(title=f"Avg. final #cooperators")
-    sns.heatmap(df_pivoted[("net", "heterogeneity")], vmin=df_mean[('net', 'heterogeneity')].min(), vmax=df_mean[('net', 'heterogeneity')].max(
-    ), yticklabels=w1s, xticklabels=w2s, annot=True, square=True, ax=ax[2]).set(title=f"Avg. final degree heterogeneity")
-    sns.heatmap(df_pivoted[("net", "k_max")], vmin=df_mean[('net', 'k_max')].min(), vmax=df_mean[('net', 'k_max')].max(
-    ), yticklabels=w1s, xticklabels=w2s, annot=True, square=True, ax=ax[3]).set(title=f"Avg. final max degree")
-    sns.heatmap(df_pivoted[("net", "rewire_n")], vmin=df_mean[('net', 'rewire_n')].min(), vmax=df_mean[('net', 'rewire_n')].max(
-    ), yticklabels=w1s, xticklabels=w2s, annot=True, square=True, ax=ax[4]).set(title=f"Avg. final #rewires")
-    sns.heatmap(df_pivoted[("net", "stop_n")], vmin=df_mean[('net', 'stop_n')].min(), vmax=df_mean[('net', 'stop_n')].max(
-    ), yticklabels=w1s, xticklabels=w2s, annot=True, square=True, ax=ax[5]).set(title=f"Avg. final stop time")
-    fig.tight_layout()
+    w1s, w2s = [round(x, 3) for x in df_pivoted[("agents", "coop_freq")].index], [
+        round(x, 3) for x in df_pivoted[("agents", "coop_freq")].columns]
+    plot_heatmap(df_pivoted[("agents", "coop_freq")], vmin=0, vmax=1, yticklabels=w1s,
+                 xticklabels=w2s, title=f"Avg. final #cooperators", ax=ax[0], interpolate=interpolate)
+    plot_heatmap(df_pivoted[("net", "heterogeneity")], vmin=df_mean[('net', 'heterogeneity')].min(), vmax=df_mean[('net', 'heterogeneity')].max(
+    ), yticklabels=w1s, xticklabels=w2s, title=f"Avg. final degree heterogeneity", ax=ax[1], interpolate=interpolate)
+    plot_heatmap(df_pivoted[("net", "k_max")], vmin=df_mean[('net', 'k_max')].min(), vmax=df_mean[('net', 'k_max')].max(
+    ), yticklabels=w1s, xticklabels=w2s, title=f"Avg. final max degree", ax=ax[2], interpolate=interpolate)
+    # rewire per opportunity: rewire numbers adjusted to stop time and W parameters.
+    df_piv_rewire_n = (df_pivoted[("net", "rewire_n")]).divide(1-1/(df_pivoted[("net", "rewire_n")].index+1),
+                                                               axis=0) / 1/(df_pivoted[("net", "rewire_n")].columns+1) / df_pivoted[("net", "stop_n")]
+    plot_heatmap(df_piv_rewire_n, vmin=0, vmax=1, yticklabels=w1s, xticklabels=w2s,
+                 title=f"Avg. final #rewires / opportunity", ax=ax[3], interpolate=interpolate)
+    plot_heatmap(df_pivoted[("net", "stop_n")], vmin=df_mean[('net', 'stop_n')].min(), vmax=df_mean[('net', 'stop_n')].max(
+    ), yticklabels=w1s, xticklabels=w2s, title=f"Avg. final stop time", ax=ax[4], interpolate=interpolate)
+    plt.suptitle(f"Mediators: {medSet}, w1={w1}, w2={w2}")
+    fig.tight_layout(rect=[0, 0, 1, 0.95])
 
 
-def plot_ts(w1, medSet):
+def plot_ts(w1, medSet, df):
+    interpolate = True
+    df_mean = df.groupby(["meds", "ws"]).mean()
     n = 5
     size = 5
     fig, ax = plt.subplots(1, n, figsize=(
@@ -77,32 +134,83 @@ def plot_ts(w1, medSet):
         index=[("game", "s")], columns=[("game", "t")]).sort_index(ascending=False)
     ss, ts = ['%.2f' % elem for elem in df_pivoted[("agents", "coop_freq")].index], [
         '%.2f' % elem for elem in df_pivoted[("agents", "coop_freq")].columns]
-    sns.heatmap(df_pivoted[("agents", "coop_freq")], vmin=0, vmax=1, yticklabels=ss,
-                xticklabels=ts, annot=True, square=True, ax=ax[0], ).set(title=f"Avg. final #cooperators")
-    sns.heatmap(df_pivoted[("net", "heterogeneity")], vmin=df_mean_ts[('net', 'heterogeneity')].min(), vmax=df_mean_ts[('net', 'heterogeneity')].max(
-    ), yticklabels=ss, xticklabels=ts, annot=True, square=True, ax=ax[1]).set(title=f"Avg. final degree heterogeneity")
-    sns.heatmap(df_pivoted[("net", "k_max")], vmin=df_mean_ts[('net', 'k_max')].min(), vmax=df_mean_ts[('net', 'k_max')].max(
-    ), yticklabels=ss, xticklabels=ts, annot=True, square=True, ax=ax[2]).set(title=f"Avg. final max degree")
-    sns.heatmap(df_pivoted[("net", "rewire_n")], vmin=df_mean_ts[('net', 'rewire_n')].min(), vmax=df_mean_ts[('net', 'rewire_n')].max(
-    ), yticklabels=ss, xticklabels=ts, annot=True, square=True, ax=ax[3]).set(title=f"Avg. final #rewires")
-    sns.heatmap(df_pivoted[("net", "stop_n")], vmin=df_mean_ts[('net', 'stop_n')].min(), vmax=df_mean_ts[('net', 'stop_n')].max(
-    ), yticklabels=ss, xticklabels=ts, annot=True, square=True, ax=ax[4]).set(title=f"Avg. final stop time")
-    # fig.tight_layout()
+    plot_heatmap(df_pivoted[("agents", "coop_freq")], vmin=0, vmax=1, yticklabels=ss,
+                 xticklabels=ts, title=f"Avg. final #cooperators", ax=ax[0], interpolate=interpolate)
+    plot_heatmap(df_pivoted[("net", "heterogeneity")], vmin=df_mean[('net', 'heterogeneity')].min(), vmax=df_mean[('net', 'heterogeneity')].max(
+    ), yticklabels=ss, xticklabels=ts, title=f"Avg. final degree heterogeneity", ax=ax[1], interpolate=interpolate)
+    plot_heatmap(df_pivoted[("net", "k_max")], vmin=df_mean[('net', 'k_max')].min(), vmax=df_mean[('net', 'k_max')].max(
+    ), yticklabels=ss, xticklabels=ts, title=f"Avg. final max degree", ax=ax[2], interpolate=interpolate)
+    # rewire per opportunity: rewire numbers adjusted to stop time and W parameters.
+    df_piv_rewire_n = (df_pivoted[("net", "rewire_n")]) / \
+        w1 / df_pivoted[("net", "stop_n")]
+    plot_heatmap(df_piv_rewire_n, vmin=0, vmax=1, yticklabels=ss, xticklabels=ts,
+                 title=f"Avg. final #rewires / opportunity", ax=ax[3], interpolate=interpolate)
+    plot_heatmap(df_pivoted[("net", "stop_n")], vmin=df_mean[('net', 'stop_n')].min(), vmax=df_mean[('net', 'stop_n')].max(
+    ), yticklabels=ss, xticklabels=ts, title=f"Avg. final stop time", ax=ax[4], interpolate=interpolate)
+    fig.tight_layout(rect=[0, 0, 1, 0.95])
+
+# Makes a pandas bar plot of mediator frequencies for each w parameter combination
+
+
+def plot_bar_grid(medSet, df):
+    df_mean = df.groupby(["meds", "ws"]).mean()
+    size = 5
+    w1s = [round(x, 3)
+           for x in pd.unique(df_mean.loc[medSet][("params", "W1")])]
+    w2s = [round(x, 3)
+           for x in pd.unique(df_mean.loc[medSet][("params", "W2")])]
+    fig, axs = plt.subplots(len(w1s), len(
+        w2s), figsize=((len(w1s)+1)*size, len(w2s)*size))
+    plt.suptitle(f"Mediator frquency: {medSet}")
+    for i, w1 in enumerate(w1s):
+        for j, w2 in enumerate(w2s):
+            med_freq_ax = df_mean.loc[[(medSet, (w1, w2))]]['med_freqs'].plot.bar(
+                ax=axs[i, j], xlabel="mediators", ylim=(0, 1), xticks=[], label=str())
+            med_freq_ax.set_title(
+                f"Mediator freqs w1={w1} w2={w2}", color='black')
+            med_freq_ax.legend(bbox_to_anchor=(1.0, 1.0))
+            med_freq_ax.plot()
+    fig.tight_layout(rect=[0, 0, 1, 0.95])
+
+# Makes a pandas violin plot of mediator frequencies for each w parameter combination
+
+
+def plot_violin_grid(medSet, df):
+    df_mean = df.groupby(["meds", "ws"]).mean()
+    size = 5
+    w1s = [round(x, 3)
+           for x in pd.unique(df_mean.loc[medSet][("params", "W1")])]
+    w2s = [round(x, 3)
+           for x in pd.unique(df_mean.loc[medSet][("params", "W2")])]
+    fig, axs = plt.subplots(len(w1s), len(
+        w2s), figsize=((len(w1s)+1)*size, len(w2s)*size))
+    plt.suptitle(f"Mediator frquency: {medSet}")
+    for i, w1 in enumerate(w1s):
+        for j, w2 in enumerate(w2s):
+            df_plot = df[(df['meds'] == medSet) & (df['ws'] == (w1, w2))][[
+                ("med_freqs", x) for x in medSet]].stack().reset_index()
+            plt.figure(figsize=(10, 5))
+            ax = sns.violinplot(x="level_1", y="med_freqs",
+                                data=df_plot, inner=None, ax=axs[i, j]).set_title(f"Mediator freqs w1={w1} w2={w2}", color='black')
+            ax = sns.swarmplot(x="level_1", y="med_freqs", data=df_plot,
+                               color="white", edgecolor="gray", size=2,  ax=axs[i, j])
+    fig.tight_layout(rect=[0, 0, 1, 0.95])
+    return fig
 
 
 # %%
 ipywidgets.interact(plot_ts,
                     w1=list(pd.unique(df_mean_ts.index.get_level_values(1))),
                     medSet=list(
-                        pd.unique(df_mean_ts.index.get_level_values(0)))
+                        pd.unique(df_mean_ts.index.get_level_values(0))),
+                    df=ipywidgets.fixed(df)
                     )
 
 # %%
 
-ipywidgets.interact(plot_bar,
-                    w1=list(pd.unique(df_mean[("params", "W1")])),
-                    w2=list(pd.unique(df_mean[("params", "W2")])),
-                    medSet=list(pd.unique(df_mean.index.get_level_values(0)))
+ipywidgets.interact(plot_competition,
+                    medSet=list(pd.unique(df_mean.index.get_level_values(0))),
+                    df=ipywidgets.fixed(df)
                     )
 
 # %%

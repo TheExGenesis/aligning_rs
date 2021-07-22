@@ -1,4 +1,5 @@
 # %%
+from evolution import *
 import matplotlib.pyplot as plt
 from itertools import chain
 from utils import transposeList
@@ -8,7 +9,6 @@ from defaultParams import _episode_n, _N, _W, _W2, _k, _T, _S
 from defaultParams import *
 from mediators import *
 from mediators import _medSet
-from evolution import *
 from itertools import product, combinations
 from functools import reduce
 from dataframe import makeEntry2, makeColumns
@@ -16,12 +16,13 @@ import seaborn as sns
 from math import inf
 
 
-def wsMatrixSim(medSet=[0, 1, 2, 3, 4], w1s=[0.5, 1, 2, 3], w2s=[0.5, 1, 2, 3], episode_n=10000, ts=(2.0, -1.0), saveHistory=False, save=False):
+def wsMatrixSim(medSet=[0, 1, 2, 3, 4], w1s=[0.5, 1, 2, 3], w2s=[0.5, 1, 2, 3], episode_n=10000, ts=(2.0, -1.0), smallMedInit=True, saveHistory=False, save=False):
     N = 500
     beta = 0.005
     k = 30
+    # smallMedInit = True # if true, the mediator will be initialized with 90% no_med and 10% from meds in the set
     runs = [cy_runCompetitionExperiment(N=N, episode_n=episode_n, W1=w1, W2=w2, ts=ts,
-                                        beta=beta, k=k, saveHistory=saveHistory, history=[], medSet=medSet) for w1, w2 in product(w1s, w2s)]
+                                        beta=beta, k=k, saveHistory=saveHistory, history=[], medSet=medSet, smallMedInit=True) for w1, w2 in product(w1s, w2s)]
     if save:
         print(f"saving {medSet, N, episode_n, beta, w1s, w2s, k}")
         saveRes(runs,   makeCompetitionName(
@@ -51,12 +52,6 @@ def tsMatrixSim(med=0, M=6, episode_n=10000, W1=1, saveHistory=False, save=True)
     return runs
 
 
-# %%
-# hands on experiments
-df = pd.DataFrame([makeEntry2(cy_runCompetitionExperiment(N=500, episode_n=1000000, W1=0.5, W2=0.1, ts=(
-    2, -1), beta=0.005, k=30, medSet=non_exclusive, endOnStratConverge=True)) for i in range(30)], columns=makeColumns()).fillna(0)
-
-# %%
 # RUN N_TRIALS OF A MATRIX FOR EACH W AND \FOR EACH MEDIATOR
 
 
@@ -66,28 +61,17 @@ df = pd.DataFrame([makeEntry2(cy_runCompetitionExperiment(N=500, episode_n=10000
 # %%
 episode_n = 1000000
 w1s = [0.5, 1, 2, 3, inf]
-w2s = [0.5, 1, 2, 3]
+w2s = [0, 0.01, 0.03, 0.1, 0.5]
 ts = (2.0, -1.0)
 
-# non-exclusive meds
-n_trials = 100
-run_name = f"vanilla_all_med_competition_{timestamp()}"
-dir_path = f"../data/{run_name}"
-experiment_name = makeCompetitionName({"medSet": "non_exclusive"})
-print(f"Running {run_name}")
-trials_results = [[makeEntry2(res) for res in wsMatrixSim(medSet=non_exclusive, w1s=w1s, w2s=w2s,
-                                                          episode_n=episode_n, ts=ts, saveHistory=False, save=False)] for i in range(n_trials)]
-results = pd.DataFrame(
-    [r for res in trials_results for r in res], columns=makeColumns()).fillna(0)
-saveDf(results, experiment_name, dir_path)
-print(f"Saved {run_name}")
 
 # exclusive meds
-n_trials = 100
-run_name = f"exclusive_all_med_competition_{timestamp()}"
+n_trials = 20
+run_name = f"exclusive_all_med_competition_smallinit_{timestamp()}"
 dir_path = f"../data/{run_name}"
 experiment_name = makeCompetitionName({"medSet": "exclusive"})
 print(f"Running {run_name}")
+meds = exclusive[1:]  # exclude no_med
 trials_results = [[makeEntry2(res) for res in wsMatrixSim(medSet=exclusive, w1s=w1s, w2s=w2s,
                                                           episode_n=episode_n, ts=ts, saveHistory=False, save=False)] for i in range(n_trials)]
 results = pd.DataFrame(
@@ -95,33 +79,18 @@ results = pd.DataFrame(
 saveDf(results, experiment_name, dir_path)
 print(f"Saved {run_name}")
 
-# local-sensitive meds
+# 1v1 mediators
 n_trials = 20
-run_name = f"local_all_med_competition_{timestamp()}"
+run_name = f"1v1_competition_smallinit_{timestamp()}"
 dir_path = f"../data/{run_name}"
-experiment_name = makeCompetitionName({"medSet": "local_meds"})
+experiment_name = makeCompetitionName({"medSet": "1v1"})
 print(f"Running {run_name}")
-trials_results = [[makeEntry2(res) for res in wsMatrixSim(medSet=local_meds, w1s=w1s, w2s=w2s,
-                                                          episode_n=episode_n, ts=ts, saveHistory=False, save=False)] for i in range(n_trials)]
-results = pd.DataFrame(
-    [r for res in trials_results for r in res], columns=makeColumns()).fillna(0)
-saveDf(results, experiment_name, dir_path)
-print(f"Saved {run_name}")
-
-
-# single meds
-n_trials = 20
-run_name = f"single_med_{timestamp()}"
-dir_path = f"../data/{run_name}"
-print(f"Running {run_name}")
-for i, medSet in enumerate([[m] for m in non_exclusive]):
-    # run n_trials of matrix of games for each w
-    trials_results = [[makeEntry2(res) for res in wsMatrixSim(
-        medSet=medSet, w1s=w1s, w2s=[0], episode_n=episode_n, ts=ts, saveHistory=False, save=False)] for i in range(n_trials)]
+meds = exclusive[1:]  # exclude no_med
+for med in meds:
+    trials_results = [wsMatrixSim(medSet=[med], w1s=w1s, w2s=w2s, episode_n=episode_n,
+                                  ts=ts, saveHistory=False, save=False) for i in range(n_trials)]
     results = pd.DataFrame(
-        [r for res in trials_results for r in res], columns=makeColumns()).fillna(0)
-    # save whole run
-    experiment_name = makeCompetitionName(
-        {"medSet": medSet})
+        [makeEntry2(res) for trial in trials_results for res in trial], columns=makeColumns()).fillna(0)
+    experiment_name = makeCompetitionName({"med": int2MedName[med]})
     saveDf(results, experiment_name, dir_path)
 print(f"Saved {run_name}")

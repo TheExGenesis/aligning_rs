@@ -58,6 +58,7 @@ cpdef int[:] cy_initMedStrats(int N, medSet):
     return medStrats
 
 
+
 # medDict = {NO_MED: useNoMed, GOOD_MED: useGoodMed,
 #            BAD_MED: useBadMed, RANDOM_MED: useRandomMed, FAIR_MED: useFairMed}
 
