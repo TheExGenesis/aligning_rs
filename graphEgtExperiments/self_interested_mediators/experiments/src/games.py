@@ -1,5 +1,5 @@
 from defaultParams import _T, _R, _S, _P
-
+import numpy as np
 
 '''Games'''
 C = 1
@@ -15,7 +15,7 @@ def makeWeightDict(t, s):
 # Returns a dictionary that maps the strategies played to payoffs received for a set of 4 payoff metric
 # T€[0,2] S€[-1,1]
 def makeDilemma(R=_R, P=_P, T=_T, S=_S):
-    return {C: {C: [R, R], D: [S, T]}, D: {C: [T, S], D: [P, P]}}
+    return np.array([[[P, P], [T, S]], [[S, T], [R, R]]])
 
 # Returns a dictionary that maps the strategies played to payoffs received for T and S (canonical form of a 2x2)
 
@@ -33,21 +33,19 @@ def playDilemma(dilemma, strats, id1, id2):
 # cumulativePayoffs :: graph -> [strat] # Cumulative Payoff of 1 round of a node playing all its neighbors
 
 
-def nodeCumPayoffs(dilemma, graph, strats, x):
-    try:
-        payoffs = [playDilemma(dilemma, strats, x, y)[0]
-                   for y in graph.get_all_neighbors(x)]
-        return sum(payoffs)
-    except:
-        return 0
+def nodeCumPayoffs(dilemma, neighbors, strats, x):
+    total = 0
+    for y in neighbors:
+        total += playDilemma(dilemma, strats, x, y)[0]
+    return total
 # Pair of cumulative payoffs
 
 
-def pairCumPayoffs(dilemma, graph, strats, a, b):
-    return [nodeCumPayoffs(dilemma, graph, strats, a), nodeCumPayoffs(dilemma, graph, strats, b)]
+def pairCumPayoffs(dilemma, neighbors, strats, a, b):
+    return [nodeCumPayoffs(dilemma, neighbors, strats, a), nodeCumPayoffs(dilemma, neighbors, strats, b)]
 
 # return a list of payoffs for each node
 
 
 def calcPayoffs(dilemma, graph, strats):
-    return [nodeCumPayoffs(dilemma, graph, strats, x) for x in graph.get_vertices()]
+    return [nodeCumPayoffs(dilemma, graph.get_all_neighbors(x), strats, x) for x in graph.get_vertices()]

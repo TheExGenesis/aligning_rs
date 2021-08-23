@@ -110,7 +110,10 @@ for med in non_exclusive:
 print(f"Saved {run_name}")
 
 # %%
+% % time
 # no rewire
+M = 7
+episode_n = 1000000
 n_trials = 30
 run_name = f"baseline_no_rewire_{timestamp()}"
 dir_path = f"../data/{run_name}"
@@ -122,3 +125,5 @@ results = pd.DataFrame([makeEntry2(
     res) for trial in ts_res for res in trial], columns=makeColumns()).fillna(0)
 saveDf(results, experiment_name, dir_path)
 print(f"Saved {run_name}")
+
+# %%

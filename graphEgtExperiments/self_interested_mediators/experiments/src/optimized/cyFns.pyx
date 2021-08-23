@@ -4,9 +4,14 @@ from libc.math cimport log, exp
 cimport numpy as cnp
 import numpy as np
 
+
 # Utils
 cpdef int crandint(int lower, int upper) except -1:
     return (rand() % (upper - lower + 1)) + lower
+
+cpdef float randFloat() except -1:
+    cdef float r = (rand() % RAND_MAX) / float(RAND_MAX)
+    return r
 
 
 cdef inline float float_max(float a, float b): return a if a >= b else b

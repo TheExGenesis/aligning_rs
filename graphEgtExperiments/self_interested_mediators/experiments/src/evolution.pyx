@@ -79,7 +79,7 @@ def cy_runEvolutionCompetitionEp(int N, float beta, float W1, float W2, float[:,
             if saveHistory:
                 history.append(graphUpdate)
             graph = updateTies(graph, graphUpdate)
-            did_rewire = 1 if graphUpdate['old'] != graphUpdate['new'] else 0
+            did_rewire = 1 if strats[y] == D else 0 # track rewire attempts, which happen if x is unsatisfied
     return graph, history, did_rewire
 
 
@@ -124,7 +124,7 @@ def cy_genericRunEvolution(int N, int episode_n, float W1, float W2, float[:, :,
             "timestamp":timestamp(),
             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats), "endOnStratConverge":endOnStratConverge}}
 
-def initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):
+def cy_initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):
     cdef int[:] medStrats
     medStrats = np.zeros(N, dtype=np.intc)
     seed_size = floor(N * baseline_proportion)
@@ -144,7 +144,7 @@ def cy_runCompetitionExperiment(int N=_N, int episode_n=_episode_n, float W1=_W,
     dilemma = cy_makeTSDilemma(ts[0], ts[1])
     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
         N=N, k=(k if k else _k))
-    medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
+    medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
     experimentResults = cy_genericRunEvolution(
         N, episode_n, W1, W2, dilemma, medStrats, cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory, endOnStratConverge=endOnStratConverge)
     return experimentResults

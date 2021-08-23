@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from itertools import product
 import numpy as np
+import graph_tool as gt
 
 
 def makeColumns():
@@ -21,7 +22,7 @@ def makeColumns():
     agent_stats = list(
         product(["agents"], ["coop_freq", "payoff_mean", "payoff_var"]))
     net_metrics = list(
-        product(["net"], ["heterogeneity", "k_max", "rewire_n", "stop_n"]))
+        product(["net"], ["dd", "heterogeneity", "k_max", "rewire_n", "stop_n"]))
     meta_metrics = list(
         product(["meta"], ["timestamp"]))
     cols = pd.MultiIndex.from_tuples(
@@ -54,7 +55,8 @@ def makeEntry2(res):
         res["params"]["t"], res["params"]["s"]), res["graph"], res["finalStrats"]))
     agent_stats = {("agents", "coop_freq"): res["finalStrats"].mean(
     ), ("agents", "payoff_mean"): payoffs.mean(), ("agents", "payoff_var"): payoffs.var()}
-    net_metrics = {("net", "heterogeneity"): heterogeneity(
+    net_metrics = {("net", "dd"): gt.stats.vertex_hist(res['graph'], 'out')[0],  # vertex_hist returns a tuple counts,bins. bins go from 0 to len(counts)
+                   ("net", "heterogeneity"): heterogeneity(
         res['graph']), ("net", "k_max"): maxDegree(res['graph']), ("net", "rewire_n"): res['rewire_n'], ("net", "stop_n"): res['stop_n']}  # TODO
     meta_metrics = {("meta", "timestamp"): res['timestamp']}
     df = {**params, **med, **game, **med_freqs, **

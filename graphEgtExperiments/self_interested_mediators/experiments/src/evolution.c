@@ -1612,17 +1612,6 @@ static CYTHON_INLINE int __pyx_sub_acquisition_count_locked(
 static CYTHON_INLINE void __Pyx_INC_MEMVIEW(__Pyx_memviewslice *, int, int);
 static CYTHON_INLINE void __Pyx_XDEC_MEMVIEW(__Pyx_memviewslice *, int, int);
 
-/* DictGetItem.proto */
-#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
-static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
-#define __Pyx_PyObject_Dict_GetItem(obj, name)\
-    (likely(PyDict_CheckExact(obj)) ?\
-     __Pyx_PyDict_GetItem(obj, name) : PyObject_GetItem(obj, name))
-#else
-#define __Pyx_PyDict_GetItem(d, key) PyObject_GetItem(d, key)
-#define __Pyx_PyObject_Dict_GetItem(obj, name)  PyObject_GetItem(obj, name)
-#endif
-
 /* RaiseTooManyValuesToUnpack.proto */
 static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected);
 
@@ -2458,6 +2447,7 @@ static PyObject *__pyx_builtin_TypeError;
 static PyObject *__pyx_builtin_Ellipsis;
 static PyObject *__pyx_builtin_id;
 static PyObject *__pyx_builtin_IndexError;
+static const char __pyx_k_D[] = "D";
 static const char __pyx_k_N[] = "N";
 static const char __pyx_k_O[] = "O";
 static const char __pyx_k_S[] = "_S";
@@ -2486,9 +2476,8 @@ static const char __pyx_k_any[] = "any";
 static const char __pyx_k_idx[] = "idx";
 static const char __pyx_k_inf[] = "inf";
 static const char __pyx_k_k_2[] = "_k";
-static const char __pyx_k_new[] = "new";
+static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_obj[] = "obj";
-static const char __pyx_k_old[] = "old";
 static const char __pyx_k_out[] = "out";
 static const char __pyx_k_sys[] = "sys";
 static const char __pyx_k_x_2[] = "x";
@@ -2524,7 +2513,6 @@ static const char __pyx_k_flags[] = "flags";
 static const char __pyx_k_floor[] = "floor";
 static const char __pyx_k_games[] = "games";
 static const char __pyx_k_graph[] = "graph";
-static const char __pyx_k_new_2[] = "__new__";
 static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_p_med[] = "p_med";
 static const char __pyx_k_range[] = "range";
@@ -2655,7 +2643,6 @@ static const char __pyx_k_pyx_unpickle_Enum[] = "__pyx_unpickle_Enum";
 static const char __pyx_k_calcStrategyUpdate[] = "calcStrategyUpdate";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_endOnStratConverge[] = "endOnStratConverge";
-static const char __pyx_k_initMedStratsSmall[] = "initMedStratsSmall";
 static const char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static const char __pyx_k_baseline_population[] = "baseline_population";
 static const char __pyx_k_baseline_proportion[] = "baseline_proportion";
@@ -2664,6 +2651,7 @@ static const char __pyx_k_calcStructuralUpdate[] = "calcStructuralUpdate";
 static const char __pyx_k_seed_population_init[] = "seed_population_init";
 static const char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static const char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
+static const char __pyx_k_cy_initMedStratsSmall[] = "cy_initMedStratsSmall";
 static const char __pyx_k_seed_population_split[] = "seed_population_split";
 static const char __pyx_k_set_fast_edge_removal[] = "set_fast_edge_removal";
 static const char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>";
@@ -2701,6 +2689,7 @@ static PyObject *__pyx_kp_s_Cannot_assign_to_read_only_memor;
 static PyObject *__pyx_kp_s_Cannot_create_writable_memory_vi;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
 static PyObject *__pyx_n_s_Counter;
+static PyObject *__pyx_n_s_D;
 static PyObject *__pyx_n_s_DataFrame;
 static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
@@ -2761,6 +2750,7 @@ static PyObject *__pyx_n_s_cy_continueCompetitionExperiment;
 static PyObject *__pyx_n_s_cy_fermi;
 static PyObject *__pyx_n_s_cy_genericRunEvolution;
 static PyObject *__pyx_n_s_cy_initMedStrats;
+static PyObject *__pyx_n_s_cy_initMedStratsSmall;
 static PyObject *__pyx_n_s_cy_initStrats;
 static PyObject *__pyx_n_s_cy_makeTSDilemma;
 static PyObject *__pyx_n_s_cy_nodeCumPayoffs;
@@ -2810,7 +2800,6 @@ static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_inf;
 static PyObject *__pyx_n_s_init;
 static PyObject *__pyx_n_s_initMedStrats;
-static PyObject *__pyx_n_s_initMedStratsSmall;
 static PyObject *__pyx_n_s_initPayoffs;
 static PyObject *__pyx_n_s_initStrats;
 static PyObject *__pyx_n_s_initUniformRandomGraph;
@@ -2840,7 +2829,6 @@ static PyObject *__pyx_n_s_ndim;
 static PyObject *__pyx_n_s_neighs_x;
 static PyObject *__pyx_n_s_neighs_y;
 static PyObject *__pyx_n_s_new;
-static PyObject *__pyx_n_s_new_2;
 static PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
 static PyObject *__pyx_n_s_nodeCumPayoffs;
 static PyObject *__pyx_n_s_np;
@@ -2848,7 +2836,6 @@ static PyObject *__pyx_n_s_numpy;
 static PyObject *__pyx_kp_s_numpy_core_multiarray_failed_to;
 static PyObject *__pyx_kp_s_numpy_core_umath_failed_to_impor;
 static PyObject *__pyx_n_s_obj;
-static PyObject *__pyx_n_s_old;
 static PyObject *__pyx_n_s_optimized_cyFns;
 static PyObject *__pyx_n_s_out;
 static PyObject *__pyx_n_s_p;
@@ -2934,7 +2921,7 @@ static PyObject *__pyx_n_s_y;
 static PyObject *__pyx_n_s_zeros;
 static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED int __pyx_v_N, float __pyx_v_beta, float __pyx_v_W1, float __pyx_v_W2, __Pyx_memviewslice __pyx_v_dilemma, PyObject *__pyx_v_graph, __Pyx_memviewslice __pyx_v_medStrats, __Pyx_memviewslice __pyx_v_strats, PyObject *__pyx_v_history, int __pyx_v__x, int __pyx_v_saveHistory); /* proto */
 static PyObject *__pyx_pf_9evolution_2cy_genericRunEvolution(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_N, int __pyx_v_episode_n, float __pyx_v_W1, float __pyx_v_W2, __Pyx_memviewslice __pyx_v_dilemma, __Pyx_memviewslice __pyx_v_medStrats, __Pyx_memviewslice __pyx_v_strats, float __pyx_v_beta, PyObject *__pyx_v_graph, int __pyx_v_k, PyObject *__pyx_v_history, PyObject *__pyx_v_saveHistory, PyObject *__pyx_v_endOnStratConverge); /* proto */
-static PyObject *__pyx_pf_9evolution_4initMedStratsSmall(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_N, PyObject *__pyx_v_medSet, PyObject *__pyx_v_baseline_med, PyObject *__pyx_v_baseline_proportion); /* proto */
+static PyObject *__pyx_pf_9evolution_4cy_initMedStratsSmall(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_N, PyObject *__pyx_v_medSet, PyObject *__pyx_v_baseline_med, PyObject *__pyx_v_baseline_proportion); /* proto */
 static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_N, int __pyx_v_episode_n, float __pyx_v_W1, float __pyx_v_W2, PyObject *__pyx_v_graph, PyObject *__pyx_v_ts, __Pyx_memviewslice __pyx_v_medStrats, CYTHON_UNUSED __Pyx_memviewslice __pyx_v_strats, float __pyx_v_beta, int __pyx_v_k, PyObject *__pyx_v_medSet, PyObject *__pyx_v_history, int __pyx_v_saveHistory, int __pyx_v_endOnStratConverge, int __pyx_v_smallMedInit); /* proto */
 static PyObject *__pyx_pf_9evolution_8cy_continueCompetitionExperiment(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_graph, __Pyx_memviewslice __pyx_v_medStrats, __Pyx_memviewslice __pyx_v_strats, int __pyx_v_N, int __pyx_v_episode_n, float __pyx_v_W1, float __pyx_v_W2, PyObject *__pyx_v_ts, float __pyx_v_beta, int __pyx_v_k, CYTHON_UNUSED PyObject *__pyx_v_medSet, PyObject *__pyx_v_history, int __pyx_v_saveHistory); /* proto */
 static int __pyx_pf_7cpython_5array_5array___getbuffer__(arrayobject *__pyx_v_self, Py_buffer *__pyx_v_info, CYTHON_UNUSED int __pyx_v_flags); /* proto */
@@ -4309,7 +4296,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
  *             if saveHistory:
  *                 history.append(graphUpdate)             # <<<<<<<<<<<<<<
  *             graph = updateTies(graph, graphUpdate)
- *             did_rewire = 1 if graphUpdate['old'] != graphUpdate['new'] else 0
+ *             did_rewire = 1 if strats[y] == D else 0 # track rewire attempts, which happen if x is unsatisfied
  */
         __pyx_t_15 = __Pyx_PyObject_Append(__pyx_v_history, __pyx_v_graphUpdate); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 80, __pyx_L1_error)
 
@@ -4326,7 +4313,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
  *             if saveHistory:
  *                 history.append(graphUpdate)
  *             graph = updateTies(graph, graphUpdate)             # <<<<<<<<<<<<<<
- *             did_rewire = 1 if graphUpdate['old'] != graphUpdate['new'] else 0
+ *             did_rewire = 1 if strats[y] == D else 0 # track rewire attempts, which happen if x is unsatisfied
  *     return graph, history, did_rewire
  */
       __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_updateTies); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
@@ -4382,15 +4369,25 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
       /* "evolution.pyx":82
  *                 history.append(graphUpdate)
  *             graph = updateTies(graph, graphUpdate)
- *             did_rewire = 1 if graphUpdate['old'] != graphUpdate['new'] else 0             # <<<<<<<<<<<<<<
+ *             did_rewire = 1 if strats[y] == D else 0 # track rewire attempts, which happen if x is unsatisfied             # <<<<<<<<<<<<<<
  *     return graph, history, did_rewire
  * 
  */
-      __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_graphUpdate, __pyx_n_s_old); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_9 = __pyx_v_y;
+      __pyx_t_7 = -1;
+      if (__pyx_t_9 < 0) {
+        __pyx_t_9 += __pyx_v_strats.shape[0];
+        if (unlikely(__pyx_t_9 < 0)) __pyx_t_7 = 0;
+      } else if (unlikely(__pyx_t_9 >= __pyx_v_strats.shape[0])) __pyx_t_7 = 0;
+      if (unlikely(__pyx_t_7 != -1)) {
+        __Pyx_RaiseBufferIndexError(__pyx_t_7);
+        __PYX_ERR(0, 82, __pyx_L1_error)
+      }
+      __pyx_t_2 = __Pyx_PyInt_From_int((*((int *) ( /* dim=0 */ (__pyx_v_strats.data + __pyx_t_9 * __pyx_v_strats.strides[0]) )))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_v_graphUpdate, __pyx_n_s_new); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_D); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 82, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_17 = PyObject_RichCompare(__pyx_t_2, __pyx_t_10, Py_NE); __Pyx_XGOTREF(__pyx_t_17); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_17 = PyObject_RichCompare(__pyx_t_2, __pyx_t_10, Py_EQ); __Pyx_XGOTREF(__pyx_t_17); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 82, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
@@ -4411,7 +4408,7 @@ static PyObject *__pyx_pf_9evolution_cy_runEvolutionCompetitionEp(CYTHON_UNUSED 
 
   /* "evolution.pyx":83
  *             graph = updateTies(graph, graphUpdate)
- *             did_rewire = 1 if graphUpdate['old'] != graphUpdate['new'] else 0
+ *             did_rewire = 1 if strats[y] == D else 0 # track rewire attempts, which happen if x is unsatisfied
  *     return graph, history, did_rewire             # <<<<<<<<<<<<<<
  * 
  * 
@@ -5980,7 +5977,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __p
  *             "timestamp":timestamp(),
  *             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats), "endOnStratConverge":endOnStratConverge}}             # <<<<<<<<<<<<<<
  * 
- * def initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):
+ * def cy_initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):
  */
   __pyx_t_18 = __Pyx_PyDict_NewPresized(10); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
@@ -6092,15 +6089,15 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_8, 1, (PyObject *(*)(char *)) __p
 /* "evolution.pyx":127
  *             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats), "endOnStratConverge":endOnStratConverge}}
  * 
- * def initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):             # <<<<<<<<<<<<<<
+ * def cy_initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):             # <<<<<<<<<<<<<<
  *     cdef int[:] medStrats
  *     medStrats = np.zeros(N, dtype=np.intc)
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9evolution_5initMedStratsSmall(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_9evolution_5initMedStratsSmall = {"initMedStratsSmall", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9evolution_5initMedStratsSmall, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_9evolution_5initMedStratsSmall(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_9evolution_5cy_initMedStratsSmall(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_9evolution_5cy_initMedStratsSmall = {"cy_initMedStratsSmall", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9evolution_5cy_initMedStratsSmall, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_9evolution_5cy_initMedStratsSmall(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_N = 0;
   PyObject *__pyx_v_medSet = 0;
   PyObject *__pyx_v_baseline_med = 0;
@@ -6110,7 +6107,7 @@ static PyObject *__pyx_pw_9evolution_5initMedStratsSmall(PyObject *__pyx_self, P
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("initMedStratsSmall (wrapper)", 0);
+  __Pyx_RefNannySetupContext("cy_initMedStratsSmall (wrapper)", 0);
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_N,&__pyx_n_s_medSet,&__pyx_n_s_baseline_med,&__pyx_n_s_baseline_proportion,0};
     PyObject* values[4] = {0,0,0,0};
@@ -6139,13 +6136,13 @@ static PyObject *__pyx_pw_9evolution_5initMedStratsSmall(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_medSet)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("initMedStratsSmall", 0, 3, 4, 1); __PYX_ERR(0, 127, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_initMedStratsSmall", 0, 3, 4, 1); __PYX_ERR(0, 127, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_baseline_med)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("initMedStratsSmall", 0, 3, 4, 2); __PYX_ERR(0, 127, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cy_initMedStratsSmall", 0, 3, 4, 2); __PYX_ERR(0, 127, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -6155,7 +6152,7 @@ static PyObject *__pyx_pw_9evolution_5initMedStratsSmall(PyObject *__pyx_self, P
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "initMedStratsSmall") < 0)) __PYX_ERR(0, 127, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "cy_initMedStratsSmall") < 0)) __PYX_ERR(0, 127, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -6175,20 +6172,20 @@ static PyObject *__pyx_pw_9evolution_5initMedStratsSmall(PyObject *__pyx_self, P
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("initMedStratsSmall", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 127, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cy_initMedStratsSmall", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 127, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("evolution.initMedStratsSmall", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("evolution.cy_initMedStratsSmall", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_9evolution_4initMedStratsSmall(__pyx_self, __pyx_v_N, __pyx_v_medSet, __pyx_v_baseline_med, __pyx_v_baseline_proportion);
+  __pyx_r = __pyx_pf_9evolution_4cy_initMedStratsSmall(__pyx_self, __pyx_v_N, __pyx_v_medSet, __pyx_v_baseline_med, __pyx_v_baseline_proportion);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9evolution_4initMedStratsSmall(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_N, PyObject *__pyx_v_medSet, PyObject *__pyx_v_baseline_med, PyObject *__pyx_v_baseline_proportion) {
+static PyObject *__pyx_pf_9evolution_4cy_initMedStratsSmall(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_N, PyObject *__pyx_v_medSet, PyObject *__pyx_v_baseline_med, PyObject *__pyx_v_baseline_proportion) {
   __Pyx_memviewslice __pyx_v_medStrats = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_v_seed_size = NULL;
   PyObject *__pyx_v_seed_population_init = NULL;
@@ -6210,10 +6207,10 @@ static PyObject *__pyx_pf_9evolution_4initMedStratsSmall(CYTHON_UNUSED PyObject 
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("initMedStratsSmall", 0);
+  __Pyx_RefNannySetupContext("cy_initMedStratsSmall", 0);
 
   /* "evolution.pyx":129
- * def initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):
+ * def cy_initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):
  *     cdef int[:] medStrats
  *     medStrats = np.zeros(N, dtype=np.intc)             # <<<<<<<<<<<<<<
  *     seed_size = floor(N * baseline_proportion)
@@ -6582,7 +6579,7 @@ static PyObject *__pyx_pf_9evolution_4initMedStratsSmall(CYTHON_UNUSED PyObject 
   /* "evolution.pyx":127
  *             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats), "endOnStratConverge":endOnStratConverge}}
  * 
- * def initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):             # <<<<<<<<<<<<<<
+ * def cy_initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):             # <<<<<<<<<<<<<<
  *     cdef int[:] medStrats
  *     medStrats = np.zeros(N, dtype=np.intc)
  */
@@ -6595,7 +6592,7 @@ static PyObject *__pyx_pf_9evolution_4initMedStratsSmall(CYTHON_UNUSED PyObject 
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-  __Pyx_AddTraceback("evolution.initMedStratsSmall", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("evolution.cy_initMedStratsSmall", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_medStrats, 1);
@@ -6994,7 +6991,7 @@ static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED 
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(             # <<<<<<<<<<<<<<
  *         N=N, k=(k if k else _k))
- *     medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
+ *     medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
  */
   __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_graph); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 145, __pyx_L1_error)
   if (__pyx_t_9) {
@@ -7025,7 +7022,7 @@ static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED 
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))             # <<<<<<<<<<<<<<
- *     medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
+ *     medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
  *     experimentResults = cy_genericRunEvolution(
  */
     __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 146, __pyx_L1_error)
@@ -7053,7 +7050,7 @@ static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED 
  *     dilemma = cy_makeTSDilemma(ts[0], ts[1])
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(             # <<<<<<<<<<<<<<
  *         N=N, k=(k if k else _k))
- *     medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
+ *     medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
  */
     __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -7068,12 +7065,12 @@ static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED 
   /* "evolution.pyx":147
  *     _graph = deepcopy(graph) if graph else initUniformRandomGraph(
  *         N=N, k=(k if k else _k))
- *     medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)             # <<<<<<<<<<<<<<
+ *     medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)             # <<<<<<<<<<<<<<
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, medStrats, cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory, endOnStratConverge=endOnStratConverge)
  */
   if ((__pyx_v_smallMedInit != 0)) {
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_initMedStratsSmall); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_cy_initMedStratsSmall); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
@@ -7197,7 +7194,7 @@ static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED 
 
   /* "evolution.pyx":148
  *         N=N, k=(k if k else _k))
- *     medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
+ *     medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
  *     experimentResults = cy_genericRunEvolution(             # <<<<<<<<<<<<<<
  *         N, episode_n, W1, W2, dilemma, medStrats, cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory, endOnStratConverge=endOnStratConverge)
  *     return experimentResults
@@ -7206,7 +7203,7 @@ static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED 
   __Pyx_GOTREF(__pyx_t_1);
 
   /* "evolution.pyx":149
- *     medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
+ *     medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, medStrats, cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory, endOnStratConverge=endOnStratConverge)             # <<<<<<<<<<<<<<
  *     return experimentResults
@@ -7268,7 +7265,7 @@ static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED 
 
   /* "evolution.pyx":148
  *         N=N, k=(k if k else _k))
- *     medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
+ *     medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
  *     experimentResults = cy_genericRunEvolution(             # <<<<<<<<<<<<<<
  *         N, episode_n, W1, W2, dilemma, medStrats, cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory, endOnStratConverge=endOnStratConverge)
  *     return experimentResults
@@ -7310,7 +7307,7 @@ static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED 
   __pyx_t_16 = 0;
 
   /* "evolution.pyx":149
- *     medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
+ *     medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
  *     experimentResults = cy_genericRunEvolution(
  *         N, episode_n, W1, W2, dilemma, medStrats, cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory, endOnStratConverge=endOnStratConverge)             # <<<<<<<<<<<<<<
  *     return experimentResults
@@ -7329,7 +7326,7 @@ static PyObject *__pyx_pf_9evolution_6cy_runCompetitionExperiment(CYTHON_UNUSED 
 
   /* "evolution.pyx":148
  *         N=N, k=(k if k else _k))
- *     medStrats = initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
+ *     medStrats = cy_initMedStratsSmall(N, medSet, 0) if smallMedInit else cy_initMedStrats(N, medSet)
  *     experimentResults = cy_genericRunEvolution(             # <<<<<<<<<<<<<<
  *         N, episode_n, W1, W2, dilemma, medStrats, cy_initStrats(N), beta, deepcopy(_graph), k, history, saveHistory=saveHistory, endOnStratConverge=endOnStratConverge)
  *     return experimentResults
@@ -22263,7 +22260,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSE
  *     if __pyx_state is not None:
  *         __pyx_unpickle_Enum__set_state(<Enum> __pyx_result, __pyx_state)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_MemviewEnum_type), __pyx_n_s_new_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 7, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_MemviewEnum_type), __pyx_n_s_new); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -23449,6 +23446,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Cannot_create_writable_memory_vi, __pyx_k_Cannot_create_writable_memory_vi, sizeof(__pyx_k_Cannot_create_writable_memory_vi), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
   {&__pyx_n_s_Counter, __pyx_k_Counter, sizeof(__pyx_k_Counter), 0, 0, 1, 1},
+  {&__pyx_n_s_D, __pyx_k_D, sizeof(__pyx_k_D), 0, 0, 1, 1},
   {&__pyx_n_s_DataFrame, __pyx_k_DataFrame, sizeof(__pyx_k_DataFrame), 0, 0, 1, 1},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
@@ -23509,6 +23507,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cy_fermi, __pyx_k_cy_fermi, sizeof(__pyx_k_cy_fermi), 0, 0, 1, 1},
   {&__pyx_n_s_cy_genericRunEvolution, __pyx_k_cy_genericRunEvolution, sizeof(__pyx_k_cy_genericRunEvolution), 0, 0, 1, 1},
   {&__pyx_n_s_cy_initMedStrats, __pyx_k_cy_initMedStrats, sizeof(__pyx_k_cy_initMedStrats), 0, 0, 1, 1},
+  {&__pyx_n_s_cy_initMedStratsSmall, __pyx_k_cy_initMedStratsSmall, sizeof(__pyx_k_cy_initMedStratsSmall), 0, 0, 1, 1},
   {&__pyx_n_s_cy_initStrats, __pyx_k_cy_initStrats, sizeof(__pyx_k_cy_initStrats), 0, 0, 1, 1},
   {&__pyx_n_s_cy_makeTSDilemma, __pyx_k_cy_makeTSDilemma, sizeof(__pyx_k_cy_makeTSDilemma), 0, 0, 1, 1},
   {&__pyx_n_s_cy_nodeCumPayoffs, __pyx_k_cy_nodeCumPayoffs, sizeof(__pyx_k_cy_nodeCumPayoffs), 0, 0, 1, 1},
@@ -23558,7 +23557,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_inf, __pyx_k_inf, sizeof(__pyx_k_inf), 0, 0, 1, 1},
   {&__pyx_n_s_init, __pyx_k_init, sizeof(__pyx_k_init), 0, 0, 1, 1},
   {&__pyx_n_s_initMedStrats, __pyx_k_initMedStrats, sizeof(__pyx_k_initMedStrats), 0, 0, 1, 1},
-  {&__pyx_n_s_initMedStratsSmall, __pyx_k_initMedStratsSmall, sizeof(__pyx_k_initMedStratsSmall), 0, 0, 1, 1},
   {&__pyx_n_s_initPayoffs, __pyx_k_initPayoffs, sizeof(__pyx_k_initPayoffs), 0, 0, 1, 1},
   {&__pyx_n_s_initStrats, __pyx_k_initStrats, sizeof(__pyx_k_initStrats), 0, 0, 1, 1},
   {&__pyx_n_s_initUniformRandomGraph, __pyx_k_initUniformRandomGraph, sizeof(__pyx_k_initUniformRandomGraph), 0, 0, 1, 1},
@@ -23588,7 +23586,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_neighs_x, __pyx_k_neighs_x, sizeof(__pyx_k_neighs_x), 0, 0, 1, 1},
   {&__pyx_n_s_neighs_y, __pyx_k_neighs_y, sizeof(__pyx_k_neighs_y), 0, 0, 1, 1},
   {&__pyx_n_s_new, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
-  {&__pyx_n_s_new_2, __pyx_k_new_2, sizeof(__pyx_k_new_2), 0, 0, 1, 1},
   {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
   {&__pyx_n_s_nodeCumPayoffs, __pyx_k_nodeCumPayoffs, sizeof(__pyx_k_nodeCumPayoffs), 0, 0, 1, 1},
   {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
@@ -23596,7 +23593,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 0, 1, 0},
   {&__pyx_kp_s_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 0, 1, 0},
   {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
-  {&__pyx_n_s_old, __pyx_k_old, sizeof(__pyx_k_old), 0, 0, 1, 1},
   {&__pyx_n_s_optimized_cyFns, __pyx_k_optimized_cyFns, sizeof(__pyx_k_optimized_cyFns), 0, 0, 1, 1},
   {&__pyx_n_s_out, __pyx_k_out, sizeof(__pyx_k_out), 0, 0, 1, 1},
   {&__pyx_n_s_p, __pyx_k_p, sizeof(__pyx_k_p), 0, 0, 1, 1},
@@ -23943,14 +23939,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "evolution.pyx":127
  *             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats), "endOnStratConverge":endOnStratConverge}}
  * 
- * def initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):             # <<<<<<<<<<<<<<
+ * def cy_initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):             # <<<<<<<<<<<<<<
  *     cdef int[:] medStrats
  *     medStrats = np.zeros(N, dtype=np.intc)
  */
   __pyx_tuple__40 = PyTuple_Pack(10, __pyx_n_s_N, __pyx_n_s_medSet, __pyx_n_s_baseline_med, __pyx_n_s_baseline_proportion, __pyx_n_s_medStrats, __pyx_n_s_seed_size, __pyx_n_s_seed_population_init, __pyx_n_s_seed_population_split, __pyx_n_s_i, __pyx_n_s_baseline_population); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
-  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(4, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_evolution_pyx, __pyx_n_s_initMedStratsSmall, 127, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(4, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_evolution_pyx, __pyx_n_s_cy_initMedStratsSmall, 127, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 127, __pyx_L1_error)
 
   /* "evolution.pyx":142
  * 
@@ -25053,13 +25049,13 @@ if (!__Pyx_RefNanny) {
   /* "evolution.pyx":127
  *             "params": {"N":N, "episode_n":episode_n, "W1": W1, "W2":W2, "t":t, "s":s, "beta":beta, "k":k, "medSet":np.unique(initialMedStrats), "endOnStratConverge":endOnStratConverge}}
  * 
- * def initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):             # <<<<<<<<<<<<<<
+ * def cy_initMedStratsSmall(N, medSet, baseline_med, baseline_proportion=0.1):             # <<<<<<<<<<<<<<
  *     cdef int[:] medStrats
  *     medStrats = np.zeros(N, dtype=np.intc)
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9evolution_5initMedStratsSmall, NULL, __pyx_n_s_evolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9evolution_5cy_initMedStratsSmall, NULL, __pyx_n_s_evolution); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_initMedStratsSmall, __pyx_t_2) < 0) __PYX_ERR(0, 127, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cy_initMedStratsSmall, __pyx_t_2) < 0) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "evolution.pyx":142
@@ -26128,30 +26124,6 @@ static CYTHON_INLINE void __Pyx_XDEC_MEMVIEW(__Pyx_memviewslice *memslice,
         memslice->memview = NULL;
     }
 }
-
-/* DictGetItem */
-#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
-static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key) {
-    PyObject *value;
-    value = PyDict_GetItemWithError(d, key);
-    if (unlikely(!value)) {
-        if (!PyErr_Occurred()) {
-            if (unlikely(PyTuple_Check(key))) {
-                PyObject* args = PyTuple_Pack(1, key);
-                if (likely(args)) {
-                    PyErr_SetObject(PyExc_KeyError, args);
-                    Py_DECREF(args);
-                }
-            } else {
-                PyErr_SetObject(PyExc_KeyError, key);
-            }
-        }
-        return NULL;
-    }
-    Py_INCREF(value);
-    return value;
-}
-#endif
 
 /* RaiseTooManyValuesToUnpack */
 static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected) {

@@ -11,7 +11,7 @@ from games import C, D
 
 
 def initStrats(N):
-    return np.random.choice([C, D], N)
+    return np.random.choice(np.array([C, D], dtype=np.intc), N)
 
 
 def initPayoffs(N):
