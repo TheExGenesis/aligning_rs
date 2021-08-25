@@ -1,4 +1,5 @@
 # %%
+from graph_tool.all import minimize_nested_blockmodel_dl, draw_hierarchy
 from evolution2 import *
 import ast
 import ipywidgets
@@ -65,8 +66,9 @@ df_metric.plot().get_figure().savefig(line_plot_path+pic_name)
 
 # %%
 # rewires per opportunity
-df_metric = df_pd[('net', 'rewire_n')].div(
-    (1-(1/(1+df_pd.index))), axis=0) / df_pd[('net', 'stop_n')]  # df with only the columns to plot
+fraction_rewires = (1-(1/(1+df_pd.index)))
+df_metric = df_pd[('net', 'rewire_n')].div(fraction_rewires, axis=0) / \
+    df_pd[('net', 'stop_n')]  # df with only the columns to plot
 df_metric_div = df_metric.div(df_metric.index, axis=0)
 pic_name = 'rewire_per_opportunity_all_meds.png'
 df_metric.plot().get_figure().savefig(line_plot_path+pic_name)
@@ -88,11 +90,26 @@ plot_ts_row(0, ("NO_MED",), df_mean_ts, axs=None).savefig()
 
 # %%
 ''' line plots over W2'''
+# %%
+''' line plots over W2'''
+
+
+def loadExperimentDf(dir_name):
+    all_csvs = [os.path.join(root, name)
+                for root, dirs, files in os.walk(dir_name)
+                for name in files
+                if name.endswith(".csv")]
+    return [pd.read_csv(fn, header=[
+        0, 1], index_col=0, converters=converter_tuples) for fn in all_csvs]
+
+
+# %%
 # loading results from df
 converter_tuples = {"meds": ast.literal_eval,
                     "ts": ast.literal_eval, "ws": lambda x: eval(x)}
-path = "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/w2_sweep_all_med_competition_smallinit_Aug-23-2021_2110/Aug-23-2021_2152/medSet-exclusive.csv"
-df = pd.read_csv(path, header=[0, 1], index_col=0, converters=converter_tuples)
+dfs = loadExperimentDf(
+    "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/w2_sweep")
+df = pd.concat(dfs)
 df = df.round(3)
 df = df.rename(columns={'Unnamed: 44_level_1': '',
                'Unnamed: 45_level_1': '', 'Unnamed: 46_level_1': '', 'Unnamed: 47_level_1': ''}, level=1)
@@ -100,27 +117,152 @@ df_mean = df.groupby([("params", "W2")]).mean()
 
 # %%
 # line plots over W2
-line_plot_path = "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/plots/single_med/line_pd_metrics_over_w/"
-df_base = df  # keep the original
+line_plot_path = "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/plots/med_competition/w2_sweep_all/"
+df_base = df.copy()  # keep the original
 df['meds'] = df['med'].apply(lambda r: tuple(
     c for c in df['med'].columns if r[c] == 1), axis=1)  # tuples of mediators
 # tuples of ws pairs
 df['ws'] = list(zip(df[('params', 'W1')], df[('params', 'W2')]))
 df['ts'] = list(zip(df[('game', 't')], df[('game', 's')]))
-
-df = df_base.groupby(["ts", ("params", "W2")]).mean()
+df['coop_conv'] = (df[('agents', 'coop_freq')] == 1).astype(int)
 # df = df_base.groupby(["ts", ("params", "W1"), 'meds']).mean()
 # prisoner's dilemma, unstack moves the index (meds) to columns
-df_pd = df.loc[(2, -1)]
+df_pd = df.groupby(["ts", ("params", "W1"), ("params", "W2")]
+                   ).mean().loc[(2, -1)].unstack(level=0)
+
 # %%
 # plot final populations
-df_metric = df_pd[[('med_freqs', x)
-                   for x in [int2MedName[x] for x in exclusive]]]
-df_metric.plot()
+for w1 in df[('params', 'W1')].unique():
+    df_pd = df.groupby(
+        ["ts", ("params", "W1"), ("params", "W2")]).mean().loc[(2, -1)]
+    df_metric = df_pd.loc[w1][[('med_freqs', x)
+                               for x in [int2MedName[x] for x in exclusive]]].rename_axis("W2", axis=0)
+    df_metric.columns = df_metric.columns.droplevel(0)
+    pic_name = f'w2_sweep_med_freqs_w1_{w1}.png'
+    df_metric.plot(title="Final mediator populations",
+                   xlabel="W2").get_figure().savefig(line_plot_path+pic_name)
+# %%
+# coop conv
+
+df_metric = df_pd['coop_conv'].rename_axis(
+    "W2", axis=0)  # df with only the columns to plot
+pic_name = 'w2_sweep_coop_conv.png'
+df_metric.plot(title="Cooperator convergence",
+               xlabel="W2").get_figure().savefig(line_plot_path+pic_name)
+# %%
+# coop freq
+df_metric = df_pd[('agents', 'coop_freq')].rename_axis(
+    "W2", axis=0)  # df with only the columns to plot
+pic_name = 'w2_sweep_coop_freq.png'
+df_metric.plot(title="Final cooperators", xlabel="W2").get_figure().savefig(
+    line_plot_path+pic_name)
+
+
+# %%
+# heterogeneity
+df_metric = df_pd[('net', 'heterogeneity')].rename_axis(
+    "W2", axis=0).rename_axis("W1", axis=1)  # df with only the columns to plot
+pic_name = 'w2_sweep_heterogeneity.png'
+df_metric.plot(title="Heterogeneity", xlabel="W2").get_figure().savefig(
+    line_plot_path+pic_name)
+
+# %%
+# kmax
+df_metric = df_pd[('net', 'k_max')].rename_axis("W2", axis=0).rename_axis(
+    "W1", axis=1)  # df with only the columns to plot
+pic_name = 'w2_sweep_k_max.png'
+df_metric.plot(title="Max. Degree", xlabel="W2").get_figure().savefig(
+    line_plot_path+pic_name)
+
+# %%
+# rewires
+df_metric = df_pd[('net', 'rewire_n')].rename_axis("W2", axis=0).rename_axis(
+    "W1", axis=1)  # df with only the columns to plot
+df_metric_div = df_metric.div(df_pd[('net', 'stop_n')], axis=0)
+# df_metric_div = df_metric.div(df_metric.columns, axis=1)
+pic_name = 'w2_sweep_rewire.png'
+df_metric_div.plot(title="Rewires", xlabel="W2").get_figure().savefig(
+    line_plot_path+pic_name)
+
+# %%
+# rewires per opportunity
+df_metric = df_pd[('net', 'rewire_n')].rename_axis(
+    "W2", axis=0).rename_axis("W1", axis=1)
+fraction_rewires = 1-(1/(1+df_metric.columns))  # if columns are W1
+df_metric = df_metric.div(fraction_rewires, axis=1) / \
+    df_pd[('net', 'stop_n')]  # divide my total time steps
+pic_name = 'w2_sweep_rewire_per_opportunity.png'
+df_metric.plot(title="Rewires per opportunity", xlabel="W2", ylim=(
+    0, 1)).get_figure().savefig(line_plot_path+pic_name)
+
+# %%
+# results from competition run
+g = runs[4]['graph']
+state = minimize_nested_blockmodel_dl(g)
+draw_hierarchy(state, output="celegansneural_nested_mdl.pdf")
+
+# W1 sweeps over fixed W2 ( to compare with single meds)
+
+# %%
+# loading results from df
+converter_tuples = {"meds": ast.literal_eval,
+                    "ts": ast.literal_eval, "ws": lambda x: eval(x)}
+dfs = loadExperimentDf(
+    "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/data/w1_sweep")
+df = pd.concat(dfs)
+df = df.round(3)
+df = df.rename(columns={'Unnamed: 44_level_1': '',
+               'Unnamed: 45_level_1': '', 'Unnamed: 46_level_1': '', 'Unnamed: 47_level_1': ''}, level=1)
+df_mean = df.groupby([("params", "W1")]).mean()
+
+# %%
+# line plots over W
+line_plot_path = "/mnt/c/Users/frsc/Documents/Projects/aligning_rs/graphEgtExperiments/self_interested_mediators/experiments/plots/med_competition/w1_sweep/"
+df_base = df  # keep the original
+# prisoner's dilemma, unstack moves the index (meds) to columns
+df['meds'] = df['med'].apply(lambda r: tuple(
+    c for c in df['med'].columns if r[c] == 1), axis=1)  # tuples of mediators
+# tuples of ws pairs
+df['ws'] = list(zip(df[('params', 'W1')], df[('params', 'W2')]))
+df['ts'] = list(zip(df[('game', 't')], df[('game', 's')]))
+df['coop_conv'] = (df[('agents', 'coop_freq')] == 1).astype(int)
+# df = df_base.groupby(["ts", ("params", "W1"), 'meds']).mean()
+# prisoner's dilemma, unstack moves the index (meds) to columns
+df_pd = df.groupby(["ts", ("params", "W2"), ("params", "W1")]
+                   ).mean().loc[(2, -1)].loc[0.067]
 # %%
 # coop freq
 df_metric = df_pd[('agents', 'coop_freq')]  # df with only the columns to plot
 pic_name = 'coop_freq_all_meds.png'
+df_metric.plot().get_figure().savefig(line_plot_path+pic_name)
+
+
+# %%
+# heterogeneity
+df_metric = df_pd[('net', 'heterogeneity')]  # df with only the columns to plot
+pic_name = 'heterogeneity_all_meds.png'
+df_metric.plot().get_figure().savefig(line_plot_path+pic_name)
+
+# %%
+# kmax
+df_metric = df_pd[('net', 'k_max')]  # df with only the columns to plot
+pic_name = 'k_max_all_meds.png'
+df_metric.plot().get_figure().savefig(line_plot_path+pic_name)
+
+# %%
+# rewires
+df_metric = df_pd[('net', 'rewire_n')]  # df with only the columns to plot
+df_metric_div = df_metric.div(df_metric.index, axis=0)
+pic_name = 'rewire_all_meds.png'
+df_metric.plot().get_figure().savefig(line_plot_path+pic_name)
+
+# %%
+# rewires per opportunity
+fraction_rewires = (1-(1/(1+df_pd.index)))
+df_metric = df_pd[('net', 'rewire_n')].div(fraction_rewires, axis=0) / \
+    df_pd[('net', 'stop_n')]  # df with only the columns to plot
+df_metric_div = df_metric.div(df_metric.index, axis=0)
+pic_name = 'rewire_per_opportunity_all_meds.png'
 df_metric.plot().get_figure().savefig(line_plot_path+pic_name)
 
 

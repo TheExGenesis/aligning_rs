@@ -169,13 +169,11 @@ def eligibleNewFriends(graph, b, a):
 
 @njit
 def eligibleStrat(neighbors, strats, strat, x):
-    ofStrat = (np.array(strats) == strat).nonzero()[0]
+    ofStrat = (strats == strat).nonzero()[0]
     if ofStrat.shape[0] == 0:
         return None
     else:
         eligible = list(set(ofStrat) - neighbors - set([x]))
-        # if len(eligible) <= 0:
-        #     return None
         return eligible
 
 

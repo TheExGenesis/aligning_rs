@@ -49,6 +49,20 @@ def plotGraph2(n, graph, strats):
                vertex_fill_color=stratColors, vertex_size=deg, edge_color=edgeColors)
 
 
+# plot w medstrat colors
+def plotGraph3(n, graph, medStrats):
+    vIds = graph.new_vertex_property("string")
+    medColors = graph.new_vertex_property("string")
+    for i in range(n):
+        medColors[i] = {0: "orange", 5: "green", 6: "red",
+                        7: "gray", 8: "purple"}[medStrats[i]]
+        vIds[i] = f'{i}'
+    deg = graph.degree_property_map("out")
+    deg.a = (np.sqrt(deg.a/n))
+    pos = fruchterman_reingold_layout(graph)
+    graph_draw(graph, pos=pos, vertex_fill_color=medColors, vertex_size=deg)
+
+
 def plotHist(_list, bins):
     return pd.Series(_list).plot.hist(bins=bins)
 

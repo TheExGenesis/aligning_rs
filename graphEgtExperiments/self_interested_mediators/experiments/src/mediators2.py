@@ -16,15 +16,15 @@ def useNoMed(graph, strats, y, x, neighs_x, neighs_y):
 
 
 def useGoodMed(graph, strats, y, x, neighs_x, neighs_y):
-    z = eligibleStrat(neighs_x, strats, C, x)
-    return None if not z else z
+    eligible = eligibleStrat(set(neighs_x), strats, C, x)
+    return None if not eligible else eligible[crandint(0, len(eligible)-1)]
 
 # Recommends a random defector
 
 
 def useBadMed(graph, strats, y, x, neighs_x, neighs_y):
-    z = eligibleStrat(neighs_x, strats, D, x)
-    return None if not z else z
+    eligible = eligibleStrat(set(neighs_x), strats, D, x)
+    return None if not eligible else eligible[crandint(0, len(eligible)-1)]
 
 # Recommends a random node
 
@@ -38,8 +38,8 @@ def useRandomMed(graph, strats, y, x, neighs_x, neighs_y):
 
 
 def useFairMed(graph, strats, y, x, neighs_x, neighs_y):
-    z = eligibleStrat(neighs_x, strats, strats[x], x)
-    return None if not z else z
+    eligible = eligibleStrat(set(neighs_x), strats, strats[x], x)
+    return None if not eligible else eligible[crandint(0, len(eligible)-1)]
 
 
 '''Exclusive mediators, only rec their own users'''
