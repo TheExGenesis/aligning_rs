@@ -1,0 +1,1325 @@
+
+@article{bahar_recommendation_2018,
+	title = {Recommendation {Systems} and {Self} {Motivated} {Users}},
+	url = {http://arxiv.org/abs/1807.01732},
+	abstract = {Modern recommendation systems rely on the wisdom of the crowd to learn the optimal course of action. This induces an inherent mis-alignment of incentives between the system's objective to learn (explore) and the individual users' objective to take the contemporaneous optimal action (exploit). The design of such systems must account for this and also for additional information available to the users. A prominent, yet simple, example is when agents arrive sequentially and each agent observes the action and reward of his predecessor. We provide an incentive compatible and asymptotically optimal mechanism for that setting. The complexity of the mechanism suggests that the design of such systems for general settings is a challenging task.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1807.01732 [cs]},
+	author = {Bahar, Gal and Smorodinsky, Rann and Tennenholtz, Moshe},
+	month = jul,
+	year = {2018},
+	note = {arXiv: 1807.01732},
+	keywords = {Computer Science - Computer Science and Game Theory}
+}
+
+@inproceedings{santos_outcome-based_2019,
+	address = {Montreal QC, Canada},
+	series = {{AAMAS} '19},
+	title = {Outcome-based {Partner} {Selection} in {Collective} {Risk} {Dilemmas}},
+	isbn = {9781450363099},
+	abstract = {Understanding how to design agents that sustain cooperation in multi-agent systems has been a long lasting goal in distributed Artificial Intelligence. Solutions proposed rely on identifying defective agents and avoid cooperating or interacting with them. These mechanisms of social control are traditionally studied in games with linear and deterministic payoffs, such as the Prisoner's Dilemma or the Public Goods Game. In reality, however, agents often face dilemmas in which payoffs are uncertain and non-linear, as collective success requires a minimum number of cooperators. These games are called Collective Risk Dilemmas (CRD), and it is unclear whether the previous mechanisms of cooperation remain effective in this case. Here we study cooperation in CRD through partner-based selection. First, we discuss an experiment in which groups of humans and robots play a CRD. We find that people only prefer cooperative partners when they lose a previous game i.e., when collective success was not previously achieved). Secondly, we develop a simplified evolutionary game theoretical model that sheds light on these results, pointing the evolutionary advantages of selecting cooperative partners only when a previous game was lost. We show that this strategy constitutes a convenient balance between strictness (only interact with cooperators) and softness (cooperate and interact with everyone), thus suggesting a new way of designing agents that promote cooperation in CRD.},
+	urldate = {2020-05-29},
+	booktitle = {Proceedings of the 18th {International} {Conference} on {Autonomous} {Agents} and {MultiAgent} {Systems}},
+	publisher = {International Foundation for Autonomous Agents and Multiagent Systems},
+	author = {Santos, Fernando P. and Mascarenhas, Samuel F. and Santos, Francisco C. and Correia, Filipa and Gomes, Samuel and Paiva, Ana},
+	month = may,
+	year = {2019},
+	keywords = {cooperation, partner selection, complex systems, human-robot interaction, collective risk dilemma, game theory},
+	pages = {1556--1564}
+}
+
+@article{milano_recommender_2020,
+	title = {Recommender systems and their ethical challenges},
+	issn = {1435-5655},
+	url = {https://doi.org/10.1007/s00146-020-00950-y},
+	doi = {10.1007/s00146-020-00950-y},
+	abstract = {This article presents the first, systematic analysis of the ethical challenges posed by recommender systems through a literature review. The article identifies six areas of concern, and maps them onto a proposed taxonomy of different kinds of ethical impact. The analysis uncovers a gap in the literature: currently user-centred approaches do not consider the interests of a variety of other stakeholders—as opposed to just the receivers of a recommendation—in assessing the ethical impacts of a recommender system.},
+	language = {en},
+	urldate = {2020-05-29},
+	journal = {AI \& SOCIETY},
+	author = {Milano, Silvia and Taddeo, Mariarosaria and Floridi, Luciano},
+	month = feb,
+	year = {2020}
+}
+
+@book{zoetekouw_critical_2019,
+	title = {A critical analysis of the negative consequences caused by recommender systems used on social media platforms},
+	url = {http://essay.utwente.nl/78500},
+	author = {Zoetekouw, K.F.A.},
+	month = jul,
+	year = {2019}
+}
+
+@article{seaver_captivating_2019,
+	title = {Captivating algorithms: {Recommender} systems as traps},
+	volume = {24},
+	issn = {1359-1835, 1460-3586},
+	shorttitle = {Captivating algorithms},
+	url = {http://journals.sagepub.com/doi/10.1177/1359183518820366},
+	doi = {10.1177/1359183518820366},
+	abstract = {Algorithmic recommender systems are a ubiquitous feature of contemporary cultural life online, suggesting music, movies, and other materials to their users. This article, drawing on fieldwork with developers of recommender systems in the US, describes a tendency among these systems’ makers to describe their purpose as ‘hooking’ people – enticing them into frequent or enduring usage. Inspired by steady references to capture in the field, the author considers recommender systems as traps, drawing on anthropological theories about animal trapping. The article charts the rise of ‘captivation metrics’ – measures of user retention – enabled by a set of transformations in recommenders’ epistemic, economic, and technical contexts. Traps prove useful for thinking about how such systems relate to broader infrastructural ecologies of knowledge and technology. As recommenders spread across online cultural infrastructures and become practically inescapable, thinking with traps offers an alternative to common ethical framings that oppose tropes of freedom and coercion.},
+	language = {en},
+	number = {4},
+	urldate = {2020-05-29},
+	journal = {Journal of Material Culture},
+	author = {Seaver, Nick},
+	month = dec,
+	year = {2019},
+	pages = {421--436}
+}
+
+@inproceedings{hohnhold_focusing_2015,
+	address = {Sydney, NSW, Australia},
+	series = {{KDD} '15},
+	title = {Focusing on the {Long}-term: {It}'s {Good} for {Users} and {Business}},
+	isbn = {9781450336642},
+	shorttitle = {Focusing on the {Long}-term},
+	url = {https://doi.org/10.1145/2783258.2788583},
+	doi = {10.1145/2783258.2788583},
+	abstract = {Over the past 10+ years, online companies large and small have adopted widespread A/B testing as a robust data-based method for evaluating potential product improvements. In online experimentation, it is straightforward to measure the short-term effect, i.e., the impact observed during the experiment. However, the short-term effect is not always predictive of the long-term effect, i.e., the final impact once the product has fully launched and users have changed their behavior in response. Thus, the challenge is how to determine the long-term user impact while still being able to make decisions in a timely manner. We tackle that challenge in this paper by first developing experiment methodology for quantifying long-term user learning. We then apply this methodology to ads shown on Google search, more specifically, to determine and quantify the drivers of ads blindness and sightedness, the phenomenon of users changing their inherent propensity to click on or interact with ads. We use these results to create a model that uses metrics measurable in the short-term to predict the long-term. We learn that user satisfaction is paramount: ads blindness and sightedness are driven by the quality of previously viewed or clicked ads, as measured by both ad relevance and landing page quality. Focusing on user satisfaction both ensures happier users but also makes business sense, as our results illustrate. We describe two major applications of our findings: a conceptual change to our search ads auction that further increased the importance of ads quality, and a 50\% reduction of the ad load on Google's mobile search interface. The results presented in this paper are generalizable in two major ways. First, the methodology may be used to quantify user learning effects and to evaluate online experiments in contexts other than ads. Second, the ads blindness/sighted-ness results indicate that a focus on user satisfaction could help to reduce the ad load on the internet at large with long-term neutral, or even positive, business impact.},
+	urldate = {2020-05-29},
+	booktitle = {Proceedings of the 21th {ACM} {SIGKDD} {International} {Conference} on {Knowledge} {Discovery} and {Data} {Mining}},
+	publisher = {Association for Computing Machinery},
+	author = {Hohnhold, Henning and O'Brien, Deirdre and Tang, Diane},
+	month = aug,
+	year = {2015},
+	keywords = {controlled experiments, randomized experiments},
+	pages = {1849--1858}
+}
+
+@article{babaioff_mechanism_2015,
+	title = {Mechanism {Design} with {Strategic} {Mediators}},
+	url = {http://arxiv.org/abs/1501.04457},
+	abstract = {We consider the problem of designing mechanisms that interact with strategic agents through strategic intermediaries (or mediators), and investigate the cost to society due to the mediators' strategic behavior. Selfish agents with private information are each associated with exactly one strategic mediator, and can interact with the mechanism exclusively through that mediator. Each mediator aims to optimize the combined utility of his agents, while the mechanism aims to optimize the combined utility of all agents. We focus on the problem of facility location on a metric induced by a publicly known tree. With non-strategic mediators, there is a dominant strategy mechanism that is optimal. We show that when both agents and mediators act strategically, there is no dominant strategy mechanism that achieves any approximation. We, thus, slightly relax the incentive constraints, and define the notion of a two-sided incentive compatible mechanism. We show that the \$3\$-competitive deterministic mechanism suggested by Procaccia and Tennenholtz (2013) and Dekel et al. (2010) for lines extends naturally to trees, and is still \$3\$-competitive as well as two-sided incentive compatible. This is essentially the best possible. We then show that by allowing randomization one can construct a \$2\$-competitive randomized mechanism that is two-sided incentive compatible, and this is also essentially tight. This result also closes a gap left in the work of Procaccia and Tennenholtz (2013) and Lu et al. (2009) for the simpler problem of designing strategy-proof mechanisms for weighted agents with no mediators on a line, while extending to the more general model of trees. We also investigate a further generalization of the above setting where there are multiple levels of mediators.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1501.04457 [cs]},
+	author = {Babaioff, Moshe and Feldman, Moran and Tennenholtz, Moshe},
+	month = jan,
+	year = {2015},
+	note = {arXiv: 1501.04457},
+	keywords = {Computer Science - Computer Science and Game Theory, 68R05, 68W20, 68W25, 91A40, 91A46, F.2.2, G.2.1, K.4}
+}
+
+@misc{kurland_rethinking_2019,
+	title = {Rethinking {Search} {Engines} and {Recommendation} {Systems}: {A} {Game} {Theoretic} {Perspective}},
+	shorttitle = {Rethinking {Search} {Engines} and {Recommendation} {Systems}},
+	url = {https://cacm.acm.org/magazines/2019/12/241056-rethinking-search-engines-and-recommendation-systems/fulltext},
+	abstract = {Novel approaches draw on the strength of game theoretic mechanism design.},
+	language = {en},
+	urldate = {2020-05-29},
+	author = {Kurland, Oren, Moshe Tennenholtz},
+	month = dec,
+	year = {2019}
+}
+
+@article{yang_role_2013,
+	title = {Role of recommendation in spatial public goods games},
+	volume = {392},
+	issn = {03784371},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0378437112009892},
+	doi = {10.1016/j.physa.2012.11.024},
+	language = {en},
+	number = {9},
+	urldate = {2020-05-29},
+	journal = {Physica A: Statistical Mechanics and its Applications},
+	author = {Yang, Zhihu and Li, Zhi and Wu, Te and Wang, Long},
+	month = may,
+	year = {2013},
+	pages = {2038--2045}
+}
+
+@article{balduzzi_smooth_2020,
+	title = {Smooth markets: {A} basic mechanism for organizing gradient-based learners},
+	shorttitle = {Smooth markets},
+	url = {http://arxiv.org/abs/2001.04678},
+	abstract = {With the success of modern machine learning, it is becoming increasingly important to understand and control how learning algorithms interact. Unfortunately, negative results from game theory show there is little hope of understanding or controlling general n-player games. We therefore introduce smooth markets (SM-games), a class of n-player games with pairwise zero sum interactions. SM-games codify a common design pattern in machine learning that includes (some) GANs, adversarial training, and other recent algorithms. We show that SM-games are amenable to analysis and optimization using first-order methods.},
+	urldate = {2020-05-29},
+	journal = {arXiv:2001.04678 [cs, stat]},
+	author = {Balduzzi, David and Czarnecki, Wojciech M. and Anthony, Thomas W. and Gemp, Ian M. and Hughes, Edward and Leibo, Joel Z. and Piliouras, Georgios and Graepel, Thore},
+	month = jan,
+	year = {2020},
+	note = {arXiv: 2001.04678},
+	keywords = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Computer Science and Game Theory, Computer Science - Multiagent Systems, Statistics - Machine Learning}
+}
+
+@article{ben-porat_competing_2018,
+	title = {Competing {Prediction} {Algorithms}},
+	url = {http://arxiv.org/abs/1806.01703},
+	abstract = {Prediction is a well-studied machine learning task, and prediction algorithms are core ingredients in online products and services. Despite their centrality in the competition between online companies who offer prediction-based products, the strategic use of prediction algorithms remains unexplored. The goal of this paper is to examine strategic use of prediction algorithms. We introduce a novel game-theoretic setting that is based on the PAC learning framework, where each player (aka a prediction algorithm at competition) seeks to maximize the sum of points for which it produces an accurate prediction and the others do not. We show that algorithms aiming at generalization may wittingly miss-predict some points to perform better than others on expectation. We analyze the empirical game, i.e. the game induced on a given sample, prove that it always possesses a pure Nash equilibrium, and show that every better-response learning process converges. Moreover, our learning-theoretic analysis suggests that players can, with high probability, learn an approximate pure Nash equilibrium for the whole population using a small number of samples.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1806.01703 [cs]},
+	author = {Ben-Porat, Omer and Tennenholtz, Moshe},
+	month = jun,
+	year = {2018},
+	note = {arXiv: 1806.01703
+version: 1},
+	keywords = {Computer Science - Computer Science and Game Theory}
+}
+
+@inproceedings{izsak_search_2014,
+	address = {Gold Coast, Queensland, Australia},
+	series = {{SIGIR} '14},
+	title = {The search duel: a response to a strong ranker},
+	isbn = {9781450322577},
+	shorttitle = {The search duel},
+	url = {https://doi.org/10.1145/2600428.2609474},
+	doi = {10.1145/2600428.2609474},
+	abstract = {How can a search engine with a relatively weak relevance ranking function compete with a search engine that has a much stronger ranking function? This dual challenge, which to the best of our knowledge has not been addressed in previous work, entails an interesting bi-modal utility function for the weak search engine. That is, the goal is to produce in response to a query a document result list whose effectiveness does not fall much behind that of the strong search engine; and, which is quite different than that of the strong engine. We present a per-query algorithmic approach that leverages fundamental retrieval principles such as pseudo-feedback-based relevance modeling. We demonstrate the merits of our approach using TREC data.},
+	urldate = {2020-05-29},
+	booktitle = {Proceedings of the 37th international {ACM} {SIGIR} conference on {Research} \& development in information retrieval},
+	publisher = {Association for Computing Machinery},
+	author = {Izsak, Peter and Raiber, Fiana and Kurland, Oren and Tennenholtz, Moshe},
+	month = jul,
+	year = {2014},
+	keywords = {search engine competition, dueling algorithms},
+	pages = {919--922}
+}
+
+@inproceedings{calero_valdez_human_2018,
+	address = {Cham},
+	series = {Lecture {Notes} in {Computer} {Science}},
+	title = {Human {Factors} in the {Age} of {Algorithms}. {Understanding} the {Human}-in-the-loop {Using} {Agent}-{Based} {Modeling}},
+	isbn = {9783319914855},
+	doi = {10.1007/978-3-319-91485-5_27},
+	abstract = {The complex interaction of humans with digitized technology has far reaching consequences, many of which are still completely opaque in the present. Technology like social networks, artificial intelligence and automation impacts life at work, at home, and in the political sphere. When work is supported by decision support systems and self-optimization, human interaction with such systems is reduced to key decision making aspects using increasingly complex interfaces. Both, algorithms and human operators become linchpins in the opaque workings of the complex socio-technical system. Similarly, when looking at human communication flows in social media, algorithms in the background control the flow of information using recommender systems. The users react to this filtered flow of information, starting a feedback-loop between users and algorithm—the filter bubble. Both scenarios share a common feature: complex human-algorithm interaction. Both scenarios lack a deep understanding of how this interaction must be properly designed. We propose the use of agent-based modeling to address the human-in-the-loop as a part of the complex socio-technical system by comparing several methods of modeling and investigating their applicability.},
+	language = {en},
+	booktitle = {Social {Computing} and {Social} {Media}. {Technologies} and {Analytics}},
+	publisher = {Springer International Publishing},
+	author = {Calero Valdez, André and Ziefle, Martina},
+	editor = {Meiselwitz, Gabriele},
+	year = {2018},
+	keywords = {Agent-based modeling ,  Social simulation ,  Cognitive simulation ,  Opinion forming ,  Industrie 4.0 ,  Internet of things ,  Internet of production },
+	pages = {357--371}
+}
+
+@article{ie_recsim:_2019,
+	title = {{RecSim}: {A} {Configurable} {Simulation} {Platform} for {Recommender} {Systems}},
+	shorttitle = {{RecSim}},
+	url = {http://arxiv.org/abs/1909.04847},
+	abstract = {We propose RecSim, a configurable platform for authoring simulation environments for recommender systems (RSs) that naturally supports sequential interaction with users. RecSim allows the creation of new environments that reflect particular aspects of user behavior and item structure at a level of abstraction well-suited to pushing the limits of current reinforcement learning (RL) and RS techniques in sequential interactive recommendation problems. Environments can be easily configured that vary assumptions about: user preferences and item familiarity; user latent state and its dynamics; and choice models and other user response behavior. We outline how RecSim offers value to RL and RS researchers and practitioners, and how it can serve as a vehicle for academic-industrial collaboration.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1909.04847 [cs, stat]},
+	author = {Ie, Eugene and Hsu, Chih-wei and Mladenov, Martin and Jain, Vihan and Narvekar, Sanmit and Wang, Jing and Wu, Rui and Boutilier, Craig},
+	month = sep,
+	year = {2019},
+	note = {arXiv: 1909.04847},
+	keywords = {Computer Science - Machine Learning, Computer Science - Human-Computer Interaction, Computer Science - Information Retrieval, Statistics - Machine Learning}
+}
+
+@article{rohde_recogym:_2018,
+	title = {{RecoGym}: {A} {Reinforcement} {Learning} {Environment} for the problem of {Product} {Recommendation} in {Online} {Advertising}},
+	shorttitle = {{RecoGym}},
+	url = {http://arxiv.org/abs/1808.00720},
+	abstract = {Recommender Systems are becoming ubiquitous in many settings and take many forms, from product recommendation in e-commerce stores, to query suggestions in search engines, to friend recommendation in social networks. Current research directions which are largely based upon supervised learning from historical data appear to be showing diminishing returns with a lot of practitioners report a discrepancy between improvements in offline metrics for supervised learning and the online performance of the newly proposed models. One possible reason is that we are using the wrong paradigm: when looking at the long-term cycle of collecting historical performance data, creating a new version of the recommendation model, A/B testing it and then rolling it out. We see that there a lot of commonalities with the reinforcement learning (RL) setup, where the agent observes the environment and acts upon it in order to change its state towards better states (states with higher rewards). To this end we introduce RecoGym, an RL environment for recommendation, which is defined by a model of user traffic patterns on e-commerce and the users response to recommendations on the publisher websites. We believe that this is an important step forward for the field of recommendation systems research, that could open up an avenue of collaboration between the recommender systems and reinforcement learning communities and lead to better alignment between offline and online performance metrics.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1808.00720 [cs]},
+	author = {Rohde, David and Bonner, Stephen and Dunlop, Travis and Vasile, Flavian and Karatzoglou, Alexandros},
+	month = sep,
+	year = {2018},
+	note = {arXiv: 1808.00720},
+	keywords = {Computer Science - Information Retrieval, Computer Science - Machine Learning}
+}
+
+@article{zafari_modelling_2018,
+	title = {Modelling and {Analysis} of {Temporal} {Preference} {Drifts} {Using} {A} {Component}-{Based} {Factorised} {Latent} {Approach}},
+	url = {https://www.arxiv-vanity.com/papers/1802.09728/},
+	abstract = {In recommender systems, human preferences are identified by a number of individual components with complicated interactions and properties. Recently, the dynamicity of preferences has been the focus of several studies. The changes in user preferences can originate from substantial reasons, like personality shift, or transient and circumstantial ones, like seasonal changes in item popularities. Disregarding these temporal drifts in modelling user preferences can result in unhelpful recommendations. Moreover, different temporal patterns can be associated with various preference domains, and preference components and their combinations. These components comprise preferences over features, preferences over feature values, conditional dependencies between features, socially-influenced preferences, and bias. For example, in the movies domain, the user can change his rating behaviour (bias shift), her preference for genre over language (feature preference shift), or start favouring drama over comedy (feature value preference shift). In this paper, we first propose a novel latent factor model to capture the domain-dependent component-specific temporal patterns in preferences. The component-based approach followed in modelling the aspects of preferences and their temporal effects enables us to arbitrarily switch components on and off. We evaluate the proposed method on three popular recommendation datasets and show that it significantly outperforms the most accurate state-of-the-art static models. The experiments also demonstrate the greater robustness and stability of the proposed dynamic model in comparison with the most successful models to date. We also analyse the temporal behaviour of different preference components and their combinations and show that the dynamic behaviour of preference components is highly dependent on the preference dataset and domain. Therefore, the results also highlight the importance of modelling temporal effects but also underline the advantages of a component-based architecture that is better suited to capture domain-specific balances in the contributions of the aspects.},
+	language = {en},
+	urldate = {2020-05-29},
+	author = {Zafari, F. and Moser, I. and Baarslag, T.},
+	month = feb,
+	year = {2018}
+}
+
+@article{vasconcelos_consensus_2019,
+	title = {Consensus and {Polarisation} in {Competing} {Complex} {Contagion} {Processes}},
+	volume = {16},
+	issn = {1742-5689, 1742-5662},
+	url = {http://arxiv.org/abs/1811.08525},
+	doi = {10.1098/rsif.2019.0196},
+	abstract = {The rate of adoption of new information depends on reinforcement from multiple sources in a way that often cannot be described by simple contagion processes. In such cases, contagion is said to be complex. Complex contagion happens in the diffusion of human behaviours, innovations, and knowledge. Based on that evidence, we propose a model that considers multiple, potentially asymmetric, and competing contagion processes and analyse its respective population-wide dynamics, bringing together ideas from complex contagion, opinion dynamics, evolutionary game theory, and language competition by shifting the focus from individuals to the properties of the diffusing processes. We show that our model spans a dynamical space in which the population exhibits patterns of consensus, dominance, and, importantly, different types of polarisation, a more diverse dynamical environment that contrasts with single simple contagion processes. We show how these patterns emerge and how different population structures modify them through a natural development of spatial correlations: structured interactions increase the range of the dominance regime by reducing that of dynamic polarisation, tight modular structures can generate structural polarisation, depending on the interplay between fundamental properties of the processes and the modularity of the interaction network.},
+	number = {155},
+	urldate = {2020-05-29},
+	journal = {Journal of The Royal Society Interface},
+	author = {Vasconcelos, Vítor V. and Levin, Simon A. and Pinheiro, Flávio L.},
+	month = jun,
+	year = {2019},
+	note = {arXiv: 1811.08525},
+	keywords = {Physics - Physics and Society},
+	pages = {20190196}
+}
+
+@inproceedings{kumar_modeling_2019,
+	title = {Modeling {Decisions} in {Collective} {Risk} {Social} {Dilemma} {Games} for {Climate} {Change} {Using} {Reinforcement} {Learning}},
+	doi = {10.1109/COGSIMA.2019.8724273},
+	abstract = {Prior research has used reinforcement-learning (RL) models like Expectancy-Valence-Learning (EVL) and Prospect-Valence-Learning (PVL) to investigate human decisions in choice games. However, currently little is known on how RL models would account for human decisions in games where people face a collective risk social dilemma (CRSD) against societal problems like climate change. In CRSD game, a group of players invested some part of their private incomes to a public fund over several rounds with the goal of collectively reaching a climate target, failing which climate change would occur with a certain probability and players would lose their remaining incomes. Next EVL and PVL models were calibrated to human decisions across two between-subject conditions in CRSD (Info-all: N=120; No-Info: N=120), where half of the players in each condition possessed lesser wealth (poor) compared to the other half (rich). A symmetric Nash model was also run in both conditions as a benchmark. In Info-all condition, players possessed complete information on investments of other players after every round; whereas, in the No-info condition, players did not possess this information. Our results showed that for both rich and poor players, the EVL model performed better than the PVL model in No-info condition; however, the PVL model performed better than the EVL model in the Info condition. Both the EVL and PVL models outperformed the symmetric Nash model. Model parameters showed reliance on recency, reward-seeking, and exploitative behaviours. We highlight the implications of our model results for situations involving a collective risk social dilemma.},
+	booktitle = {2019 {IEEE} {Conference} on {Cognitive} and {Computational} {Aspects} of {Situation} {Management} ({CogSIMA})},
+	author = {Kumar, Medha and Agrawal, Kapil and Dutt, Varun},
+	month = apr,
+	year = {2019},
+	note = {ISSN: 2379-1675},
+	keywords = {cognition, decision making, environmental science computing, game theory, learning (artificial intelligence), social sciences computing, collective risk social dilemma games, climate change, human decisions, choice games, RL models, CRSD game, private incomes, climate target, between-subject conditions, symmetric Nash model, EVL model, PVL model, reinforcement learning, no-info condition, prospect-valence-learning, expectancy-valence-learning, Investment, Games, Computational modeling, Data models, Mathematical model, Collective risk social dilemma, decision-making, reinforcement-learning, Expectancy-Valence-Learning model, Prospect-Valence-Learning model},
+	pages = {26--33}
+}
+
+@article{tuyls_symmetric_2018,
+	title = {Symmetric {Decomposition} of {Asymmetric} {Games}},
+	url = {http://arxiv.org/abs/1711.05074},
+	abstract = {We introduce new theoretical insights into two-population asymmetric games allowing for an elegant symmetric decomposition into two single population symmetric games. Specifically, we show how an asymmetric bimatrix game (A,B) can be decomposed into its symmetric counterparts by envisioning and investigating the payoff tables (A and B) that constitute the asymmetric game, as two independent, single population, symmetric games. We reveal several surprising formal relationships between an asymmetric two-population game and its symmetric single population counterparts, which facilitate a convenient analysis of the original asymmetric game due to the dimensionality reduction of the decomposition. The main finding reveals that if (x,y) is a Nash equilibrium of an asymmetric game (A,B), this implies that y is a Nash equilibrium of the symmetric counterpart game determined by payoff table A, and x is a Nash equilibrium of the symmetric counterpart game determined by payoff table B. Also the reverse holds and combinations of Nash equilibria of the counterpart games form Nash equilibria of the asymmetric game. We illustrate how these formal relationships aid in identifying and analysing the Nash structure of asymmetric games, by examining the evolutionary dynamics of the simpler counterpart games in several canonical examples.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1711.05074 [cs]},
+	author = {Tuyls, Karl and Perolat, Julien and Lanctot, Marc and Ostrovski, Georg and Savani, Rahul and Leibo, Joel and Ord, Toby and Graepel, Thore and Legg, Shane},
+	month = jan,
+	year = {2018},
+	note = {arXiv: 1711.05074},
+	keywords = {Computer Science - Computer Science and Game Theory, Computer Science - Multiagent Systems}
+}
+
+@misc{fc_scale-free_2005,
+	title = {Scale-free {Networks} {Provide} a {Unifying} {Framework} for the {Emergence} of {Cooperation}},
+	url = {https://pubmed.ncbi.nlm.nih.gov/16197256/},
+	abstract = {We study the evolution of cooperation in the framework of evolutionary game theory, adopting the prisoner's dilemma and snowdrift game as metaphors of cooperation between unrelated individuals. In sharp contrast with previous results we find that, whenever individuals interact following networks of …},
+	language = {en},
+	urldate = {2020-05-29},
+	journal = {Physical review letters},
+	author = {Fc, Santos and Jm, Pacheco},
+	month = aug,
+	year = {2005},
+	pmid = {16197256},
+	doi = {10.1103/PhysRevLett.95.098104}
+}
+
+@article{santos_cooperation_2006,
+	title = {Cooperation {Prevails} {When} {Individuals} {Adjust} {Their} {Social} {Ties}},
+	volume = {2},
+	issn = {1553-734X},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1617133/},
+	doi = {10.1371/journal.pcbi.0020140},
+	abstract = {Conventional evolutionary game theory predicts that natural selection favours the selfish and strong even though cooperative interactions thrive at all levels of organization in living systems. Recent investigations demonstrated that a limiting factor for the evolution of cooperative interactions is the way in which they are organized, cooperators becoming evolutionarily competitive whenever individuals are constrained to interact with few others along the edges of networks with low average connectivity. Despite this insight, the conundrum of cooperation remains since recent empirical data shows that real networks exhibit typically high average connectivity and associated single-to-broad–scale heterogeneity. Here, a computational model is constructed in which individuals are able to self-organize both their strategy and their social ties throughout evolution, based exclusively on their self-interest. We show that the entangled evolution of individual strategy and network structure constitutes a key mechanism for the sustainability of cooperation in social networks. For a given average connectivity of the population, there is a critical value for the ratio W between the time scales associated with the evolution of strategy and of structure above which cooperators wipe out defectors. Moreover, the emerging social networks exhibit an overall heterogeneity that accounts very well for the diversity of patterns recently found in acquired data on social networks. Finally, heterogeneity is found to become maximal when W reaches its critical value. These results show that simple topological dynamics reflecting the individual capacity for self-organization of social ties can produce realistic networks of high average connectivity with associated single-to-broad–scale heterogeneity. On the other hand, they show that cooperation cannot evolve as a result of “social viscosity” alone in heterogeneous networks with high average connectivity, requiring the additional mechanism of topological co-evolution to ensure the survival of cooperative behaviour., In social networks, some individuals interact with more people and more often than others. In this context, one may wonder: under which conditions are social beings willing to be cooperative? Current models proposed in the context of evolutionary game theory cannot explain cooperation in communities with a high average number of social ties. Santos, Pacheco, and Lenaerts show that when individuals are able to simultaneously alter their behaviour and their social ties, cooperation may prevail. Moreover, the structure of the final networks corresponds to those found in empirical data. Their article concludes that the more individuals interact, the more they must be able to promptly adjust their partnerships for cooperation to thrive. Consequently, to understand the occurrence of cooperative behaviour in realistic settings, both the evolution of the complex network of interactions and the evolution of strategies should be taken into account simultaneously.},
+	number = {10},
+	urldate = {2020-05-29},
+	journal = {PLoS Computational Biology},
+	author = {Santos, Francisco C and Pacheco, Jorge M and Lenaerts, Tom},
+	month = oct,
+	year = {2006},
+	pmid = {17054392},
+	pmcid = {PMC1617133}
+}
+
+@article{anastassacos_partner_2019,
+	title = {Partner {Selection} for the {Emergence} of {Cooperation} in {Multi}-{Agent} {Systems} {Using} {Reinforcement} {Learning}},
+	url = {http://arxiv.org/abs/1902.03185},
+	abstract = {Social dilemmas have been widely studied to explain how humans are able to cooperate in society. Considerable effort has been invested in designing artificial agents for social dilemmas that incorporate explicit agent motivations that are chosen to favor coordinated or cooperative responses. The prevalence of this general approach points towards the importance of achieving an understanding of both an agent's internal design and external environment dynamics that facilitate cooperative behavior. In this paper, we investigate how partner selection can promote cooperative behavior between agents who are trained to maximize a purely selfish objective function. Our experiments reveal that agents trained with this dynamic learn a strategy that retaliates against defectors while promoting cooperation with other agents resulting in a prosocial society.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1902.03185 [cs]},
+	author = {Anastassacos, Nicolas and Hailes, Stephen and Musolesi, Mirco},
+	month = nov,
+	year = {2019},
+	note = {arXiv: 1902.03185},
+	keywords = {Computer Science - Multiagent Systems, Computer Science - Artificial Intelligence}
+}
+
+@techreport{blanco_preferences_2009,
+	address = {Rochester, NY},
+	type = {{SSRN} {Scholarly} {Paper}},
+	title = {Preferences and {Beliefs} in a {Sequential} {Social} {Dilemma}: {A} {Within}-{Subjects} {Analysis}},
+	shorttitle = {Preferences and {Beliefs} in a {Sequential} {Social} {Dilemma}},
+	url = {https://papers.ssrn.com/abstract=1522692},
+	abstract = {Within-subject data from sequential social dilemma experiments reveal a correlation of first-and second-mover decisions for which two channels may be responsible, that our experiment allows to separate: i) a direct, preference-based channel that influences both first- and second-mover decisions; ii) an indirect channel, where second-mover decisions influence beliefs via a consensus effect, and the first-mover decision is a best response to these beliefs. We find strong evidence for the indirect channel: beliefs about second-mover cooperation are biased toward own second-mover behavior, and most subjects best respond to stated beliefs. But when first movers know the true probability of second-mover cooperation, subjects' own second moves still have predictive power regarding their first moves, suggesting that the direct channel also plays a role.},
+	language = {en},
+	number = {ID 1522692},
+	urldate = {2020-05-29},
+	institution = {Social Science Research Network},
+	author = {Blanco, Mariana and Engelmann, Dirk and Koch, Alexander K. and Normann, Hans-Theo},
+	month = dec,
+	year = {2009},
+	keywords = {experimental economics, consensus effect, social dilemmas}
+}
+
+@article{lerer_maintaining_2018,
+	title = {Maintaining cooperation in complex social dilemmas using deep reinforcement learning},
+	url = {http://arxiv.org/abs/1707.01068},
+	abstract = {Social dilemmas are situations where individuals face a temptation to increase their payoffs at a cost to total welfare. Building artificially intelligent agents that achieve good outcomes in these situations is important because many real world interactions include a tension between selfish interests and the welfare of others. We show how to modify modern reinforcement learning methods to construct agents that act in ways that are simple to understand, nice (begin by cooperating), provokable (try to avoid being exploited), and forgiving (try to return to mutual cooperation). We show both theoretically and experimentally that such agents can maintain cooperation in Markov social dilemmas. Our construction does not require training methods beyond a modification of self-play, thus if an environment is such that good strategies can be constructed in the zero-sum case (eg. Atari) then we can construct agents that solve social dilemmas in this environment.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1707.01068 [cs]},
+	author = {Lerer, Adam and Peysakhovich, Alexander},
+	month = mar,
+	year = {2018},
+	note = {arXiv: 1707.01068},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computer Science and Game Theory, Computer Science - Multiagent Systems}
+}
+
+@article{hernandez-leal_survey_2019,
+	title = {A {Survey} and {Critique} of {Multiagent} {Deep} {Reinforcement} {Learning}},
+	volume = {33},
+	issn = {1387-2532, 1573-7454},
+	url = {http://arxiv.org/abs/1810.05587},
+	doi = {10.1007/s10458-019-09421-1},
+	abstract = {Deep reinforcement learning (RL) has achieved outstanding results in recent years. This has led to a dramatic increase in the number of applications and methods. Recent works have explored learning beyond single-agent scenarios and have considered multiagent learning (MAL) scenarios. Initial results report successes in complex multiagent domains, although there are several challenges to be addressed. The primary goal of this article is to provide a clear overview of current multiagent deep reinforcement learning (MDRL) literature. Additionally, we complement the overview with a broader analysis: (i) we revisit previous key components, originally presented in MAL and RL, and highlight how they have been adapted to multiagent deep reinforcement learning settings. (ii) We provide general guidelines to new practitioners in the area: describing lessons learned from MDRL works, pointing to recent benchmarks, and outlining open avenues of research. (iii) We take a more critical tone raising practical challenges of MDRL (e.g., implementation and computational demands). We expect this article will help unify and motivate future research to take advantage of the abundant literature that exists (e.g., RL and MAL) in a joint effort to promote fruitful research in the multiagent community.},
+	number = {6},
+	urldate = {2020-05-29},
+	journal = {Autonomous Agents and Multi-Agent Systems},
+	author = {Hernandez-Leal, Pablo and Kartal, Bilal and Taylor, Matthew E.},
+	month = nov,
+	year = {2019},
+	note = {arXiv: 1810.05587},
+	keywords = {Computer Science - Multiagent Systems, Computer Science - Artificial Intelligence, Computer Science - Machine Learning},
+	pages = {750--797}
+}
+
+@article{leibo_autocurricula_2019,
+	title = {Autocurricula and the {Emergence} of {Innovation} from {Social} {Interaction}: {A} {Manifesto} for {Multi}-{Agent} {Intelligence} {Research}},
+	shorttitle = {Autocurricula and the {Emergence} of {Innovation} from {Social} {Interaction}},
+	url = {http://arxiv.org/abs/1903.00742},
+	abstract = {Evolution has produced a multi-scale mosaic of interacting adaptive units. Innovations arise when perturbations push parts of the system away from stable equilibria into new regimes where previously well-adapted solutions no longer work. Here we explore the hypothesis that multi-agent systems sometimes display intrinsic dynamics arising from competition and cooperation that provide a naturally emergent curriculum, which we term an autocurriculum. The solution of one social task often begets new social tasks, continually generating novel challenges, and thereby promoting innovation. Under certain conditions these challenges may become increasingly complex over time, demanding that agents accumulate ever more innovations.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1903.00742 [cs, q-bio]},
+	author = {Leibo, Joel Z. and Hughes, Edward and Lanctot, Marc and Graepel, Thore},
+	month = mar,
+	year = {2019},
+	note = {arXiv: 1903.00742},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computer Science and Game Theory, Computer Science - Multiagent Systems, Computer Science - Neural and Evolutionary Computing, Quantitative Biology - Neurons and Cognition}
+}
+
+@article{gupta_networked_2020,
+	title = {Networked {Multi}-{Agent} {Reinforcement} {Learning} with {Emergent} {Communication}},
+	url = {http://arxiv.org/abs/2004.02780},
+	abstract = {Multi-Agent Reinforcement Learning (MARL) methods find optimal policies for agents that operate in the presence of other learning agents. Central to achieving this is how the agents coordinate. One way to coordinate is by learning to communicate with each other. Can the agents develop a language while learning to perform a common task? In this paper, we formulate and study a MARL problem where cooperative agents are connected to each other via a fixed underlying network. These agents can communicate along the edges of this network by exchanging discrete symbols. However, the semantics of these symbols are not predefined and, during training, the agents are required to develop a language that helps them in accomplishing their goals. We propose a method for training these agents using emergent communication. We demonstrate the applicability of the proposed framework by applying it to the problem of managing traffic controllers, where we achieve state-of-the-art performance as compared to a number of strong baselines. More importantly, we perform a detailed analysis of the emergent communication to show, for instance, that the developed language is grounded and demonstrate its relationship with the underlying network topology. To the best of our knowledge, this is the only work that performs an in depth analysis of emergent communication in a networked MARL setting while being applicable to a broad class of problems.},
+	urldate = {2020-05-29},
+	journal = {arXiv:2004.02780 [cs]},
+	author = {Gupta, Shubham and Hazra, Rishi and Dukkipati, Ambedkar},
+	month = apr,
+	year = {2020},
+	note = {arXiv: 2004.02780},
+	keywords = {Computer Science - Multiagent Systems, Computer Science - Artificial Intelligence}
+}
+
+@article{leibo_multi-agent_2017,
+	title = {Multi-agent {Reinforcement} {Learning} in {Sequential} {Social} {Dilemmas}},
+	url = {http://arxiv.org/abs/1702.03037},
+	abstract = {Matrix games like Prisoner's Dilemma have guided research on social dilemmas for decades. However, they necessarily treat the choice to cooperate or defect as an atomic action. In real-world social dilemmas these choices are temporally extended. Cooperativeness is a property that applies to policies, not elementary actions. We introduce sequential social dilemmas that share the mixed incentive structure of matrix game social dilemmas but also require agents to learn policies that implement their strategic intentions. We analyze the dynamics of policies learned by multiple self-interested independent learning agents, each using its own deep Q-network, on two Markov games we introduce here: 1. a fruit Gathering game and 2. a Wolfpack hunting game. We characterize how learned behavior in each domain changes as a function of environmental factors including resource abundance. Our experiments show how conflict can emerge from competition over shared resources and shed light on how the sequential nature of real world social dilemmas affects cooperation.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1702.03037 [cs]},
+	author = {Leibo, Joel Z. and Zambaldi, Vinicius and Lanctot, Marc and Marecki, Janusz and Graepel, Thore},
+	month = feb,
+	year = {2017},
+	note = {arXiv: 1702.03037},
+	keywords = {Computer Science - Multiagent Systems, Computer Science - Artificial Intelligence, Computer Science - Computer Science and Game Theory, Computer Science - Machine Learning}
+}
+
+@article{jaques_social_2019,
+	title = {Social {Influence} as {Intrinsic} {Motivation} for {Multi}-{Agent} {Deep} {Reinforcement} {Learning}},
+	url = {http://arxiv.org/abs/1810.08647},
+	abstract = {We propose a unified mechanism for achieving coordination and communication in Multi-Agent Reinforcement Learning (MARL), through rewarding agents for having causal influence over other agents' actions. Causal influence is assessed using counterfactual reasoning. At each timestep, an agent simulates alternate actions that it could have taken, and computes their effect on the behavior of other agents. Actions that lead to bigger changes in other agents' behavior are considered influential and are rewarded. We show that this is equivalent to rewarding agents for having high mutual information between their actions. Empirical results demonstrate that influence leads to enhanced coordination and communication in challenging social dilemma environments, dramatically increasing the learning curves of the deep RL agents, and leading to more meaningful learned communication protocols. The influence rewards for all agents can be computed in a decentralized way by enabling agents to learn a model of other agents using deep neural networks. In contrast, key previous works on emergent communication in the MARL setting were unable to learn diverse policies in a decentralized manner and had to resort to centralized training. Consequently, the influence reward opens up a window of new opportunities for research in this area.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1810.08647 [cs, stat]},
+	author = {Jaques, Natasha and Lazaridou, Angeliki and Hughes, Edward and Gulcehre, Caglar and Ortega, Pedro A. and Strouse, D. J. and Leibo, Joel Z. and de Freitas, Nando},
+	month = jun,
+	year = {2019},
+	note = {arXiv: 1810.08647
+version: 3},
+	keywords = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Multiagent Systems, Statistics - Machine Learning}
+}
+
+@article{harper_reinforcement_2017,
+	title = {Reinforcement learning produces dominant strategies for the {Iterated} {Prisoner}’s {Dilemma}},
+	volume = {12},
+	issn = {1932-6203},
+	url = {https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188046},
+	doi = {10.1371/journal.pone.0188046},
+	abstract = {We present tournament results and several powerful strategies for the Iterated Prisoner’s Dilemma created using reinforcement learning techniques (evolutionary and particle swarm algorithms). These strategies are trained to perform well against a corpus of over 170 distinct opponents, including many well-known and classic strategies. All the trained strategies win standard tournaments against the total collection of other opponents. The trained strategies and one particular human made designed strategy are the top performers in noisy tournaments also.},
+	language = {en},
+	number = {12},
+	urldate = {2020-05-29},
+	journal = {PLOS ONE},
+	author = {Harper, Marc and Knight, Vincent and Jones, Martin and Koutsovoulos, Georgios and Glynatsi, Nikoleta E. and Campbell, Owen},
+	month = dec,
+	year = {2017},
+	keywords = {Artificial neural networks, Prisoner's dilemma, Hidden Markov models, Machine learning algorithms, Evolutionary algorithms, Neural networks, Algorithms, Game theory},
+	pages = {e0188046}
+}
+
+@techreport{clifton_cooperation_2019,
+	title = {Cooperation, {Conflict}, and {Transformative} {Artificial} {Intelligence}: {A} {Research} {Agenda}},
+	author = {Clifton, Jesse },
+	month = dec,
+	year = {2019}
+}
+
+@article{tuyls_generalised_2018,
+	title = {A {Generalised} {Method} for {Empirical} {Game} {Theoretic} {Analysis}},
+	url = {http://arxiv.org/abs/1803.06376},
+	abstract = {This paper provides theoretical bounds for empirical game theoretical analysis of complex multi-agent interactions. We provide insights in the empirical meta game showing that a Nash equilibrium of the meta-game is an approximate Nash equilibrium of the true underlying game. We investigate and show how many data samples are required to obtain a close enough approximation of the underlying game. Additionally, we extend the meta-game analysis methodology to asymmetric games. The state-of-the-art has only considered empirical games in which agents have access to the same strategy sets and the payoff structure is symmetric, implying that agents are interchangeable. Finally, we carry out an empirical illustration of the generalised method in several domains, illustrating the theory and evolutionary dynamics of several versions of the AlphaGo algorithm (symmetric), the dynamics of the Colonel Blotto game played by human players on Facebook (symmetric), and an example of a meta-game in Leduc Poker (asymmetric), generated by the PSRO multi-agent learning algorithm.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1803.06376 [cs]},
+	author = {Tuyls, Karl and Perolat, Julien and Lanctot, Marc and Leibo, Joel Z. and Graepel, Thore},
+	month = mar,
+	year = {2018},
+	note = {arXiv: 1803.06376},
+	keywords = {Computer Science - Computer Science and Game Theory, Computer Science - Multiagent Systems}
+}
+
+@article{lanctot_unified_2017,
+	title = {A {Unified} {Game}-{Theoretic} {Approach} to {Multiagent} {Reinforcement} {Learning}},
+	url = {http://arxiv.org/abs/1711.00832},
+	abstract = {To achieve general intelligence, agents must learn how to interact with others in a shared environment: this is the challenge of multiagent reinforcement learning (MARL). The simplest form is independent reinforcement learning (InRL), where each agent treats its experience as part of its (non-stationary) environment. In this paper, we first observe that policies learned using InRL can overfit to the other agents' policies during training, failing to sufficiently generalize during execution. We introduce a new metric, joint-policy correlation, to quantify this effect. We describe an algorithm for general MARL, based on approximate best responses to mixtures of policies generated using deep reinforcement learning, and empirical game-theoretic analysis to compute meta-strategies for policy selection. The algorithm generalizes previous ones such as InRL, iterated best response, double oracle, and fictitious play. Then, we present a scalable implementation which reduces the memory requirement using decoupled meta-solvers. Finally, we demonstrate the generality of the resulting policies in two partially observable settings: gridworld coordination games and poker.},
+	urldate = {2020-05-29},
+	journal = {arXiv:1711.00832 [cs]},
+	author = {Lanctot, Marc and Zambaldi, Vinicius and Gruslys, Audrunas and Lazaridou, Angeliki and Tuyls, Karl and Perolat, Julien and Silver, David and Graepel, Thore},
+	month = nov,
+	year = {2017},
+	note = {arXiv: 1711.00832},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computer Science and Game Theory, Computer Science - Machine Learning, Computer Science - Multiagent Systems}
+}
+
+@article{omidshafiei_navigating_2020,
+	title = {Navigating the {Landscape} of {Games}},
+	url = {http://arxiv.org/abs/2005.01642},
+	abstract = {Games are traditionally recognized as one of the key testbeds underlying progress in artificial intelligence (AI), aptly referred to as the "Drosophila of AI". Traditionally, researchers have focused on using games to build strong AI agents that, e.g., achieve human-level performance. This progress, however, also requires a classification of how 'interesting' a game is for an artificial agent. Tackling this latter question not only facilitates an understanding of the characteristics of learnt AI agents in games, but also helps to determine what game an AI should address next as part of its training. Here, we show how network measures applied to so-called response graphs of large-scale games enable the creation of a useful landscape of games, quantifying the relationships between games of widely varying sizes, characteristics, and complexities. We illustrate our findings in various domains, ranging from well-studied canonical games to significantly more complex empirical games capturing the performance of trained AI agents pitted against one another. Our results culminate in a demonstration of how one can leverage this information to automatically generate new and interesting games, including mixtures of empirical games synthesized from real world games.},
+	urldate = {2020-05-29},
+	journal = {arXiv:2005.01642 [cs]},
+	author = {Omidshafiei, Shayegan and Tuyls, Karl and Czarnecki, Wojciech M. and Santos, Francisco C. and Rowland, Mark and Connor, Jerome and Hennes, Daniel and Muller, Paul and Perolat, Julien and De Vylder, Bart and Gruslys, Audrunas and Munos, Remi},
+	month = may,
+	year = {2020},
+	note = {arXiv: 2005.01642},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Multiagent Systems}
+}
+
+@techreport{drexler_reframing_2019,
+	title = {Reframing {Superintelligence}: {Comprehensive} {AI} {Services} as {General} {Intelligence}”, {Technical} {Report}},
+	institution = {Future of Humanity Institute, University of Oxford},
+	author = {Drexler, K.E.},
+	month = jan,
+	year = {2019}
+}
+
+@article{traulsen_stochastic_2006,
+	title = {Stochastic {Dynamics} of {Invasion} and {Fixation}},
+	volume = {74},
+	issn = {1539-3755, 1550-2376},
+	url = {http://arxiv.org/abs/q-bio/0609020},
+	doi = {10.1103/PhysRevE.74.011909},
+	abstract = {We study evolutionary game dynamics in finite populations. We analyze an evolutionary process, which we call pairwise comparison, for which we adopt the ubiquitous Fermi distribution function from statistical mechanics. The inverse temperature in this process controls the intensity of selection, leading to a unified framework for evolutionary dynamics at all intensities of selection, from random drift to imitation dynamics. We derive, for the first time, a simple closed formula which determines the feasibility of cooperation in finite populations, whenever cooperation is modeled in terms of any symmetric two-person game. In contrast with previous results, the present formula is valid at all intensities of selection and for any initial condition. We investigate the evolutionary dynamics of cooperators in finite populations, and study the interplay between intensity of selection and the remnants of interior fixed points in infinite populations, as a function of a given initial number of cooperators, showing how this interplay strongly affects the approach to fixation of a given trait in finite populations, leading to counter-intuitive results at different intensities of selection.},
+	number = {1},
+	urldate = {2020-05-31},
+	journal = {Physical Review E},
+	author = {Traulsen, Arne and Nowak, Martin A. and Pacheco, Jorge M.},
+	month = jul,
+	year = {2006},
+	note = {arXiv: q-bio/0609020},
+	keywords = {Quantitative Biology - Populations and Evolution},
+	pages = {011909}
+}
+
+@article{burr_analysis_2018,
+	title = {An {Analysis} of the {Interaction} {Between} {Intelligent} {Software} {Agents} and {Human} {Users}},
+	volume = {28},
+	issn = {1572-8641},
+	url = {https://doi.org/10.1007/s11023-018-9479-0},
+	doi = {10.1007/s11023-018-9479-0},
+	abstract = {Interactions between an intelligent software agent (ISA) and a human user are ubiquitous in everyday situations such as access to information, entertainment, and purchases. In such interactions, the ISA mediates the user’s access to the content, or controls some other aspect of the user experience, and is not designed to be neutral about outcomes of user choices. Like human users, ISAs are driven by goals, make autonomous decisions, and can learn from experience. Using ideas from bounded rationality (and deploying concepts from artificial intelligence, behavioural economics, control theory, and game theory), we frame these interactions as instances of an ISA whose reward depends on actions performed by the user. Such agents benefit by steering the user’s behaviour towards outcomes that maximise the ISA’s utility, which may or may not be aligned with that of the user. Video games, news recommendation aggregation engines, and fitness trackers can all be instances of this general case. Our analysis facilitates distinguishing various subcases of interaction (i.e. deception, coercion, trading, and nudging), as well as second-order effects that might include the possibility for adaptive interfaces to induce behavioural addiction, and/or change in user belief. We present these types of interaction within a conceptual framework, and review current examples of persuasive technologies and the issues that arise from their use. We argue that the nature of the feedback commonly used by learning agents to update their models and subsequent decisions could steer the behaviour of human users away from what benefits them, and in a direction that can undermine autonomy and cause further disparity between actions and goals as exemplified by addictive and compulsive behaviour. We discuss some of the ethical, social and legal implications of this technology and argue that it can sometimes exploit and reinforce weaknesses in human beings.},
+	language = {en},
+	number = {4},
+	urldate = {2020-05-31},
+	journal = {Minds and Machines},
+	author = {Burr, Christopher and Cristianini, Nello and Ladyman, James},
+	month = dec,
+	year = {2018},
+	pages = {735--774}
+}
+
+@article{halkidi_recommender_2020,
+	title = {Recommender systems with selfish users},
+	issn = {0219-3116},
+	url = {https://doi.org/10.1007/s10115-020-01460-5},
+	doi = {10.1007/s10115-020-01460-5},
+	abstract = {Recommender systems are a fundamental component of contemporary social-media platforms and require feedback submitted from users in order to fulfill their goal. On the other hand, the raise of advocacy about user-controlled data repositories supports the selective submission of data by user through intelligent software agents residing at the user end. These agents are endowed with the task of protecting user privacy by applying a “soft filter” on personal data provided to the system. In this work, we pose the question: “how should the software agent control the user feedback submitted to a recommender system in a way that is most privacy preserving, while the user still enjoys most of the benefits of the recommender system?”. We consider a set of such agents, each of which aims to protect the privacy of its serving user by submitting to the recommender system server a version of her real rating profile. The fact that issued recommendations to a user depend on the collective rating profiles by all agents gives rise to a novel game-theoretic setup that unveils the trade-off between privacy preservation of each user and the quality of recommendation they receive. Privacy is quantified through a distance metric between declared and an “initial” random rating profile; the latter is assumed to provide a “neutral” starting point for the disclosure of the real profile. We allow different users to have different perception of their privacy through a user-dependent utility function of this distance. The quality of recommendations for each user depends on submitted ratings of all users, including the ratings of the user to whom the recommendation is provided. We prove the existence of a Nash equilibrium point (NEP), and we derive conditions for that. We show that user strategies converge to the NEP after an iterative best-response strategy update sequence that involves circulation of aggregate quantities in the system and no revelation of real ratings. We also present various modes of user cooperation in rating declaration, by which users mutually benefit in terms of privacy. We evaluate and compare cooperative and selfish strategies in their performance in terms of privacy preservation and recommendation quality through real movie datasets.},
+	language = {en},
+	urldate = {2020-06-01},
+	journal = {Knowledge and Information Systems},
+	author = {Halkidi, Maria and Koutsopoulos, Iordanis},
+	month = mar,
+	year = {2020}
+}
+
+@article{mckee_social_2020,
+	title = {Social diversity and social preferences in mixed-motive reinforcement learning},
+	url = {http://arxiv.org/abs/2002.02325},
+	abstract = {Recent research on reinforcement learning in pure-conflict and pure-common interest games has emphasized the importance of population heterogeneity. In contrast, studies of reinforcement learning in mixed-motive games have primarily leveraged homogeneous approaches. Given the defining characteristic of mixed-motive games--the imperfect correlation of incentives between group members--we study the effect of population heterogeneity on mixed-motive reinforcement learning. We draw on interdependence theory from social psychology and imbue reinforcement learning agents with Social Value Orientation (SVO), a flexible formalization of preferences over group outcome distributions. We subsequently explore the effects of diversity in SVO on populations of reinforcement learning agents in two mixed-motive Markov games. We demonstrate that heterogeneity in SVO generates meaningful and complex behavioral variation among agents similar to that suggested by interdependence theory. Empirical results in these mixed-motive dilemmas suggest agents trained in heterogeneous populations develop particularly generalized, high-performing policies relative to those trained in homogeneous populations.},
+	urldate = {2020-06-01},
+	journal = {arXiv:2002.02325 [cs]},
+	author = {McKee, Kevin R. and Gemp, Ian and McWilliams, Brian and Duéñez-Guzmán, Edgar A. and Hughes, Edward and Leibo, Joel Z.},
+	month = feb,
+	year = {2020},
+	note = {arXiv: 2002.02325},
+	keywords = {Computer Science - Multiagent Systems, Computer Science - Artificial Intelligence}
+}
+
+@article{karimi_news_2018,
+	title = {News recommender systems – {Survey} and roads ahead},
+	volume = {54},
+	issn = {0306-4573},
+	url = {http://www.sciencedirect.com/science/article/pii/S030645731730153X},
+	doi = {10.1016/j.ipm.2018.04.008},
+	abstract = {More and more people read the news online, e.g., by visiting the websites of their favorite newspapers or by navigating the sites of news aggregators. However, the abundance of news information that is published online every day through different channels can make it challenging for readers to locate the content they are interested in. The goal of News Recommender Systems (NRS) is to make reading suggestions to users in a personalized way. Due to their practical relevance, a variety of technical approaches to build such systems have been proposed over the last two decades. In this work, we review the state-of-the-art of designing and evaluating news recommender systems over the last ten years. One main goal of the work is to analyze which particular challenges of news recommendation (e.g., short item life times and recency aspects) have been well explored and which areas still require more work. Furthermore, in contrast to previous surveys, the paper specifically discusses methodological questions and today’s academic practice of evaluating and comparing different algorithmic news recommendation approaches based on accuracy measures.},
+	language = {en},
+	number = {6},
+	urldate = {2020-06-01},
+	journal = {Information Processing \& Management},
+	author = {Karimi, Mozhgan and Jannach, Dietmar and Jugovac, Michael},
+	month = nov,
+	year = {2018},
+	keywords = {News recommender systems, Survey},
+	pages = {1203--1227}
+}
+
+@article{ie_reinforcement_2019,
+	title = {Reinforcement {Learning} for {Slate}-based {Recommender} {Systems}: {A} {Tractable} {Decomposition} and {Practical} {Methodology}},
+	shorttitle = {Reinforcement {Learning} for {Slate}-based {Recommender} {Systems}},
+	url = {http://arxiv.org/abs/1905.12767},
+	abstract = {Most practical recommender systems focus on estimating immediate user engagement without considering the long-term effects of recommendations on user behavior. Reinforcement learning (RL) methods offer the potential to optimize recommendations for long-term user engagement. However, since users are often presented with slates of multiple items - which may have interacting effects on user choice - methods are required to deal with the combinatorics of the RL action space. In this work, we address the challenge of making slate-based recommendations to optimize long-term value using RL. Our contributions are three-fold. (i) We develop SLATEQ, a decomposition of value-based temporal-difference and Q-learning that renders RL tractable with slates. Under mild assumptions on user choice behavior, we show that the long-term value (LTV) of a slate can be decomposed into a tractable function of its component item-wise LTVs. (ii) We outline a methodology that leverages existing myopic learning-based recommenders to quickly develop a recommender that handles LTV. (iii) We demonstrate our methods in simulation, and validate the scalability of decomposed TD-learning using SLATEQ in live experiments on YouTube.},
+	urldate = {2020-06-01},
+	journal = {arXiv:1905.12767 [cs, stat]},
+	author = {Ie, Eugene and Jain, Vihan and Wang, Jing and Narvekar, Sanmit and Agarwal, Ritesh and Wu, Rui and Cheng, Heng-Tze and Lustman, Morgane and Gatto, Vince and Covington, Paul and McFadden, Jim and Chandra, Tushar and Boutilier, Craig},
+	month = may,
+	year = {2019},
+	note = {arXiv: 1905.12767
+version: 2},
+	keywords = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Information Retrieval, Statistics - Machine Learning}
+}
+
+@book{bostrom_superintelligence_2014,
+	title = {Superintelligence : {Paths}, {Dangers}, {Strategies}},
+	url = {https://nickbostrom.com/views/superintelligence.pdf},
+	author = {Bostrom, Nick},
+	month = jul,
+	year = {2014},
+	note = {original-date: July 2014}
+}
+
+@book{goodhart_problems_1981,
+	title = {Problems of {Monetary} {Management}: {The} {UK} {Experience}},
+	url = {https://books.google.ch/books?id=OMe6UQxu1KcC&pg=PA111&redir_esc=y#v=onepage&q&f=false},
+	author = {Goodhart, Charles},
+	year = {1981},
+	note = {original-date: }
+}
+
+@article{hoang_roadmap_2020,
+	title = {A {Roadmap} for {Robust} {End}-to-{End} {Alignment}},
+	url = {http://arxiv.org/abs/1809.01036},
+	abstract = {This paper discussed the \{{\textbackslash}it robust alignment\} problem, that is, the problem of aligning the goals of algorithms with human preferences. It presented a general roadmap to tackle this issue. Interestingly, this roadmap identifies 5 critical steps, as well as many relevant aspects of these 5 steps. In other words, we have presented a large number of hopefully more tractable subproblems that readers are highly encouraged to tackle. Hopefully, this combination allows to better highlight the most pressing problems, how every expertise can be best used to, and how combining the solutions to subproblems might add up to solve robust alignment.},
+	urldate = {2020-06-02},
+	journal = {arXiv:1809.01036 [cs]},
+	author = {Hoang, Lê Nguyên},
+	month = feb,
+	year = {2020},
+	note = {arXiv: 1809.01036},
+	keywords = {Computer Science - Artificial Intelligence}
+}
+
+@misc{vendrov_aligning_2019,
+	title = {Aligning {Recommender} {Systems} as {Cause} {Area}},
+	url = {https://forum.effectivealtruism.org/posts/xzjQvqDYahigHcwgQ/aligning-recommender-systems-as-cause-area},
+	journal = {EA Forum},
+	author = {Vendrov, Ivan and Nixon, Jeremy},
+	month = may,
+	year = {2019}
+}
+
+@article{ben-porat_game-theoretic_2018,
+	title = {A {Game}-{Theoretic} {Approach} to {Recommendation} {Systems} with {Strategic} {Content} {Providers}},
+	url = {http://arxiv.org/abs/1806.00955},
+	abstract = {We introduce a game-theoretic approach to the study of recommendation systems with strategic content providers. Such systems should be fair and stable. Showing that traditional approaches fail to satisfy these requirements, we propose the Shapley mediator. We show that the Shapley mediator fulfills the fairness and stability requirements, runs in linear time, and is the only economically efficient mechanism satisfying these properties.},
+	urldate = {2020-06-03},
+	journal = {arXiv:1806.00955 [cs]},
+	author = {Ben-Porat, Omer and Tennenholtz, Moshe},
+	month = oct,
+	year = {2018},
+	note = {arXiv: 1806.00955},
+	keywords = {Computer Science - Computer Science and Game Theory, Computer Science - Information Retrieval}
+}
+
+@article{segbroeck_selection_2011,
+	title = {Selection pressure transforms the nature of social dilemmas in adaptive networks},
+	volume = {13},
+	issn = {1367-2630},
+	url = {https://iopscience.iop.org/article/10.1088/1367-2630/13/1/013007},
+	doi = {10.1088/1367-2630/13/1/013007},
+	number = {1},
+	urldate = {2020-06-03},
+	journal = {New Journal of Physics},
+	author = {Segbroeck, Sven Van and Santos, Francisco C and Lenaerts, Tom and Pacheco, Jorge M},
+	month = jan,
+	year = {2011},
+	pages = {013007}
+}
+
+@article{chu_multi-agent_2020,
+	title = {Multi-agent {Reinforcement} {Learning} for {Networked} {System} {Control}},
+	url = {http://arxiv.org/abs/2004.01339},
+	abstract = {This paper considers multi-agent reinforcement learning (MARL) in networked system control. Specifically, each agent learns a decentralized control policy based on local observations and messages from connected neighbors. We formulate such a networked MARL (NMARL) problem as a spatiotemporal Markov decision process and introduce a spatial discount factor to stabilize the training of each local agent. Further, we propose a new differentiable communication protocol, called NeurComm, to reduce information loss and non-stationarity in NMARL. Based on experiments in realistic NMARL scenarios of adaptive traffic signal control and cooperative adaptive cruise control, an appropriate spatial discount factor effectively enhances the learning curves of non-communicative MARL algorithms, while NeurComm outperforms existing communication protocols in both learning efficiency and control performance.},
+	urldate = {2020-06-03},
+	journal = {arXiv:2004.01339 [cs, stat]},
+	author = {Chu, Tianshu and Chinchali, Sandeep and Katti, Sachin},
+	month = apr,
+	year = {2020},
+	note = {arXiv: 2004.01339},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning}
+}
+
+@article{izquierdo_reinforcement_nodate,
+	title = {Reinforcement learning dynamics in social dilemmas},
+	url = {https://www.academia.edu/15281537/Reinforcement_learning_dynamics_in_social_dilemmas},
+	abstract = {Reinforcement learning dynamics in social dilemmas},
+	language = {en},
+	urldate = {2020-06-06},
+	author = {Izquierdo, Luis R. and Izquierdo, Luis R. and Izquierdo, Segismundo}
+}
+
+@article{macy_learning_2002,
+	title = {Learning dynamics in social dilemmas},
+	volume = {99},
+	issn = {0027-8424},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC128590/},
+	doi = {10.1073/pnas.092080099},
+	abstract = {The Nash equilibrium, the main solution concept in analytical game theory, cannot make precise predictions about the outcome of repeated mixed-motive games. Nor can it tell us much about the dynamics by which a population of players moves from one equilibrium to another. These limitations, along with concerns about the cognitive demands of forward-looking rationality, have motivated efforts to explore backward-looking alternatives to analytical game theory. Most of the effort has been invested in evolutionary models of population dynamics. We shift attention to a learning-theoretic alternative. Computational experiments with adaptive agents identify a fundamental solution concept for social dilemmas–−stochastic collusion–−based on a random walk from a self-limiting noncooperative equilibrium into a self-reinforcing cooperative equilibrium. However, we show that this solution is viable only within a narrow range of aspiration levels. Below the lower threshold, agents are pulled into a deficient equilibrium that is a stronger attractor than mutual cooperation. Above the upper threshold, agents are dissatisfied with mutual cooperation. Aspirations that adapt with experience (producing habituation to stimuli) do not gravitate into the window of viability; rather, they are the worst of both worlds. Habituation destabilizes cooperation and stabilizes defection. Results from the two-person problem suggest that applications to multiplex and embedded relationships will yield unexpected insights into the global dynamics of cooperation in social dilemmas.},
+	number = {Suppl 3},
+	urldate = {2020-06-06},
+	journal = {Proceedings of the National Academy of Sciences of the United States of America},
+	author = {Macy, Michael W. and Flache, Andreas},
+	month = may,
+	year = {2002},
+	pmid = {12011402},
+	pmcid = {PMC128590},
+	pages = {7229--7236}
+}
+
+@misc{r_evolution_1981,
+	title = {The {Evolution} of {Cooperation}},
+	url = {https://pubmed.ncbi.nlm.nih.gov/7466396/},
+	abstract = {Cooperation in organisms, whether bacteria or primates, has been a difficulty for evolutionary theory since Darwin. On the assumption that interactions between pairs of individuals occur on a probabilistic basis, a model is developed based on the concept of an evolutionarily stable strategy in the c …},
+	language = {en},
+	urldate = {2020-06-06},
+	journal = {Science (New York, N.Y.)},
+	author = {R, Axelrod and Wd, Hamilton},
+	month = mar,
+	year = {1981},
+	pmid = {7466396},
+	doi = {10.1126/science.7466396}
+}
+
+@misc{m_evolution_2003,
+	title = {Evolution of {Indirect} {Reciprocity} by {Social} {Information}: {The} {Role} of {Trust} and {Reputation} in {Evolution} of {Altruism}},
+	shorttitle = {Evolution of {Indirect} {Reciprocity} by {Social} {Information}},
+	url = {https://pubmed.ncbi.nlm.nih.gov/12875829/},
+	abstract = {The complexity of human's cooperative behavior cannot be fully explained by theories of kin selection and group selection. If reciprocal altruism is to provide an explanation for altruistic behavior, it would have to depart from direct reciprocity, which requires dyads of individuals to interact rep …},
+	language = {en},
+	urldate = {2020-06-06},
+	journal = {Journal of theoretical biology},
+	author = {M, Mohtashemi and L, Mui},
+	month = aug,
+	year = {2003},
+	pmid = {12875829},
+	doi = {10.1016/s0022-5193(03)00143-7}
+}
+
+@article{santos_social_2008,
+	title = {Social diversity promotes the emergence of cooperation in public goods games},
+	volume = {454},
+	copyright = {2008 Macmillan Publishers Limited. All rights reserved},
+	issn = {1476-4687},
+	url = {https://www.nature.com/articles/nature06940},
+	doi = {10.1038/nature06940},
+	abstract = {Humans often cooperate with each other, but the temptation to forgo the public good mostly wins over collective cooperative action. Many existing models treat individuals as equivalent, ignoring diversity and population structure; however, here it's shown theoretically that social diversity, introduced via heterogeneous graphs, promotes the emergence of cooperation in public goods games.},
+	language = {en},
+	number = {7201},
+	urldate = {2020-06-06},
+	journal = {Nature},
+	author = {Santos, Francisco C. and Santos, Marta D. and Pacheco, Jorge M.},
+	month = jul,
+	year = {2008},
+	pages = {213--216}
+}
+
+@article{hughes_inequity_2018,
+	title = {Inequity aversion improves cooperation in intertemporal social dilemmas},
+	url = {http://arxiv.org/abs/1803.08884},
+	abstract = {Groups of humans are often able to find ways to cooperate with one another in complex, temporally extended social dilemmas. Models based on behavioral economics are only able to explain this phenomenon for unrealistic stateless matrix games. Recently, multi-agent reinforcement learning has been applied to generalize social dilemma problems to temporally and spatially extended Markov games. However, this has not yet generated an agent that learns to cooperate in social dilemmas as humans do. A key insight is that many, but not all, human individuals have inequity averse social preferences. This promotes a particular resolution of the matrix game social dilemma wherein inequity-averse individuals are personally pro-social and punish defectors. Here we extend this idea to Markov games and show that it promotes cooperation in several types of sequential social dilemma, via a profitable interaction with policy learnability. In particular, we find that inequity aversion improves temporal credit assignment for the important class of intertemporal social dilemmas. These results help explain how large-scale cooperation may emerge and persist.},
+	urldate = {2020-06-06},
+	journal = {arXiv:1803.08884 [cs, q-bio]},
+	author = {Hughes, Edward and Leibo, Joel Z. and Phillips, Matthew G. and Tuyls, Karl and Duéñez-Guzmán, Edgar A. and Castañeda, Antonio García and Dunning, Iain and Zhu, Tina and McKee, Kevin R. and Koster, Raphael and Roff, Heather and Graepel, Thore},
+	month = sep,
+	year = {2018},
+	note = {arXiv: 1803.08884},
+	keywords = {Computer Science - Neural and Evolutionary Computing, Computer Science - Artificial Intelligence, Computer Science - Computer Science and Game Theory, Computer Science - Multiagent Systems, Quantitative Biology - Populations and Evolution}
+}
+
+@article{perolat_multi-agent_2017,
+	title = {A multi-agent reinforcement learning model of common-pool resource appropriation},
+	url = {http://arxiv.org/abs/1707.06600},
+	abstract = {Humanity faces numerous problems of common-pool resource appropriation. This class of multi-agent social dilemma includes the problems of ensuring sustainable use of fresh water, common fisheries, grazing pastures, and irrigation systems. Abstract models of common-pool resource appropriation based on non-cooperative game theory predict that self-interested agents will generally fail to find socially positive equilibria---a phenomenon called the tragedy of the commons. However, in reality, human societies are sometimes able to discover and implement stable cooperative solutions. Decades of behavioral game theory research have sought to uncover aspects of human behavior that make this possible. Most of that work was based on laboratory experiments where participants only make a single choice: how much to appropriate. Recognizing the importance of spatial and temporal resource dynamics, a recent trend has been toward experiments in more complex real-time video game-like environments. However, standard methods of non-cooperative game theory can no longer be used to generate predictions for this case. Here we show that deep reinforcement learning can be used instead. To that end, we study the emergent behavior of groups of independently learning agents in a partially observed Markov game modeling common-pool resource appropriation. Our experiments highlight the importance of trial-and-error learning in common-pool resource appropriation and shed light on the relationship between exclusion, sustainability, and inequality.},
+	urldate = {2020-06-06},
+	journal = {arXiv:1707.06600 [cs, q-bio]},
+	author = {Perolat, Julien and Leibo, Joel Z. and Zambaldi, Vinicius and Beattie, Charles and Tuyls, Karl and Graepel, Thore},
+	month = sep,
+	year = {2017},
+	note = {arXiv: 1707.06600},
+	keywords = {Computer Science - Multiagent Systems, Computer Science - Neural and Evolutionary Computing, Quantitative Biology - Populations and Evolution}
+}
+
+@article{peysakhovich_prosocial_2017,
+	title = {Prosocial learning agents solve generalized {Stag} {Hunts} better than selfish ones},
+	url = {http://arxiv.org/abs/1709.02865},
+	abstract = {Deep reinforcement learning has become an important paradigm for constructing agents that can enter complex multi-agent situations and improve their policies through experience. One commonly used technique is reactive training - applying standard RL methods while treating other agents as a part of the learner's environment. It is known that in general-sum games reactive training can lead groups of agents to converge to inefficient outcomes. We focus on one such class of environments: Stag Hunt games. Here agents either choose a risky cooperative policy (which leads to high payoffs if both choose it but low payoffs to an agent who attempts it alone) or a safe one (which leads to a safe payoff no matter what). We ask how we can change the learning rule of a single agent to improve its outcomes in Stag Hunts that include other reactive learners. We extend existing work on reward-shaping in multi-agent reinforcement learning and show that that making a single agent prosocial, that is, making them care about the rewards of their partners can increase the probability that groups converge to good outcomes. Thus, even if we control a single agent in a group making that agent prosocial can increase our agent's long-run payoff. We show experimentally that this result carries over to a variety of more complex environments with Stag Hunt-like dynamics including ones where agents must learn from raw input pixels.},
+	urldate = {2020-06-06},
+	journal = {arXiv:1709.02865 [cs]},
+	author = {Peysakhovich, Alexander and Lerer, Adam},
+	month = dec,
+	year = {2017},
+	note = {arXiv: 1709.02865},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computer Science and Game Theory}
+}
+
+@article{barabasi_emergence_1999,
+	title = {Emergence of {Scaling} in {Random} {Networks}},
+	volume = {286},
+	issn = {0036-8075, 1095-9203},
+	url = {https://science.sciencemag.org/content/286/5439/509},
+	doi = {10.1126/science.286.5439.509},
+	abstract = {{\textless}p{\textgreater}Systems as diverse as genetic networks or the World Wide Web are best described as networks with complex topology. A common property of many large networks is that the vertex connectivities follow a scale-free power-law distribution. This feature was found to be a consequence of two generic mechanisms: (i) networks expand continuously by the addition of new vertices, and (ii) new vertices attach preferentially to sites that are already well connected. A model based on these two ingredients reproduces the observed stationary scale-free distributions, which indicates that the development of large networks is governed by robust self-organizing phenomena that go beyond the particulars of the individual systems.{\textless}/p{\textgreater}},
+	language = {en},
+	number = {5439},
+	urldate = {2020-06-06},
+	journal = {Science},
+	author = {Barabási, Albert-László and Albert, Réka},
+	month = oct,
+	year = {1999},
+	pmid = {10521342},
+	pages = {509--512}
+}
+
+@article{mnih_human-level_2015,
+	title = {Human-level control through deep reinforcement learning},
+	volume = {518},
+	copyright = {2015 Nature Publishing Group, a division of Macmillan Publishers Limited. All Rights Reserved.},
+	issn = {1476-4687},
+	url = {https://www.nature.com/articles/nature14236},
+	doi = {10.1038/nature14236},
+	abstract = {An artificial agent is developed that learns to play\&nbsp;a diverse range of classic Atari 2600 computer games directly from sensory experience, achieving a\&nbsp;performance comparable to that of an expert human player; this work paves the way to building general-purpose learning algorithms that bridge the divide between perception and action.},
+	language = {en},
+	number = {7540},
+	urldate = {2020-06-06},
+	journal = {Nature},
+	author = {Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A. and Veness, Joel and Bellemare, Marc G. and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K. and Ostrovski, Georg and Petersen, Stig and Beattie, Charles and Sadik, Amir and Antonoglou, Ioannis and King, Helen and Kumaran, Dharshan and Wierstra, Daan and Legg, Shane and Hassabis, Demis},
+	month = feb,
+	year = {2015},
+	pages = {529--533}
+}
+
+@article{watkins_q-learning_1992,
+	title = {Q-learning},
+	volume = {8},
+	issn = {0885-6125, 1573-0565},
+	url = {http://link.springer.com/10.1007/BF00992698},
+	doi = {10.1007/BF00992698},
+	language = {en},
+	number = {3-4},
+	urldate = {2020-06-06},
+	journal = {Machine Learning},
+	author = {Watkins, Christopher J. C. H. and Dayan, Peter},
+	month = may,
+	year = {1992},
+	pages = {279--292}
+}
+
+@article{pinheiro_how_2012,
+	title = {How selection pressure changes the nature of social dilemmas in structured populations},
+	volume = {14},
+	issn = {1367-2630},
+	url = {https://iopscience.iop.org/article/10.1088/1367-2630/14/7/073035},
+	doi = {10.1088/1367-2630/14/7/073035},
+	number = {7},
+	urldate = {2020-06-06},
+	journal = {New Journal of Physics},
+	author = {Pinheiro, Flávio L and Santos, Francisco C and Pacheco, Jorge M},
+	month = jul,
+	year = {2012},
+	pages = {073035}
+}
+
+@book{russell_artificial_2010,
+	address = {Upper Saddle River, N.J},
+	edition = {3rd ed},
+	series = {Prentice {Hall} series in artificial intelligence},
+	title = {Artificial intelligence: a modern approach},
+	isbn = {9780137903955},
+	shorttitle = {Artificial intelligence},
+	publisher = {Prentice Hall/Pearson Education},
+	author = {Russell, Stuart J. and Norvig, Peter},
+	year = {2010},
+	keywords = {Artificial intelligence}
+}
+
+@article{de_vries_identity_2010,
+	title = {Identity, profiling algorithms and a world of ambient intelligence},
+	volume = {12},
+	issn = {1388-1957, 1572-8439},
+	url = {http://link.springer.com/10.1007/s10676-009-9215-9},
+	doi = {10.1007/s10676-009-9215-9},
+	language = {en},
+	number = {1},
+	urldate = {2020-06-07},
+	journal = {Ethics and Information Technology},
+	author = {de Vries, Katja},
+	month = mar,
+	year = {2010},
+	pages = {71--85}
+}
+
+@inproceedings{jannach_recommendations_2016,
+	address = {Boston Massachusetts USA},
+	title = {Recommendations with a {Purpose}},
+	isbn = {9781450340359},
+	url = {https://dl.acm.org/doi/10.1145/2959100.2959186},
+	doi = {10.1145/2959100.2959186},
+	language = {en},
+	urldate = {2020-06-07},
+	booktitle = {Proceedings of the 10th {ACM} {Conference} on {Recommender} {Systems}},
+	publisher = {ACM},
+	author = {Jannach, Dietmar and Adomavicius, Gediminas},
+	month = sep,
+	year = {2016},
+	pages = {7--10}
+}
+
+@article{adomavicius_toward_2005,
+	title = {Toward the next generation of recommender systems: a survey of the state-of-the-art and possible extensions},
+	volume = {17},
+	issn = {1041-4347},
+	shorttitle = {Toward the next generation of recommender systems},
+	url = {http://ieeexplore.ieee.org/document/1423975/},
+	doi = {10.1109/TKDE.2005.99},
+	number = {6},
+	urldate = {2020-06-07},
+	journal = {IEEE Transactions on Knowledge and Data Engineering},
+	author = {Adomavicius, G. and Tuzhilin, A.},
+	month = jun,
+	year = {2005},
+	pages = {734--749}
+}
+
+@book{ricci_recommender_2015,
+	edition = {2},
+	title = {Recommender {Systems} {Handbook}},
+	isbn = {9781489976369},
+	url = {https://www.springer.com/gb/book/9781489976369},
+	abstract = {This second edition of a well-received text, with 20 new chapters, presents a coherent and unified repository of recommender systems’ major concepts, theories, methodologies, trends, and challenges. A variety of real-world applications and detailed case studies are included. In addition to wholesale revision of the existing chapters, this edition includes new topics including: decision making and recommender systems, reciprocal recommender systems, recommender systems in social networks, mobile recommender systems, explanations for recommender systems, music recommender systems, cross-domain recommendations, privacy in recommender systems, and semantic-based recommender systems. This multi-disciplinary handbook involves world-wide experts from diverse fields such as artificial intelligence, human-computer interaction, information retrieval, data mining, mathematics, statistics, adaptive user interfaces, decision support systems, psychology, marketing, and consumer behavior. Theoreticians and practitioners from these fields will find this reference to be an invaluable source of ideas, methods and techniques for developing more efficient, cost-effective and accurate recommender systems.},
+	language = {en},
+	urldate = {2020-06-07},
+	publisher = {Springer US},
+	editor = {Ricci, Francesco and Rokach, Lior and Shapira, Bracha},
+	year = {2015},
+	doi = {10.1007/978-1-4899-7637-6}
+}
+
+@incollection{tiropanis_ethics_2015,
+	address = {Cham},
+	title = {Ethics of {Personalized} {Information} {Filtering}},
+	volume = {9089},
+	isbn = {9783319186085 9783319186092},
+	url = {http://link.springer.com/10.1007/978-3-319-18609-2_10},
+	urldate = {2020-06-07},
+	booktitle = {Internet {Science}},
+	publisher = {Springer International Publishing},
+	author = {Koene, Ansgar and Perez, Elvira and Carter, Christopher James and Statache, Ramona and Adolphs, Svenja and O’Malley, Claire and Rodden, Tom and McAuley, Derek},
+	editor = {Tiropanis, Thanassis and Vakali, Athena and Sartori, Laura and Burnap, Pete},
+	year = {2015},
+	doi = {10.1007/978-3-319-18609-2_10},
+	pages = {123--132}
+}
+
+@article{taddeo_how_2018,
+	title = {How {AI} can be a force for good},
+	volume = {361},
+	issn = {0036-8075, 1095-9203},
+	url = {https://www.sciencemag.org/lookup/doi/10.1126/science.aat5991},
+	doi = {10.1126/science.aat5991},
+	language = {en},
+	number = {6404},
+	urldate = {2020-06-07},
+	journal = {Science},
+	author = {Taddeo, Mariarosaria and Floridi, Luciano},
+	month = aug,
+	year = {2018},
+	pages = {751--752}
+}
+
+@techreport{time_well_spent_whats_2017,
+	title = {What’s the difference between apps we cherish vs. regret?},
+	url = {http://www.timewellspent.io/app-ratings/},
+	author = {Time Well Spent},
+	year = {2017}
+}
+
+@article{floridi_construction_2011,
+	title = {The {Construction} of {Personal} {Identities} {Online}},
+	volume = {21},
+	issn = {0924-6495, 1572-8641},
+	url = {http://link.springer.com/10.1007/s11023-011-9254-y},
+	doi = {10.1007/s11023-011-9254-y},
+	language = {en},
+	number = {4},
+	urldate = {2020-06-07},
+	journal = {Minds and Machines},
+	author = {Floridi, Luciano},
+	month = nov,
+	year = {2011},
+	pages = {477--479}
+}
+
+@book{ariely_predictably_2008,
+	address = {New York, NY},
+	edition = {1st ed},
+	title = {Predictably irrational: the hidden forces that shape our decisions},
+	isbn = {9780061353239},
+	shorttitle = {Predictably irrational},
+	abstract = {An evaluation of the sources of illogical decisions explores the reasons why irrational thought often overcomes level-headed practices, offering insight into the structural patterns that cause people to make the same mistakes repeatedly},
+	publisher = {Harper},
+	author = {Ariely, Dan},
+	year = {2008},
+	note = {OCLC: ocn182521026},
+	keywords = {Decision making, Economics, Psychological aspects, Consumer behavior, Decision making, Thought and thinking, Reasoning, Economics, Psychological aspects, Consumers}
+}
+
+@article{burki_vaccine_2019,
+	title = {Vaccine misinformation and social media},
+	volume = {1},
+	issn = {25897500},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S2589750019301360},
+	doi = {10.1016/S2589-7500(19)30136-0},
+	language = {en},
+	number = {6},
+	urldate = {2020-06-07},
+	journal = {The Lancet Digital Health},
+	author = {Burki, Talha},
+	month = oct,
+	year = {2019},
+	pages = {e258--e259}
+}
+
+@article{bozdag_bias_2013,
+	title = {Bias in algorithmic filtering and personalization},
+	volume = {15},
+	issn = {1388-1957, 1572-8439},
+	url = {http://link.springer.com/10.1007/s10676-013-9321-6},
+	doi = {10.1007/s10676-013-9321-6},
+	language = {en},
+	number = {3},
+	urldate = {2020-06-07},
+	journal = {Ethics and Information Technology},
+	author = {Bozdag, Engin},
+	month = sep,
+	year = {2013},
+	pages = {209--227}
+}
+
+@article{bozdag_breaking_2015,
+	title = {Breaking the filter bubble: democracy and design},
+	volume = {17},
+	issn = {1388-1957, 1572-8439},
+	shorttitle = {Breaking the filter bubble},
+	url = {http://link.springer.com/10.1007/s10676-015-9380-y},
+	doi = {10.1007/s10676-015-9380-y},
+	language = {en},
+	number = {4},
+	urldate = {2020-06-07},
+	journal = {Ethics and Information Technology},
+	author = {Bozdag, Engin and van den Hoven, Jeroen},
+	month = dec,
+	year = {2015},
+	pages = {249--265}
+}
+
+@article{harambam_democratizing_2018,
+	title = {Democratizing algorithmic news recommenders: how to materialize voice in a technologically saturated media ecosystem},
+	volume = {376},
+	issn = {1364-503X, 1471-2962},
+	shorttitle = {Democratizing algorithmic news recommenders},
+	url = {https://royalsocietypublishing.org/doi/10.1098/rsta.2018.0088},
+	doi = {10.1098/rsta.2018.0088},
+	language = {en},
+	number = {2133},
+	urldate = {2020-06-07},
+	journal = {Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences},
+	author = {Harambam, Jaron and Helberger, Natali and van Hoboken, Joris},
+	month = nov,
+	year = {2018},
+	pages = {20180088}
+}
+
+@article{helberger_exposure_2018,
+	title = {Exposure diversity as a design principle for recommender systems},
+	volume = {21},
+	issn = {1369-118X, 1468-4462},
+	url = {https://www.tandfonline.com/doi/full/10.1080/1369118X.2016.1271900},
+	doi = {10.1080/1369118X.2016.1271900},
+	language = {en},
+	number = {2},
+	urldate = {2020-06-07},
+	journal = {Information, Communication \& Society},
+	author = {Helberger, Natali and Karppinen, Kari and D’Acunto, Lucia},
+	month = feb,
+	year = {2018},
+	pages = {191--207}
+}
+
+@incollection{kompatsiaris_serendipity_2017,
+	address = {Cham},
+	title = {Serendipity by {Design}? {How} to {Turn} from {Diversity} {Exposure} to {Diversity} {Experience} to {Face} {Filter} {Bubbles} in {Social} {Media}},
+	volume = {10673},
+	isbn = {9783319702834 9783319702841},
+	shorttitle = {Serendipity by {Design}?},
+	url = {http://link.springer.com/10.1007/978-3-319-70284-1_22},
+	urldate = {2020-06-07},
+	booktitle = {Internet {Science}},
+	publisher = {Springer International Publishing},
+	author = {Reviglio, Urbano},
+	editor = {Kompatsiaris, Ioannis and Cave, Jonathan and Satsiou, Anna and Carle, Georg and Passani, Antonella and Kontopoulos, Efstratios and Diplaris, Sotiris and McMillan, Donald},
+	year = {2017},
+	doi = {10.1007/978-3-319-70284-1_22},
+	pages = {281--300}
+}
+
+@incollection{hadfield-menell_cooperative_2016,
+	title = {Cooperative {Inverse} {Reinforcement} {Learning}},
+	url = {http://papers.nips.cc/paper/6420-cooperative-inverse-reinforcement-learning.pdf},
+	urldate = {2020-06-07},
+	booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 29},
+	publisher = {Curran Associates, Inc.},
+	author = {Hadfield-Menell, Dylan and Russell, Stuart J and Abbeel, Pieter and Dragan, Anca},
+	editor = {Lee, D. D. and Sugiyama, M. and Luxburg, U. V. and Guyon, I. and Garnett, R.},
+	year = {2016},
+	pages = {3909--3917}
+}
+
+@article{burr_analysis_2018-1,
+	title = {An {Analysis} of the {Interaction} {Between} {Intelligent} {Software} {Agents} and {Human} {Users}},
+	volume = {28},
+	issn = {1572-8641},
+	url = {https://doi.org/10.1007/s11023-018-9479-0},
+	doi = {10.1007/s11023-018-9479-0},
+	abstract = {Interactions between an intelligent software agent (ISA) and a human user are ubiquitous in everyday situations such as access to information, entertainment, and purchases. In such interactions, the ISA mediates the user’s access to the content, or controls some other aspect of the user experience, and is not designed to be neutral about outcomes of user choices. Like human users, ISAs are driven by goals, make autonomous decisions, and can learn from experience. Using ideas from bounded rationality (and deploying concepts from artificial intelligence, behavioural economics, control theory, and game theory), we frame these interactions as instances of an ISA whose reward depends on actions performed by the user. Such agents benefit by steering the user’s behaviour towards outcomes that maximise the ISA’s utility, which may or may not be aligned with that of the user. Video games, news recommendation aggregation engines, and fitness trackers can all be instances of this general case. Our analysis facilitates distinguishing various subcases of interaction (i.e. deception, coercion, trading, and nudging), as well as second-order effects that might include the possibility for adaptive interfaces to induce behavioural addiction, and/or change in user belief. We present these types of interaction within a conceptual framework, and review current examples of persuasive technologies and the issues that arise from their use. We argue that the nature of the feedback commonly used by learning agents to update their models and subsequent decisions could steer the behaviour of human users away from what benefits them, and in a direction that can undermine autonomy and cause further disparity between actions and goals as exemplified by addictive and compulsive behaviour. We discuss some of the ethical, social and legal implications of this technology and argue that it can sometimes exploit and reinforce weaknesses in human beings.},
+	language = {en},
+	number = {4},
+	urldate = {2020-06-07},
+	journal = {Minds and Machines},
+	author = {Burr, Christopher and Cristianini, Nello and Ladyman, James},
+	month = dec,
+	year = {2018},
+	pages = {735--774}
+}
+
+@misc{hubinger_overview_2020,
+	title = {An overview of 11 proposals for building safe advanced {AI} - {AI} {Alignment} {Forum}},
+	url = {https://www.alignmentforum.org/posts/fRsjBseRuvRhMPPE5/an-overview-of-11-proposals-for-building-safe-advanced-ai},
+	abstract = {Special thanks to Kate Woolverton, Paul Christiano, Rohin Shah, Alex Turner,
+William Saunders, Beth Barnes, Abram Demski, Scott Garrabrant, Sam Eisenstat,
+and Tsvi Benson-Tilsen for providing helpful comments and feedback on this post
+and the talk that preceded it.
+
+This post is a collection of 11 different proposals for building safe advanced
+AI under the current machine learning paradigm. There's a lot of literature out
+there laying out various different approaches such as amplification, debate, or 
+recursive reward modeling, but a lot of that literature focuses primarily on
+outer alignment at the expense of inner alignment and doesn't provide direct
+comparisons between approaches. The goal of this post is to help solve that
+problem by providing a single collection of 11 different proposals for building
+safe advanced AI—each including both inner and outer alignment components. That
+being said, not only does this post not cover all existing proposals, I strongly
+expect that there will be lots of additional new proposals to come in the
+future. Nevertheless, I think it is quite useful to at least take a broad look
+at what we have now and compare and contrast some of the current leading
+candidates.
+
+It is important for me to note before I begin that the way I describe the 11
+approaches presented here is not meant to be an accurate representation of how
+anyone else would represent them. Rather, you should treat all the approaches I
+describe here as my version of that approach rather than any sort of canonical
+version that their various creators/proponents would endorse.
+
+Furthermore, this post only includes approaches that intend to directly build
+advanced AI systems via machine learning. Thus, this post doesn't include other
+possible approaches for solving the broader AI existential risk problem such as:
+
+ * finding a fundamentally different way of approaching AI than the current
+   machine learning paradigm that makes it easier to build safe advanced AI,
+ * developin},
+	urldate = {2020-06-07},
+	author = {Hubinger, Evan},
+	year = {2020}
+}
+
+@misc{steinhardt_ai_2019,
+	title = {{AI} {Alignment} {Research} {Overview} (by {Jacob} {Steinhardt}) - {LessWrong} 2.0},
+	url = {https://www.lesswrong.com/posts/7GEviErBXcjJsbSeD/ai-alignment-research-overview-by-jacob-steinhardt},
+	abstract = {I'm really excited to see someone outline all the work they think needs solving
+in AI alignment - to describe what the problem looks like, what a solution looks
+like, and what work has been done so far. Especially from Jacob, who is a
+coauthor of the Concrete Problems in AI Safety paper.
+
+Below, I've included some excerpts from doc. I've included the introduction, the
+following section describing the categories of technical work, and some
+high-level information from the long sections on 'technical alignment problem'
+and the 'detecting failures in advance'.
+
+
+--------------------------------------------------------------------------------
+
+INTRODUCTION
+This document gives an overview of different areas of technical work that seem
+necessary, or at least desirable, for creating safe and aligned AI systems. The
+focus is on safety and alignment of powerful AI systems, i.e. systems that may
+exceed human capabilities in a broad variety of domains, and which likely act on
+a large scale. Correspondingly, there is an emphasis on approaches that seem
+scalable to such systems.
+
+By “aligned”, I mean that the actions it pursues move the world towards states
+that humans want, and away from states that humans don’t want. Some issues with
+this definition are that different humans might have different preferences (I
+will mostly ignore this issue), and that there are differences between stated
+preferences, “revealed” preferences as implied by actions, and preferences that
+one endorses upon reflection (I won’t ignore this issue).
+
+I think it is quite plausible that some topics are missing, and I welcome
+comments to that regard. My goal is to outline a critical mass of topics in
+enough detail that someone with knowledge of ML and some limited familiarity
+with AI alignment as an area would have a collection of promising research
+directions, a mechanistic understanding of why they are promising, and some
+pointers for what work on them might look like.
+
+To that end, below I outline four br},
+	urldate = {2020-06-07},
+	author = {Steinhardt, Jacob},
+	year = {2019}
+}
+
+@article{leike_scalable_2018,
+	title = {Scalable agent alignment via reward modeling: a research direction},
+	shorttitle = {Scalable agent alignment via reward modeling},
+	url = {http://arxiv.org/abs/1811.07871},
+	abstract = {One obstacle to applying reinforcement learning algorithms to real-world problems is the lack of suitable reward functions. Designing such reward functions is difficult in part because the user only has an implicit understanding of the task objective. This gives rise to the agent alignment problem: how do we create agents that behave in accordance with the user's intentions? We outline a high-level research direction to solve the agent alignment problem centered around reward modeling: learning a reward function from interaction with the user and optimizing the learned reward function with reinforcement learning. We discuss the key challenges we expect to face when scaling reward modeling to complex and general domains, concrete approaches to mitigate these challenges, and ways to establish trust in the resulting agents.},
+	urldate = {2020-06-07},
+	journal = {arXiv:1811.07871 [cs, stat]},
+	author = {Leike, Jan and Krueger, David and Everitt, Tom and Martic, Miljan and Maini, Vishal and Legg, Shane},
+	month = nov,
+	year = {2018},
+	note = {arXiv: 1811.07871},
+	keywords = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Neural and Evolutionary Computing, Statistics - Machine Learning}
+}
+
+@article{amodei_concrete_2016,
+	title = {Concrete {Problems} in {AI} {Safety}},
+	url = {http://arxiv.org/abs/1606.06565},
+	abstract = {Rapid progress in machine learning and artificial intelligence (AI) has brought increasing attention to the potential impacts of AI technologies on society. In this paper we discuss one such potential impact: the problem of accidents in machine learning systems, defined as unintended and harmful behavior that may emerge from poor design of real-world AI systems. We present a list of five practical research problems related to accident risk, categorized according to whether the problem originates from having the wrong objective function ("avoiding side effects" and "avoiding reward hacking"), an objective function that is too expensive to evaluate frequently ("scalable supervision"), or undesirable behavior during the learning process ("safe exploration" and "distributional shift"). We review previous work in these areas as well as suggesting research directions with a focus on relevance to cutting-edge AI systems. Finally, we consider the high-level question of how to think most productively about the safety of forward-looking applications of AI.},
+	urldate = {2020-06-07},
+	journal = {arXiv:1606.06565 [cs]},
+	author = {Amodei, Dario and Olah, Chris and Steinhardt, Jacob and Christiano, Paul and Schulman, John and Mané, Dan},
+	month = jul,
+	year = {2016},
+	note = {arXiv: 1606.06565},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Machine Learning}
+}
+
+@article{prunkl_beyond_2020,
+	title = {Beyond {Near}- and {Long}-{Term}: {Towards} a {Clearer} {Account} of {Research} {Priorities} in {AI} {Ethics} and {Society}},
+	shorttitle = {Beyond {Near}- and {Long}-{Term}},
+	url = {http://arxiv.org/abs/2001.04335},
+	abstract = {One way of carving up the broad "AI ethics and society" research space that has emerged in recent years is to distinguish between "near-term" and "long-term" research. While such ways of breaking down the research space can be useful, we put forward several concerns about the near/long-term distinction gaining too much prominence in how research questions and priorities are framed. We highlight some ambiguities and inconsistencies in how the distinction is used, and argue that while there are differing priorities within this broad research community, these differences are not well-captured by the near/long-term distinction. We unpack the near/long-term distinction into four different dimensions, and propose some ways that researchers can communicate more clearly about their work and priorities using these dimensions. We suggest that moving towards a more nuanced conversation about research priorities can help establish new opportunities for collaboration, aid the development of more consistent and coherent research agendas, and enable identification of previously neglected research areas.},
+	urldate = {2020-06-07},
+	journal = {arXiv:2001.04335 [cs]},
+	author = {Prunkl, Carina and Whittlestone, Jess},
+	month = jan,
+	year = {2020},
+	note = {arXiv: 2001.04335},
+	keywords = {Computer Science - Computers and Society, Computer Science - Artificial Intelligence}
+}
+
+@article{irving_ai_2018,
+	title = {{AI} safety via debate},
+	url = {http://arxiv.org/abs/1805.00899},
+	abstract = {To make AI systems broadly useful for challenging real-world tasks, we need them to learn complex human goals and preferences. One approach to specifying complex goals asks humans to judge during training which agent behaviors are safe and useful, but this approach can fail if the task is too complicated for a human to directly judge. To help address this concern, we propose training agents via self play on a zero sum debate game. Given a question or proposed action, two agents take turns making short statements up to a limit, then a human judges which of the agents gave the most true, useful information. In an analogy to complexity theory, debate with optimal play can answer any question in PSPACE given polynomial time judges (direct judging answers only NP questions). In practice, whether debate works involves empirical questions about humans and the tasks we want AIs to perform, plus theoretical questions about the meaning of AI alignment. We report results on an initial MNIST experiment where agents compete to convince a sparse classifier, boosting the classifier's accuracy from 59.4\% to 88.9\% given 6 pixels and from 48.2\% to 85.2\% given 4 pixels. Finally, we discuss theoretical and practical aspects of the debate model, focusing on potential weaknesses as the model scales up, and we propose future human and computer experiments to test these properties.},
+	urldate = {2020-06-07},
+	journal = {arXiv:1805.00899 [cs, stat]},
+	author = {Irving, Geoffrey and Christiano, Paul and Amodei, Dario},
+	month = oct,
+	year = {2018},
+	note = {arXiv: 1805.00899},
+	keywords = {Statistics - Machine Learning, Computer Science - Machine Learning}
+}
+
+@misc{hubinger_relaxed_2019,
+	title = {Relaxed adversarial training for inner alignment - {AI} {Alignment} {Forum}},
+	url = {https://www.alignmentforum.org/posts/9Dy5YRaoCxH9zuJqa/relaxed-adversarial-training-for-inner-alignment},
+	abstract = {This post is part of research I did at OpenAI with mentoring and guidance from
+Paul Christiano. It also represents my current agenda regarding what I believe
+looks like the most promising approach for addressing inner alignment.
+
+One particularly concerning failure mode for any sort of advanced AI system is
+for it to have good performance on the training distribution, but nevertheless
+still have some input on which it behaves highly “unacceptably” during
+deployment. For the purposes of this post, we will follow Paul Christiano in
+thinking about acceptability as some concept that satisfies the following two
+conditions:
+
+ 1. “As long as the model always behaves acceptably, and achieves a high reward
+    on average, we can be happy.”
+ 2. “Requiring a model to always behave acceptably wouldn't make a hard problem
+    too much harder.”
+
+Thus, acceptability is a different condition than asking for good performance
+during deployment—an honest mistake is considered acceptable, as is just failing
+to do anything interesting at all. That being said, some of the sorts of things
+you might want from acceptability could include corrigibility, non-deception, or
+myopia.[1] The hope for this style of approach is that it is competitive to only
+apply advanced machine learning to those situations which have clear notions of
+acceptability.
+
+The tension, however, rests in being able to achieve good performance while
+maintaining an acceptability guarantee. Thus, the ideal solution to this problem
+would be a way of converting a training procedure which can achieve arbitrary
+performance into a training procedure which is not much harder to run, and which
+can still achieve arbitrary performance, but which also enforces an
+acceptability guarantee.
+
+One obvious way to attempt to maintain an acceptability guarantee is to
+construct a loss function which incentivizes acceptability as part of
+performance. Something of this form is almost certainly going to be a component
+of any safe system. That be},
+	urldate = {2020-06-07},
+	author = {Hubinger, Evan},
+	year = {2019}
+}
+
+@misc{clifton_cooperation_2019-1,
+	title = {Cooperation, {Conflict}, and {Transformative} {Artificial} {Intelligence}: {A} {Research} {Agenda}},
+	url = {https://www.lesswrong.com/s/p947tK8CoBbdpPtyK},
+	abstract = {A community blog devoted to refining the art of rationality},
+	urldate = {2020-06-07},
+	journal = {LessWrong},
+	author = {Clifton, Jesse},
+	month = dec,
+	year = {2019}
+}
+
+@incollection{hadfield-menell_inverse_2017,
+	title = {Inverse {Reward} {Design}},
+	url = {http://papers.nips.cc/paper/7253-inverse-reward-design.pdf},
+	urldate = {2020-06-07},
+	booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 30},
+	publisher = {Curran Associates, Inc.},
+	author = {Hadfield-Menell, Dylan and Milli, Smitha and Abbeel, Pieter and Russell, Stuart J and Dragan, Anca},
+	editor = {Guyon, I. and Luxburg, U. V. and Bengio, S. and Wallach, H. and Fergus, R. and Vishwanathan, S. and Garnett, R.},
+	year = {2017},
+	pages = {6765--6774}
+}

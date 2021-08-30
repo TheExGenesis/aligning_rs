@@ -1,0 +1,7 @@
+,med,med,med,med,med,med,med,med,med,med,med,med,med,params,params,params,params,game,game,med_freqs,med_freqs,med_freqs,med_freqs,med_freqs,med_freqs,med_freqs,med_freqs,med_freqs,med_freqs,med_freqs,med_freqs,med_freqs,agents,agents,agents,net,net,net,net,meta
+,NO_MED,GOOD_MED,BAD_MED,RANDOM_MED,FAIR_MED,GOOD_MED_X,BAD_MED_X,RANDOM_MED_X,FAIR_MED_X,GOOD_MED_LOCAL,BAD_MED_LOCAL,RANDOM_MED_LOCAL,FAIR_MED_LOCAL,W1,W2,N,episode_n,t,s,NO_MED,GOOD_MED,BAD_MED,RANDOM_MED,FAIR_MED,GOOD_MED_X,BAD_MED_X,RANDOM_MED_X,FAIR_MED_X,GOOD_MED_LOCAL,BAD_MED_LOCAL,RANDOM_MED_LOCAL,FAIR_MED_LOCAL,coop_freq,payoff_mean,payoff_var,heterogeneity,k_max,rewire_n,stop_n,timestamp
+0,0.0,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.5,0.0,500,1,-1.0,2.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.498,14.94,914.7404,0.0,30,0,0,Jun-27-2021_1144
+1,0.0,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,500,1,-1.0,2.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.464,13.92,902.1496,0.0,30,0,0,Jun-27-2021_1144
+2,0.0,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,500,1,-1.0,2.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.526,15.78,896.9116,0.0,30,0,0,Jun-27-2021_1144
+3,0.0,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,0.0,500,1,-1.0,2.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.478,14.34,894.8123999999999,0.0,30,0,0,Jun-27-2021_1144
+4,0.0,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,inf,0.0,500,1,-1.0,2.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.49,14.7,905.4700000000001,0.0,30,0,0,Jun-27-2021_1144
